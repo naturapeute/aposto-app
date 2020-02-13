@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+    <title>Facturapeute - La tarification 590 facile</title>
+</head>
+<body>
+    <h1>Facture</h1>
+    <form>
+        <h2>Document</h2>
+        <label for="identification">Identification</label>
+        <input type="text" id="identification" disabled required>
+        <h2>Auteur de la facture</h2>
+        <label for="author-last-name">Nom</label>
+        <input type="text" id="author-last-name" required><br>
+        <label for="author-first-name">Prénom</label>
+        <input type="text" id="author-first-name" required><br>
+        <label for="author-rcc-number">N° RCC</label>
+        <input type="text" id="author-rcc-number" required><br>
+        <label for="author-street">N° et rue</label>
+        <input type="text" id="author-street" required><br>
+        <label for="author-npa">NPA</label>
+        <input type="text" id="author-npa" required><br>
+        <label for="author-city">Localité</label>
+        <input type="text" id="author-city" required>
+        <h2>Fournisseur de prestation</h2>
+        <label for="service-performer-last-name">Nom</label>
+        <input type="text" id="service-performer-last-name" required><br>
+        <label for="service-performer-first-name">Prénom</label>
+        <input type="text" id="service-performer-first-name" required><br>
+        <label for="service-performer-rcc-number">N° RCC</label>
+        <input type="text" id="service-performer-rcc-number" required><br>
+        <label for="service-performer-street">N° et rue</label>
+        <input type="text" id="service-performer-street" required><br>
+        <label for="service-performer-npa">NPA</label>
+        <input type="text" id="service-performer-npa" required><br>
+        <label for="service-performer-city">Localité</label>
+        <input type="text" id="service-performer-city" required>
+        <h2>Patient/client</h2>
+        <label for="customer-last-name">Nom</label>
+        <input type="text" id="customer-last-name" required><br>
+        <label for="customer-first-name">Prénom</label>
+        <input type="text" id="customer-first-name" required><br>
+        <label for="customer-street">N° et rue</label>
+        <input type="text" id="customer-street" required><br>
+        <label for="customer-npa">NPA</label>
+        <input type="text" id="customer-npa" required><br>
+        <label for="customer-city">Localité</label>
+        <input type="text" id="customer-city" required><br>
+        <label for="customer-birthdate">Date de naissance</label>
+        <input type="date" id="customer-birthdate" required><br>
+        <label for="customer-law">Loi</label>
+        <select id="customer-law" disabled required>
+            <option value="customer-law-lca" selected>LCA</option>
+        </select><br>
+        <label for="customer-refund-type">Type de remboursement</label>
+        <select id="customer-refund-type" disabled required>
+            <option value="customer-refund-type-tg" selected>Tiers Garant</option>
+        </select><br>
+        <label for="receipt-date">Date de facture</label>
+        <input type="date" id="receipt-date" disabled required><br>
+        <label for="receipt-number">N° de facture</label>
+        <input type="number" id="receipt-number" disabled required>
+        <h2>Thérapie</h2>
+        <label for="therapy-type">Thérapie</label>
+        <select id="therapy-type">
+            <option value="therapy-type-private" selected>Thérapie individuelle</option>
+            <option value="therapy-type-group">Thérapie de groupe</option>
+        </select><br>
+        <h2>Prestations</h2>
+        <label for="service-date">Date</label>
+        <input type="date" id="service-date" required>
+        <label for="service-rate-type">Tarif</label>
+        <select id="service-rate-type">
+            <option value="service-rate-type-590" selected>590</option>
+            <option value="service-rate-type-999">999</option>
+        </select>
+        <label for="service-code">Code tarifaire</label>
+        <select id="service-code">
+            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+        </select>
+        <label for="service-quantity">Quantité</label>
+        <input type="number" id="service-quantity" value="1" required>
+        <label for="service-price">Prix</label>
+        <input type="number" id="service-price" required>
+        <label for="service-tax">TVA</label>
+        <input type="number" id="service-tax" value="0.00%" disabled required>
+        <label for="service-amount">Montant</label>
+        <input type="number" id="service-amount" disabled required><br>
+        <button>Ajouter une prestation</button><br>
+        <label for="total-amount">Montant dû</label>
+        <input type="number" id="total-amount" disabled required><br>
+        <label for="paiement-period">Délai de paiement (jours, net)</label>
+        <input type="number" id="paiement-period" value="30" required><br>
+        <input type="submit" value="Générer la facture">
+    </form>
+</body>
