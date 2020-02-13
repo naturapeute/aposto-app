@@ -66,38 +66,111 @@
             <option value="therapy-type-group">Thérapie de groupe</option>
         </select><br>
         <h2>Prestations</h2>
-        <table id="service-table">
-            <tr>
-                <th>Date</th>
-                <th>Tarif</th>
-                <th>Code tarifaire</th>
-                <th>Quantité</th>
-                <th>Prix</th>
-                <th>TVA</th>
-                <th>Montant</th>
-            </tr>
-        </table>
-        <label for="service-date">Date</label>
-        <input type="date" id="service-date" required>
-        <label for="service-rate-type">Tarif</label>
-        <select id="service-rate-type">
+        <h3>Prestation 1</h3>
+        <label for="service-date-1">Date</label>
+        <input type="date" id="service-date-1" required>
+        <label for="service-rate-type-1">Tarif</label>
+        <select id="service-rate-type-1">
             <option value="service-rate-type-590" selected>590</option>
             <option value="service-rate-type-999">999</option>
         </select>
-        <label for="service-code">Code tarifaire</label>
-        <select id="service-code">
+        <label for="service-code-1">Code tarifaire</label>
+        <select id="service-code-1">
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity">Quantité</label>
-        <input type="number" id="service-quantity" value="0" onchange=updateAmount(1) required>
-        <label for="service-price">Prix</label>
-        <input type="text" id="service-price" value="0.00" onchange=updateAmount(1) required>
-        <label for="service-tax">TVA</label>
-        <input type="text" id="service-tax" value="0.00%" disabled required>
-        <label for="service-amount">Montant</label>
-        <input type="text" id="service-amount" value="0.00" disabled required>
-        <button onclick=addService()>Ajouter la prestation</button><br>
+        <label for="service-quantity-1">Quantité</label>
+        <input type="number" id="service-quantity-1" value="0" onchange=updateAmount(1) required>
+        <label for="service-price-1">Prix</label>
+        <input type="text" id="service-price-1" value="0.00" onchange=updateAmount(1) required>
+        <label for="service-tax-1">TVA</label>
+        <input type="text" id="service-tax-1" value="0.00%" disabled required>
+        <label for="service-amount-1">Montant</label>
+        <input type="text" id="service-amount-1" value="0.00" disabled required>
+        <h3>Prestation 2</h3>
+        <label for="service-date-2">Date</label>
+        <input type="date" id="service-date-2" required>
+        <label for="service-rate-type-2">Tarif</label>
+        <select id="service-rate-type-2">
+            <option value="service-rate-type-590" selected>590</option>
+            <option value="service-rate-type-999">999</option>
+        </select>
+        <label for="service-code-2">Code tarifaire</label>
+        <select id="service-code-2">
+            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+        </select>
+        <label for="service-quantity-2">Quantité</label>
+        <input type="number" id="service-quantity-2" value="0" onchange=updateAmount(2) required>
+        <label for="service-price-2">Prix</label>
+        <input type="text" id="service-price-2" value="0.00" onchange=updateAmount(2) required>
+        <label for="service-tax-2">TVA</label>
+        <input type="text" id="service-tax-2" value="0.00%" disabled required>
+        <label for="service-amount-2">Montant</label>
+        <input type="text" id="service-amount-2" value="0.00" disabled required>
+        <h3>Prestation 3</h3>
+        <label for="service-date-3">Date</label >
+        <input type="date" id="service-date-3" required>
+        <label for="service-rate-type-3">Tarif</label>
+        <select id="service-rate-type-3">
+            <option value="service-rate-type-590" selected>590</option>
+            <option value="service-rate-type-999">999</option>
+        </select>
+        <label for="service-code-3">Code tarifaire</label>
+        <select id="service-code-3">
+            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+        </select>
+        <label for="service-quantity-3">Quantité</label>
+        <input type="number" id="service-quantity-3" value="0" onchange=updateAmount(3) required>
+        <label for="service-price-3">Prix</label>
+        <input type="text" id="service-price-3" value="0.00" onchange=updateAmount(3) required>
+        <label for="service-tax-3">TVA</label>
+        <input type="text" id="service-tax-3" value="0.00%" disabled required>
+        <label for="service-amount-3">Montant</label>
+        <input type="text" id="service-amount-3" value="0.00" disabled required>
+        <h3>Prestation 4</h3>
+        <label for="service-date-4">Date</label>
+        <input type="date" id="service-date-4" required>
+        <label for="service-rate-type-4">Tarif</label>
+        <select id="service-rate-type-4">
+            <option value="service-rate-type-590" selected>590</option>
+            <option value="service-rate-type-999">999</option>
+        </select>
+        <label for="service-code-4">Code tarifaire</label>
+        <select id="service-code-4">
+            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+        </select>
+        <label for="service-quantity-4">Quantité</label>
+        <input type="number" id="service-quantity-4" value="0" onchange=updateAmount(4) required>
+        <label for="service-price-4">Prix</label>
+        <input type="text" id="service-price-4" value="0.00" onchange=updateAmount(4) required>
+        <label for="service-tax-4">TVA</label>
+        <input type="text" id="service-tax-4" value="0.00%" disabled required>
+        <label for="service-amount-4">Montant</label>
+        <input type="text" id="service-amount-4" value="0.00" disabled required>
+        <h3>Prestation 5</h3>
+        <label for="service-date-5">Date</label>
+        <input type="date" id="service-date-5" required>
+        <label for="service-rate-type-5">Tarif</label>
+        <select id="service-rate-type-5">
+            <option value="service-rate-type-590" selected>590</option>
+            <option value="service-rate-type-999">999</option>
+        </select>
+        <label for="service-code-5">Code tarifaire</label>
+        <select id="service-code-5">
+            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+        </select>
+        <label for="service-quantity-5">Quantité</label>
+        <input type="number" id="service-quantity-5" value="0" onchange=updateAmount(5) required>
+        <label for="service-price-5">Prix</label>
+        <input type="text" id="service-price-5" value="0.00" onchange=updateAmount(5) required>
+        <label for="service-tax-5">TVA</label>
+        <input type="text" id="service-tax-5" value="0.00%" disabled required>
+        <label for="service-amount-5">Montant</label>
+        <input type="text" id="service-amount-5" value="0.00" disabled required>
         <label for="total-amount">Montant dû</label>
         <input type="text" id="total-amount" value="0.00" disabled required><br>
         <label for="paiement-period">Délai de paiement (jours, net)</label>
@@ -107,8 +180,6 @@
 </body>
 
 <script>
-    const services = [];
-
     window.addEventListener('load', () => {
         const date = new Date();        
         const timestamp = date.getTime();
@@ -138,43 +209,18 @@
     };
 
     updateAmount = (serviceId) => {
-        document.getElementById(`service-amount`).value =
-            document.getElementById(`service-quantity`).value * document.getElementById(`service-price`).value;
-    };
-
-    addService = () => {
-        event.preventDefault();
-
-        const newService = {
-            date: document.getElementById('service-date').value,
-            rateType: document.getElementById('service-rate-type').value,
-            code: document.getElementById('service-code').value,
-            quantity: document.getElementById('service-quantity').value,
-            price: document.getElementById('service-price').value,
-            tax: document.getElementById('service-tax').value
-        };
-
-        const newRow = document.getElementById('service-table').insertRow(-1);
-        newRow.insertCell(-1).innerHTML = newService.date;
-        newRow.insertCell(-1).innerHTML = newService.rateType;
-        newRow.insertCell(-1).innerHTML = newService.code;
-        newRow.insertCell(-1).innerHTML = newService.quantity;
-        newRow.insertCell(-1).innerHTML = newService.price;
-        newRow.insertCell(-1).innerHTML = newService.tax;
-        newRow.insertCell(-1).innerHTML = newService.price * newService.quantity;
-
-        services.push(newService);
-
+        document.getElementById(`service-amount-${serviceId}`).value =
+            document.getElementById(`service-quantity-${serviceId}`).value * document.getElementById(`service-price-${serviceId}`).value;
+    
         updateTotalAmount();
     };
 
     updateTotalAmount = () => {
-        let totalAmount = 0;
-
-        services.forEach(service => {
-            totalAmount += service.price * service.quantity;
-        });
-
-        document.getElementById('total-amount').value = totalAmount;
+        document.getElementById('total-amount').value = 
+            parseInt(document.getElementById('service-amount-1').value) +
+            parseInt(document.getElementById('service-amount-2').value) +
+            parseInt(document.getElementById('service-amount-3').value) +
+            parseInt(document.getElementById('service-amount-4').value) +
+            parseInt(document.getElementById('service-amount-5').value);
     };
 </script>
