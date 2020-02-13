@@ -66,27 +66,38 @@
             <option value="therapy-type-group">Thérapie de groupe</option>
         </select><br>
         <h2>Prestations</h2>
-        <label for="service-date-1">Date</label>
-        <input type="date" id="service-date-1" required>
-        <label for="service-rate-type-1">Tarif</label>
-        <select id="service-rate-type-1">
+        <table id="service-table">
+            <tr>
+                <th>Date</th>
+                <th>Tarif</th>
+                <th>Code tarifaire</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>TVA</th>
+                <th>Montant</th>
+            </tr>
+        </table>
+        <label for="service-date">Date</label>
+        <input type="date" id="service-date" required>
+        <label for="service-rate-type">Tarif</label>
+        <select id="service-rate-type">
             <option value="service-rate-type-590" selected>590</option>
             <option value="service-rate-type-999">999</option>
         </select>
-        <label for="service-code-1">Code tarifaire</label>
-        <select id="service-code-1">
+        <label for="service-code">Code tarifaire</label>
+        <select id="service-code">
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity-1">Quantité</label>
-        <input type="number" id="service-quantity-1" value="0" onchange=updateAmount(1) required>
-        <label for="service-price-1">Prix</label>
-        <input type="text" id="service-price-1" value="0.00" onchange=updateAmount(1) required>
-        <label for="service-tax-1">TVA</label>
-        <input type="text" id="service-tax-1" value="0.00%" disabled required>
-        <label for="service-amount-1">Montant</label>
-        <input type="text" id="service-amount-1" value="0.00" disabled required><br>
-        <button>Ajouter une prestation</button><br>
+        <label for="service-quantity">Quantité</label>
+        <input type="number" id="service-quantity" value="0" onchange=updateAmount(1) required>
+        <label for="service-price">Prix</label>
+        <input type="text" id="service-price" value="0.00" onchange=updateAmount(1) required>
+        <label for="service-tax">TVA</label>
+        <input type="text" id="service-tax" value="0.00%" disabled required>
+        <label for="service-amount">Montant</label>
+        <input type="text" id="service-amount" value="0.00" disabled required>
+        <button onclick=addService()>Ajouter la prestation</button><br>
         <label for="total-amount">Montant dû</label>
         <input type="text" id="total-amount" value="0.00" disabled required><br>
         <label for="paiement-period">Délai de paiement (jours, net)</label>
@@ -96,7 +107,7 @@
 </body>
 
 <script>
-    const services = [ { quantity: 0, price: 0 } ];
+    const services = [];
 
     window.addEventListener('load', () => {
         const date = new Date();        
@@ -127,11 +138,8 @@
     };
 
     updateAmount = (serviceId) => {
-        services[serviceId - 1].quantity = document.getElementById(`service-quantity-${serviceId}`).value;
-        services[serviceId - 1].price = document.getElementById(`service-price-${serviceId}`).value;
-
-        document.getElementById(`service-amount-${serviceId}`).value = services[serviceId - 1].quantity * services[serviceId - 1].price;
-        document.getElementById('total-amount').value = getTotalAmount();
+        document.getElementById(`service-amount`).value =
+            document.getElementById(`service-quantity`).value * document.getElementById(`service-price`).value;
     };
 
     getTotalAmount = () => {
@@ -142,5 +150,29 @@
         });
 
         return totalAmount;
+    };
+
+    addService = () => {
+        event.preventDefault();
+
+        const newService = {
+            date: document.getElementById('service-date').value,
+            rateType: document.getElementById('service-rate-type').value,
+            code: document.getElementById('service-code').value,
+            quantity: document.getElementById('service-quantity').value,
+            price: document.getElementById('service-price').value,
+            tax: document.getElementById('service-tax').value
+        };
+
+        const newRow = document.getElementById('service-table').insertRow(-1);
+        newRow.insertCell(-1).innerHTML = newService.date;
+        newRow.insertCell(-1).innerHTML = newService.rateType;
+        newRow.insertCell(-1).innerHTML = newService.code;
+        newRow.insertCell(-1).innerHTML = newService.quantity;
+        newRow.insertCell(-1).innerHTML = newService.price;
+        newRow.insertCell(-1).innerHTML = newService.tax;
+        newRow.insertCell(-1).innerHTML = newService.price * newService.quantity;
+
+        services.push(newService);
     };
 </script>
