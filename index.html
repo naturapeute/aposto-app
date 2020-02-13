@@ -79,16 +79,16 @@
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
         <label for="service-quantity">Quantité</label>
-        <input type="number" id="service-quantity" value="1" required>
+        <input type="number" id="service-quantity" value="0" onchange=updateAmount() required>
         <label for="service-price">Prix</label>
-        <input type="number" id="service-price" required>
+        <input type="text" id="service-price" value="0.00" onchange=updateAmount() required>
         <label for="service-tax">TVA</label>
-        <input type="number" id="service-tax" value="0.00%" disabled required>
+        <input type="text" id="service-tax" value="0.00%" disabled required>
         <label for="service-amount">Montant</label>
-        <input type="number" id="service-amount" disabled required><br>
+        <input type="text" id="service-amount" value="0.00" disabled required><br>
         <button>Ajouter une prestation</button><br>
         <label for="total-amount">Montant dû</label>
-        <input type="number" id="total-amount" disabled required><br>
+        <input type="text" id="total-amount" value="0.00" disabled required><br>
         <label for="paiement-period">Délai de paiement (jours, net)</label>
         <input type="number" id="paiement-period" value="30" required><br>
         <input type="submit" value="Générer la facture">
@@ -96,6 +96,8 @@
 </body>
 
 <script>
+    const services = [ { quantity: 0, price: 0 } ];
+
     window.addEventListener('load', () => {
         const date = new Date();        
         const timestamp = date.getTime();
@@ -122,5 +124,23 @@
         const month = `0${date.getMonth()}`.slice(-2);
 
         return `${date.getFullYear()}-${month}-${day}`;
+    };
+
+    updateAmount = () => {
+        services[0].quantity = document.getElementById('service-quantity').value;
+        services[0].price = document.getElementById('service-price').value;
+
+        document.getElementById('service-amount').value = services[0].quantity * services[0].price;
+        document.getElementById('total-amount').value = getTotalAmount();
+    };
+
+    getTotalAmount = () => {
+        let totalAmount = 0;
+
+        services.forEach(service => {
+            totalAmount += service.price * service.quantity;
+        });
+
+        return totalAmount;
     };
 </script>
