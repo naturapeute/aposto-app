@@ -142,16 +142,6 @@
             document.getElementById(`service-quantity`).value * document.getElementById(`service-price`).value;
     };
 
-    getTotalAmount = () => {
-        let totalAmount = 0;
-
-        services.forEach(service => {
-            totalAmount += service.price * service.quantity;
-        });
-
-        return totalAmount;
-    };
-
     addService = () => {
         event.preventDefault();
 
@@ -174,5 +164,17 @@
         newRow.insertCell(-1).innerHTML = newService.price * newService.quantity;
 
         services.push(newService);
+
+        updateTotalAmount();
+    };
+
+    updateTotalAmount = () => {
+        let totalAmount = 0;
+
+        services.forEach(service => {
+            totalAmount += service.price * service.quantity;
+        });
+
+        document.getElementById('total-amount').value = totalAmount;
     };
 </script>
