@@ -2,187 +2,355 @@
 <head>
     <title>Facturapeute - La tarification 590 facile</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
 </head>
 <body>
-    <h1>Facture</h1>
-    <form>
-        <h2>Document</h2>
-        <label for="identification">Identification</label>
-        <input type="text" id="identification" disabled required>
-        <h2>Auteur de la facture</h2>
-        <label for="author-last-name">Nom</label>
-        <input type="text" id="author-last-name" required><br>
-        <label for="author-first-name">Prénom</label>
-        <input type="text" id="author-first-name" required><br>
-        <label for="author-rcc-number">N° RCC</label>
-        <input type="text" id="author-rcc-number" required><br>
-        <label for="author-street">N° et rue</label>
-        <input type="text" id="author-street" required><br>
-        <label for="author-npa">NPA</label>
-        <input type="text" id="author-npa" required><br>
-        <label for="author-city">Localité</label>
-        <input type="text" id="author-city" required>
-        <h2>Fournisseur de prestation</h2>
-        <label for="service-performer-last-name">Nom</label>
-        <input type="text" id="service-performer-last-name" required><br>
-        <label for="service-performer-first-name">Prénom</label>
-        <input type="text" id="service-performer-first-name" required><br>
-        <label for="service-performer-rcc-number">N° RCC</label>
-        <input type="text" id="service-performer-rcc-number" required><br>
-        <label for="service-performer-street">N° et rue</label>
-        <input type="text" id="service-performer-street" required><br>
-        <label for="service-performer-npa">NPA</label>
-        <input type="text" id="service-performer-npa" required><br>
-        <label for="service-performer-city">Localité</label>
-        <input type="text" id="service-performer-city" required>
-        <h2>Patient/client</h2>
-        <label for="customer-last-name">Nom</label>
-        <input type="text" id="customer-last-name" required><br>
-        <label for="customer-first-name">Prénom</label>
-        <input type="text" id="customer-first-name" required><br>
-        <label for="customer-street">N° et rue</label>
-        <input type="text" id="customer-street" required><br>
-        <label for="customer-npa">NPA</label>
-        <input type="text" id="customer-npa" required><br>
-        <label for="customer-city">Localité</label>
-        <input type="text" id="customer-city" required><br>
-        <label for="customer-birthdate">Date de naissance</label>
-        <input type="date" id="customer-birthdate" required><br>
-        <label for="customer-law">Loi</label>
-        <select id="customer-law" disabled required>
-            <option value="customer-law-lca" selected>LCA</option>
-        </select><br>
-        <label for="customer-copy-receipt">Copie</label>
-        <select id="customer-copy-receipt" disabled required>
-            <option value="customer-copy-receipt-no" selected>Non</option>
-        </select><br>
-        <label for="customer-refund-type">Type de remboursement</label>
-        <select id="customer-refund-type" disabled required>
-            <option value="customer-refund-type-tg" selected>Tiers Garant</option>
-        </select><br>
-        <label for="service-role">Role</label>
-        <input type="text" id="service-role" value="Médecine complémentaire" disabled required><br>
-        <label for="receipt-date">Date de facture</label>
-        <input type="date" id="receipt-date" disabled required><br>
-        <label for="receipt-number">N° de facture</label>
-        <input type="number" id="receipt-number" disabled required><br>
-        <label for="receipt-reason">Motif du traitement</label>
-        <select id="receipt-reason" disabled required>
-            <option value="receipt-reason-illness" selected>Maladie</option>
-        </select>
-        <h2>Thérapie</h2>
-        <label for="therapy-type">Thérapie</label>
-        <select id="therapy-type">
-            <option value="therapy-type-private" selected>Thérapie individuelle</option>
-            <option value="therapy-type-group">Thérapie de groupe</option>
-        </select><br>
-        <label for="therapy-point-value">Valeur du point</label>
-        <input type="text" id="therapy-point-value" value="1.00" disabled required>
-        <h2>Prestations</h2>
-        <label for="service-price">Tarif horaire</label>
-        <input type="text" id="service-price" value="0.00" onchange=updateAllAmounts() required>
-        <h3>Prestation 1</h3>
-        <label for="service-date-1">Date</label>
-        <input type="date" id="service-date-1" required>
-        <label for="service-rate-type-1">Tarif</label>
-        <select id="service-rate-type-1">
-            <option value="service-rate-type-590" selected>590</option>
-            <option value="service-rate-type-999">999</option>
-        </select>
-        <label for="service-code-1">Code tarifaire</label>
-        <select id="service-code-1">
-            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
-        </select>
-        <label for="service-duration-1">Durée</label>
-        <input type="number" id="service-duration-1" value="0" step="5" onchange=updateAmount(1) required>
-        <label for="service-tax-1">TVA</label>
-        <input type="text" id="service-tax-1" value="0.00%" disabled required>
-        <label for="service-amount-1">Montant</label>
-        <input type="text" id="service-amount-1" value="0.00" disabled required>
-        <h3>Prestation 2</h3>
-        <label for="service-date-2">Date</label>
-        <input type="date" id="service-date-2" required>
-        <label for="service-rate-type-2">Tarif</label>
-        <select id="service-rate-type-2">
-            <option value="service-rate-type-590" selected>590</option>
-            <option value="service-rate-type-999">999</option>
-        </select>
-        <label for="service-code-2">Code tarifaire</label>
-        <select id="service-code-2">
-            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
-        </select>
-        <label for="service-duration-2">Durée</label>
-        <input type="number" id="service-duration-2" value="0" step="5" onchange=updateAmount(2) required>
-        <label for="service-tax-2">TVA</label>
-        <input type="text" id="service-tax-2" value="0.00%" disabled required>
-        <label for="service-amount-2">Montant</label>
-        <input type="text" id="service-amount-2" value="0.00" disabled required>
-        <h3>Prestation 3</h3>
-        <label for="service-date-3">Date</label >
-        <input type="date" id="service-date-3" required>
-        <label for="service-rate-type-3">Tarif</label>
-        <select id="service-rate-type-3">
-            <option value="service-rate-type-590" selected>590</option>
-            <option value="service-rate-type-999">999</option>
-        </select>
-        <label for="service-code-3">Code tarifaire</label>
-        <select id="service-code-3">
-            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
-        </select>
-        <label for="service-duration-3">Durée</label>
-        <input type="number" id="service-duration-3" value="0" step="5" onchange=updateAmount(3) required>
-        <label for="service-tax-3">TVA</label>
-        <input type="text" id="service-tax-3" value="0.00%" disabled required>
-        <label for="service-amount-3">Montant</label>
-        <input type="text" id="service-amount-3" value="0.00" disabled required>
-        <h3>Prestation 4</h3>
-        <label for="service-date-4">Date</label>
-        <input type="date" id="service-date-4" required>
-        <label for="service-rate-type-4">Tarif</label>
-        <select id="service-rate-type-4">
-            <option value="service-rate-type-590" selected>590</option>
-            <option value="service-rate-type-999">999</option>
-        </select>
-        <label for="service-code-4">Code tarifaire</label>
-        <select id="service-code-4">
-            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
-        </select>
-        <label for="service-duration-4">Durée</label>
-        <input type="number" id="service-duration-4" value="0" step="5" onchange=updateAmount(4) required>
-        <label for="service-tax-4">TVA</label>
-        <input type="text" id="service-tax-4" value="0.00%" disabled required>
-        <label for="service-amount-4">Montant</label>
-        <input type="text" id="service-amount-4" value="0.00" disabled required>
-        <h3>Prestation 5</h3>
-        <label for="service-date-5">Date</label>
-        <input type="date" id="service-date-5" required>
-        <label for="service-rate-type-5">Tarif</label>
-        <select id="service-rate-type-5">
-            <option value="service-rate-type-590" selected>590</option>
-            <option value="service-rate-type-999">999</option>
-        </select>
-        <label for="service-code-5">Code tarifaire</label>
-        <select id="service-code-5">
-            <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
-        </select>
-        <label for="service-duration-5">Durée</label>
-        <input type="number" id="service-duration-5" value="0" step="5" onchange=updateAmount(5) required>
-        <label for="service-tax-5">TVA</label>
-        <input type="text" id="service-tax-5" value="0.00%" disabled required>
-        <label for="service-amount-5">Montant</label>
-        <input type="text" id="service-amount-5" value="0.00" disabled required><br>
-        <label for="total-amount">Montant dû</label>
-        <input type="text" id="total-amount" value="0.00" disabled required><br>
-        <label for="paiement-period">Délai de paiement (jours, net)</label>
-        <input type="number" id="paiement-period" value="30" required><br>
-        <input type="submit" value="Générer la facture">
-    </form>
+    <div class="container">
+        <h1>Facture</h1>
+        <form class="form-horizontal">
+            <h2>Document</h2>
+            <div class="form-group">
+                <label class="form-label" for="identification">Identification</label>
+                <input class="form-input" type="text" id="identification" disabled required>
+            </div>
+            <h2>Auteur de la facture</h2>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="author-first-name">Prénom</label>
+                    <input class="form-input" type="text" id="author-first-name" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="author-last-name">Nom</label>
+                    <input class="form-input" type="text" id="author-last-name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="author-rcc-number">N° RCC</label>
+                <input class="form-input" type="text" id="author-rcc-number" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="author-street">N° et rue</label>
+                <input class="form-input" type="text" id="author-street" required>
+            </div>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="author-npa">NPA</label>
+                    <input class="form-input" type="text" id="author-npa" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="author-city">Localité</label>
+                    <input class="form-input" type="text" id="author-city" required>
+                </div>
+            </div>
+            <h2>Fournisseur de prestation</h2>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="service-performer-first-name">Prénom</label>
+                    <input class="form-input" type="text" id="service-performer-first-name" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="service-performer-last-name">Nom</label>
+                    <input class="form-input" type="text" id="service-performer-last-name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-performer-rcc-number">N° RCC</label>
+                <input class="form-input" type="text" id="service-performer-rcc-number" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-performer-street">N° et rue</label>
+                <input class="form-input" type="text" id="service-performer-street" required>
+            </div>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="service-performer-npa">NPA</label>
+                    <input class="form-input" type="text" id="service-performer-npa" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="service-performer-city">Localité</label>
+                    <input class="form-input" type="text" id="service-performer-city" required>
+                </div>
+            </div>
+            <h2>Patient/client</h2>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="customer-first-name">Prénom</label>
+                    <input class="form-input" type="text" id="customer-first-name" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="customer-last-name">Nom</label>
+                    <input class="form-input" type="text" id="customer-last-name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="customer-street">N° et rue</label>
+                <input class="form-input" type="text" id="customer-street" required>
+            </div>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="customer-npa">NPA</label>
+                    <input class="form-input" type="text" id="customer-npa" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="customer-city">Localité</label>
+                    <input class="form-input" type="text" id="customer-city" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="customer-birthdate">Date de naissance</label>
+                <input class="form-input" type="date" id="customer-birthdate" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="customer-law">Loi</label>
+                <select class="form-select" id="customer-law" disabled required>
+                    <option value="customer-law-lca" selected>LCA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="customer-copy-receipt">Copie</label>
+                <select class="form-select" id="customer-copy-receipt" disabled required>
+                    <option value="customer-copy-receipt-no" selected>Non</option>
+                </select>    
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="customer-refund-type">Type de remboursement</label>
+                <select class="form-select" id="customer-refund-type" disabled required>
+                    <option value="customer-refund-type-tg" selected>Tiers Garant</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-role">Rôle</label>
+                <input class="form-input" type="text" id="service-role" value="Médecine complémentaire" disabled required>
+            </div>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label" for="receipt-date">Date de facture</label>
+                    <input class="form-input" type="date" id="receipt-date" disabled required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="receipt-number">N° de facture</label>
+                    <input class="form-input" type="number" id="receipt-number" disabled required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="receipt-reason">Motif du traitement</label>
+                <select class="form-select" id="receipt-reason" disabled required>
+                    <option value="receipt-reason-illness" selected>Maladie</option>
+                </select>
+            </div>
+            <h2>Thérapie</h2>
+            <div class="form-group">
+                <label class="form-label" for="therapy-type">Thérapie</label>
+                <select class="form-select" id="therapy-type">
+                    <option value="therapy-type-private" selected>Thérapie individuelle</option>
+                    <option value="therapy-type-group">Thérapie de groupe</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="therapy-point-value">Valeur du point</label>
+                <input class="form-input" type="text" id="therapy-point-value" value="1.00" disabled required>
+            </div>
+            <h2>Prestations</h2>
+            <div class="form-group">
+                <label class="form-label" for="service-price">Tarif horaire</label>
+                <input class="form-input" type="text" id="service-price" value="0.00" onchange=updateAllAmounts() required>
+            </div>
+            <h3>Prestation 1</h3>
+            <div class="form-group">
+                <label class="form-label" for="service-date-1">Date</label>
+                <input class="form-input" type="date" id="service-date-1" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-rate-type-1">Tarif</label>
+                <select class="form-select" id="service-rate-type-1" required>
+                    <option value="service-rate-type-590" selected>590</option>
+                    <option value="service-rate-type-999">999</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-code-1">Code tarifaire</label>
+                <select class="form-select" id="service-code-1" required>
+                    <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+                    <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-duration-1">Durée</label>
+                <input class="form-input" type="number" id="service-duration-1" value="0" step="5" onchange=updateAmount(1) required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-tax-1">TVA</label>
+                <input class="form-input" type="text" id="service-tax-1" value="0.00%" disabled required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-amount-1">Montant</label>
+                <input class="form-input" type="text" id="service-amount-1" value="0.00" disabled required>
+            </div>
+            <h3>Prestation 2</h3>
+            <div class="form-group">
+                <label class="form-label" for="service-date-2">Date</label>
+                <input class="form-input" type="date" id="service-date-2">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-rate-type-2">Tarif</label>
+                <select class="form-select" id="service-rate-type-2">
+                    <option value="service-rate-type-590" selected>590</option>
+                    <option value="service-rate-type-999">999</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-code-2">Code tarifaire</label>
+                <select class="form-select" id="service-code-2">
+                    <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+                    <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-duration-2">Durée</label>
+                <input class="form-input" type="number" id="service-duration-2" value="0" step="5" onchange=updateAmount(2)>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-tax-2">TVA</label>
+                <input class="form-input" type="text" id="service-tax-2" value="0.00%" disabled>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-amount-2">Montant</label>
+                <input class="form-input" type="text" id="service-amount-2" value="0.00" disabled>
+            </div>
+            <h3>Prestation 3</h3>
+            <div class="form-group">
+                <label class="form-label" for="service-date-3">Date</label >
+                    <input class="form-input" type="date" id="service-date-3">
+                </div>
+            <div class="form-group">
+                <label class="form-label" for="service-rate-type-3">Tarif</label>
+                <select class="form-select" id="service-rate-type-3">
+                    <option value="service-rate-type-590" selected>590</option>
+                    <option value="service-rate-type-999">999</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-code-3">Code tarifaire</label>
+                <select class="form-select" id="service-code-3">
+                    <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+                    <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-duration-3">Durée</label>
+                <input class="form-input" type="number" id="service-duration-3" value="0" step="5" onchange=updateAmount(3)>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-tax-3">TVA</label>
+                <input class="form-input" type="text" id="service-tax-3" value="0.00%" disabled>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-amount-3">Montant</label>
+                <input class="form-input" type="text" id="service-amount-3" value="0.00" disabled>
+            </div>
+            <h3>Prestation 4</h3>
+            <div class="form-group">
+                <label class="form-label" for="service-date-4">Date</label>
+                <input class="form-input" type="date" id="service-date-4">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-rate-type-4">Tarif</label>
+                <select class="form-select" id="service-rate-type-4">
+                    <option value="service-rate-type-590" selected>590</option>
+                    <option value="service-rate-type-999">999</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-code-4">Code tarifaire</label>
+                <select class="form-select" id="service-code-4">
+                    <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+                    <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-duration-4">Durée</label>
+                <input class="form-input" type="number" id="service-duration-4" value="0" step="5" onchange=updateAmount(4)>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-tax-4">TVA</label>
+                <input class="form-input" type="text" id="service-tax-4" value="0.00%" disabled>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-amount-4">Montant</label>
+                <input class="form-input" type="text" id="service-amount-4" value="0.00" disabled>
+            </div>
+            <h3>Prestation 5</h3>
+            <div class="form-group">
+                <label class="form-label" for="service-date-5">Date</label>
+                <input class="form-input" type="date" id="service-date-5">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-rate-type-5">Tarif</label>
+                <select class="form-select" id="service-rate-type-5">
+                    <option value="service-rate-type-590" selected>590</option>
+                    <option value="service-rate-type-999">999</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-code-5">Code tarifaire</label>
+                <select class="form-select" id="service-code-5">
+                    <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
+                    <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-duration-5">Durée</label>
+                <input class="form-input" type="number" id="service-duration-5" value="0" step="5" onchange=updateAmount(5)>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-tax-5">TVA</label>
+                <input class="form-input" type="text" id="service-tax-5" value="0.00%" disabled>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="service-amount-5">Montant</label>
+                <input class="form-input" type="text" id="service-amount-5" value="0.00" disabled>
+            </div>
+            <h2>Bilan</h2>
+            <div class="form-group">
+                <label class="form-label" for="total-amount">Montant dû</label>
+                <input class="form-input" type="text" id="total-amount" value="0.00" disabled required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="paiement-period">Délai de paiement (jours, net)</label>
+                <input class="form-input" type="number" id="paiement-period" value="30" required>
+            </div>
+            <input class="form-input" type="submit" value="Générer la facture">
+        </form>
+    </div>
 </body>
+
+<style>
+    .container {
+        width: 750px;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .form-group .col-6:not(:last-child) {
+        padding-right: 0.75rem;
+    }
+
+    .form-group .col-6:last-child {
+        padding-left: 0.75rem;
+    }
+
+    input[type=submit] {
+        margin-top: 2rem
+    }
+</style>
 
 <script>
     window.addEventListener('load', () => {
