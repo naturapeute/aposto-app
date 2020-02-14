@@ -7,7 +7,7 @@
 <body>
     <div class="container">
         <h1>Facture</h1>
-        <form class="form-horizontal" onsubmit="return generateReceipt(event)">
+        <form class="form-horizontal" onsubmit=generateReceipt(event)>
             <h2>Document</h2>
             <div class="form-group">
                 <label class="form-label" for="identification">Identification</label>
@@ -457,7 +457,7 @@
         }
 
         localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
-        
-        return false;
+
+        window.location.href = '/receipt.html';
     };
 </script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <title>Facturapeute - Votre Facture</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <span id="identification"></span>
+</body>
+
+<style>
+    body {
+        margin: 10mm;
+        font-family: Arial, Helvetica, sans-serif;
+        max-width: 210mm;
+        max-height: 297mm;
+        background-image: url("empty_receipt.png");
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 11pt;
+    }
+
+    #identification {
+        position: relative;
+        top: 60px;
+        left: 282px;
+    }
+</style>
+
+<script>
+    const receiptContent = JSON.parse(localStorage.getItem('receiptContent'));
+
+    document.getElementById('identification').innerHTML = receiptContent.identification;
+
+    console.log(receiptContent.identification);
+</script>
