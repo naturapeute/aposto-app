@@ -7,7 +7,7 @@
 <body>
     <div class="container">
         <h1>Facture</h1>
-        <form class="form-horizontal">
+        <form class="form-horizontal" onsubmit="return generateReceipt(event)">
             <h2>Document</h2>
             <div class="form-group">
                 <label class="form-label" for="identification">Identification</label>
@@ -402,5 +402,62 @@
         }
 
         document.getElementById('total-amount').value = totalAmount;
+    };
+
+    generateReceipt = (e) => {
+        e.preventDefault();
+
+        const receiptContent = {
+            identification: document.getElementById('identification').value,
+            author: {
+                firstName: document.getElementById('author-first-name').value,
+                lastName: document.getElementById('author-last-name').value,
+                RCCNumber: document.getElementById('author-rcc-number').value,
+                street: document.getElementById('author-street').value,
+                NPA: document.getElementById('author-npa').value,
+                city: document.getElementById('author-city').value
+            },
+            servicePerformer: {
+                firstName: document.getElementById('service-performer-first-name').value,
+                lastName: document.getElementById('service-performer-last-name').value,
+                RCCNumber: document.getElementById('service-performer-rcc-number').value,
+                street: document.getElementById('service-performer-street').value,
+                NPA: document.getElementById('service-performer-npa').value,
+                city: document.getElementById('service-performer-city').value
+            },
+            customer: {
+                firstName: document.getElementById('customer-first-name').value,
+                lastName: document.getElementById('customer-last-name').value,
+                street: document.getElementById('customer-street').value,
+                NPA: document.getElementById('customer-npa').value,
+                city: document.getElementById('customer-city').value,
+                birthdate: document.getElementById('customer-birthdate').value,
+            },
+            receiptDate: document.getElementById('receipt-date').value,
+            receiptNumber: document.getElementById('receipt-number').value,
+            therapyType: document.getElementById('therapy-type').value,
+            servicePrice: document.getElementById('service-price').value,
+            prestations: [],
+            paiementPeriod: document.getElementById('paiement-period').value 
+        };
+
+        for (let i = 1; i <= 5; i++) {
+            const date = document.getElementById(`service-date-${i}`).value;
+
+            if (date) {
+                const prestation = {
+                    date: date,
+                    rateType: document.getElementById(`service-rate-type-${i}`).value,
+                    code: document.getElementById(`service-code-${i}`).value,
+                    duration: document.getElementById(`service-duration-${i}`).value
+                };
+
+                receiptContent.prestations.push(prestation);
+            }
+        }
+
+        localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
+        
+        return false;
     };
 </script>
