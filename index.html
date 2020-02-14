@@ -55,16 +55,24 @@
         <select id="customer-refund-type" disabled required>
             <option value="customer-refund-type-tg" selected>Tiers Garant</option>
         </select><br>
+        <label for="service-role">Role</label>
+        <input type="text" id="service-role" value="Médecine complémentaire" disabled required><br>
         <label for="receipt-date">Date de facture</label>
         <input type="date" id="receipt-date" disabled required><br>
         <label for="receipt-number">N° de facture</label>
-        <input type="number" id="receipt-number" disabled required>
+        <input type="number" id="receipt-number" disabled required><br>
+        <label for="receipt-reason">Motif du traitement</label>
+        <select id="receipt-reason" disabled required>
+            <option value="receipt-reason-illness" selected>Maladie</option>
+        </select>
         <h2>Thérapie</h2>
         <label for="therapy-type">Thérapie</label>
         <select id="therapy-type">
             <option value="therapy-type-private" selected>Thérapie individuelle</option>
             <option value="therapy-type-group">Thérapie de groupe</option>
         </select><br>
+        <label for="therapy-point-value">Valeur du point</label>
+        <input type="text" id="therapy-point-value" value="1.00" disabled required>
         <h2>Prestations</h2>
         <label for="service-price">Tarif horaire</label>
         <input type="text" id="service-price" value="0.00" onchange=updateAllAmounts() required>
@@ -162,7 +170,7 @@
         <label for="service-tax-5">TVA</label>
         <input type="text" id="service-tax-5" value="0.00%" disabled required>
         <label for="service-amount-5">Montant</label>
-        <input type="text" id="service-amount-5" value="0.00" disabled required>
+        <input type="text" id="service-amount-5" value="0.00" disabled required><br>
         <label for="total-amount">Montant dû</label>
         <input type="text" id="total-amount" value="0.00" disabled required><br>
         <label for="paiement-period">Délai de paiement (jours, net)</label>
