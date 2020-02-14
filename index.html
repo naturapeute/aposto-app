@@ -66,6 +66,8 @@
             <option value="therapy-type-group">Thérapie de groupe</option>
         </select><br>
         <h2>Prestations</h2>
+        <label for="service-price">Tarif horaire</label>
+        <input type="text" id="service-price" value="0.00" onchange=updateAllAmounts() required>
         <h3>Prestation 1</h3>
         <label for="service-date-1">Date</label>
         <input type="date" id="service-date-1" required>
@@ -81,8 +83,6 @@
         </select>
         <label for="service-quantity-1">Quantité</label>
         <input type="number" id="service-quantity-1" value="0" onchange=updateAmount(1) required>
-        <label for="service-price-1">Prix</label>
-        <input type="text" id="service-price-1" value="0.00" onchange=updateAmount(1) required>
         <label for="service-tax-1">TVA</label>
         <input type="text" id="service-tax-1" value="0.00%" disabled required>
         <label for="service-amount-1">Montant</label>
@@ -102,8 +102,6 @@
         </select>
         <label for="service-quantity-2">Quantité</label>
         <input type="number" id="service-quantity-2" value="0" onchange=updateAmount(2) required>
-        <label for="service-price-2">Prix</label>
-        <input type="text" id="service-price-2" value="0.00" onchange=updateAmount(2) required>
         <label for="service-tax-2">TVA</label>
         <input type="text" id="service-tax-2" value="0.00%" disabled required>
         <label for="service-amount-2">Montant</label>
@@ -123,8 +121,6 @@
         </select>
         <label for="service-quantity-3">Quantité</label>
         <input type="number" id="service-quantity-3" value="0" onchange=updateAmount(3) required>
-        <label for="service-price-3">Prix</label>
-        <input type="text" id="service-price-3" value="0.00" onchange=updateAmount(3) required>
         <label for="service-tax-3">TVA</label>
         <input type="text" id="service-tax-3" value="0.00%" disabled required>
         <label for="service-amount-3">Montant</label>
@@ -144,8 +140,6 @@
         </select>
         <label for="service-quantity-4">Quantité</label>
         <input type="number" id="service-quantity-4" value="0" onchange=updateAmount(4) required>
-        <label for="service-price-4">Prix</label>
-        <input type="text" id="service-price-4" value="0.00" onchange=updateAmount(4) required>
         <label for="service-tax-4">TVA</label>
         <input type="text" id="service-tax-4" value="0.00%" disabled required>
         <label for="service-amount-4">Montant</label>
@@ -165,8 +159,6 @@
         </select>
         <label for="service-quantity-5">Quantité</label>
         <input type="number" id="service-quantity-5" value="0" onchange=updateAmount(5) required>
-        <label for="service-price-5">Prix</label>
-        <input type="text" id="service-price-5" value="0.00" onchange=updateAmount(5) required>
         <label for="service-tax-5">TVA</label>
         <input type="text" id="service-tax-5" value="0.00%" disabled required>
         <label for="service-amount-5">Montant</label>
@@ -208,19 +200,26 @@
         return `${date.getFullYear()}-${month}-${day}`;
     };
 
+    updateAllAmounts = () => {
+        for (let i = 1; i <= 5; i++) {
+            updateAmount(i);
+        }
+    };
+
     updateAmount = (serviceId) => {
         document.getElementById(`service-amount-${serviceId}`).value =
-            document.getElementById(`service-quantity-${serviceId}`).value * document.getElementById(`service-price-${serviceId}`).value;
+            document.getElementById(`service-quantity-${serviceId}`).value * document.getElementById('service-price').value;
     
         updateTotalAmount();
     };
 
     updateTotalAmount = () => {
-        document.getElementById('total-amount').value = 
-            parseInt(document.getElementById('service-amount-1').value) +
-            parseInt(document.getElementById('service-amount-2').value) +
-            parseInt(document.getElementById('service-amount-3').value) +
-            parseInt(document.getElementById('service-amount-4').value) +
-            parseInt(document.getElementById('service-amount-5').value);
+        let totalAmount = 0;
+
+        for (let i = 1; i <= 5; i++) {
+            totalAmount += parseFloat(document.getElementById(`service-amount-${i}`).value);
+        }
+
+        document.getElementById('total-amount').value = totalAmount;
     };
 </script>
