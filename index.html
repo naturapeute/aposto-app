@@ -52,6 +52,10 @@
         <select id="customer-law" disabled required>
             <option value="customer-law-lca" selected>LCA</option>
         </select><br>
+        <label for="customer-copy-receipt">Copie</label>
+        <select id="customer-copy-receipt" disabled required>
+            <option value="customer-copy-receipt-no" selected>Non</option>
+        </select><br>
         <label for="customer-refund-type">Type de remboursement</label>
         <select id="customer-refund-type" disabled required>
             <option value="customer-refund-type-tg" selected>Tiers Garant</option>
@@ -90,8 +94,8 @@
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity-1">Quantité</label>
-        <input type="number" id="service-quantity-1" value="0" onchange=updateAmount(1) required>
+        <label for="service-duration-1">Durée</label>
+        <input type="number" id="service-duration-1" value="0" step="5" onchange=updateAmount(1) required>
         <label for="service-tax-1">TVA</label>
         <input type="text" id="service-tax-1" value="0.00%" disabled required>
         <label for="service-amount-1">Montant</label>
@@ -109,8 +113,8 @@
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity-2">Quantité</label>
-        <input type="number" id="service-quantity-2" value="0" onchange=updateAmount(2) required>
+        <label for="service-duration-2">Durée</label>
+        <input type="number" id="service-duration-2" value="0" step="5" onchange=updateAmount(2) required>
         <label for="service-tax-2">TVA</label>
         <input type="text" id="service-tax-2" value="0.00%" disabled required>
         <label for="service-amount-2">Montant</label>
@@ -128,8 +132,8 @@
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity-3">Quantité</label>
-        <input type="number" id="service-quantity-3" value="0" onchange=updateAmount(3) required>
+        <label for="service-duration-3">Durée</label>
+        <input type="number" id="service-duration-3" value="0" step="5" onchange=updateAmount(3) required>
         <label for="service-tax-3">TVA</label>
         <input type="text" id="service-tax-3" value="0.00%" disabled required>
         <label for="service-amount-3">Montant</label>
@@ -147,8 +151,8 @@
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity-4">Quantité</label>
-        <input type="number" id="service-quantity-4" value="0" onchange=updateAmount(4) required>
+        <label for="service-duration-4">Durée</label>
+        <input type="number" id="service-duration-4" value="0" step="5" onchange=updateAmount(4) required>
         <label for="service-tax-4">TVA</label>
         <input type="text" id="service-tax-4" value="0.00%" disabled required>
         <label for="service-amount-4">Montant</label>
@@ -166,8 +170,8 @@
             <option value="service-code-1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="service-code-1004">1004 Acuponcture, par période de 5 minutes</option>
         </select>
-        <label for="service-quantity-5">Quantité</label>
-        <input type="number" id="service-quantity-5" value="0" onchange=updateAmount(5) required>
+        <label for="service-duration-5">Durée</label>
+        <input type="number" id="service-duration-5" value="0" step="5" onchange=updateAmount(5) required>
         <label for="service-tax-5">TVA</label>
         <input type="text" id="service-tax-5" value="0.00%" disabled required>
         <label for="service-amount-5">Montant</label>
@@ -217,7 +221,7 @@
 
     updateAmount = (serviceId) => {
         document.getElementById(`service-amount-${serviceId}`).value =
-            document.getElementById(`service-quantity-${serviceId}`).value * document.getElementById('service-price').value;
+            (document.getElementById(`service-duration-${serviceId}`).value / 5) * document.getElementById('service-price').value;
     
         updateTotalAmount();
     };
