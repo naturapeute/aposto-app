@@ -266,49 +266,51 @@
     }
 </style>
 
+<script src="utils.js"></script>
+
 <script>
     const receiptContent = JSON.parse(localStorage.getItem('receiptContent'));
 
-    document.getElementById('identification').innerHTML = receiptContent.identification;
-    document.getElementById('author-names').innerHTML = `${receiptContent.author.firstName} ${receiptContent.author.lastName}`;
-    document.getElementById('author-rcc').innerHTML = receiptContent.author.RCCNumber;
-    document.getElementById('author-address').innerHTML =
+    $('#identification').innerHTML = receiptContent.identification;
+    $('#author-names').innerHTML = `${receiptContent.author.firstName} ${receiptContent.author.lastName}`;
+    $('#author-rcc').innerHTML = receiptContent.author.RCCNumber;
+    $('#author-address').innerHTML =
         `${receiptContent.author.street}, ${receiptContent.author.NPA}, ${receiptContent.author.city}`;
-    document.getElementById('service-performer-names').innerHTML
+    $('#service-performer-names').innerHTML
         = `${receiptContent.servicePerformer.firstName} ${receiptContent.servicePerformer.lastName}`;
-    document.getElementById('service-performer-rcc').innerHTML = receiptContent.servicePerformer.RCCNumber;
-    document.getElementById('service-performer-address').innerHTML =
+    $('#service-performer-rcc').innerHTML = receiptContent.servicePerformer.RCCNumber;
+    $('#service-performer-address').innerHTML =
         `${receiptContent.servicePerformer.street}, ${receiptContent.servicePerformer.NPA}, ${receiptContent.servicePerformer.city}`;
-    document.getElementById('customer-last-name').innerHTML = receiptContent.customer.lastName;
-    document.getElementById('customer-first-name').innerHTML = receiptContent.customer.firstName;
-    document.getElementById('customer-street').innerHTML = receiptContent.customer.street;
-    document.getElementById('customer-npa').innerHTML = receiptContent.customer.NPA;
-    document.getElementById('customer-city').innerHTML = receiptContent.customer.city;
-    document.getElementById('customer-birthdate').innerHTML = receiptContent.customer.birthdate;
-    document.getElementById('therapy-start-date').innerHTML = receiptContent.receiptDate;
-    document.getElementById('therapy-end-date').innerHTML = receiptContent.receiptDate;
-    document.getElementById('receipt-date').innerHTML = receiptContent.receiptDate;
-    document.getElementById('receipt-number').innerHTML = `/ ${receiptContent.identification}`;
-    document.getElementById('therapy-type').innerHTML = receiptContent.therapyType;
+    $('#customer-last-name').innerHTML = receiptContent.customer.lastName;
+    $('#customer-first-name').innerHTML = receiptContent.customer.firstName;
+    $('#customer-street').innerHTML = receiptContent.customer.street;
+    $('#customer-npa').innerHTML = receiptContent.customer.NPA;
+    $('#customer-city').innerHTML = receiptContent.customer.city;
+    $('#customer-birthdate').innerHTML = receiptContent.customer.birthdate;
+    $('#therapy-start-date').innerHTML = receiptContent.receiptDate;
+    $('#therapy-end-date').innerHTML = receiptContent.receiptDate;
+    $('#receipt-date').innerHTML = receiptContent.receiptDate;
+    $('#receipt-number').innerHTML = `/ ${receiptContent.identification}`;
+    $('#therapy-type').innerHTML = receiptContent.therapyType;
 
     for (let i = 0; i < receiptContent.services.length; i++) {
-        document.getElementsByClassName(`service-${i + 1} service-date`)[0].innerHTML = receiptContent.services[i].date;
-        document.getElementsByClassName(`service-${i + 1} service-rate-type`)[0].innerHTML = '590';
-        document.getElementsByClassName(`service-${i + 1} service-code`)[0].innerHTML = receiptContent.services[i].code;
-        document.getElementsByClassName(`service-${i + 1} service-quantity`)[0].innerHTML = `${parseInt(receiptContent.services[i].duration) / 5}.00`;
-        document.getElementsByClassName(`service-${i + 1} service-price`)[0].innerHTML = receiptContent.servicePrice;
-        document.getElementsByClassName(`service-${i + 1} service-point-value`)[0].innerHTML = '1.00';
-        document.getElementsByClassName(`service-${i + 1} service-tax`)[0].innerHTML = '0.0%';
-        document.getElementsByClassName(`service-${i + 1} service-amount`)[0].innerHTML =
-            (parseInt(receiptContent.services[i].duration) / 5) * parseFloat(receiptContent.servicePrice);
+        $(`.service-${i + 1}.service-date`).innerHTML = receiptContent.services[i].date;
+        $(`.service-${i + 1}.service-rate-type`).innerHTML = '590';
+        $(`.service-${i + 1}.service-code`).innerHTML = receiptContent.services[i].code;
+        $(`.service-${i + 1}.service-quantity`).innerHTML = (Number(receiptContent.services[i].duration) / 5).toFixed(2);
+        $(`.service-${i + 1}.service-price`).innerHTML = (Number(receiptContent.servicePrice) / 12).toFixed(2);
+        $(`.service-${i + 1}.service-point-value`).innerHTML = '1.00';
+        $(`.service-${i + 1}.service-tax`).innerHTML = '0.0%';
+        $(`.service-${i + 1}.service-amount`).innerHTML =
+            ((Number(receiptContent.services[i].duration) / 5) * (Number(receiptContent.servicePrice) / 12)).toFixed(2);
     }
 
     let totalAmount = 0;
 
     receiptContent.services.forEach(service => {
-        totalAmount += (parseInt(service.duration) / 5) * parseFloat(receiptContent.servicePrice);
+        totalAmount += (Number(service.duration) / 5) * (Number(receiptContent.servicePrice) / 12);
     });
 
-    document.getElementById('total-amount').innerHTML = totalAmount;
-    document.getElementById('owed-amount').innerHTML = totalAmount;
+    $('#total-amount').innerHTML = totalAmount.toFixed(2);
+    $('#owed-amount').innerHTML = totalAmount.toFixed(2);
 </script>
