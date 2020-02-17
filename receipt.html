@@ -4,27 +4,265 @@
     <meta charset="utf-8">
 </head>
 <body>
+    <img src="empty_receipt.png" />
     <span id="identification"></span>
+    <span id="author-names"></span>
+    <span id="author-rcc"></span>
+    <span id="author-address"></span>
+    <span id="service-performer-names"></span>
+    <span id="service-performer-rcc"></span>
+    <span id="service-performer-address"></span>
+    <span id="customer-last-name"></span>
+    <span id="customer-first-name"></span>
+    <span id="customer-street"></span>
+    <span id="customer-npa"></span>
+    <span id="customer-city"></span>
+    <span id="customer-birthdate"></span>
+    <span id="therapy-start-date"></span>
+    <span id="therapy-end-date"></span>
+    <span id="receipt-date"></span>
+    <span id="receipt-number"></span>
+    <span id="therapy-type"></span>
+    <span class="service-1 service-date"></span>
+    <span class="service-1 service-rate-type"></span>
+    <span class="service-1 service-code"></span>
+    <span class="service-1 service-quantity"></span>
+    <span class="service-1 service-price"></span>
+    <span class="service-1 service-point-value"></span>
+    <span class="service-1 service-tax"></span>
+    <span class="service-1 service-amount"></span>
+    <span class="service-1 service-code-label"></span>
+    <span class="service-2 service-date"></span>
+    <span class="service-2 service-rate-type"></span>
+    <span class="service-2 service-code"></span>
+    <span class="service-2 service-quantity"></span>
+    <span class="service-2 service-price"></span>
+    <span class="service-2 service-point-value"></span>
+    <span class="service-2 service-tax"></span>
+    <span class="service-2 service-amount"></span>
+    <span class="service-2 service-code-label"></span>
+    <span class="service-3 service-date"></span>
+    <span class="service-3 service-rate-type"></span>
+    <span class="service-3 service-code"></span>
+    <span class="service-3 service-quantity"></span>
+    <span class="service-3 service-price"></span>
+    <span class="service-3 service-point-value"></span>
+    <span class="service-3 service-tax"></span>
+    <span class="service-3 service-amount"></span>
+    <span class="service-3 service-code-label"></span>
+    <span class="service-4 service-date"></span>
+    <span class="service-4 service-rate-type"></span>
+    <span class="service-4 service-code"></span>
+    <span class="service-4 service-quantity"></span>
+    <span class="service-4 service-price"></span>
+    <span class="service-4 service-point-value"></span>
+    <span class="service-4 service-tax"></span>
+    <span class="service-4 service-amount"></span>
+    <span class="service-4 service-code-label"></span>
+    <span class="service-5 service-date"></span>
+    <span class="service-5 service-rate-type"></span>
+    <span class="service-5 service-code"></span>
+    <span class="service-5 service-quantity"></span>
+    <span class="service-5 service-price"></span>
+    <span class="service-5 service-point-value"></span>
+    <span class="service-5 service-tax"></span>
+    <span class="service-5 service-amount"></span>
+    <span class="service-5 service-code-label"></span>
+    <span id="total-amount"></span>
+    <span id="owed-amount"></span>
 </body>
 
 <style>
     body {
-        margin: 10mm;
         font-family: Arial, Helvetica, sans-serif;
-        max-width: 210mm;
-        max-height: 297mm;
-        background-image: url("empty_receipt.png");
-        background-repeat: no-repeat;
-        position: absolute;
+        position: relative;
         top: 0;
         left: 0;
-        font-size: 11pt;
+        font-size: 7pt;
+        margin: 0;
+    }
+
+    body > * {
+        position: absolute;
+    }
+
+    img {
+        top: 0;
+        left: 0;
+        max-width: 210mm;
+        max-height: 297mm;
     }
 
     #identification {
-        position: relative;
-        top: 60px;
-        left: 282px;
+        top: 68px;
+        left: 179px;
+    }
+
+    #author-names {
+        top: 84px;
+        left: 250px;
+    }
+
+    #author-rcc {
+        top: 95px;
+        left: 164px;
+    }
+
+    #author-address {
+        top: 95px;
+        left: 251px;
+    }
+
+    #service-performer-names {
+        top: 110px;
+        left: 250px;
+    }
+
+    #service-performer-rcc {
+        top: 121px;
+        left: 164px;
+    }
+
+    #service-performer-address {
+        top: 121px;
+        left: 251px;
+    }
+    #customer-last-name {
+        top: 142px;
+        left: 220px;
+    }
+
+    #customer-first-name {
+        top: 156px;
+        left: 220px;
+    }
+
+    #customer-street {
+        top: 169px;
+        left: 220px;
+    }
+
+    #customer-npa {
+        top: 182px;
+        left: 220px;
+    }
+
+    #customer-city {
+        top: 194px;
+        left: 220px;
+    }
+
+    #customer-birthdate {
+        top: 208px;
+        left: 220px;
+    }
+
+    #therapy-start-date {
+        top: 367px;
+        left: 220px;
+    }
+
+    #therapy-end-date {
+        top: 367px;
+        left: 283px;
+    }
+
+    #receipt-date {
+        top: 340px;
+        left: 513px;
+    }
+
+    #receipt-number {
+        top: 340px;
+        left: 580px;
+    }
+
+    #therapy-type {
+        top: 437px;
+        left: 125px;
+    }
+
+    .service-1 {
+        top: 506px;
+    }
+
+    .service-2 {
+        top: 531px;
+    }
+
+    .service-3 {
+        top: 556px;
+    }
+
+    .service-4 {
+        top: 581px;
+    }
+
+    .service-5 {
+        top: 606px;
+    }
+
+    .service-date {
+        left: 63px;
+    }
+
+    .service-rate-type {
+        left: 126px;
+    }
+
+    .service-code,
+    .service-code-label {
+        left: 150px;
+    }
+
+    .service-quantity {
+        left: 337px;
+    }
+
+    .service-price {
+        left: 385px;
+    }
+
+    .service-point-value {
+        left: 467px;
+    }
+
+    .service-tax {
+        left: 661px;
+    }
+
+    .service-amount {
+        left: 730px;
+    }
+
+    .service-code-label.service-1 {
+        top: 518px;
+    }
+
+    .service-code-label.service-2 {
+        top: 543px;
+    }
+
+    .service-code-label.service-3 {
+        top: 568px;
+    }
+
+    .service-code-label.service-4 {
+        top: 593px;
+    }
+
+    .service-code-label.service-5 {
+        top: 618px;
+    }
+
+    #total-amount {
+        top: 1001px;
+        left: 724px;
+    }
+
+    #owed-amount {
+        top: 1036px;
+        left: 724px;
     }
 </style>
 
@@ -32,6 +270,45 @@
     const receiptContent = JSON.parse(localStorage.getItem('receiptContent'));
 
     document.getElementById('identification').innerHTML = receiptContent.identification;
+    document.getElementById('author-names').innerHTML = `${receiptContent.author.firstName} ${receiptContent.author.lastName}`;
+    document.getElementById('author-rcc').innerHTML = receiptContent.author.RCCNumber;
+    document.getElementById('author-address').innerHTML =
+        `${receiptContent.author.street}, ${receiptContent.author.NPA}, ${receiptContent.author.city}`;
+    document.getElementById('service-performer-names').innerHTML
+        = `${receiptContent.servicePerformer.firstName} ${receiptContent.servicePerformer.lastName}`;
+    document.getElementById('service-performer-rcc').innerHTML = receiptContent.servicePerformer.RCCNumber;
+    document.getElementById('service-performer-address').innerHTML =
+        `${receiptContent.servicePerformer.street}, ${receiptContent.servicePerformer.NPA}, ${receiptContent.servicePerformer.city}`;
+    document.getElementById('customer-last-name').innerHTML = receiptContent.customer.lastName;
+    document.getElementById('customer-first-name').innerHTML = receiptContent.customer.firstName;
+    document.getElementById('customer-street').innerHTML = receiptContent.customer.street;
+    document.getElementById('customer-npa').innerHTML = receiptContent.customer.NPA;
+    document.getElementById('customer-city').innerHTML = receiptContent.customer.city;
+    document.getElementById('customer-birthdate').innerHTML = receiptContent.customer.birthdate;
+    document.getElementById('therapy-start-date').innerHTML = receiptContent.receiptDate;
+    document.getElementById('therapy-end-date').innerHTML = receiptContent.receiptDate;
+    document.getElementById('receipt-date').innerHTML = receiptContent.receiptDate;
+    document.getElementById('receipt-number').innerHTML = `/ ${receiptContent.identification}`;
+    document.getElementById('therapy-type').innerHTML = receiptContent.therapyType;
 
-    console.log(receiptContent.identification);
+    for (let i = 0; i < receiptContent.services.length; i++) {
+        document.getElementsByClassName(`service-${i + 1} service-date`)[0].innerHTML = receiptContent.services[i].date;
+        document.getElementsByClassName(`service-${i + 1} service-rate-type`)[0].innerHTML = '590';
+        document.getElementsByClassName(`service-${i + 1} service-code`)[0].innerHTML = receiptContent.services[i].code;
+        document.getElementsByClassName(`service-${i + 1} service-quantity`)[0].innerHTML = `${parseInt(receiptContent.services[i].duration) / 5}.00`;
+        document.getElementsByClassName(`service-${i + 1} service-price`)[0].innerHTML = receiptContent.servicePrice;
+        document.getElementsByClassName(`service-${i + 1} service-point-value`)[0].innerHTML = '1.00';
+        document.getElementsByClassName(`service-${i + 1} service-tax`)[0].innerHTML = '0.0%';
+        document.getElementsByClassName(`service-${i + 1} service-amount`)[0].innerHTML =
+            (parseInt(receiptContent.services[i].duration) / 5) * parseFloat(receiptContent.servicePrice);
+    }
+
+    let totalAmount = 0;
+
+    receiptContent.services.forEach(service => {
+        totalAmount += (parseInt(service.duration) / 5) * parseFloat(receiptContent.servicePrice);
+    });
+
+    document.getElementById('total-amount').innerHTML = totalAmount;
+    document.getElementById('owed-amount').innerHTML = totalAmount;
 </script>
