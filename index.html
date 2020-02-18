@@ -74,7 +74,7 @@
           <label class="form-label" for="service-price">Tarif horaire</label>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-price" max="200" onchange=updateTotalAmount() required>
+          <input class="form-input" type="number" id="service-price" max="200" data-amount required>
         </div>
       </div>
       <div class="form-group">
@@ -85,8 +85,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5"
-            onchange=updateTotalAmount() required>
+          <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5" data-amount required>
         </div>
       </div>
       <div class="form-group">
@@ -98,8 +97,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5"
-            onchange=updateTotalAmount()>
+          <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -111,8 +109,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5"
-            onchange=updateTotalAmount()>
+          <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -124,8 +121,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5"
-            onchange=updateTotalAmount()>
+          <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -137,8 +133,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5"
-            onchange=updateTotalAmount()>
+          <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -184,6 +179,13 @@
 <script src="utils.js"></script>
 
 <script>
+  Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
+    dataAmountElement.addEventListener('change', updateTotalAmount);
+    dataAmountElement.addEventListener('keyup', updateTotalAmount);
+  });
+
+  updateTotalAmount();
+
   function updateTotalAmount() {
     let totalAmount = 0;
     const price = Number($('#service-price').value) / 12;
