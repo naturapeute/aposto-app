@@ -1,231 +1,238 @@
 <!DOCTYPE html>
+
 <head>
-    <title>Facturapeute - La tarification 590 facile</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+  <title>Facturapeute - La tarification 590 facile</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Facture</h1>
-        <form class="form-horizontal" onsubmit=generateReceipt(event)>
-            <h2>Information thérapeute</h2>
-            <div class="form-group">
-                <div class="col-6">
-                    <label class="form-label" for="therapist-first-name">Prénom</label>
-                    <input class="form-input" type="text" id="therapist-first-name" required>
-                </div>
-                <div class="col-6">
-                    <label class="form-label" for="therapist-last-name">Nom</label>
-                    <input class="form-input" type="text" id="therapist-last-name" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="therapist-rcc-number">N° RCC</label>
-                <input class="form-input" type="text" id="therapist-rcc-number" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="therapist-street">Rue et n°</label>
-                <input class="form-input" type="text" id="therapist-street" required>
-            </div>
-            <div class="form-group">
-                <div class="col-6">
-                    <label class="form-label" for="therapist-npa">NPA</label>
-                    <input class="form-input" type="text" id="therapist-npa" required>
-                </div>
-                <div class="col-6">
-                    <label class="form-label" for="therapist-city">Localité</label>
-                    <input class="form-input" type="text" id="therapist-city" required>
-                </div>
-            </div>
-            <h2>Information patient</h2>
-            <div class="form-group">
-                <div class="col-6">
-                    <label class="form-label" for="customer-first-name">Prénom</label>
-                    <input class="form-input" type="text" id="customer-first-name" required>
-                </div>
-                <div class="col-6">
-                    <label class="form-label" for="customer-last-name">Nom</label>
-                    <input class="form-input" type="text" id="customer-last-name" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="customer-street">Rue et n°</label>
-                <input class="form-input" type="text" id="customer-street" required>
-            </div>
-            <div class="form-group">
-                <div class="col-6">
-                    <label class="form-label" for="customer-npa">NPA</label>
-                    <input class="form-input" type="text" id="customer-npa" required>
-                </div>
-                <div class="col-6">
-                    <label class="form-label" for="customer-city">Localité</label>
-                    <input class="form-input" type="text" id="customer-city" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="customer-birthdate">Date de naissance</label>
-                <input class="form-input" type="date" id="customer-birthdate" required>
-            </div>
-            <h2>Description de la séance</h2>
-            <div class="form-group">
-                <div class="col-2">
-                    <label class="form-label" for="service-price">Tarif horaire</label>
-                </div>
-                <div class="col-3">
-                    <input class="form-input" type="number" id="service-price" max="200" onchange=updateTotalAmount() required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-9">
-                    <select class="form-select" id="service-code-1" required>
-                        <option value="1003" selected>1003 Acupressure, par période de 5 minutes</option>
-                        <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5" onchange=updateTotalAmount() required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-9">
-                    <select class="form-select" id="service-code-2">
-                        <option value="" selected></option>
-                        <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-                        <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5" onchange=updateTotalAmount()>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-9">
-                    <select class="form-select" id="service-code-3">
-                        <option value="" selected></option>
-                        <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-                        <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5" onchange=updateTotalAmount()>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-9">
-                    <select class="form-select" id="service-code-4">
-                        <option value="" selected></option>
-                        <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-                        <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5" onchange=updateTotalAmount()>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-9">
-                    <select class="form-select" id="service-code-5">
-                        <option value="" selected></option>
-                        <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-                        <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5" onchange=updateTotalAmount()>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">
-                    Total : <span id="total-amount">0.0</span> CHF
-                </label>
-            </div>
-            <input class="form-input btn btn-lg btn-primary" type="submit" value="Générer la facture">
-        </form>
-    </div>
+  <div class="container">
+    <h1>Facture</h1>
+    <form class="form-horizontal" onsubmit=generateReceipt(event)>
+      <h2>Informations du thérapeute</h2>
+      <div class="form-group">
+        <div class="col-6">
+          <label class="form-label" for="therapist-first-name">Prénom</label>
+          <input class="form-input" type="text" id="therapist-first-name" required>
+        </div>
+        <div class="col-6">
+          <label class="form-label" for="therapist-last-name">Nom</label>
+          <input class="form-input" type="text" id="therapist-last-name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="therapist-rcc-number">N° RCC</label>
+        <input class="form-input" type="text" id="therapist-rcc-number" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="therapist-street">Rue et n°</label>
+        <input class="form-input" type="text" id="therapist-street" required>
+      </div>
+      <div class="form-group">
+        <div class="col-6">
+          <label class="form-label" for="therapist-npa">NPA</label>
+          <input class="form-input" type="text" id="therapist-npa" required>
+        </div>
+        <div class="col-6">
+          <label class="form-label" for="therapist-city">Localité</label>
+          <input class="form-input" type="text" id="therapist-city" required>
+        </div>
+      </div>
+      <h2>Informations du patient</h2>
+      <div class="form-group">
+        <div class="col-6">
+          <label class="form-label" for="customer-first-name">Prénom</label>
+          <input class="form-input" type="text" id="customer-first-name" required>
+        </div>
+        <div class="col-6">
+          <label class="form-label" for="customer-last-name">Nom</label>
+          <input class="form-input" type="text" id="customer-last-name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="customer-street">Rue et n°</label>
+        <input class="form-input" type="text" id="customer-street" required>
+      </div>
+      <div class="form-group">
+        <div class="col-6">
+          <label class="form-label" for="customer-npa">NPA</label>
+          <input class="form-input" type="text" id="customer-npa" required>
+        </div>
+        <div class="col-6">
+          <label class="form-label" for="customer-city">Localité</label>
+          <input class="form-input" type="text" id="customer-city" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="customer-birthdate">Date de naissance</label>
+        <input class="form-input" type="date" id="customer-birthdate" required>
+      </div>
+      <h2>Description de la séance</h2>
+      <div class="form-group">
+        <div class="col-2">
+          <label class="form-label" for="service-price">Tarif horaire</label>
+        </div>
+        <div class="col-3">
+          <input class="form-input" type="number" id="service-price" max="200" onchange=updateTotalAmount() required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-9">
+          <select class="form-select" id="service-code-1" required>
+            <option value="1003" selected>1003 Acupressure, par période de 5 minutes</option>
+            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5"
+            onchange=updateTotalAmount() required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-9">
+          <select class="form-select" id="service-code-2">
+            <option value="" selected></option>
+            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5"
+            onchange=updateTotalAmount()>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-9">
+          <select class="form-select" id="service-code-3">
+            <option value="" selected></option>
+            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5"
+            onchange=updateTotalAmount()>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-9">
+          <select class="form-select" id="service-code-4">
+            <option value="" selected></option>
+            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5"
+            onchange=updateTotalAmount()>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-9">
+          <select class="form-select" id="service-code-5">
+            <option value="" selected></option>
+            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
+            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5"
+            onchange=updateTotalAmount()>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">
+          Total : <span id="total-amount">0.0</span> CHF
+        </label>
+      </div>
+      <input class="form-input btn btn-lg btn-primary" type="submit" value="Générer la facture">
+    </form>
+  </div>
 </body>
 
 <style>
-    .container {
-        width: 750px;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-    }
+  .container {
+    width: 750px;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
 
-    h1 {
-        text-align: center;
-    }
+  h1 {
+    text-align: center;
+  }
 
-    h2 {
-        margin: 1.5rem 0 0.5rem 0;
-    }
+  h2 {
+    margin: 1.5rem 0 0.5rem 0;
+  }
 
-    .form-group .col-6:not(:last-child),
-    .form-group .col-9 {
-        padding-right: 0.75rem;
-    }
+  .form-group .col-6:not(:last-child),
+  .form-group .col-9 {
+    padding-right: 0.75rem;
+  }
 
-    .form-group .col-6:last-child,
-    .form-group .col-3 {
-        padding-left: 0.75rem;
-    }
+  .form-group .col-6:last-child,
+  .form-group .col-3 {
+    padding-left: 0.75rem;
+  }
 
-    input[type=submit] {
-        margin-top: 2rem
-    }
+  input[type=submit] {
+    margin-top: 2rem
+  }
 </style>
 
 <script src="utils.js"></script>
 
 <script>
-    function updateTotalAmount() {
-        let totalAmount = 0;
-        const price = Number($('#service-price').value) / 12;
+  function updateTotalAmount() {
+    let totalAmount = 0;
+    const price = Number($('#service-price').value) / 12;
 
-        for (let i = 1; i <= 5; i++)
-            totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price;
+    for (let i = 1; i <= 5; i++)
+      totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price;
 
-        $('#total-amount').innerHTML = totalAmount.toFixed(2);
-    }
+    $('#total-amount').innerHTML = totalAmount.toFixed(2);
+  }
 
-    function generateReceipt(e) {
-        e.preventDefault();
+  function generateReceipt(e) {
+    e.preventDefault();
 
-        const receiptContent = {
-            therapist: {
-                firstName: $('#therapist-first-name').value,
-                lastName: $('#therapist-last-name').value,
-                RCCNumber: $('#therapist-rcc-number').value,
-                street: $('#therapist-street').value,
-                NPA: $('#therapist-npa').value,
-                city: $('#therapist-city').value
-            },
-            customer: {
-                firstName: $('#customer-first-name').value,
-                lastName: $('#customer-last-name').value,
-                street: $('#customer-street').value,
-                NPA: $('#customer-npa').value,
-                city: $('#customer-city').value,
-                birthdate: getDateString(new Date($('#customer-birthdate').value)),
-            },
-            servicePrice: $('#service-price').value,
-            services: [],
+    const receiptContent = {
+      therapist: {
+        firstName: $('#therapist-first-name').value,
+        lastName: $('#therapist-last-name').value,
+        RCCNumber: $('#therapist-rcc-number').value,
+        street: $('#therapist-street').value,
+        NPA: $('#therapist-npa').value,
+        city: $('#therapist-city').value
+      },
+      customer: {
+        firstName: $('#customer-first-name').value,
+        lastName: $('#customer-last-name').value,
+        street: $('#customer-street').value,
+        NPA: $('#customer-npa').value,
+        city: $('#customer-city').value,
+        birthdate: getDateString(new Date($('#customer-birthdate').value)),
+      },
+      servicePrice: $('#service-price').value,
+      services: [],
+    };
+
+    for (let i = 1; i <= 5; i++) {
+      const serviceCode = $(`#service-code-${i}`).value;
+
+      if (serviceCode) {
+        const service = {
+          code: serviceCode,
+          duration: $(`#service-duration-${i}`).value
         };
 
-        for (let i = 1; i <= 5; i++) {
-            const serviceCode = $(`#service-code-${i}`).value;
+        receiptContent.services.push(service);
+      }
+    }
 
-            if (serviceCode) {
-                const service = {
-                    code: serviceCode,
-                    duration: $(`#service-duration-${i}`).value
-                };
+    localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
 
-                receiptContent.services.push(service);
-            }
-        }
-
-        localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
-
-        window.location.href = '/receipt.html';
-    };
+    window.location.href = '/receipt.html';
+  };
 </script>
