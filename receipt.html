@@ -271,46 +271,58 @@
 <script>
     const receiptContent = JSON.parse(localStorage.getItem('receiptContent'));
 
-    $('#identification').innerHTML = receiptContent.identification;
-    $('#author-names').innerHTML = `${receiptContent.author.firstName} ${receiptContent.author.lastName}`;
-    $('#author-rcc').innerHTML = receiptContent.author.RCCNumber;
+    const date = new Date();        
+    const timestamp = `${date.getTime()}`.slice(0, -3);
+    const fullDateString = getFullDateString(date);
+    const dateString = getDateString(date);
+
+    $('#identification').innerHTML = `${timestamp}  ${fullDateString}`;
+    $('#author-names').innerHTML = `${receiptContent.therapist.firstName} ${receiptContent.therapist.lastName}`;
+    $('#author-rcc').innerHTML = receiptContent.therapist.RCCNumber;
     $('#author-address').innerHTML =
-        `${receiptContent.author.street}, ${receiptContent.author.NPA}, ${receiptContent.author.city}`;
-    $('#service-performer-names').innerHTML
-        = `${receiptContent.servicePerformer.firstName} ${receiptContent.servicePerformer.lastName}`;
-    $('#service-performer-rcc').innerHTML = receiptContent.servicePerformer.RCCNumber;
+        `${receiptContent.therapist.street}, ${receiptContent.therapist.NPA}, ${receiptContent.therapist.city}`;
+    $('#service-performer-names').innerHTML = `${receiptContent.therapist.firstName} ${receiptContent.therapist.lastName}`;
+    $('#service-performer-rcc').innerHTML = receiptContent.therapist.RCCNumber;
     $('#service-performer-address').innerHTML =
-        `${receiptContent.servicePerformer.street}, ${receiptContent.servicePerformer.NPA}, ${receiptContent.servicePerformer.city}`;
+        `${receiptContent.therapist.street}, ${receiptContent.therapist.NPA}, ${receiptContent.therapist.city}`;
     $('#customer-last-name').innerHTML = receiptContent.customer.lastName;
     $('#customer-first-name').innerHTML = receiptContent.customer.firstName;
     $('#customer-street').innerHTML = receiptContent.customer.street;
     $('#customer-npa').innerHTML = receiptContent.customer.NPA;
     $('#customer-city').innerHTML = receiptContent.customer.city;
     $('#customer-birthdate').innerHTML = receiptContent.customer.birthdate;
-    $('#therapy-start-date').innerHTML = receiptContent.receiptDate;
-    $('#therapy-end-date').innerHTML = receiptContent.receiptDate;
-    $('#receipt-date').innerHTML = receiptContent.receiptDate;
-    $('#receipt-number').innerHTML = `/ ${receiptContent.identification}`;
-    $('#therapy-type').innerHTML = receiptContent.therapyType;
-
-    for (let i = 0; i < receiptContent.services.length; i++) {
-        $(`.service-${i + 1}.service-date`).innerHTML = receiptContent.services[i].date;
-        $(`.service-${i + 1}.service-rate-type`).innerHTML = '590';
-        $(`.service-${i + 1}.service-code`).innerHTML = receiptContent.services[i].code;
-        $(`.service-${i + 1}.service-quantity`).innerHTML = (Number(receiptContent.services[i].duration) / 5).toFixed(2);
-        $(`.service-${i + 1}.service-price`).innerHTML = (Number(receiptContent.servicePrice) / 12).toFixed(2);
-        $(`.service-${i + 1}.service-point-value`).innerHTML = '1.00';
-        $(`.service-${i + 1}.service-tax`).innerHTML = '0.0%';
-        $(`.service-${i + 1}.service-amount`).innerHTML =
-            ((Number(receiptContent.services[i].duration) / 5) * (Number(receiptContent.servicePrice) / 12)).toFixed(2);
-    }
+    $('#therapy-start-date').innerHTML = dateString;
+    $('#therapy-end-date').innerHTML = dateString;
+    $('#receipt-date').innerHTML = dateString;
+    $('#receipt-number').innerHTML = `/ ${timestamp}  ${fullDateString}`;
+    $('#therapy-type').innerHTML = 'Thérapie individuelle';
 
     let totalAmount = 0;
 
-    receiptContent.services.forEach(service => {
-        totalAmount += (Number(service.duration) / 5) * (Number(receiptContent.servicePrice) / 12);
-    });
+    for (let i = 0; i < receiptContent.services.length; i++) {
+        const quantity = Number(receiptContent.services[i].duration) / 5;
+        const price = Number(receiptContent.servicePrice) / 12;
+
+        $(`.service-${i + 1}.service-date`).innerHTML = dateString;
+        $(`.service-${i + 1}.service-rate-type`).innerHTML = '590';
+        $(`.service-${i + 1}.service-code`).innerHTML = receiptContent.services[i].code;
+        $(`.service-${i + 1}.service-quantity`).innerHTML = quantity.toFixed(2);
+        $(`.service-${i + 1}.service-price`).innerHTML = price.toFixed(2);
+        $(`.service-${i + 1}.service-point-value`).innerHTML = '1.00';
+        $(`.service-${i + 1}.service-tax`).innerHTML = '0.0%';
+        $(`.service-${i + 1}.service-amount`).innerHTML = (quantity * price).toFixed(2);
+
+        totalAmount += quantity * price;
+    }
 
     $('#total-amount').innerHTML = totalAmount.toFixed(2);
     $('#owed-amount').innerHTML = totalAmount.toFixed(2);
+
+    function getFullDateString(date) {
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        return `${getDateString(date)} ${hours}:${minutes}:${seconds}`;
+    };
 </script>
