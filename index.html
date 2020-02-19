@@ -74,7 +74,10 @@
           <label class="form-label" for="service-price">Tarif horaire</label>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-price" max="200" data-amount required>
+          <input class="form-input" type="number" id="service-price" min="0" max="200" data-amount required>
+        </div>
+        <div class="col-1">
+          <label class="form-label">CHF</label>
         </div>
       </div>
       <div class="form-group">
@@ -85,7 +88,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5" data-amount required>
+          <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5" min="0" data-amount required>
         </div>
       </div>
       <div class="form-group">
@@ -97,7 +100,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5" data-amount>
+          <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -109,7 +112,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5" data-amount>
+          <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -121,7 +124,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5" data-amount>
+          <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -133,7 +136,7 @@
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5" data-amount>
+          <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -167,7 +170,8 @@
   }
 
   .form-group .col-6:last-child,
-  .form-group .col-3 {
+  .form-group .col-3,
+  .form-group .col-1 {
     padding-left: 0.75rem;
   }
 
