@@ -20,7 +20,7 @@
         <div class="card-footer"><span class="label label-rounded label-success">Sélectionné</span></div>
       </div>
       <details id="author-details" open>
-        <summary> Informations de l'auteur de la facture</summary>
+        <summary>Informations de l'auteur de la facture</summary>
         <div class="form-group">
           <label class="form-label" for="author-name">Nom ou entreprise</label>
           <input class="form-input" type="text" id="author-name" required>
@@ -45,34 +45,44 @@
         </div>
       </details>
       <h2>Informations du thérapeute</h2>
-      <div class="form-group">
-        <div class="col-6">
-          <label class="form-label" for="therapist-first-name">Prénom</label>
-          <input class="form-input" type="text" id="therapist-first-name" required>
+      <div class="card hide-card" id="therapist-card">
+        <div class="card-header">
+          <div class="card-title h5"></div>
         </div>
-        <div class="col-6">
-          <label class="form-label" for="therapist-last-name">Nom</label>
-          <input class="form-input" type="text" id="therapist-last-name" required>
+        <div class="card-body"></div>
+        <div class="card-footer"><span class="label label-rounded label-success">Sélectionné</span></div>
+      </div>
+      <details id="therapist-details" open>
+        <summary>Informations du thérapeute</summary>
+        <div class="form-group">
+          <div class="col-6">
+            <label class="form-label" for="therapist-first-name">Prénom</label>
+            <input class="form-input" type="text" id="therapist-first-name" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="therapist-last-name">Nom</label>
+            <input class="form-input" type="text" id="therapist-last-name" required>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="therapist-rcc-number">N° RCC</label>
-        <input class="form-input" type="text" id="therapist-rcc-number" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="therapist-street">Rue et n°</label>
-        <input class="form-input" type="text" id="therapist-street" required>
-      </div>
-      <div class="form-group">
-        <div class="col-6">
-          <label class="form-label" for="therapist-npa">NPA</label>
-          <input class="form-input" type="text" id="therapist-npa" required>
+        <div class="form-group">
+          <label class="form-label" for="therapist-rcc-number">N° RCC</label>
+          <input class="form-input" type="text" id="therapist-rcc-number" required>
         </div>
-        <div class="col-6">
-          <label class="form-label" for="therapist-city">Localité</label>
-          <input class="form-input" type="text" id="therapist-city" required>
+        <div class="form-group">
+          <label class="form-label" for="therapist-street">Rue et n°</label>
+          <input class="form-input" type="text" id="therapist-street" required>
         </div>
-      </div>
+        <div class="form-group">
+          <div class="col-6">
+            <label class="form-label" for="therapist-npa">NPA</label>
+            <input class="form-input" type="text" id="therapist-npa" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="therapist-city">Localité</label>
+            <input class="form-input" type="text" id="therapist-city" required>
+          </div>
+        </div>
+      </details>
       <h2>Informations du patient</h2>
       <div class="form-group">
         <div class="col-6">
@@ -248,6 +258,10 @@
   }
 
   if (therapist) {
+    $('#therapist-details').open = false;
+    $('#therapist-card').className = 'card show-card';
+    $('#therapist-card .card-header .card-title').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
+    $('#therapist-card .card-body').innerHTML = `${therapist.RCCNumber}<br>${therapist.street}, ${therapist.NPA}, ${therapist.city}`
     $('#therapist-first-name').value = therapist.firstName;
     $('#therapist-last-name').value = therapist.lastName;
     $('#therapist-rcc-number').value = therapist.RCCNumber;
