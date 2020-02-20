@@ -249,7 +249,7 @@
     $('#author-details').open = false;
     $('#author-card').className = 'card show-card';
     $('#author-card .card-header .card-title').innerHTML = author.name;
-    $('#author-card .card-body').innerHTML = `${author.RCCNumber}<br>${author.street}, ${author.NPA}, ${author.city}`
+    $('#author-card .card-body').innerHTML = `RCC: ${author.RCCNumber}<br>Adresse: ${author.street}, ${author.NPA}, ${author.city}`
     $('#author-name').value = author.name;
     $('#author-rcc-number').value = author.RCCNumber;
     $('#author-street').value = author.street;
@@ -261,7 +261,7 @@
     $('#therapist-details').open = false;
     $('#therapist-card').className = 'card show-card';
     $('#therapist-card .card-header .card-title').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
-    $('#therapist-card .card-body').innerHTML = `${therapist.RCCNumber}<br>${therapist.street}, ${therapist.NPA}, ${therapist.city}`
+    $('#therapist-card .card-body').innerHTML = `RCC: ${therapist.RCCNumber}<br>Adresse: ${therapist.street}, ${therapist.NPA}, ${therapist.city}`
     $('#therapist-first-name').value = therapist.firstName;
     $('#therapist-last-name').value = therapist.lastName;
     $('#therapist-rcc-number').value = therapist.RCCNumber;
@@ -311,6 +311,7 @@
       NPA: $('#customer-npa').value,
       city: $('#customer-city').value,
       birthdate: getDateString(new Date($('#customer-birthdate').value)),
+      frequency: 1
     };
 
     const servicePrice = $('#service-price').value;
@@ -339,12 +340,26 @@
     if (!localStorage.getItem('therapist'))
       localStorage.setItem('therapist', JSON.stringify(therapist));
 
-    if (!localStorage.getItem('customers'))
-      localStorage.setItem('customers', JSON.stringify([ customer ]));
-    else if (!customers.includes(customer)) {
-      customers.push(customer);
+    const customers = JSON.parse(localStorage.getItem('customers'));
+
+    if (customers) {
+      const matchingCustomer = customers.find(existingCustomer => {
+        return existingCustomer.firstName === customer.firstName
+          && existingCustomer.lastName === customer.lastName
+          && existingCustomer.street === customer.street
+          && existingCustomer.NPA === customer.NPA
+          && existingCustomer.city === customer.city
+          && existingCustomer.birthdate === customer.birthdate;
+      });
+
+      if (matchingCustomer)
+        matchingCustomer.frequency++;
+      else
+        customers.push(customer);
+
       localStorage.setItem('customers', JSON.stringify(customers));
-    }
+    } else
+      localStorage.setItem('customers', JSON.stringify([ customer ]));
 
     if (!localStorage.getItem('servicePrice'))
       localStorage.setItem('servicePrice', JSON.stringify(servicePrice));
