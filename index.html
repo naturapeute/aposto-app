@@ -240,39 +240,52 @@
     dataAmountElement.addEventListener('keyup', updateTotalAmount);
   });
 
-  const author = JSON.parse(localStorage.getItem('author'));
-  const therapist = JSON.parse(localStorage.getItem('therapist'));
+  loadAuthorBackup();
+  loadTherapistBackup();
+  loadServicePriceBackup();
+
   const customers = JSON.parse(localStorage.getItem('customers'));
-  const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
-
-  if (author) {
-    $('#author-details').open = false;
-    $('#author-card').className = 'card show-card';
-    $('#author-card .card-header .card-title').innerHTML = author.name;
-    $('#author-card .card-body').innerHTML = `RCC: ${author.RCCNumber}<br>Adresse: ${author.street}, ${author.NPA}, ${author.city}`
-    $('#author-name').value = author.name;
-    $('#author-rcc-number').value = author.RCCNumber;
-    $('#author-street').value = author.street;
-    $('#author-npa').value = author.NPA;
-    $('#author-city').value = author.city;
-  }
-
-  if (therapist) {
-    $('#therapist-details').open = false;
-    $('#therapist-card').className = 'card show-card';
-    $('#therapist-card .card-header .card-title').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
-    $('#therapist-card .card-body').innerHTML = `RCC: ${therapist.RCCNumber}<br>Adresse: ${therapist.street}, ${therapist.NPA}, ${therapist.city}`
-    $('#therapist-first-name').value = therapist.firstName;
-    $('#therapist-last-name').value = therapist.lastName;
-    $('#therapist-rcc-number').value = therapist.RCCNumber;
-    $('#therapist-street').value = therapist.street;
-    $('#therapist-npa').value = therapist.NPA;
-    $('#therapist-city').value = therapist.city;
-  }
-
-  if (servicePrice) $('#service-price').value = servicePrice;
 
   updateTotalAmount();
+
+  function loadAuthorBackup() {
+    const author = JSON.parse(localStorage.getItem('author'));
+
+    if (author) {
+      $('#author-details').open = false;
+      $('#author-card').className = 'card show-card';
+      $('#author-card .card-header .card-title').innerHTML = author.name;
+      $('#author-card .card-body').innerHTML = `RCC: ${author.RCCNumber}<br>Adresse: ${author.street}, ${author.NPA}, ${author.city}`
+      $('#author-name').value = author.name;
+      $('#author-rcc-number').value = author.RCCNumber;
+      $('#author-street').value = author.street;
+      $('#author-npa').value = author.NPA;
+      $('#author-city').value = author.city;
+    }
+  }
+
+  function loadTherapistBackup() {
+    const therapist = JSON.parse(localStorage.getItem('therapist'));
+
+    if (therapist) {
+      $('#therapist-details').open = false;
+      $('#therapist-card').className = 'card show-card';
+      $('#therapist-card .card-header .card-title').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
+      $('#therapist-card .card-body').innerHTML = `RCC: ${therapist.RCCNumber}<br>Adresse: ${therapist.street}, ${therapist.NPA}, ${therapist.city}`
+      $('#therapist-first-name').value = therapist.firstName;
+      $('#therapist-last-name').value = therapist.lastName;
+      $('#therapist-rcc-number').value = therapist.RCCNumber;
+      $('#therapist-street').value = therapist.street;
+      $('#therapist-npa').value = therapist.NPA;
+      $('#therapist-city').value = therapist.city;
+    }
+  }
+
+  function loadServicePriceBackup() {
+    const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
+
+    if (servicePrice) $('#service-price').value = servicePrice;
+  }
 
   function updateTotalAmount() {
     let totalAmount = 0;
@@ -287,15 +300,39 @@
   function generateReceipt(e) {
     e.preventDefault();
 
-    const author = {
+    const author = getAuthorData();
+    const therapist = getTherapistData();
+    const customer = getCustomerData();
+
+    const servicePrice = $('#service-price').value;
+
+    const receiptContent = {
+      customer: customer,
+      services: getServicesData()
+    };
+
+    saveData('author', author);
+    saveData('therapist', therapist);
+    saveData('servicePrice', servicePrice);
+    saveCustomer(customer);
+
+    localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
+
+    window.location.href = '/receipt.html';
+  };
+
+  function getAuthorData() {
+    return {
       name: $('#author-name').value,
       RCCNumber: $('#author-rcc-number').value,
       street: $('#author-street').value,
       NPA: $('#author-npa').value,
       city: $('#author-city').value
     };
+  }
 
-    const therapist = {
+  function getTherapistData() {
+    return {
       firstName: $('#therapist-first-name').value,
       lastName: $('#therapist-last-name').value,
       RCCNumber: $('#therapist-rcc-number').value,
@@ -303,8 +340,10 @@
       NPA: $('#therapist-npa').value,
       city: $('#therapist-city').value
     };
+  }
 
-    const customer = {
+  function getCustomerData() {
+    return {
       firstName: $('#customer-first-name').value,
       lastName: $('#customer-last-name').value,
       street: $('#customer-street').value,
@@ -313,13 +352,10 @@
       birthdate: getDateString(new Date($('#customer-birthdate').value)),
       frequency: 1
     };
+  }
 
-    const servicePrice = $('#service-price').value;
-
-    const receiptContent = {
-      customer: customer,
-      services: []
-    };
+  function getServicesData() {
+    const services = [];
 
     for (let i = 1; i <= 5; i++) {
       const serviceCode = $(`#service-code-${i}`).value;
@@ -330,16 +366,19 @@
           duration: $(`#service-duration-${i}`).value
         };
 
-        receiptContent.services.push(service);
+        services.push(service);
       }
     }
 
-    if (!localStorage.getItem('author'))
-      localStorage.setItem('author', JSON.stringify(author));
-    
-    if (!localStorage.getItem('therapist'))
-      localStorage.setItem('therapist', JSON.stringify(therapist));
+    return services;
+  }
 
+  function saveData(dataName, data) {
+    if (!localStorage.getItem(dataName))
+      localStorage.setItem(dataName, JSON.stringify(data));
+  }
+
+  function saveCustomer(customer) {
     const customers = JSON.parse(localStorage.getItem('customers'));
 
     if (customers) {
@@ -360,12 +399,5 @@
       localStorage.setItem('customers', JSON.stringify(customers));
     } else
       localStorage.setItem('customers', JSON.stringify([ customer ]));
-
-    if (!localStorage.getItem('servicePrice'))
-      localStorage.setItem('servicePrice', JSON.stringify(servicePrice));
-
-    localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
-
-    window.location.href = '/receipt.html';
-  };
+  }
 </script>
