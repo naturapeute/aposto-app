@@ -4,6 +4,7 @@
   <title>Facturapeute - La tarification 590 facile</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 </head>
 
 <body>
@@ -11,28 +12,38 @@
     <h1>Facture</h1>
     <form class="form-horizontal" onsubmit=generateReceipt(event)>
       <h2>Informations de l'auteur de la facture</h2>
-      <div class="form-group">
-        <label class="form-label" for="author-name">Nom ou entreprise</label>
-        <input class="form-input" type="text" id="author-name" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="author-rcc-number">N° RCC</label>
-        <input class="form-input" type="text" id="author-rcc-number" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="author-street">Rue et n°</label>
-        <input class="form-input" type="text" id="author-street" required>
-      </div>
-      <div class="form-group">
-        <div class="col-6">
-          <label class="form-label" for="author-npa">NPA</label>
-          <input class="form-input" type="text" id="author-npa" required>
+      <div class="card hide-card" id="author-card">
+        <div class="card-header">
+          <div class="card-title h5"></div>
         </div>
-        <div class="col-6">
-          <label class="form-label" for="author-city">Localité</label>
-          <input class="form-input" type="text" id="author-city" required>
-        </div>
+        <div class="card-body"></div>
+        <div class="card-footer"><span class="label label-rounded label-success">Sélectionné</span></div>
       </div>
+      <details id="author-details" open>
+        <summary> Informations de l'auteur de la facture</summary>
+        <div class="form-group">
+          <label class="form-label" for="author-name">Nom ou entreprise</label>
+          <input class="form-input" type="text" id="author-name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="author-rcc-number">N° RCC</label>
+          <input class="form-input" type="text" id="author-rcc-number" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="author-street">Rue et n°</label>
+          <input class="form-input" type="text" id="author-street" required>
+        </div>
+        <div class="form-group">
+          <div class="col-6">
+            <label class="form-label" for="author-npa">NPA</label>
+            <input class="form-input" type="text" id="author-npa" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label" for="author-city">Localité</label>
+            <input class="form-input" type="text" id="author-city" required>
+          </div>
+        </div>
+      </details>
       <h2>Informations du thérapeute</h2>
       <div class="form-group">
         <div class="col-6">
@@ -187,6 +198,14 @@
     margin: 1.5rem 0 0.5rem 0;
   }
 
+  .show-card {
+    display: block;
+  }
+
+  .hide-card {
+    display: none;
+  }
+
   .form-group .col-6:not(:last-child),
   .form-group .col-9 {
     padding-right: 0.75rem;
@@ -217,6 +236,10 @@
   const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
 
   if (author) {
+    $('#author-details').open = false;
+    $('#author-card').className = 'card show-card';
+    $('#author-card .card-header .card-title').innerHTML = author.name;
+    $('#author-card .card-body').innerHTML = `${author.RCCNumber}<br>${author.street}, ${author.NPA}, ${author.city}`
     $('#author-name').value = author.name;
     $('#author-rcc-number').value = author.RCCNumber;
     $('#author-street').value = author.street;
