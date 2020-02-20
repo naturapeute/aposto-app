@@ -272,6 +272,9 @@
 <script src="utils.js"></script>
 
 <script>
+  const author = JSON.parse(localStorage.getItem('author'));
+  const therapist = JSON.parse(localStorage.getItem('therapist'));
+  const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
   const receiptContent = JSON.parse(localStorage.getItem('receiptContent'));
 
   const date = new Date();
@@ -280,14 +283,12 @@
   const dateString = getDateString(date);
 
   $('#identification').innerHTML = `${timestamp}  ${fullDateString}`;
-  $('#author-names').innerHTML = receiptContent.author.name;
-  $('#author-rcc').innerHTML = receiptContent.author.RCCNumber;
-  $('#author-address').innerHTML =
-    `${receiptContent.author.street}, ${receiptContent.author.NPA}, ${receiptContent.author.city}`;
-  $('#service-performer-names').innerHTML = `${receiptContent.therapist.firstName} ${receiptContent.therapist.lastName}`;
-  $('#service-performer-rcc').innerHTML = receiptContent.therapist.RCCNumber;
-  $('#service-performer-address').innerHTML =
-    `${receiptContent.therapist.street}, ${receiptContent.therapist.NPA}, ${receiptContent.therapist.city}`;
+  $('#author-names').innerHTML = author.name;
+  $('#author-rcc').innerHTML = author.RCCNumber;
+  $('#author-address').innerHTML = `${author.street}, ${author.NPA}, ${author.city}`;
+  $('#service-performer-names').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
+  $('#service-performer-rcc').innerHTML = therapist.RCCNumber;
+  $('#service-performer-address').innerHTML = `${therapist.street}, ${therapist.NPA}, ${therapist.city}`;
   $('#customer-last-name').innerHTML = receiptContent.customer.lastName;
   $('#customer-first-name').innerHTML = receiptContent.customer.firstName;
   $('#customer-street').innerHTML = receiptContent.customer.street;
@@ -304,7 +305,7 @@
 
   for (let i = 0; i < receiptContent.services.length; i++) {
     const quantity = Number(receiptContent.services[i].duration) / 5;
-    const price = Number(receiptContent.servicePrice) / 12;
+    const price = Number(servicePrice) / 12;
 
     $(`.service-${i + 1}.service-date`).innerHTML = dateString;
     $(`.service-${i + 1}.service-rate-type`).innerHTML = '590';

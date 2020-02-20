@@ -211,6 +211,30 @@
     dataAmountElement.addEventListener('keyup', updateTotalAmount);
   });
 
+  const author = JSON.parse(localStorage.getItem('author'));
+  const therapist = JSON.parse(localStorage.getItem('therapist'));
+  const customers = JSON.parse(localStorage.getItem('customers'));
+  const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
+
+  if (author) {
+    $('#author-name').value = author.name;
+    $('#author-rcc-number').value = author.RCCNumber;
+    $('#author-street').value = author.street;
+    $('#author-npa').value = author.NPA;
+    $('#author-city').value = author.city;
+  }
+
+  if (therapist) {
+    $('#therapist-first-name').value = therapist.firstName;
+    $('#therapist-last-name').value = therapist.lastName;
+    $('#therapist-rcc-number').value = therapist.RCCNumber;
+    $('#therapist-street').value = therapist.street;
+    $('#therapist-npa').value = therapist.NPA;
+    $('#therapist-city').value = therapist.city;
+  }
+
+  if (servicePrice) $('#service-price').value = servicePrice;
+
   updateTotalAmount();
 
   function updateTotalAmount() {
@@ -226,32 +250,37 @@
   function generateReceipt(e) {
     e.preventDefault();
 
+    const author = {
+      name: $('#author-name').value,
+      RCCNumber: $('#author-rcc-number').value,
+      street: $('#author-street').value,
+      NPA: $('#author-npa').value,
+      city: $('#author-city').value
+    };
+
+    const therapist = {
+      firstName: $('#therapist-first-name').value,
+      lastName: $('#therapist-last-name').value,
+      RCCNumber: $('#therapist-rcc-number').value,
+      street: $('#therapist-street').value,
+      NPA: $('#therapist-npa').value,
+      city: $('#therapist-city').value
+    };
+
+    const customer = {
+      firstName: $('#customer-first-name').value,
+      lastName: $('#customer-last-name').value,
+      street: $('#customer-street').value,
+      NPA: $('#customer-npa').value,
+      city: $('#customer-city').value,
+      birthdate: getDateString(new Date($('#customer-birthdate').value)),
+    };
+
+    const servicePrice = $('#service-price').value;
+
     const receiptContent = {
-      author: {
-        name: $('#author-name').value,
-        RCCNumber: $('#author-rcc-number').value,
-        street: $('#author-street').value,
-        NPA: $('#author-npa').value,
-        city: $('#author-city').value
-      },
-      therapist: {
-        firstName: $('#therapist-first-name').value,
-        lastName: $('#therapist-last-name').value,
-        RCCNumber: $('#therapist-rcc-number').value,
-        street: $('#therapist-street').value,
-        NPA: $('#therapist-npa').value,
-        city: $('#therapist-city').value
-      },
-      customer: {
-        firstName: $('#customer-first-name').value,
-        lastName: $('#customer-last-name').value,
-        street: $('#customer-street').value,
-        NPA: $('#customer-npa').value,
-        city: $('#customer-city').value,
-        birthdate: getDateString(new Date($('#customer-birthdate').value)),
-      },
-      servicePrice: $('#service-price').value,
-      services: [],
+      customer: customer,
+      services: []
     };
 
     for (let i = 1; i <= 5; i++) {
@@ -266,6 +295,22 @@
         receiptContent.services.push(service);
       }
     }
+
+    if (!localStorage.getItem('author'))
+      localStorage.setItem('author', JSON.stringify(author));
+    
+    if (!localStorage.getItem('therapist'))
+      localStorage.setItem('therapist', JSON.stringify(therapist));
+
+    if (!localStorage.getItem('customers'))
+      localStorage.setItem('customers', JSON.stringify([ customer ]));
+    else if (!customers.includes(customer)) {
+      customers.push(customer);
+      localStorage.setItem('customers', JSON.stringify(customers));
+    }
+
+    if (!localStorage.getItem('servicePrice'))
+      localStorage.setItem('servicePrice', JSON.stringify(servicePrice));
 
     localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
 
