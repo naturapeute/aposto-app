@@ -11,78 +11,84 @@
   <div class="container">
     <h1>Facture</h1>
     <form class="form-horizontal" onsubmit=generateReceipt(event)>
-      <h2>Informations de l'auteur de la facture</h2>
-      <div class="card hide-card" id="author-card">
-        <div class="card-header">
-          <div class="card-title h5"></div>
+      <h2>Informations générales</h2>
+      <div class="columns">
+        <div class="column col-6">
+          <div class="card" id="author-card">
+            <div class="card-header">
+              <div class="card-title h5">
+                Auteur de la facture
+              </div>
+            </div>
+            <div class="card-body">
+              <span id="author-name-display"></span>
+              <div class="show-class">
+                <div class="form-group">
+                  <label class="form-label" for="author-name">Nom ou entreprise</label>
+                  <input class="form-input" type="text" id="author-name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="author-rcc-number">N° RCC</label>
+                  <input class="form-input" type="text" id="author-rcc-number" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="author-street">Rue et n°</label>
+                  <input class="form-input" type="text" id="author-street" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="author-npa">NPA</label>
+                  <input class="form-input" type="text" id="author-npa" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="author-city">Localité</label>
+                  <input class="form-input" type="text" id="author-city" required>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body"></div>
-        <div class="card-footer"><span class="label label-rounded label-success">Sélectionné</span></div>
+        <div class="column col-6">
+          <div class="card" id="therapist-card">
+            <div class="card-header">
+              <div class="card-title h5">
+                Thérapeute
+              </div>
+            </div>
+            <div class="card-body">
+              <span id="therapist-name-display"></span>
+              <div class="show-class">
+                <div class="form-group">
+                  <label class="form-label" for="therapist-first-name">Prénom</label>
+                  <input class="form-input" type="text" id="therapist-first-name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-last-name">Nom</label>
+                  <input class="form-input" type="text" id="therapist-last-name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-rcc-number">N° RCC</label>
+                  <input class="form-input" type="text" id="therapist-rcc-number" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-street">Rue et n°</label>
+                  <input class="form-input" type="text" id="therapist-street" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-npa">NPA</label>
+                  <input class="form-input" type="text" id="therapist-npa" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-city">Localité</label>
+                  <input class="form-input" type="text" id="therapist-city" required>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <details id="author-details" open>
-        <summary>Informations de l'auteur de la facture</summary>
-        <div class="form-group">
-          <label class="form-label" for="author-name">Nom ou entreprise</label>
-          <input class="form-input" type="text" id="author-name" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="author-rcc-number">N° RCC</label>
-          <input class="form-input" type="text" id="author-rcc-number" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="author-street">Rue et n°</label>
-          <input class="form-input" type="text" id="author-street" required>
-        </div>
-        <div class="form-group">
-          <div class="col-6">
-            <label class="form-label" for="author-npa">NPA</label>
-            <input class="form-input" type="text" id="author-npa" required>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="author-city">Localité</label>
-            <input class="form-input" type="text" id="author-city" required>
-          </div>
-        </div>
-      </details>
-      <h2>Informations du thérapeute</h2>
-      <div class="card hide-card" id="therapist-card">
-        <div class="card-header">
-          <div class="card-title h5"></div>
-        </div>
-        <div class="card-body"></div>
-        <div class="card-footer"><span class="label label-rounded label-success">Sélectionné</span></div>
-      </div>
-      <details id="therapist-details" open>
-        <summary>Informations du thérapeute</summary>
-        <div class="form-group">
-          <div class="col-6">
-            <label class="form-label" for="therapist-first-name">Prénom</label>
-            <input class="form-input" type="text" id="therapist-first-name" required>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="therapist-last-name">Nom</label>
-            <input class="form-input" type="text" id="therapist-last-name" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="therapist-rcc-number">N° RCC</label>
-          <input class="form-input" type="text" id="therapist-rcc-number" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="therapist-street">Rue et n°</label>
-          <input class="form-input" type="text" id="therapist-street" required>
-        </div>
-        <div class="form-group">
-          <div class="col-6">
-            <label class="form-label" for="therapist-npa">NPA</label>
-            <input class="form-input" type="text" id="therapist-npa" required>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="therapist-city">Localité</label>
-            <input class="form-input" type="text" id="therapist-city" required>
-          </div>
-        </div>
-      </details>
+      <button class="btn btn-sm btn-primary btn-edit-info hide-class" onclick=editInfo(event)>
+        Modifier les informations
+      </button>
       <h2>Informations du patient</h2>
       <div class="form-group">
         <div class="col-6">
@@ -208,12 +214,23 @@
     margin: 1.5rem 0 0.5rem 0;
   }
 
-  .show-card {
+  .show-class {
     display: block;
   }
 
-  .hide-card {
+  .hide-class {
     display: none;
+  }
+
+  #author-card,
+  #therapist-card {
+    text-align: center;
+    height: 100%;
+  }
+
+  .btn-edit-info {
+    width: 100%;
+    margin-top: 1rem;
   }
 
   .form-group .col-6:not(:last-child),
@@ -235,6 +252,8 @@
 <script src="utils.js"></script>
 
 <script>
+  let isInfoEdited = false;
+
   Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
     dataAmountElement.addEventListener('change', updateTotalAmount);
     dataAmountElement.addEventListener('keyup', updateTotalAmount);
@@ -252,15 +271,14 @@
     const author = JSON.parse(localStorage.getItem('author'));
 
     if (author) {
-      $('#author-details').open = false;
-      $('#author-card').className = 'card show-card';
-      $('#author-card .card-header .card-title').innerHTML = author.name;
-      $('#author-card .card-body').innerHTML = `RCC: ${author.RCCNumber}<br>Adresse: ${author.street}, ${author.NPA}, ${author.city}`
+      $('#author-card .show-class').className = 'hide-class';
+      $('#author-name-display').innerHTML = author.name;
       $('#author-name').value = author.name;
       $('#author-rcc-number').value = author.RCCNumber;
       $('#author-street').value = author.street;
       $('#author-npa').value = author.NPA;
       $('#author-city').value = author.city;
+      $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
     }
   }
 
@@ -268,16 +286,15 @@
     const therapist = JSON.parse(localStorage.getItem('therapist'));
 
     if (therapist) {
-      $('#therapist-details').open = false;
-      $('#therapist-card').className = 'card show-card';
-      $('#therapist-card .card-header .card-title').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
-      $('#therapist-card .card-body').innerHTML = `RCC: ${therapist.RCCNumber}<br>Adresse: ${therapist.street}, ${therapist.NPA}, ${therapist.city}`
+      $('#therapist-card .show-class').className = 'hide-class';
+      $('#therapist-name-display').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
       $('#therapist-first-name').value = therapist.firstName;
       $('#therapist-last-name').value = therapist.lastName;
       $('#therapist-rcc-number').value = therapist.RCCNumber;
       $('#therapist-street').value = therapist.street;
       $('#therapist-npa').value = therapist.NPA;
       $('#therapist-city').value = therapist.city;
+      $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
     }
   }
 
@@ -285,6 +302,16 @@
     const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
 
     if (servicePrice) $('#service-price').value = servicePrice;
+  }
+
+  function editInfo(e) {
+    e.preventDefault();
+
+    $('#author-card .hide-class').className = 'show-class';
+    $('#therapist-card .hide-class').className = 'show-class';
+    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class';
+
+    isInfoEdited = true;
   }
 
   function updateTotalAmount() {
@@ -374,7 +401,7 @@
   }
 
   function saveData(dataName, data) {
-    if (!localStorage.getItem(dataName))
+    if (!localStorage.getItem(dataName) || isInfoEdited)
       localStorage.setItem(dataName, JSON.stringify(data));
   }
 
