@@ -317,6 +317,8 @@
     customers = JSON.parse(localStorage.getItem('customers'));
 
     if (customers) {
+      customers.sort((a, b) => b.frequency - a.frequency);
+
       $('.customers-list-container').className = 'customers-list-container show-class';
 
       customers.forEach((customer, i) => {
@@ -422,7 +424,7 @@
       street: $('#customer-street').value,
       NPA: $('#customer-npa').value,
       city: $('#customer-city').value,
-      birthdate: new Date($('#customer-birthdate').value),
+      birthdate: $('#customer-birthdate').value,
       frequency: 1
     };
   }
