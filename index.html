@@ -382,7 +382,10 @@
     const servicePrice = $('#service-price').value;
 
     const receiptContent = {
+      author: author,
+      therapist: therapist,
       customer: customer,
+      servicePrice: servicePrice,
       services: getServicesData()
     };
 
