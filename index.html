@@ -124,7 +124,7 @@
           <label class="form-label" for="service-price">Tarif horaire</label>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-price" min="0" max="200" data-amount required>
+          <input class="form-input" type="number" id="service-price" min="0" max="200" onkeyup=onPriceEdit() data-amount required>
         </div>
         <div class="col-1">
           <label class="form-label">CHF</label>
@@ -311,6 +311,10 @@
     $('#therapist-card .hide-class').className = 'show-class';
     $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class';
 
+    isInfoEdited = true;
+  }
+
+  function onPriceEdit() {
     isInfoEdited = true;
   }
 
