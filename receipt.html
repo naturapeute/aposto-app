@@ -294,7 +294,7 @@
   $('#customer-street').innerHTML = receiptContent.customer.street;
   $('#customer-npa').innerHTML = receiptContent.customer.NPA;
   $('#customer-city').innerHTML = receiptContent.customer.city;
-  $('#customer-birthdate').innerHTML = receiptContent.customer.birthdate;
+  $('#customer-birthdate').innerHTML = getDateString(new Date(receiptContent.customer.birthdate));
   $('#therapy-start-date').innerHTML = dateString;
   $('#therapy-end-date').innerHTML = dateString;
   $('#receipt-date').innerHTML = dateString;
