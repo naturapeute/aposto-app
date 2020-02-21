@@ -394,9 +394,15 @@
     saveData('servicePrice', servicePrice);
     saveCustomer(customer);
 
-    localStorage.setItem('receiptContent', JSON.stringify(receiptContent));
+    const receiptContentBase64 = btoa(JSON.stringify(receiptContent));
+    const receiptFilename = `facture-${Date.now()}.pdf`;
+    const receiptURL = encodeURIComponent(`http://590.terrapeute.ch/receipt.html?receiptContent=${receiptContentBase64}`);
+    const url = `http://f.terrapeute.ch/pdf/${receiptURL}/${receiptFilename}`;
 
-    window.location.href = '/receipt.html';
+    const link = document.createElement("a");
+    link.download = receiptFilename;
+    link.href = url;
+    link.click();
   };
 
   function getAuthorData() {
