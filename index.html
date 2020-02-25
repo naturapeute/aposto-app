@@ -198,14 +198,15 @@
           Total : <span id="total-amount">0.0</span> CHF
         </label>
       </div>
-      <input class="form-input btn btn-lg btn-primary" type="submit" value="Télécharger la facture">
+      <button class="form-input btn btn-lg btn-primary">Télécharger la facture</button>
+      <button class="form-input btn btn-lg" title="Bientôt prêt ! - Envoyer la facture au client, vous recevrez aussi une copie" disabled>Envoyer la facture</button>
     </form>
   </div>
 
   <template id=service-template>
     <option value="{{ service.value }}">
-      {{ service.label }} —
-      {{ service.value }}
+      {{ service.value }} —
+      {{ service.label }}
     </option>
   </template>
 </body>
