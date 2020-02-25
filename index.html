@@ -10,6 +10,9 @@
 <body>
   <div class="container">
     <h1>Facture</h1>
+    <div class="success-alert bg-success hide-class">
+      Votre facture a été téléchargée. Si vous ne la trouvez pas, vérifiez votre dossier Téléchargement.
+    </div>
     <form class="form-horizontal" onsubmit=generateReceipt(event)>
       <h2>Informations générales</h2>
       <div class="columns">
@@ -220,6 +223,12 @@
     text-align: center;
   }
 
+  .success-alert {
+    border-radius: .1rem;
+    padding: 0.5rem;
+    margin-top: 2rem;
+  }
+
   h2 {
     margin: 1.5rem 0 0.5rem 0;
   }
@@ -235,6 +244,10 @@
   .author-column,
   .therapist-column {
     text-align: center;
+  }
+
+  .author-column > .card,
+  .therapist-column > .card {
     height: 100%;
   }
 
@@ -304,6 +317,12 @@
 <script>
   let isInfoEdited = false;
   let customers;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get('success');
+
+  if (myParam === '1')
+    $('.success-alert').className = 'success-alert bg-success show-class';
 
   Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
     dataAmountElement.addEventListener('change', updateTotalAmount);
@@ -377,8 +396,8 @@
   function editInfo(e) {
     e.preventDefault();
 
-    $('#author-card .hide-class').className = 'show-class';
-    $('#therapist-card .hide-class').className = 'show-class';
+    $('.author-column .hide-class').className = 'show-class';
+    $('.therapist-column .hide-class').className = 'show-class';
     $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class';
 
     isInfoEdited = true;
@@ -437,7 +456,10 @@
     const link = document.createElement("a");
     link.download = receiptFilename;
     link.href = url;
+    link.target = '_blank'
     link.click();
+
+    window.location.href = '?success=1';
   };
 
   function getAuthorData() {
