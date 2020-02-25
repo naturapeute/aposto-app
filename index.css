@@ -1,0 +1,97 @@
+.container {
+  max-width: 750px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.success-alert {
+  border-radius: .1rem;
+  padding: 0.5rem;
+  margin-top: 2rem;
+}
+
+h2 {
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.show-class {
+  display: block;
+}
+
+.hide-class {
+  display: none;
+}
+
+.author-column,
+.therapist-column {
+  text-align: center;
+}
+
+.author-column > .card,
+.therapist-column > .card {
+  height: 100%;
+}
+
+@media (max-width: 600px) {
+  .author-column {
+    margin-bottom: 1rem;
+  }
+}
+
+.btn-edit-info {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.customers-list {
+  display: flex;
+  overflow: scroll;
+  margin-bottom: 0.4rem;
+}
+
+.customer-card {
+  min-width: 150px;
+  margin-right: 0.8rem;
+}
+
+.customer-card:hover {
+  background: #4240d4;
+  border-color: #3634d2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-group .col-6:not(:last-child),
+.form-group .col-9 {
+  padding-right: 0.75rem;
+}
+
+.form-group .col-6:last-child,
+.form-group .col-3,
+.currency-column {
+  padding-left: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .form-group .col-6:not(:last-child),
+  .form-group .col-9 {
+    padding-right: 0;
+  }
+
+  .form-group .col-6:last-child,
+  .form-group .col-3 {
+    padding-left: 0;
+  }
+
+  .col-9.col-sm-12 {
+    margin-bottom: 0.4rem;
+  }
+}
+
+input[type=submit] {
+  margin-top: 2rem
+}
