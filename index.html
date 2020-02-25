@@ -25,23 +25,23 @@
               <div class="show-class">
                 <div class="form-group">
                   <label class="form-label" for="author-name">Nom ou entreprise</label>
-                  <input class="form-input" type="text" id="author-name" required>
+                  <input class="form-input" type="text" id="author-name" name="author-name" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-rcc-number">N° RCC</label>
-                  <input class="form-input" type="text" id="author-rcc-number" required>
+                  <input class="form-input" type="text" id="author-rcc-number" name="author-rcc-number" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-street">Rue et n°</label>
-                  <input class="form-input" type="text" id="author-street" required>
+                  <input class="form-input" type="text" id="author-street" name="author-street" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-npa">NPA</label>
-                  <input class="form-input" type="text" id="author-npa" required>
+                  <input class="form-input" type="text" id="author-npa" name="author-npa" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-city">Localité</label>
-                  <input class="form-input" type="text" id="author-city" required>
+                  <input class="form-input" type="text" id="author-city" name="author-city" required>
                 </div>
               </div>
             </div>
@@ -59,27 +59,27 @@
               <div class="show-class">
                 <div class="form-group">
                   <label class="form-label" for="therapist-first-name">Prénom</label>
-                  <input class="form-input" type="text" id="therapist-first-name" required>
+                  <input class="form-input" type="text" id="therapist-first-name" name="therapist-first-name" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-last-name">Nom</label>
-                  <input class="form-input" type="text" id="therapist-last-name" required>
+                  <input class="form-input" type="text" id="therapist-last-name" name="therapist-last-name" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-rcc-number">N° RCC</label>
-                  <input class="form-input" type="text" id="therapist-rcc-number" required>
+                  <input class="form-input" type="text" id="therapist-rcc-number" name="therapist-rcc-number" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-street">Rue et n°</label>
-                  <input class="form-input" type="text" id="therapist-street" required>
+                  <input class="form-input" type="text" id="therapist-street" name="therapist-street" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-npa">NPA</label>
-                  <input class="form-input" type="text" id="therapist-npa" required>
+                  <input class="form-input" type="text" id="therapist-npa" name="therapist-npa" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-city">Localité</label>
-                  <input class="form-input" type="text" id="therapist-city" required>
+                  <input class="form-input" type="text" id="therapist-city" name="therapist-city" required>
                 </div>
               </div>
             </div>
@@ -97,30 +97,30 @@
       <div class="form-group">
         <div class="col-6">
           <label class="form-label" for="customer-first-name">Prénom</label>
-          <input class="form-input" type="text" id="customer-first-name" required>
+          <input class="form-input" type="text" id="customer-first-name" name="customer-first-name" required>
         </div>
         <div class="col-6">
           <label class="form-label" for="customer-last-name">Nom</label>
-          <input class="form-input" type="text" id="customer-last-name" required>
+          <input class="form-input" type="text" id="customer-last-name" name="customer-last-name" required>
         </div>
       </div>
       <div class="form-group">
         <label class="form-label" for="customer-street">Rue et n°</label>
-        <input class="form-input" type="text" id="customer-street" required>
+        <input class="form-input" type="text" id="customer-street" name="customer-street" required>
       </div>
       <div class="form-group">
         <div class="col-6">
           <label class="form-label" for="customer-npa">NPA</label>
-          <input class="form-input" type="text" id="customer-npa" required>
+          <input class="form-input" type="text" id="customer-npa" name="customer-npa" required>
         </div>
         <div class="col-6">
           <label class="form-label" for="customer-city">Localité</label>
-          <input class="form-input" type="text" id="customer-city" required>
+          <input class="form-input" type="text" id="customer-city" name="customer-city" required>
         </div>
       </div>
       <div class="form-group">
         <label class="form-label" for="customer-birthdate">Date de naissance</label>
-        <input class="form-input" type="date" id="customer-birthdate" required>
+        <input class="form-input" type="date" id="customer-birthdate" name="customer-birthdate" required>
       </div>
       <h2>Description de la séance</h2>
       <div class="form-group">
@@ -128,7 +128,8 @@
           <label class="form-label" for="service-price">Tarif horaire</label>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-price" min="0" max="200" onkeyup=onPriceEdit() data-amount required>
+          <input class="form-input" type="number" id="service-price" name="service-price" min="0" max="200"
+            onkeyup=onPriceEdit() data-amount required>
         </div>
         <div class="col-1">
           <label class="form-label">CHF</label>
@@ -136,61 +137,66 @@
       </div>
       <div class="form-group">
         <div class="col-9">
-          <select class="form-select" id="service-code-1" required>
+          <select class="form-select" id="service-code-1" name="service-code-1" required>
             <option value="1003" selected>1003 Acupressure, par période de 5 minutes</option>
             <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-1" placeholder="Durée (minutes)" step="5" min="0" data-amount required>
+          <input class="form-input" type="number" id="service-duration-1" name="service-duration-1"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount required>
         </div>
       </div>
       <div class="form-group">
         <div class="col-9">
-          <select class="form-select" id="service-code-2">
+          <select class="form-select" id="service-code-2" name="service-code-2">
             <option value="" selected></option>
             <option value="1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-2" placeholder="Durée (minutes)" step="5" min="0" data-amount>
+          <input class="form-input" type="number" id="service-duration-2" name="service-duration-2"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
         <div class="col-9">
-          <select class="form-select" id="service-code-3">
+          <select class="form-select" id="service-code-3" name="service-code-3">
             <option value="" selected></option>
             <option value="1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-3" placeholder="Durée (minutes)" step="5" min="0" data-amount>
+          <input class="form-input" type="number" id="service-duration-3" name="service-duration-3"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
         <div class="col-9">
-          <select class="form-select" id="service-code-4">
+          <select class="form-select" id="service-code-4" name="service-code-4">
             <option value="" selected></option>
             <option value="1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-4" placeholder="Durée (minutes)" step="5" min="0" data-amount>
+          <input class="form-input" type="number" id="service-duration-4" name="service-duration-4"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
         <div class="col-9">
-          <select class="form-select" id="service-code-5">
+          <select class="form-select" id="service-code-5" name="service-code-5">
             <option value="" selected></option>
             <option value="1003">1003 Acupressure, par période de 5 minutes</option>
             <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3">
-          <input class="form-input" type="number" id="service-duration-5" placeholder="Durée (minutes)" step="5" min="0" data-amount>
+          <input class="form-input" type="number" id="service-duration-5" name="service-duration-5"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
@@ -330,7 +336,7 @@
             </div>
           </div>`
       });
-    }    
+    }
   }
 
   function loadServicePriceBackup() {
@@ -482,7 +488,7 @@
 
       localStorage.setItem('customers', JSON.stringify(customers));
     } else
-      localStorage.setItem('customers', JSON.stringify([ customer ]));
+      localStorage.setItem('customers', JSON.stringify([customer]));
   }
 
   function dateObjectToDateInput(date) {
