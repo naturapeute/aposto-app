@@ -142,8 +142,6 @@
       <div class="form-group">
         <div class="col-9 col-sm-12">
           <select class="form-select" id="service-code-1" name="service-code-1" required>
-            <option value="1003" selected>1003 Acupressure, par période de 5 minutes</option>
-            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3 col-sm-12">
@@ -155,8 +153,6 @@
         <div class="col-9 col-sm-12">
           <select class="form-select" id="service-code-2" name="service-code-2">
             <option value="" selected></option>
-            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3 col-sm-12">
@@ -168,8 +164,6 @@
         <div class="col-9 col-sm-12">
           <select class="form-select" id="service-code-3" name="service-code-3">
             <option value="" selected></option>
-            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3 col-sm-12">
@@ -181,8 +175,6 @@
         <div class="col-9 col-sm-12">
           <select class="form-select" id="service-code-4" name="service-code-4">
             <option value="" selected></option>
-            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3 col-sm-12">
@@ -194,8 +186,6 @@
         <div class="col-9 col-sm-12">
           <select class="form-select" id="service-code-5" name="service-code-5">
             <option value="" selected></option>
-            <option value="1003">1003 Acupressure, par période de 5 minutes</option>
-            <option value="1004">1004 Acuponcture, par période de 5 minutes</option>
           </select>
         </div>
         <div class="col-3 col-sm-12">
@@ -211,6 +201,13 @@
       <input class="form-input btn btn-lg btn-primary" type="submit" value="Télécharger la facture">
     </form>
   </div>
+
+  <template id=service-template>
+    <option value="{{ service.value }}">
+      {{ service.label }} —
+      {{ service.value }}
+    </option>
+  </template>
 </body>
 
 <script src="js/utils.js"></script>
