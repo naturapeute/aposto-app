@@ -38,6 +38,8 @@ function loadAuthorBackup() {
     $('#author-street').value = author.street
     $('#author-npa').value = author.NPA
     $('#author-city').value = author.city
+    $('#author-email').value = author.email
+    $('#author-phone').value = author.phone
     $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
   }
 }
@@ -54,6 +56,8 @@ function loadTherapistBackup() {
     $('#therapist-street').value = therapist.street
     $('#therapist-npa').value = therapist.NPA
     $('#therapist-city').value = therapist.city
+    $('#therapist-email').value = therapist.email
+    $('#therapist-phone').value = therapist.phone
     $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
   }
 }
@@ -100,6 +104,7 @@ function selectCustomer(i) {
   $('#customer-street').value = customers[i].street
   $('#customer-npa').value = customers[i].NPA
   $('#customer-city').value = customers[i].city
+  $('#customer-email').value = customers[i].email
   $('#customer-birthdate').value = dateObjectToDateInput(new Date(customers[i].birthdate))
 }
 
@@ -159,7 +164,9 @@ function getAuthorData() {
     RCCNumber: $('#author-rcc-number').value,
     street: $('#author-street').value,
     NPA: $('#author-npa').value,
-    city: $('#author-city').value
+    city: $('#author-city').value,
+    email: $('#author-email').value,
+    phone: $('#author-phone').value
   }
 }
 
@@ -170,7 +177,9 @@ function getTherapistData() {
     RCCNumber: $('#therapist-rcc-number').value,
     street: $('#therapist-street').value,
     NPA: $('#therapist-npa').value,
-    city: $('#therapist-city').value
+    city: $('#therapist-city').value,
+    email: $('#therapist-email').value,
+    phone: $('#therapist-phone').value
   }
 }
 
@@ -181,6 +190,7 @@ function getCustomerData() {
     street: $('#customer-street').value,
     NPA: $('#customer-npa').value,
     city: $('#customer-city').value,
+    email: $('#customer-email').value,
     birthdate: $('#customer-birthdate').value,
     frequency: 1
   }
@@ -220,6 +230,7 @@ function saveCustomer(customer) {
         && existingCustomer.street === customer.street
         && existingCustomer.NPA === customer.NPA
         && existingCustomer.city === customer.city
+        && existingCustomer.email === customer.email
         && existingCustomer.birthdate === customer.birthdate
     })
 
