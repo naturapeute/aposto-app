@@ -1,62 +1,62 @@
-let isInfoEdited = false;
-let customers;
+let isInfoEdited = false
+let customers
 
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('success');
+const urlParams = new URLSearchParams(window.location.search)
+const myParam = urlParams.get('success')
 
 if (myParam === '1')
-  $('.success-alert').className = 'success-alert bg-success show-class';
+  $('.success-alert').className = 'success-alert bg-success show-class'
 
 Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
-  dataAmountElement.addEventListener('change', updateTotalAmount);
-  dataAmountElement.addEventListener('keyup', updateTotalAmount);
-});
+  dataAmountElement.addEventListener('change', updateTotalAmount)
+  dataAmountElement.addEventListener('keyup', updateTotalAmount)
+})
 
-loadAuthorBackup();
-loadTherapistBackup();
-loadCustomersBackup();
-loadServicePriceBackup();
+loadAuthorBackup()
+loadTherapistBackup()
+loadCustomersBackup()
+loadServicePriceBackup()
 
-updateTotalAmount();
+updateTotalAmount()
 
 function loadAuthorBackup() {
-  const author = JSON.parse(localStorage.getItem('author'));
+  const author = JSON.parse(localStorage.getItem('author'))
 
   if (author) {
-    $('.author-column .show-class').className = 'hide-class';
-    $('#author-name-display').innerHTML = author.name;
-    $('#author-name').value = author.name;
-    $('#author-rcc-number').value = author.RCCNumber;
-    $('#author-street').value = author.street;
-    $('#author-npa').value = author.NPA;
-    $('#author-city').value = author.city;
+    $('.author-column .show-class').className = 'hide-class'
+    $('#author-name-display').innerHTML = author.name
+    $('#author-name').value = author.name
+    $('#author-rcc-number').value = author.RCCNumber
+    $('#author-street').value = author.street
+    $('#author-npa').value = author.NPA
+    $('#author-city').value = author.city
     $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
   }
 }
 
 function loadTherapistBackup() {
-  const therapist = JSON.parse(localStorage.getItem('therapist'));
+  const therapist = JSON.parse(localStorage.getItem('therapist'))
 
   if (therapist) {
-    $('.therapist-column .show-class').className = 'hide-class';
-    $('#therapist-name-display').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
-    $('#therapist-first-name').value = therapist.firstName;
-    $('#therapist-last-name').value = therapist.lastName;
-    $('#therapist-rcc-number').value = therapist.RCCNumber;
-    $('#therapist-street').value = therapist.street;
-    $('#therapist-npa').value = therapist.NPA;
-    $('#therapist-city').value = therapist.city;
+    $('.therapist-column .show-class').className = 'hide-class'
+    $('#therapist-name-display').innerHTML = `${therapist.firstName} ${therapist.lastName}`
+    $('#therapist-first-name').value = therapist.firstName
+    $('#therapist-last-name').value = therapist.lastName
+    $('#therapist-rcc-number').value = therapist.RCCNumber
+    $('#therapist-street').value = therapist.street
+    $('#therapist-npa').value = therapist.NPA
+    $('#therapist-city').value = therapist.city
     $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
   }
 }
 
 function loadCustomersBackup() {
-  customers = JSON.parse(localStorage.getItem('customers'));
+  customers = JSON.parse(localStorage.getItem('customers'))
 
   if (customers) {
-    customers.sort((a, b) => b.frequency - a.frequency);
+    customers.sort((a, b) => b.frequency - a.frequency)
 
-    $('.customers-list-container').className = 'customers-list-container show-class';
+    $('.customers-list-container').className = 'customers-list-container show-class'
 
     customers.forEach((customer, i) => {
       $('.customers-list').innerHTML +=
@@ -66,57 +66,57 @@ function loadCustomersBackup() {
             ${customer.lastName}
           </div>
         </div>`
-    });
+    })
   }
 }
 
 function loadServicePriceBackup() {
-  const servicePrice = JSON.parse(localStorage.getItem('servicePrice'));
+  const servicePrice = JSON.parse(localStorage.getItem('servicePrice'))
 
-  if (servicePrice) $('#service-price').value = servicePrice;
+  if (servicePrice) $('#service-price').value = servicePrice
 }
 
 function editInfo(e) {
-  e.preventDefault();
+  e.preventDefault()
 
-  $('.author-column .hide-class').className = 'show-class';
-  $('.therapist-column .hide-class').className = 'show-class';
-  $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class';
+  $('.author-column .hide-class').className = 'show-class'
+  $('.therapist-column .hide-class').className = 'show-class'
+  $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class'
 
-  isInfoEdited = true;
+  isInfoEdited = true
 }
 
 function selectCustomer(i) {
-  $('#customer-first-name').value = customers[i].firstName;
-  $('#customer-last-name').value = customers[i].lastName;
-  $('#customer-street').value = customers[i].street;
-  $('#customer-npa').value = customers[i].NPA;
-  $('#customer-city').value = customers[i].city;
-  $('#customer-birthdate').value = dateObjectToDateInput(new Date(customers[i].birthdate));
+  $('#customer-first-name').value = customers[i].firstName
+  $('#customer-last-name').value = customers[i].lastName
+  $('#customer-street').value = customers[i].street
+  $('#customer-npa').value = customers[i].NPA
+  $('#customer-city').value = customers[i].city
+  $('#customer-birthdate').value = dateObjectToDateInput(new Date(customers[i].birthdate))
 }
 
 function onPriceEdit() {
-  isInfoEdited = true;
+  isInfoEdited = true
 }
 
 function updateTotalAmount() {
-  let totalAmount = 0;
-  const price = Number($('#service-price').value) / 12;
+  let totalAmount = 0
+  const price = Number($('#service-price').value) / 12
 
   for (let i = 1; i <= 5; i++)
-    totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price;
+    totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price
 
-  $('#total-amount').innerHTML = totalAmount.toFixed(2);
+  $('#total-amount').innerHTML = totalAmount.toFixed(2)
 }
 
 function generateReceipt(e) {
-  e.preventDefault();
+  e.preventDefault()
 
-  const author = getAuthorData();
-  const therapist = getTherapistData();
-  const customer = getCustomerData();
+  const author = getAuthorData()
+  const therapist = getTherapistData()
+  const customer = getCustomerData()
 
-  const servicePrice = $('#service-price').value;
+  const servicePrice = $('#service-price').value
 
   const receiptContent = {
     author: author,
@@ -124,26 +124,26 @@ function generateReceipt(e) {
     customer: customer,
     servicePrice: servicePrice,
     services: getServicesData()
-  };
+  }
 
-  saveData('author', author);
-  saveData('therapist', therapist);
-  saveData('servicePrice', servicePrice);
-  saveCustomer(customer);
+  saveData('author', author)
+  saveData('therapist', therapist)
+  saveData('servicePrice', servicePrice)
+  saveCustomer(customer)
 
-  const receiptContentBase64 = btoa(JSON.stringify(receiptContent));
-  const receiptFilename = `facture-${Date.now()}.pdf`;
-  const receiptURL = encodeURIComponent(`http://app.aposto.ch/receipt/receipt.html?receiptContent=${receiptContentBase64}`);
-  const url = `http://f.terrapeute.ch/pdf/${receiptURL}/${receiptFilename}`;
+  const receiptContentBase64 = btoa(JSON.stringify(receiptContent))
+  const receiptFilename = `facture-${Date.now()}.pdf`
+  const receiptURL = encodeURIComponent(`http://app.aposto.ch/receipt/receipt.html?receiptContent=${receiptContentBase64}`)
+  const url = `http://f.terrapeute.ch/pdf/${receiptURL}/${receiptFilename}`
 
-  const link = document.createElement("a");
-  link.download = receiptFilename;
-  link.href = url;
+  const link = document.createElement('a')
+  link.download = receiptFilename
+  link.href = url
   link.target = '_blank'
-  link.click();
+  link.click()
 
-  window.location.href = '?success=1';
-};
+  window.location.href = '?success=1'
+}
 
 function getAuthorData() {
   return {
@@ -152,7 +152,7 @@ function getAuthorData() {
     street: $('#author-street').value,
     NPA: $('#author-npa').value,
     city: $('#author-city').value
-  };
+  }
 }
 
 function getTherapistData() {
@@ -163,7 +163,7 @@ function getTherapistData() {
     street: $('#therapist-street').value,
     NPA: $('#therapist-npa').value,
     city: $('#therapist-city').value
-  };
+  }
 }
 
 function getCustomerData() {
@@ -175,35 +175,35 @@ function getCustomerData() {
     city: $('#customer-city').value,
     birthdate: $('#customer-birthdate').value,
     frequency: 1
-  };
+  }
 }
 
 function getServicesData() {
-  const services = [];
+  const services = []
 
   for (let i = 1; i <= 5; i++) {
-    const serviceCode = $(`#service-code-${i}`).value;
+    const serviceCode = $(`#service-code-${i}`).value
 
     if (serviceCode) {
       const service = {
         code: serviceCode,
         duration: $(`#service-duration-${i}`).value
-      };
+      }
 
-      services.push(service);
+      services.push(service)
     }
   }
 
-  return services;
+  return services
 }
 
 function saveData(dataName, data) {
   if (!localStorage.getItem(dataName) || isInfoEdited)
-    localStorage.setItem(dataName, JSON.stringify(data));
+    localStorage.setItem(dataName, JSON.stringify(data))
 }
 
 function saveCustomer(customer) {
-  const customers = JSON.parse(localStorage.getItem('customers'));
+  const customers = JSON.parse(localStorage.getItem('customers'))
 
   if (customers) {
     const matchingCustomer = customers.find(existingCustomer => {
@@ -212,22 +212,22 @@ function saveCustomer(customer) {
         && existingCustomer.street === customer.street
         && existingCustomer.NPA === customer.NPA
         && existingCustomer.city === customer.city
-        && existingCustomer.birthdate === customer.birthdate;
-    });
+        && existingCustomer.birthdate === customer.birthdate
+    })
 
     if (matchingCustomer)
-      matchingCustomer.frequency++;
+      matchingCustomer.frequency++
     else
-      customers.push(customer);
+      customers.push(customer)
 
-    localStorage.setItem('customers', JSON.stringify(customers));
+    localStorage.setItem('customers', JSON.stringify(customers))
   } else
-    localStorage.setItem('customers', JSON.stringify([customer]));
+    localStorage.setItem('customers', JSON.stringify([customer]))
 }
 
 function dateObjectToDateInput(date) {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
 
-  return `${date.getFullYear()}-${month}-${day}`;
+  return `${date.getFullYear()}-${month}-${day}`
 }
