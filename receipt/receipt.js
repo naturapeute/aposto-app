@@ -31,7 +31,7 @@ for (let i = 0; i < receiptContent.services.length; i++) {
   const quantity = Number(receiptContent.services[i].duration) / 5
   const price = Number(receiptContent.servicePrice) / 12
 
-  $(`.service-${i + 1}.service-date`).innerHTML = dateString
+  $(`.service-${i + 1}.service-date`).innerHTML = getDateString(new Date(receiptContent.services[i].date))
   $(`.service-${i + 1}.service-rate-type`).innerHTML = '590'
   $(`.service-${i + 1}.service-code`).innerHTML = receiptContent.services[i].code
   $(`.service-${i + 1}.service-quantity`).innerHTML = quantity.toFixed(2)
@@ -53,4 +53,11 @@ function getFullDateString(date) {
   const seconds = String(date.getSeconds()).padStart(2, '0')
 
   return `${getDateString(date)} ${hours}:${minutes}:${seconds}`
+}
+
+function getDateString(date) {
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+
+  return `${day}.${month}.${date.getFullYear()}`
 }

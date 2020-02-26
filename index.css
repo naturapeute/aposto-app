@@ -26,18 +26,18 @@ h2 {
   display: none;
 }
 
-.author-column,
-.therapist-column {
+.author-col,
+.therapist-col {
   text-align: center;
 }
 
-.author-column > .card,
-.therapist-column > .card {
+.author-col > .card,
+.therapist-col > .card {
   height: 100%;
 }
 
 @media (max-width: 600px) {
-  .author-column {
+  .author-col {
     margin-bottom: 1rem;
   }
 }
@@ -66,13 +66,14 @@ h2 {
 }
 
 .form-group .col-6:not(:last-child),
-.form-group .col-9 {
+.form-group .col-9,
+.date-col {
   padding-right: 0.75rem;
 }
 
 .form-group .col-6:last-child,
-.form-group .col-3,
-.currency-column {
+.duration-col,
+.currency-col {
   padding-left: 0.75rem;
 }
 
