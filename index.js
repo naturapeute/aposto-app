@@ -12,12 +12,20 @@ Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement
   dataAmountElement.addEventListener('keyup', updateTotalAmount)
 })
 
+feedServiceOptions()
+
 loadAuthorBackup()
 loadTherapistBackup()
 loadCustomersBackup()
 loadServicePriceBackup()
 
 updateTotalAmount()
+
+function feedServiceOptions() {
+  const template = document.querySelector('#service-template').innerHTML
+  const htmlOptions = services.map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match))).join('')
+  Array.from(document.querySelectorAll('[id^=service-code-]')).forEach(select => select.innerHTML += htmlOptions)
+}
 
 function loadAuthorBackup() {
   const author = JSON.parse(localStorage.getItem('author'))
