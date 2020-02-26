@@ -1,4 +1,4 @@
-.container {
+main {
   max-width: 750px;
   margin-top: 2rem;
   margin-bottom: 3rem;
@@ -8,21 +8,21 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  margin: 1.5rem 0 0.5rem 0;
+}
+
 .success-alert {
   border-radius: .1rem;
   padding: 0.5rem;
   margin-top: 2rem;
 }
 
-h2 {
-  margin: 1.5rem 0 0.5rem 0;
-}
-
-.show-class {
+.show {
   display: block;
 }
 
-.hide-class {
+.hide {
   display: none;
 }
 
