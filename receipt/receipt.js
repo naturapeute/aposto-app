@@ -39,6 +39,7 @@ for (let i = 0; i < receiptContent.services.length; i++) {
   $(`.service-${i + 1}.service-point-value`).innerHTML = '1.00'
   $(`.service-${i + 1}.service-tax`).innerHTML = '0.0%'
   $(`.service-${i + 1}.service-amount`).innerHTML = (quantity * price).toFixed(2)
+  $(`.service-${i + 1}.service-code-label`).innerHTML = serviceCodes.find(serviceCode => serviceCode.value === Number(receiptContent.services[i].code)).label
 
   totalAmount += quantity * price
 }

@@ -23,7 +23,7 @@ updateTotalAmount()
 
 function feedServiceOptions() {
   const template = document.querySelector('#service-template').innerHTML
-  const htmlOptions = services.map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match))).join('')
+  const htmlOptions = serviceCodes.map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match))).join('')
   Array.from(document.querySelectorAll('[id^=service-code-]')).forEach(select => select.innerHTML += htmlOptions)
 }
 

@@ -9,7 +9,7 @@ function getDateString(date) {
   return `${day}.${month}.${date.getFullYear()}`
 }
 
-const services = [
+const serviceCodes = [
   {value: 1203, label: "Ostéopathie, par période de 5 minutes"},
   {value: 1200, label: "Anamnèse / bilan / diagnostic / constatations médicales, par période de 5 minutes"},
   {value: 1250, label: "Consultation manquée"},
