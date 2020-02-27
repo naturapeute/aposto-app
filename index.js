@@ -151,7 +151,7 @@ function generateReceipt(e) {
   const receiptContentBase64 = btoa(JSON.stringify(receiptContent))
   const receiptFilename = `facture-${Date.now()}.pdf`
   const receiptURL = encodeURIComponent(`http://app.aposto.ch/receipt/receipt.html?receiptContent=${receiptContentBase64}`)
-  const url = `http://f.terrapeute.ch/pdf/${receiptURL}/${receiptFilename}`
+  const url = `http://api.aposto.ch/pdf/${receiptURL}/${receiptFilename}`
 
   const link = document.createElement('a')
   link.download = receiptFilename
