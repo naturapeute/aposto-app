@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search)
 const receiptContent = JSON.parse(atob(urlParams.get('receiptContent')))
 
-const date = new Date()
+const date = new Date(receiptContent.timestamp)
 const timestamp = `${date.getTime()}`.slice(0, -3)
 const fullDateString = getFullDateString(date)
 const dateString = getDateString(date)

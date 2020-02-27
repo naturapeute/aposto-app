@@ -1,5 +1,6 @@
 loadMatomo()
 
+const receiptDate = Date.now()
 let isInfoEdited = false
 let customers
 
@@ -138,6 +139,7 @@ function generateReceipt(e) {
   const servicePrice = $('#service-price').value
 
   const receiptContent = {
+    timestamp: receiptDate,
     author: author,
     therapist: therapist,
     customer: customer,
