@@ -24,7 +24,7 @@ img {
 }
 
 #author-names {
-  top: 84px;
+  top: 83px;
   left: 250px;
 }
 
@@ -38,19 +38,39 @@ img {
   left: 251px;
 }
 
-#service-performer-names {
+#author-email {
+  top: 83px;
+  left: 586px;
+}
+
+#author-phone {
+  top: 94px;
+  left: 586px;
+}
+
+#therapist-names {
   top: 110px;
   left: 250px;
 }
 
-#service-performer-rcc {
+#therapist-rcc {
   top: 121px;
   left: 164px;
 }
 
-#service-performer-address {
+#therapist-address {
   top: 121px;
   left: 251px;
+}
+
+#therapist-email {
+  top: 110px;
+  left: 586px;
+}
+
+#therapist-phone {
+  top: 121px;
+  left: 586px;
 }
 
 #customer-last-name {
