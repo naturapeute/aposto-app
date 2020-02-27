@@ -10,9 +10,9 @@
 </head>
 
 <body>
-  <div class="container">
+  <main class="container">
     <h1>Facture</h1>
-    <div class="success-alert bg-success hide-class">
+    <div class="success-alert bg-success hide">
       Votre facture a été téléchargée. Si vous ne la trouvez pas, vérifiez votre dossier Téléchargement.
     </div>
     <form class="form-horizontal" onsubmit=generateReceipt(event)>
@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
               <span id="author-name-display"></span>
-              <div class="show-class">
+              <div class="show">
                 <div class="form-group">
                   <label class="form-label" for="author-name">Nom ou entreprise</label>
                   <input class="form-input" type="text" id="author-name" name="author-name" required>
@@ -61,7 +61,7 @@
             </div>
             <div class="card-body">
               <span id="therapist-name-display"></span>
-              <div class="show-class">
+              <div class="show">
                 <div class="form-group">
                   <label class="form-label" for="therapist-first-name">Prénom</label>
                   <input class="form-input" type="text" id="therapist-first-name" name="therapist-first-name" required>
@@ -91,11 +91,11 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-sm btn-primary btn-edit-info hide-class" onclick=editInfo(event)>
+      <button class="btn btn-sm btn-primary btn-edit-info hide" onclick=editInfo(event)>
         Modifier les informations
       </button>
       <h2>Informations du patient</h2>
-      <div class="customers-list-container hide-class">
+      <div class="customers-list-container hide">
         <h5>Mes patients</h5>
         <div class="customers-list"></div>
       </div>
@@ -203,7 +203,7 @@
       <button class="btn" title="Envoyer la facture au client, vous recevrez aussi une copie" disabled>Envoyer la facture au client (Bientôt !)</button>
       <a class="btn" title="Entamer une nouvelle facture" href="">Préparer une nouvelle facture</a>
     </form>
-  </div>
+  </main>
 
   <template id=service-template>
     <option value="{{ service.value }}">

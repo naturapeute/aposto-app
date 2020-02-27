@@ -5,7 +5,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('success');
 
 if (myParam === '1')
-  $('.success-alert').className = 'success-alert bg-success show-class';
+  $('.success-alert').className = 'success-alert bg-success show';
 
 Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
   dataAmountElement.addEventListener('change', updateTotalAmount);
@@ -23,14 +23,14 @@ function loadAuthorBackup() {
   const author = JSON.parse(localStorage.getItem('author'));
 
   if (author) {
-    $('.author-column .show-class').className = 'hide-class';
+    $('.author-column .show').className = 'hide';
     $('#author-name-display').innerHTML = author.name;
     $('#author-name').value = author.name;
     $('#author-rcc-number').value = author.RCCNumber;
     $('#author-street').value = author.street;
     $('#author-npa').value = author.NPA;
     $('#author-city').value = author.city;
-    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
+    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show'
   }
 }
 
@@ -38,7 +38,7 @@ function loadTherapistBackup() {
   const therapist = JSON.parse(localStorage.getItem('therapist'));
 
   if (therapist) {
-    $('.therapist-column .show-class').className = 'hide-class';
+    $('.therapist-column .show').className = 'hide';
     $('#therapist-name-display').innerHTML = `${therapist.firstName} ${therapist.lastName}`;
     $('#therapist-first-name').value = therapist.firstName;
     $('#therapist-last-name').value = therapist.lastName;
@@ -46,7 +46,7 @@ function loadTherapistBackup() {
     $('#therapist-street').value = therapist.street;
     $('#therapist-npa').value = therapist.NPA;
     $('#therapist-city').value = therapist.city;
-    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show-class'
+    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show'
   }
 }
 
@@ -56,7 +56,7 @@ function loadCustomersBackup() {
   if (customers) {
     customers.sort((a, b) => b.frequency - a.frequency);
 
-    $('.customers-list-container').className = 'customers-list-container show-class';
+    $('.customers-list-container').className = 'customers-list-container show';
 
     customers.forEach((customer, i) => {
       $('.customers-list').innerHTML +=
@@ -79,9 +79,9 @@ function loadServicePriceBackup() {
 function editInfo(e) {
   e.preventDefault();
 
-  $('.author-column .hide-class').className = 'show-class';
-  $('.therapist-column .hide-class').className = 'show-class';
-  $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class';
+  $('.author-column .hide').className = 'show';
+  $('.therapist-column .hide').className = 'show';
+  $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide';
 
   isInfoEdited = true;
 }
