@@ -17,7 +17,7 @@
     <form class="form-horizontal" onsubmit=generateReceipt(event)>
       <h2>Informations générales</h2>
       <div class="columns">
-        <div class="column col-6 col-sm-12 author-column">
+        <div class="column col-6 col-sm-12 author-col">
           <div class="card">
             <div class="card-header">
               <div class="card-title h5">
@@ -59,7 +59,7 @@
             </div>
           </div>
         </div>
-        <div class="column col-6 col-sm-12 therapist-column">
+        <div class="column col-6 col-sm-12 therapist-col">
           <div class="card">
             <div class="card-header">
               <div class="card-title h5">
@@ -156,60 +156,75 @@
           <input class="form-input" type="number" id="service-price" name="service-price" min="0" max="200"
             onkeyup=onPriceEdit() data-amount required>
         </div>
-        <div class="col-2 currency-column">
+        <div class="col-2 currency-col">
           <label class="form-label">CHF</label>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-9 col-sm-12">
+        <div class="col-3 col-sm-12 date-col">
+          <input class="form-input" type="date" id="service-date-1" name="service-date-1" required>
+        </div>
+        <div class="col-6 col-sm-12">
           <select class="form-select" id="service-code-1" name="service-code-1" required>
           </select>
         </div>
-        <div class="col-3 col-sm-12">
+        <div class="col-3 col-sm-12 duration-col">
           <input class="form-input" type="number" id="service-duration-1" name="service-duration-1"
             placeholder="Durée (minutes)" step="5" min="0" data-amount required>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-9 col-sm-12">
+        <div class="col-3 col-sm-12 date-col">
+          <input class="form-input" type="date" id="service-date-2" name="service-date-2" required>
+        </div>
+        <div class="col-6 col-sm-12">
           <select class="form-select" id="service-code-2" name="service-code-2">
             <option value="" selected></option>
           </select>
         </div>
-        <div class="col-3 col-sm-12">
+        <div class="col-3 col-sm-12 duration-col">
           <input class="form-input" type="number" id="service-duration-2" name="service-duration-2"
             placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-9 col-sm-12">
+        <div class="col-3 col-sm-12 date-col">
+          <input class="form-input" type="date" id="service-date-3" name="service-date-3" required>
+        </div>
+        <div class="col-6 col-sm-12">
           <select class="form-select" id="service-code-3" name="service-code-3">
             <option value="" selected></option>
           </select>
         </div>
-        <div class="col-3 col-sm-12">
+        <div class="col-3 col-sm-12 duration-col">
           <input class="form-input" type="number" id="service-duration-3" name="service-duration-3"
             placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-9 col-sm-12">
+        <div class="col-3 col-sm-12 date-col">
+          <input class="form-input" type="date" id="service-date-4" name="service-date-4" required>
+        </div>
+        <div class="col-6 col-sm-12">
           <select class="form-select" id="service-code-4" name="service-code-4">
             <option value="" selected></option>
           </select>
         </div>
-        <div class="col-3 col-sm-12">
+        <div class="col-3 col-sm-12 duration-col">
           <input class="form-input" type="number" id="service-duration-4" name="service-duration-4"
             placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-9 col-sm-12">
+        <div class="col-3 col-sm-12 date-col">
+          <input class="form-input" type="date" id="service-date-5" name="service-date-5" required>
+        </div>
+        <div class="col-6 col-sm-12">
           <select class="form-select" id="service-code-5" name="service-code-5">
             <option value="" selected></option>
           </select>
         </div>
-        <div class="col-3 col-sm-12">
+        <div class="col-3 col-sm-12 duration-col">
           <input class="form-input" type="number" id="service-duration-5" name="service-duration-5"
             placeholder="Durée (minutes)" step="5" min="0" data-amount>
         </div>

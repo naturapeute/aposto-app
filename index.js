@@ -12,6 +12,10 @@ Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement
   dataAmountElement.addEventListener('keyup', updateTotalAmount)
 })
 
+Array.from(document.querySelectorAll('.date-col input')).forEach(dateInput => {
+  dateInput.value = dateObjectToDateInput(new Date())
+})
+
 feedServiceOptions()
 
 loadAuthorBackup()
@@ -31,7 +35,7 @@ function loadAuthorBackup() {
   const author = JSON.parse(localStorage.getItem('author'))
 
   if (author) {
-    $('.author-column .show-class').className = 'hide-class'
+    $('.author-col .show-class').className = 'hide-class'
     $('#author-name-display').innerHTML = author.name
     $('#author-name').value = author.name
     $('#author-rcc-number').value = author.RCCNumber
@@ -48,7 +52,7 @@ function loadTherapistBackup() {
   const therapist = JSON.parse(localStorage.getItem('therapist'))
 
   if (therapist) {
-    $('.therapist-column .show-class').className = 'hide-class'
+    $('.therapist-col .show-class').className = 'hide-class'
     $('#therapist-name-display').innerHTML = `${therapist.firstName} ${therapist.lastName}`
     $('#therapist-first-name').value = therapist.firstName
     $('#therapist-last-name').value = therapist.lastName
@@ -91,8 +95,8 @@ function loadServicePriceBackup() {
 function editInfo(e) {
   e.preventDefault()
 
-  $('.author-column .hide-class').className = 'show-class'
-  $('.therapist-column .hide-class').className = 'show-class'
+  $('.author-col .hide-class').className = 'show-class'
+  $('.therapist-col .hide-class').className = 'show-class'
   $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide-class'
 
   isInfoEdited = true
@@ -204,6 +208,7 @@ function getServicesData() {
 
     if (serviceCode) {
       const service = {
+        date: $(`#service-date-${i}`).value,
         code: serviceCode,
         duration: $(`#service-duration-${i}`).value
       }
