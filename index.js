@@ -5,10 +5,8 @@ let isInfoEdited = false
 let customers
 
 const urlParams = new URLSearchParams(window.location.search)
-const myParam = urlParams.get('success')
 
-if (myParam === '1')
-  $('.success-alert').className = 'success-alert bg-success show'
+$('.success-alert').classList.toggle('hide', !Boolean(urlParams.get('success')))
 
 Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
   dataAmountElement.addEventListener('change', updateTotalAmount)
@@ -38,8 +36,8 @@ function loadAuthorBackup() {
   const author = JSON.parse(localStorage.getItem('author'))
 
   if (author) {
-    $('.author-col .show').className = 'hide'
-    $('#author-name-display').innerHTML = author.name
+    $('.author-form').classList.add('hide')
+    $('#author-name-display').textContent = author.name
     $('#author-name').value = author.name
     $('#author-rcc-number').value = author.RCCNumber
     $('#author-street').value = author.street
@@ -47,7 +45,7 @@ function loadAuthorBackup() {
     $('#author-city').value = author.city
     $('#author-email').value = author.email
     $('#author-phone').value = author.phone
-    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show'
+    $('.btn-edit-info').classList.remove('hide')
   }
 }
 
@@ -55,8 +53,8 @@ function loadTherapistBackup() {
   const therapist = JSON.parse(localStorage.getItem('therapist'))
 
   if (therapist) {
-    $('.therapist-col .show').className = 'hide'
-    $('#therapist-name-display').innerHTML = `${therapist.firstName} ${therapist.lastName}`
+    $('.therapist-form').classList.add('hide')
+    $('#therapist-name-display').textContent = `${therapist.firstName} ${therapist.lastName}`
     $('#therapist-first-name').value = therapist.firstName
     $('#therapist-last-name').value = therapist.lastName
     $('#therapist-rcc-number').value = therapist.RCCNumber
@@ -65,7 +63,7 @@ function loadTherapistBackup() {
     $('#therapist-city').value = therapist.city
     $('#therapist-email').value = therapist.email
     $('#therapist-phone').value = therapist.phone
-    $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info show'
+    $('.btn-edit-info').classList.remove('hide')
   }
 }
 
@@ -75,7 +73,7 @@ function loadCustomersBackup() {
   if (customers) {
     customers.sort((a, b) => b.frequency - a.frequency)
 
-    $('.customers-list-container').className = 'customers-list-container show'
+    $('.customers-list-container').classList.remove('hide')
 
     customers.forEach((customer, i) => {
       $('.customers-list').innerHTML +=
@@ -98,9 +96,9 @@ function loadServicePriceBackup() {
 function editInfo(e) {
   e.preventDefault()
 
-  $('.author-col .hide').className = 'show'
-  $('.therapist-col .hide').className = 'show'
-  $('.btn-edit-info').className = 'btn btn-sm btn-primary btn-edit-info hide'
+  $('.author-form').classList.remove('hide')
+  $('.therapist-form').classList.remove('hide')
+  $('.btn-edit-info').classList.add('hide')
 
   isInfoEdited = true
 }
@@ -126,7 +124,7 @@ function updateTotalAmount() {
   for (let i = 1; i <= 5; i++)
     totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price
 
-  $('#total-amount').innerHTML = totalAmount.toFixed(2)
+  $('#total-amount').textContent = totalAmount.toFixed(2)
 }
 
 function generateReceipt(e) {
