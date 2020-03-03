@@ -127,9 +127,7 @@ function updateTotalAmount() {
   $('#total-amount').textContent = totalAmount.toFixed(2)
 }
 
-function generateReceipt(e) {
-  e.preventDefault()
-
+function generateReceiptBase64() {
   const author = getAuthorData()
   const therapist = getTherapistData()
   const customer = getCustomerData()
@@ -150,18 +148,53 @@ function generateReceipt(e) {
   saveData('servicePrice', servicePrice)
   saveCustomer(customer)
 
-  const receiptContentBase64 = btoa(JSON.stringify(receiptContent))
+  return btoa(JSON.stringify(receiptContent))
+}
+
+function downloadReceipt(e) {
+  e.preventDefault()
+
+  const receiptContentBase64 = generateReceiptBase64()
   const receiptFilename = `facture-${Date.now()}.pdf`
-  const receiptURL = encodeURIComponent(`http://app.aposto.ch/receipt/receipt.html?receiptContent=${receiptContentBase64}`)
-  const url = `http://api.aposto.ch/pdf/${receiptURL}/${receiptFilename}`
 
   const link = document.createElement('a')
   link.download = receiptFilename
-  link.href = url
+  link.href = `https://api.aposto.ch/pdf/${receiptContentBase64}/${receiptFilename}`
   link.target = '_blank'
   link.click()
 
   window.location.href = '?success=1'
+}
+
+function sendReceipt(e) {
+  e.preventDefault()
+
+  const receiptContentBase64 = generateReceiptBase64()
+
+  (async () => {
+    try {
+      const response = await fetch(
+        `https://api.aposto.ch/pdf/${receiptContentBase64}`,
+        { headers: { 'Accept': 'application/json' } }
+      )
+  
+      if (response.status != 200) {
+        console.log('Email sending has failed. Try again later.')
+
+        try {
+          const errorContent = JSON.parse(response.body)
+
+          console.log(errorContent)
+        } catch(err) {
+          console.log(`Body JSON parsing has failed: ${err.message}`)
+        }
+      }
+      else
+        window.location.href = '?success=1'
+    } catch(err) {
+      console.log(`Fetch has failed: ${err.message}`)
+    }
+  })()
 }
 
 function getAuthorData() {

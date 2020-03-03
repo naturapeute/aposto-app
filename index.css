@@ -88,6 +88,23 @@ h2 {
   }
 }
 
-input[type=submit] {
-  margin-top: 2rem
+.buttons-group {
+  margin-top: 1rem;
+}
+
+.buttons-group > *:first-child {
+  padding-right: 0.5rem;
+}
+
+.buttons-group > *:not(:first-child):not(:last-child) {
+  padding: 0 0.25rem;
+}
+
+.buttons-group > *:last-child {
+  padding-left: 0.5rem;
+}
+
+.buttons-group button,
+.buttons-group a {
+  width: 100%;
 }

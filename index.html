@@ -15,7 +15,7 @@
     <div class="success-alert bg-success hide">
       Votre facture a été téléchargée. Si vous ne la trouvez pas, vérifiez votre dossier Téléchargement.
     </div>
-    <form class="form-horizontal" onsubmit=generateReceipt(event)>
+    <form class="form-horizontal">
       <h2>Informations générales</h2>
       <div class="columns">
         <div class="column col-6 col-sm-12 author-col">
@@ -235,9 +235,17 @@
           Total : <span id="total-amount">0.0</span> CHF
         </label>
       </div>
-      <button class="btn btn-primary" title="Técharger la facture en format PDF">Télécharger la facture</button>
-      <button class="btn" title="Envoyer la facture au client, vous recevrez aussi une copie" disabled>Envoyer la facture au client (Bientôt !)</button>
-      <a class="btn" title="Entamer une nouvelle facture" href="">Préparer une nouvelle facture</a>
+      <div class="form-group buttons-group">
+        <div class="col-4 col-sm-12">
+          <button class="btn btn-primary" title="Técharger la facture en format PDF" onclick=downaloadReceipt(event)>Télécharger la facture</button>
+        </div>
+        <div class="col-4 col-sm-12">
+          <button class="btn" title="Envoyer la facture au client, vous recevrez aussi une copie" onclick=sendReceipt(event)>Envoyer la facture au client</button>
+        </div>
+        <div class="col-4 col-sm-12">
+          <a class="btn" title="Entamer une nouvelle facture" href="">Préparer une nouvelle facture</a>
+        </div>
+      </div>
     </form>
   </main>
 
