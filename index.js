@@ -171,14 +171,20 @@ function sendReceipt(e) {
     try {
       const response = await fetch(
         `https://api.aposto.ch/email/${receiptContentBase64}`,
-        { headers: { 'Accept': 'application/json' } }
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Origin': 'https://app.aposto.ch'
+          }
+        }
       )
 
       if (response.status != 200) {
         console.log('Email sending has failed. Try again later.')
 
         try {
-          const errorContent = JSON.parse(response.body)
+          const errorContent = await response.json()
 
           console.log(errorContent)
         } catch (err) {
