@@ -4,10 +4,6 @@ const receiptDate = Date.now()
 let isInfoEdited = false
 let customers
 
-const urlParams = new URLSearchParams(window.location.search)
-
-$('.success-alert').classList.toggle('hide', !Boolean(urlParams.get('success')))
-
 Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
   dataAmountElement.addEventListener('change', updateTotalAmount)
   dataAmountElement.addEventListener('keyup', updateTotalAmount)
@@ -163,7 +159,7 @@ function downloadReceipt(e) {
   link.target = '_blank'
   link.click()
 
-  window.location.href = '?success=1'
+  $('#success-alert-download').classList.toggle('hide')
 }
 
 function sendReceipt(e) {
@@ -171,13 +167,13 @@ function sendReceipt(e) {
 
   const receiptContentBase64 = generateReceiptBase64()
 
-  (async () => {
+  ;(async () => {
     try {
       const response = await fetch(
-        `https://api.aposto.ch/pdf/${receiptContentBase64}`,
+        `https://api.aposto.ch/email/${receiptContentBase64}`,
         { headers: { 'Accept': 'application/json' } }
       )
-  
+
       if (response.status != 200) {
         console.log('Email sending has failed. Try again later.')
 
@@ -185,13 +181,13 @@ function sendReceipt(e) {
           const errorContent = JSON.parse(response.body)
 
           console.log(errorContent)
-        } catch(err) {
+        } catch (err) {
           console.log(`Body JSON parsing has failed: ${err.message}`)
         }
       }
       else
-        window.location.href = '?success=1'
-    } catch(err) {
+        $('#success-alert-email').classList.toggle('hide')
+    } catch (err) {
       console.log(`Fetch has failed: ${err.message}`)
     }
   })()
