@@ -5,16 +5,21 @@ const date = new Date(receiptContent.timestamp)
 const timestamp = `${date.getTime()}`.slice(0, -3)
 const fullDateString = getFullDateString(date)
 const dateString = getDateString(date)
+const [therapyStartDate, therapyEndDate] = getTherapyStartEndDates()
 
 $('#identification').textContent = `${timestamp}  ${fullDateString}`
 $('#author-names').textContent = receiptContent.author.name
 $('#author-rcc').textContent = receiptContent.author.RCCNumber
-$('#author-address').textContent = `${receiptContent.author.street}, ${receiptContent.author.NPA}, ${receiptContent.author.city}`
+$(
+  '#author-address'
+).textContent = `${receiptContent.author.street}, ${receiptContent.author.NPA}, ${receiptContent.author.city}`
 $('#author-email').textContent = receiptContent.author.email
 $('#author-phone').textContent = receiptContent.author.phone
 $('#therapist-names').textContent = `${receiptContent.therapist.firstName} ${receiptContent.therapist.lastName}`
 $('#therapist-rcc').textContent = receiptContent.therapist.RCCNumber
-$('#therapist-address').textContent = `${receiptContent.therapist.street}, ${receiptContent.therapist.NPA}, ${receiptContent.therapist.city}`
+$(
+  '#therapist-address'
+).textContent = `${receiptContent.therapist.street}, ${receiptContent.therapist.NPA}, ${receiptContent.therapist.city}`
 $('#therapist-email').textContent = receiptContent.therapist.email
 $('#therapist-phone').textContent = receiptContent.therapist.phone
 $('#customer-last-name').textContent = receiptContent.customer.lastName
@@ -23,8 +28,8 @@ $('#customer-street').textContent = receiptContent.customer.street
 $('#customer-npa').textContent = receiptContent.customer.NPA
 $('#customer-city').textContent = receiptContent.customer.city
 $('#customer-birthdate').textContent = getDateString(new Date(receiptContent.customer.birthdate))
-$('#therapy-start-date').textContent = dateString
-$('#therapy-end-date').textContent = dateString
+$('#therapy-start-date').textContent = getDateString(therapyStartDate)
+$('#therapy-end-date').textContent = getDateString(therapyEndDate)
 $('#receipt-date').textContent = dateString
 $('#receipt-number').textContent = `/ ${timestamp}  ${fullDateString}`
 $('#therapy-type').textContent = 'Thérapie individuelle'
@@ -43,7 +48,9 @@ for (let i = 0; i < receiptContent.services.length; i++) {
   $(`.service-${i + 1}.service-point-value`).textContent = '1.00'
   $(`.service-${i + 1}.service-tax`).textContent = '0.0%'
   $(`.service-${i + 1}.service-amount`).textContent = (quantity * price).toFixed(2)
-  $(`.service-${i + 1}.service-code-label`).textContent = serviceCodes.find(serviceCode => serviceCode.value === Number(receiptContent.services[i].code)).label
+  $(`.service-${i + 1}.service-code-label`).textContent = serviceCodes.find(
+    serviceCode => serviceCode.value === Number(receiptContent.services[i].code)
+  ).label
 
   totalAmount += quantity * price
 }
@@ -64,4 +71,10 @@ function getDateString(date) {
   const month = String(date.getMonth() + 1).padStart(2, '0')
 
   return `${day}.${month}.${date.getFullYear()}`
+}
+
+function getTherapyStartEndDates() {
+  const therapyDates = receiptContent.services.map(service => new Date(service.date))
+
+  return [new Date(Math.min.apply(null, therapyDates)), new Date(Math.max.apply(null, therapyDates))]
 }
