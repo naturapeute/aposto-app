@@ -1,6 +1,7 @@
 loadMatomo()
 
 const receiptDate = Date.now()
+const intRandom = Math.floor(Math.random() * (100 - 10 + 1) + 10)
 let isInfoEdited = false
 let customers
 
@@ -131,6 +132,7 @@ function generateReceiptBase64() {
   const servicePrice = $('#service-price').value
 
   const receiptContent = {
+    intRandom: intRandom,
     timestamp: receiptDate,
     author: author,
     therapist: therapist,

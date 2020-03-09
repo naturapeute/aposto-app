@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Facturapeute - Votre Facture</title>
   <meta charset="utf-8">
+  <title>Facturapeute - Votre Facture</title>
+  <link rel="icon" type="image/png" href="https://terrapeute.ch/img/favicon.png" />
   <link rel="stylesheet" href="receipt.css">
 </head>
 
 <body>
-  <img src="empty_receipt.png" />
+  <img id="empty-receipt-bg" src="empty_receipt.png" />
   <span id="identification"></span>
   <span id="author-names"></span>
   <span id="author-rcc"></span>
@@ -77,6 +78,7 @@
   <span class="service-5 service-code-label"></span>
   <span id="total-amount"></span>
   <span id="owed-amount"></span>
+  <img id="datamatrix" />
 </body>
 
 <script src="../js/utils.js"></script>
