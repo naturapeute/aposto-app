@@ -86,25 +86,23 @@ function getTherapyStartEndDates() {
 //=========================================//
 
 function generateDataMatrix() {
-  const customerBirthdate = new Date(receiptContent.customer.birthdate)
   const strSeparator = '#'
   const strPrefix = '/-/'
-  const intRandom = random(10, 100)
   const strDate = getDataMatrixDateString()
   const intChecksum = calculateChecksum(
     totalAmount,
     receiptContent.therapist.RCCNumber,
     receiptContent.customer.NPA,
-    customerBirthdate,
+    new Date(receiptContent.customer.birthdate),
     therapyStartDate
   )
 
-  return `${strPrefix}${strSeparator}${intRandom}${strSeparator}${strDate}${strSeparator}${intChecksum}`
+  return `${strPrefix}${strSeparator}${receiptContent.intRandom}${strSeparator}${strDate}${strSeparator}${intChecksum}`
 }
 
 function getDataMatrixDateString() {
   const strDay = String(date.getDate()).padStart(2, '0')
-  const strMonth = String((date.getMonth() + 1)).padStart(2, '0')
+  const strMonth = String(date.getMonth() + 1).padStart(2, '0')
   const strYear = String(date.getFullYear()).padStart(2, '0')
   const strHours = String(date.getHours()).padStart(2, '0')
   const strMinutes = String(date.getMinutes()).padStart(2, '0')
@@ -114,19 +112,16 @@ function getDataMatrixDateString() {
 }
 
 function calculateChecksum(totalAmount, therapistRCCNumber, customerNPA, customerBirthdate, therapyStartDate) {
-  const intRCC = parseInt(therapistRCCNumber.substring(1))
+  const intTherapistRCCNumber = parseInt(therapistRCCNumber.substring(1))
   const intCustomerBirthdate = dateDifferenceInDays(customerBirthdate)
   const intCustomerNPA = parseInt(customerNPA.substring(0, 4))
   const intTotalAmount = Math.round(totalAmount)
   const intTherapyStartDate = dateDifferenceInDays(therapyStartDate)
 
-  const intChecksum = intRCC + intCustomerBirthdate + intCustomerNPA + intTotalAmount + intTherapyStartDate
+  const intChecksum =
+    intTherapistRCCNumber + intCustomerBirthdate + intCustomerNPA + intTotalAmount + intTherapyStartDate
 
   return `${intChecksum}${intCustomerNPA}${intTotalAmount}${intTherapyStartDate}`
-}
-
-function random(minimum, maximum) {
-  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum)
 }
 
 function dateDifferenceInDays(date1) {
