@@ -78,3 +78,63 @@ function getTherapyStartEndDates() {
 
   return [new Date(Math.min.apply(null, therapyDates)), new Date(Math.max.apply(null, therapyDates))]
 }
+
+//=========================================//
+//         Datamatrix GENERATION           //
+// All below functions are related to the  //
+// data matrix generation.                 //
+//=========================================//
+
+function generateDataMatrix() {
+  const customerBirthdate = new Date(receiptContent.customer.birthdate)
+  const strSeparator = '#'
+  const strPrefix = '/-/'
+  const intRandom = random(10, 100)
+  const strDate = getDataMatrixDateString()
+  const intChecksum = calculateChecksum(
+    totalAmount,
+    receiptContent.therapist.RCCNumber,
+    receiptContent.customer.NPA,
+    customerBirthdate,
+    therapyStartDate
+  )
+
+  return `${strPrefix}${strSeparator}${intRandom}${strSeparator}${strDate}${strSeparator}${intChecksum}`
+}
+
+function getDataMatrixDateString() {
+  const strDay = String(date.getDate()).padStart(2, '0')
+  const strMonth = String((date.getMonth() + 1)).padStart(2, '0')
+  const strYear = String(date.getFullYear()).padStart(2, '0')
+  const strHours = String(date.getHours()).padStart(2, '0')
+  const strMinutes = String(date.getMinutes()).padStart(2, '0')
+  const strSeconds = String(date.getSeconds()).padStart(2, '0')
+
+  return `${strDay}${strMonth}${strYear}${strHours}${strMinutes}${strSeconds}`
+}
+
+function calculateChecksum(totalAmount, therapistRCCNumber, customerNPA, customerBirthdate, therapyStartDate) {
+  const intRCC = parseInt(therapistRCCNumber.substring(1))
+  const intCustomerBirthdate = dateDifferenceInDays(customerBirthdate)
+  const intCustomerNPA = parseInt(customerNPA.substring(0, 4))
+  const intTotalAmount = Math.round(totalAmount)
+  const intTherapyStartDate = dateDifferenceInDays(therapyStartDate)
+
+  const intChecksum = intRCC + intCustomerBirthdate + intCustomerNPA + intTotalAmount + intTherapyStartDate
+
+  return `${intChecksum}${intCustomerNPA}${intTotalAmount}${intTherapyStartDate}`
+}
+
+function random(minimum, maximum) {
+  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum)
+}
+
+function dateDifferenceInDays(date1) {
+  const dateInit = new Date(1900, 01 - 1, 01)
+  const MS_PER_DAY = 1000 * 60 * 60 * 24
+
+  const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate())
+  const utc2 = Date.UTC(dateInit.getFullYear(), dateInit.getMonth(), dateInit.getDate())
+
+  return Math.round(Math.abs((utc2 - utc1) / MS_PER_DAY))
+}
