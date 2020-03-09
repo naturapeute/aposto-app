@@ -11,7 +11,7 @@ body>* {
   position: absolute;
 }
 
-img {
+#empty-receipt-bg {
   top: 0;
   left: 0;
   max-width: 210mm;
@@ -209,4 +209,11 @@ img {
 #owed-amount {
   top: 1036px;
   left: 724px;
+}
+
+#datamatrix {
+  height: 32px;
+  width: 32px;
+  top: 1052px;
+  left: 44px;
 }

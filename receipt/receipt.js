@@ -58,6 +58,8 @@ for (let i = 0; i < receiptContent.services.length; i++) {
 $('#total-amount').textContent = totalAmount.toFixed(2)
 $('#owed-amount').textContent = totalAmount.toFixed(2)
 
+addDatamatrix()
+
 function getFullDateString(date) {
   const hours = String(date.getHours()).padStart(2, '0')
   const minutes = String(date.getMinutes()).padStart(2, '0')
@@ -79,16 +81,22 @@ function getTherapyStartEndDates() {
   return [new Date(Math.min.apply(null, therapyDates)), new Date(Math.max.apply(null, therapyDates))]
 }
 
+function addDatamatrix() {
+  const datamatrixStringBase64 = btoa(generateDatamatrixString())
+
+  $('#datamatrix').src = `https://api.aposto.ch/datamatrix/${datamatrixStringBase64}/datamatrix.png`
+}
+
 //=========================================//
 //         Datamatrix GENERATION           //
 // All below functions are related to the  //
 // data matrix generation.                 //
 //=========================================//
 
-function generateDataMatrix() {
+function generateDatamatrixString() {
   const strSeparator = '#'
   const strPrefix = '/-/'
-  const strDate = getDataMatrixDateString()
+  const strDate = getDatamatrixDateString()
   const intChecksum = calculateChecksum(
     totalAmount,
     receiptContent.therapist.RCCNumber,
@@ -100,7 +108,7 @@ function generateDataMatrix() {
   return `${strPrefix}${strSeparator}${receiptContent.intRandom}${strSeparator}${strDate}${strSeparator}${intChecksum}`
 }
 
-function getDataMatrixDateString() {
+function getDatamatrixDateString() {
   const strDay = String(date.getDate()).padStart(2, '0')
   const strMonth = String(date.getMonth() + 1).padStart(2, '0')
   const strYear = String(date.getFullYear()).padStart(2, '0')
