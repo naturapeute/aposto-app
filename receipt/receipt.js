@@ -56,7 +56,7 @@ for (let i = 0; i < receiptContent.services.length; i++) {
 }
 
 $('#total-amount').textContent = totalAmount.toFixed(2)
-$('#owed-amount').textContent = totalAmount.toFixed(2)
+$('#paid-amount').textContent = totalAmount.toFixed(2)
 
 addDatamatrix()
 
