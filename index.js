@@ -157,7 +157,7 @@ function downloadReceipt(e) {
 
   const link = document.createElement('a')
   link.download = receiptFilename
-  link.href = `https://api.aposto.ch/pdf/${receiptContentBase64}/${receiptFilename}`
+  link.href = `${apiURL}/pdf/${receiptContentBase64}/${receiptFilename}`
   link.target = '_blank'
   link.click()
 
@@ -172,7 +172,7 @@ function sendReceipt(e) {
   ;(async () => {
     try {
       const response = await fetch(
-        `https://api.aposto.ch/email/${receiptContentBase64}`,
+        `${apiURL}/email/${receiptContentBase64}`,
         {
           method: 'GET',
           headers: {

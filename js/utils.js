@@ -1,3 +1,6 @@
+// const apiURL = 'http://localohost:8080' // DEVELOPMENT
+const apiURL = 'https://api.aposto.ch' // PRODUCTION
+
 function $(query) {
   return document.querySelector(query)
 }

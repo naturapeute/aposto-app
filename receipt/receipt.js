@@ -84,7 +84,7 @@ function getTherapyStartEndDates() {
 function addDatamatrix() {
   const datamatrixStringBase64 = btoa(generateDatamatrixString())
 
-  $('#datamatrix').src = `https://api.aposto.ch/datamatrix/${datamatrixStringBase64}/datamatrix.png`
+  $('#datamatrix').src = `${apiURL}/datamatrix/${datamatrixStringBase64}/datamatrix.png`
 }
 
 //=========================================//
