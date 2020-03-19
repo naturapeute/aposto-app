@@ -113,9 +113,11 @@ function selectPatient(i) {
   $('#patient-last-name').value = patients[i].lastName
   $('#patient-street').value = patients[i].street
   $('#patient-npa').value = patients[i].NPA
+  $('#patient-canton').value = patients[i].canton
   $('#patient-city').value = patients[i].city
   $('#patient-email').value = patients[i].email
   $('#patient-birthdate').value = dateObjectToDateInput(new Date(patients[i].birthdate))
+  $('#patient-gender').value = patients[i].gender
 }
 
 function onPriceEdit() {
