@@ -43,18 +43,18 @@ h2 {
   margin-top: 1rem;
 }
 
-.customers-list {
+.patients-list {
   display: flex;
   overflow: scroll;
   margin-bottom: 0.4rem;
 }
 
-.customer-card {
+.patient-card {
   min-width: 150px;
   margin-right: 0.8rem;
 }
 
-.customer-card:hover {
+.patient-card:hover {
   background: #4240d4;
   border-color: #3634d2;
   color: #fff;

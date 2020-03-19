@@ -3,7 +3,7 @@ loadMatomo()
 const receiptDate = Date.now()
 const intRandom = Math.floor(Math.random() * (100 - 10 + 1) + 10)
 let isInfoEdited = false
-let customers
+let patients
 
 Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
   dataAmountElement.addEventListener('change', updateTotalAmount)
@@ -18,7 +18,7 @@ feedServiceOptions()
 
 loadAuthorBackup()
 loadTherapistBackup()
-loadCustomersBackup()
+loadPatientsBackup()
 loadServicePriceBackup()
 
 updateTotalAmount()
@@ -64,20 +64,20 @@ function loadTherapistBackup() {
   }
 }
 
-function loadCustomersBackup() {
-  customers = JSON.parse(localStorage.getItem('customers'))
+function loadPatientsBackup() {
+  patients = JSON.parse(localStorage.getItem('patients'))
 
-  if (customers) {
-    customers.sort((a, b) => b.frequency - a.frequency)
+  if (patients) {
+    patients.sort((a, b) => b.frequency - a.frequency)
 
-    $('.customers-list-container').classList.remove('hide')
+    $('.patients-list-container').classList.remove('hide')
 
-    customers.forEach((customer, i) => {
-      $('.customers-list').innerHTML +=
-        `<div class="card customer-card" id="customer-${i}" onclick=selectCustomer(${i})>
+    patients.forEach((patient, i) => {
+      $('.patients-list').innerHTML +=
+        `<div class="card patient-card" id="patient-${i}" onclick=selectPatient(${i})>
           <div class="card-body">
-            ${customer.firstName}<br>
-            ${customer.lastName}
+            ${patient.firstName}<br>
+            ${patient.lastName}
           </div>
         </div>`
     })
@@ -100,14 +100,14 @@ function editInfo(e) {
   isInfoEdited = true
 }
 
-function selectCustomer(i) {
-  $('#customer-first-name').value = customers[i].firstName
-  $('#customer-last-name').value = customers[i].lastName
-  $('#customer-street').value = customers[i].street
-  $('#customer-npa').value = customers[i].NPA
-  $('#customer-city').value = customers[i].city
-  $('#customer-email').value = customers[i].email
-  $('#customer-birthdate').value = dateObjectToDateInput(new Date(customers[i].birthdate))
+function selectPatient(i) {
+  $('#patient-first-name').value = patients[i].firstName
+  $('#patient-last-name').value = patients[i].lastName
+  $('#patient-street').value = patients[i].street
+  $('#patient-npa').value = patients[i].NPA
+  $('#patient-city').value = patients[i].city
+  $('#patient-email').value = patients[i].email
+  $('#patient-birthdate').value = dateObjectToDateInput(new Date(patients[i].birthdate))
 }
 
 function onPriceEdit() {
@@ -127,7 +127,9 @@ function updateTotalAmount() {
 function generateReceiptBase64() {
   const author = getAuthorData()
   const therapist = getTherapistData()
-  const customer = getCustomerData()
+  const patient = getPatientData()
+
+  console.log(patient)
 
   const servicePrice = $('#service-price').value
 
@@ -136,7 +138,7 @@ function generateReceiptBase64() {
     timestamp: receiptDate,
     author: author,
     therapist: therapist,
-    customer: customer,
+    patient: patient,
     servicePrice: servicePrice,
     services: getServicesData()
   }
@@ -144,7 +146,7 @@ function generateReceiptBase64() {
   saveData('author', author)
   saveData('therapist', therapist)
   saveData('servicePrice', servicePrice)
-  saveCustomer(customer)
+  savePatient(patient)
 
   return btoa(JSON.stringify(receiptContent))
 }
@@ -226,15 +228,15 @@ function getTherapistData() {
   }
 }
 
-function getCustomerData() {
+function getPatientData() {
   return {
-    firstName: $('#customer-first-name').value,
-    lastName: $('#customer-last-name').value,
-    street: $('#customer-street').value,
-    NPA: $('#customer-npa').value,
-    city: $('#customer-city').value,
-    email: $('#customer-email').value,
-    birthdate: $('#customer-birthdate').value,
+    firstName: $('#patient-first-name').value,
+    lastName: $('#patient-last-name').value,
+    street: $('#patient-street').value,
+    NPA: $('#patient-npa').value,
+    city: $('#patient-city').value,
+    email: $('#patient-email').value,
+    birthdate: $('#patient-birthdate').value,
     frequency: 1
   }
 }
@@ -264,28 +266,28 @@ function saveData(dataName, data) {
     localStorage.setItem(dataName, JSON.stringify(data))
 }
 
-function saveCustomer(customer) {
-  const customers = JSON.parse(localStorage.getItem('customers'))
+function savePatient(patient) {
+  const patients = JSON.parse(localStorage.getItem('patients'))
 
-  if (customers) {
-    const matchingCustomer = customers.find(existingCustomer => {
-      return existingCustomer.firstName === customer.firstName
-        && existingCustomer.lastName === customer.lastName
-        && existingCustomer.street === customer.street
-        && existingCustomer.NPA === customer.NPA
-        && existingCustomer.city === customer.city
-        && existingCustomer.email === customer.email
-        && existingCustomer.birthdate === customer.birthdate
+  if (patients) {
+    const matchingPatient = patients.find(existingPatient => {
+      return existingPatient.firstName === patient.firstName
+        && existingPatient.lastName === patient.lastName
+        && existingPatient.street === patient.street
+        && existingPatient.NPA === patient.NPA
+        && existingPatient.city === patient.city
+        && existingPatient.email === patient.email
+        && existingPatient.birthdate === patient.birthdate
     })
 
-    if (matchingCustomer)
-      matchingCustomer.frequency++
+    if (matchingPatient)
+      matchingPatient.frequency++
     else
-      customers.push(customer)
+      patients.push(patient)
 
-    localStorage.setItem('customers', JSON.stringify(customers))
+    localStorage.setItem('patients', JSON.stringify(patients))
   } else
-    localStorage.setItem('customers', JSON.stringify([customer]))
+    localStorage.setItem('patients', JSON.stringify([patient]))
 }
 
 function dateObjectToDateInput(date) {
