@@ -47,7 +47,7 @@ function loadAuthorBackup() {
     $('#author-name').value = author.name
     $('#author-rcc-number').value = author.RCCNumber
     $('#author-street').value = author.street
-    $('#author-npa').value = author.NPA
+    $('#author-zip').value = author.ZIP
     $('#author-city').value = author.city
     $('#author-email').value = author.email
     $('#author-phone').value = author.phone
@@ -65,7 +65,7 @@ function loadTherapistBackup() {
     $('#therapist-last-name').value = therapist.lastName
     $('#therapist-rcc-number').value = therapist.RCCNumber
     $('#therapist-street').value = therapist.street
-    $('#therapist-npa').value = therapist.NPA
+    $('#therapist-zip').value = therapist.ZIP
     $('#therapist-city').value = therapist.city
     $('#therapist-email').value = therapist.email
     $('#therapist-phone').value = therapist.phone
@@ -112,7 +112,7 @@ function selectPatient(i) {
   $('#patient-first-name').value = patients[i].firstName
   $('#patient-last-name').value = patients[i].lastName
   $('#patient-street').value = patients[i].street
-  $('#patient-npa').value = patients[i].NPA
+  $('#patient-zip').value = patients[i].ZIP
   $('#patient-canton').value = patients[i].canton
   $('#patient-city').value = patients[i].city
   $('#patient-email').value = patients[i].email
@@ -210,7 +210,7 @@ function getAuthorData() {
     name: $('#author-name').value,
     RCCNumber: $('#author-rcc-number').value,
     street: $('#author-street').value,
-    NPA: $('#author-npa').value,
+    ZIP: $('#author-zip').value,
     city: $('#author-city').value,
     email: $('#author-email').value,
     phone: $('#author-phone').value
@@ -223,7 +223,7 @@ function getTherapistData() {
     lastName: $('#therapist-last-name').value,
     RCCNumber: $('#therapist-rcc-number').value,
     street: $('#therapist-street').value,
-    NPA: $('#therapist-npa').value,
+    ZIP: $('#therapist-zip').value,
     city: $('#therapist-city').value,
     email: $('#therapist-email').value,
     phone: $('#therapist-phone').value
@@ -235,7 +235,7 @@ function getPatientData() {
     firstName: $('#patient-first-name').value,
     lastName: $('#patient-last-name').value,
     street: $('#patient-street').value,
-    NPA: $('#patient-npa').value,
+    ZIP: $('#patient-zip').value,
     city: $('#patient-city').value,
     email: $('#patient-email').value,
     birthdate: new Date($('#patient-birthdate').value).getTime(),
@@ -278,7 +278,7 @@ function savePatient(patient) {
         existingPatient.firstName === patient.firstName &&
         existingPatient.lastName === patient.lastName &&
         existingPatient.street === patient.street &&
-        existingPatient.NPA === patient.NPA &&
+        existingPatient.ZIP === patient.ZIP &&
         existingPatient.city === patient.city &&
         existingPatient.email === patient.email &&
         existingPatient.birthdate === patient.birthdate
