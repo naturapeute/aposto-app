@@ -15,6 +15,7 @@ Array.from(document.querySelectorAll('.date-col input')).forEach(dateInput => {
 })
 
 feedServiceOptions()
+feedCantonOptions()
 
 loadAuthorBackup()
 loadTherapistBackup()
@@ -29,6 +30,12 @@ function feedServiceOptions() {
     .map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match)))
     .join('')
   Array.from(document.querySelectorAll('[id^=service-code-]')).forEach(select => (select.innerHTML += htmlOptions))
+}
+
+function feedCantonOptions() {
+  document.querySelector('#patient-canton').innerHTML += cantons.map(
+    canton => `<option value="${canton}">${canton}</option>`
+  )
 }
 
 function loadAuthorBackup() {
@@ -231,6 +238,7 @@ function getPatientData() {
     email: $('#patient-email').value,
     birthdate: new Date($('#patient-birthdate').value).getTime(),
     gender: $('#patient-gender').value,
+    canton: $('#patient-canton').value,
     frequency: 1
   }
 }
