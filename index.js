@@ -1,6 +1,6 @@
 loadMatomo()
 
-const receiptDate = Date.now()
+const invoiceDate = Date.now()
 const intRandom = Math.floor(Math.random() * (100 - 10 + 1) + 10)
 let isInfoEdited = false
 let patients
@@ -133,16 +133,16 @@ function updateTotalAmount() {
   $('#total-amount').textContent = totalAmount.toFixed(2)
 }
 
-function generateReceiptBase64() {
+function generateInvoiceBase64() {
   const author = getAuthorData()
   const therapist = getTherapistData()
   const patient = getPatientData()
 
   const servicePrice = Number($('#service-price').value)
 
-  const receiptContent = {
+  const invoiceContent = {
     intRandom: intRandom,
-    timestamp: receiptDate,
+    timestamp: invoiceDate,
     author: author,
     therapist: therapist,
     patient: patient,
@@ -155,32 +155,32 @@ function generateReceiptBase64() {
   saveData('servicePrice', servicePrice)
   savePatient(patient)
 
-  return btoa(JSON.stringify(receiptContent))
+  return btoa(JSON.stringify(invoiceContent))
 }
 
-function downloadReceipt(e) {
+function downloadInvoice(e) {
   e.preventDefault()
 
-  const receiptContentBase64 = generateReceiptBase64()
-  const receiptFilename = `facture-${Date.now()}.pdf`
+  const invoiceContentBase64 = generateInvoiceBase64()
+  const invoiceFilename = `facture-${Date.now()}.pdf`
 
   const link = document.createElement('a')
-  link.download = receiptFilename
-  link.href = `${apiURL}/pdf/${receiptContentBase64}/${receiptFilename}`
+  link.download = invoiceFilename
+  link.href = `${apiURL}/pdf/${invoiceContentBase64}/${invoiceFilename}`
   link.target = '_blank'
   link.click()
 
   $('#success-alert-download').classList.toggle('hide')
 }
 
-function sendReceipt(e) {
+function sendInvoice(e) {
   e.preventDefault()
 
-  const receiptContentBase64 = generateReceiptBase64()
+  const invoiceContentBase64 = generateInvoiceBase64()
 
   ;(async () => {
     try {
-      const response = await fetch(`${apiURL}/email/${receiptContentBase64}`, {
+      const response = await fetch(`${apiURL}/email/${invoiceContentBase64}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
