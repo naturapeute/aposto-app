@@ -230,6 +230,7 @@ function getPatientData() {
     city: $('#patient-city').value,
     email: $('#patient-email').value,
     birthdate: new Date($('#patient-birthdate').value).getTime(),
+    gender: $('#patient-gender').value,
     frequency: 1
   }
 }

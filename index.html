@@ -31,13 +31,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-rcc-number">N° RCC</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="author-rcc-number"
-                    name="author-rcc-number"
-                    required
-                  />
+                  <input class="form-input" type="text" id="author-rcc-number" name="author-rcc-number" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-street">Rue et n°</label>
@@ -75,43 +69,21 @@
               <div class="therapist-form">
                 <div class="form-group">
                   <label class="form-label" for="therapist-first-name">Prénom</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="therapist-first-name"
-                    name="therapist-first-name"
-                    required
-                  />
+                  <input class="form-input" type="text" id="therapist-first-name" name="therapist-first-name"
+                    required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-last-name">Nom</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="therapist-last-name"
-                    name="therapist-last-name"
-                    required
-                  />
+                  <input class="form-input" type="text" id="therapist-last-name" name="therapist-last-name" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-rcc-number">N° RCC</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="therapist-rcc-number"
-                    name="therapist-rcc-number"
-                    required
-                  />
+                  <input class="form-input" type="text" id="therapist-rcc-number" name="therapist-rcc-number"
+                    required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-street">Rue et n°</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="therapist-street"
-                    name="therapist-street"
-                    required
-                  />
+                  <input class="form-input" type="text" id="therapist-street" name="therapist-street" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-npa">NPA</label>
@@ -123,23 +95,11 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-email">Email</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="therapist-email"
-                    name="therapist-email"
-                    required
-                  />
+                  <input class="form-input" type="text" id="therapist-email" name="therapist-email" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-phone">Téléphone</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="therapist-phone"
-                    name="therapist-phone"
-                    required
-                  />
+                  <input class="form-input" type="text" id="therapist-phone" name="therapist-phone" required />
                 </div>
               </div>
             </div>
@@ -157,13 +117,7 @@
       <div class="form-group">
         <div class="col-6 col-sm-12">
           <label class="form-label" for="patient-first-name">Prénom</label>
-          <input
-            class="form-input"
-            type="text"
-            id="patient-first-name"
-            name="patient-first-name"
-            required
-          />
+          <input class="form-input" type="text" id="patient-first-name" name="patient-first-name" required />
         </div>
         <div class="col-6 col-sm-12">
           <label class="form-label" for="patient-last-name">Nom</label>
@@ -185,8 +139,18 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label" for="patient-birthdate">Date de naissance</label>
-        <input class="form-input" type="date" id="patient-birthdate" name="patient-birthdate" required />
+        <div class="col-6 col-sm-12">
+          <label class="form-label" for="patient-birthdate">Date de naissance</label>
+          <input class="form-input" type="date" id="patient-birthdate" name="patient-birthdate" required />
+        </div>
+        <div class="col-6 col-sm-12">
+          <label class="form-label" for="patient-gender">Sexe</label>
+          <select class="form-select" id="patient-gender" name="patient-gender" required>
+            <option value="" selected></option>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+          </select>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label" for="patient-email">Email</label>
@@ -199,17 +163,8 @@
           <label class="form-label" for="service-price">Tarif horaire</label>
         </div>
         <div class="col-3 col-sm-5">
-          <input
-            class="form-input"
-            type="number"
-            id="service-price"
-            name="service-price"
-            min="0"
-            max="200"
-            onkeyup="onPriceEdit()"
-            data-amount
-            required
-          />
+          <input class="form-input" type="number" id="service-price" name="service-price" min="0" max="200"
+            onkeyup="onPriceEdit()" data-amount required />
         </div>
         <div class="col-2 currency-col">
           <label class="form-label">CHF</label>
@@ -223,17 +178,8 @@
           <select class="form-select" id="service-code-1" name="service-code-1" required> </select>
         </div>
         <div class="col-3 col-sm-12 duration-col">
-          <input
-            class="form-input"
-            type="number"
-            id="service-duration-1"
-            name="service-duration-1"
-            placeholder="Durée (minutes)"
-            step="5"
-            min="0"
-            data-amount
-            required
-          />
+          <input class="form-input" type="number" id="service-duration-1" name="service-duration-1"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount required />
         </div>
       </div>
       <div class="form-group">
@@ -246,16 +192,8 @@
           </select>
         </div>
         <div class="col-3 col-sm-12 duration-col">
-          <input
-            class="form-input"
-            type="number"
-            id="service-duration-2"
-            name="service-duration-2"
-            placeholder="Durée (minutes)"
-            step="5"
-            min="0"
-            data-amount
-          />
+          <input class="form-input" type="number" id="service-duration-2" name="service-duration-2"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount />
         </div>
       </div>
       <div class="form-group">
@@ -268,16 +206,8 @@
           </select>
         </div>
         <div class="col-3 col-sm-12 duration-col">
-          <input
-            class="form-input"
-            type="number"
-            id="service-duration-3"
-            name="service-duration-3"
-            placeholder="Durée (minutes)"
-            step="5"
-            min="0"
-            data-amount
-          />
+          <input class="form-input" type="number" id="service-duration-3" name="service-duration-3"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount />
         </div>
       </div>
       <div class="form-group">
@@ -290,16 +220,8 @@
           </select>
         </div>
         <div class="col-3 col-sm-12 duration-col">
-          <input
-            class="form-input"
-            type="number"
-            id="service-duration-4"
-            name="service-duration-4"
-            placeholder="Durée (minutes)"
-            step="5"
-            min="0"
-            data-amount
-          />
+          <input class="form-input" type="number" id="service-duration-4" name="service-duration-4"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount />
         </div>
       </div>
       <div class="form-group">
@@ -312,16 +234,8 @@
           </select>
         </div>
         <div class="col-3 col-sm-12 duration-col">
-          <input
-            class="form-input"
-            type="number"
-            id="service-duration-5"
-            name="service-duration-5"
-            placeholder="Durée (minutes)"
-            step="5"
-            min="0"
-            data-amount
-          />
+          <input class="form-input" type="number" id="service-duration-5" name="service-duration-5"
+            placeholder="Durée (minutes)" step="5" min="0" data-amount />
         </div>
       </div>
       <div class="form-group">
@@ -329,20 +243,13 @@
       </div>
       <div class="form-group buttons-group">
         <div class="col-4 col-sm-12">
-          <button
-            class="btn btn-primary"
-            title="Técharger la facture en format PDF"
-            onclick="downloadReceipt(event)"
-          >
+          <button class="btn btn-primary" title="Técharger la facture en format PDF" onclick="downloadReceipt(event)">
             Télécharger la facture
           </button>
         </div>
         <div class="col-4 col-sm-12">
-          <button
-            class="btn"
-            title="Envoyer la facture au client, vous recevrez aussi une copie"
-            onclick="sendReceipt(event)"
-          >
+          <button class="btn" title="Envoyer la facture au client, vous recevrez aussi une copie"
+            onclick="sendReceipt(event)">
             Envoyer la facture au client
           </button>
         </div>
