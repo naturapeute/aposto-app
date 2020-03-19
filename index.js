@@ -25,8 +25,10 @@ updateTotalAmount()
 
 function feedServiceOptions() {
   const template = document.querySelector('#service-template').innerHTML
-  const htmlOptions = serviceCodes.map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match))).join('')
-  Array.from(document.querySelectorAll('[id^=service-code-]')).forEach(select => select.innerHTML += htmlOptions)
+  const htmlOptions = serviceCodes
+    .map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match)))
+    .join('')
+  Array.from(document.querySelectorAll('[id^=service-code-]')).forEach(select => (select.innerHTML += htmlOptions))
 }
 
 function loadAuthorBackup() {
@@ -73,8 +75,7 @@ function loadPatientsBackup() {
     $('.patients-list-container').classList.remove('hide')
 
     patients.forEach((patient, i) => {
-      $('.patients-list').innerHTML +=
-        `<div class="card patient-card" id="patient-${i}" onclick=selectPatient(${i})>
+      $('.patients-list').innerHTML += `<div class="card patient-card" id="patient-${i}" onclick=selectPatient(${i})>
           <div class="card-body">
             ${patient.firstName}<br>
             ${patient.lastName}
@@ -118,8 +119,7 @@ function updateTotalAmount() {
   let totalAmount = 0
   const price = Number($('#service-price').value) / 12
 
-  for (let i = 1; i <= 5; i++)
-    totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price
+  for (let i = 1; i <= 5; i++) totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price
 
   $('#total-amount').textContent = totalAmount.toFixed(2)
 }
@@ -129,9 +129,7 @@ function generateReceiptBase64() {
   const therapist = getTherapistData()
   const patient = getPatientData()
 
-  console.log(patient)
-
-  const servicePrice = $('#service-price').value
+  const servicePrice = Number($('#service-price').value)
 
   const receiptContent = {
     intRandom: intRandom,
@@ -173,16 +171,13 @@ function sendReceipt(e) {
 
   ;(async () => {
     try {
-      const response = await fetch(
-        `${apiURL}/email/${receiptContentBase64}`,
-        {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Origin': 'https://app.aposto.ch'
-          }
+      const response = await fetch(`${apiURL}/email/${receiptContentBase64}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Origin: 'https://app.aposto.ch'
         }
-      )
+      })
 
       if (response.status != 200) {
         console.log('Email sending has failed. Try again later.')
@@ -194,9 +189,7 @@ function sendReceipt(e) {
         } catch (err) {
           console.log(`Body JSON parsing has failed: ${err.message}`)
         }
-      }
-      else
-        $('#success-alert-email').classList.toggle('hide')
+      } else $('#success-alert-email').classList.toggle('hide')
     } catch (err) {
       console.log(`Fetch has failed: ${err.message}`)
     }
@@ -236,7 +229,7 @@ function getPatientData() {
     NPA: $('#patient-npa').value,
     city: $('#patient-city').value,
     email: $('#patient-email').value,
-    birthdate: $('#patient-birthdate').value,
+    birthdate: new Date($('#patient-birthdate').value).getTime(),
     frequency: 1
   }
 }
@@ -245,13 +238,13 @@ function getServicesData() {
   const services = []
 
   for (let i = 1; i <= 5; i++) {
-    const serviceCode = $(`#service-code-${i}`).value
+    const serviceCode = Number($(`#service-code-${i}`).value)
 
     if (serviceCode) {
       const service = {
-        date: $(`#service-date-${i}`).value,
+        date: new Date($(`#service-date-${i}`).value).getTime(),
         code: serviceCode,
-        duration: $(`#service-duration-${i}`).value
+        duration: Number($(`#service-duration-${i}`).value)
       }
 
       services.push(service)
@@ -262,8 +255,7 @@ function getServicesData() {
 }
 
 function saveData(dataName, data) {
-  if (!localStorage.getItem(dataName) || isInfoEdited)
-    localStorage.setItem(dataName, JSON.stringify(data))
+  if (!localStorage.getItem(dataName) || isInfoEdited) localStorage.setItem(dataName, JSON.stringify(data))
 }
 
 function savePatient(patient) {
@@ -271,23 +263,22 @@ function savePatient(patient) {
 
   if (patients) {
     const matchingPatient = patients.find(existingPatient => {
-      return existingPatient.firstName === patient.firstName
-        && existingPatient.lastName === patient.lastName
-        && existingPatient.street === patient.street
-        && existingPatient.NPA === patient.NPA
-        && existingPatient.city === patient.city
-        && existingPatient.email === patient.email
-        && existingPatient.birthdate === patient.birthdate
+      return (
+        existingPatient.firstName === patient.firstName &&
+        existingPatient.lastName === patient.lastName &&
+        existingPatient.street === patient.street &&
+        existingPatient.NPA === patient.NPA &&
+        existingPatient.city === patient.city &&
+        existingPatient.email === patient.email &&
+        existingPatient.birthdate === patient.birthdate
+      )
     })
 
-    if (matchingPatient)
-      matchingPatient.frequency++
-    else
-      patients.push(patient)
+    if (matchingPatient) matchingPatient.frequency++
+    else patients.push(patient)
 
     localStorage.setItem('patients', JSON.stringify(patients))
-  } else
-    localStorage.setItem('patients', JSON.stringify([patient]))
+  } else localStorage.setItem('patients', JSON.stringify([patient]))
 }
 
 function dateObjectToDateInput(date) {
@@ -298,14 +289,20 @@ function dateObjectToDateInput(date) {
 }
 
 function loadMatomo() {
-  var _paq = window._paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function () {
-    var u = "//stats.anonym.dev/";
-    _paq.push(['setTrackerUrl', u + 'matomo.php']);
-    _paq.push(['setSiteId', '5']);
-    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-    g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
-  })();
+  var _paq = window._paq || []
+  _paq.push(['trackPageView'])
+  _paq.push(['enableLinkTracking'])
+  ;(function() {
+    var u = '//stats.anonym.dev/'
+    _paq.push(['setTrackerUrl', u + 'matomo.php'])
+    _paq.push(['setSiteId', '5'])
+    var d = document,
+      g = d.createElement('script'),
+      s = d.getElementsByTagName('script')[0]
+    g.type = 'text/javascript'
+    g.async = true
+    g.defer = true
+    g.src = u + 'matomo.js'
+    s.parentNode.insertBefore(g, s)
+  })()
 }
