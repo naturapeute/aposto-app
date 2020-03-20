@@ -45,6 +45,7 @@ function loadAuthorBackup() {
     $('.author-form').classList.add('hide')
     $('#author-name-display').textContent = author.name
     $('#author-name').value = author.name
+    $('#author-gln-number').value = author.GLNNumber
     $('#author-rcc-number').value = author.RCCNumber
     $('#author-street').value = author.street
     $('#author-zip').value = author.ZIP
@@ -63,6 +64,7 @@ function loadTherapistBackup() {
     $('#therapist-name-display').textContent = `${therapist.firstName} ${therapist.lastName}`
     $('#therapist-first-name').value = therapist.firstName
     $('#therapist-last-name').value = therapist.lastName
+    $('#therapist-gln-number').value = therapist.GLNNumber
     $('#therapist-rcc-number').value = therapist.RCCNumber
     $('#therapist-street').value = therapist.street
     $('#therapist-zip').value = therapist.ZIP
