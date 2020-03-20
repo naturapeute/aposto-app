@@ -84,10 +84,10 @@ function loadPatientsBackup() {
     $('.patients-list-container').classList.remove('hide')
 
     patients.forEach((patient, i) => {
-      $('.patients-list').innerHTML += `<div class="patient-card" id="patient-${i}" onclick=selectPatient(${i})>
+      $('.patients-list').innerHTML += `<button class="btn btn-sm btn-patient" id="patient-${i}" onclick="selectPatient(event, ${i})">
           ${patient.firstName}
           ${patient.lastName}
-        </div>`
+        </button>`
     })
   }
 }
@@ -188,6 +188,9 @@ function editInfo(e) {
 }
 
 function selectPatient(i) {
+function selectPatient(e, i) {
+  e.preventDefault()
+
   $('#patient-first-name').value = patients[i].firstName
   $('#patient-last-name').value = patients[i].lastName
   $('#patient-street').value = patients[i].street
