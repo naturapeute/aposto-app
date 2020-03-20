@@ -187,7 +187,20 @@ function editInfo(e) {
   isInfoEdited = true
 }
 
-function selectPatient(i) {
+function emptyPatientInfo(e) {
+  e.preventDefault()
+
+  $('#patient-first-name').value = ''
+  $('#patient-last-name').value = ''
+  $('#patient-street').value = ''
+  $('#patient-zip').value = ''
+  $('#patient-canton').value = ''
+  $('#patient-city').value = ''
+  $('#patient-email').value = ''
+  $('#patient-birthdate').value = ''
+  $('#patient-gender').value = ''
+}
+
 function selectPatient(e, i) {
   e.preventDefault()
 

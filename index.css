@@ -94,6 +94,11 @@ h2 {
   cursor: pointer;
 }
 
+.btn.btn-sm.btn-patient i {
+  font-size: .5rem;
+  vertical-align: 0%;
+}
+
 .form-group .col-6:not(:last-child),
 .form-group .col-3:not(:last-child),
 .form-group .col-9,
