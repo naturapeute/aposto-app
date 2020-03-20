@@ -214,6 +214,14 @@ function updateTotalAmount() {
   $('#total-amount').textContent = totalAmount.toFixed(2)
 }
 
+function onServiceCodeSelected(e, serviceIndex) {
+  if (!e.currentTarget.value) {
+    $(`#service-duration-${serviceIndex}`).value = ''
+    $(`#service-duration-${serviceIndex}`).required = false
+    updateTotalAmount()
+  } else $(`#service-duration-${serviceIndex}`).required = true
+}
+
 function generateInvoiceBase64() {
   const author = getAuthorData()
   const therapist = getTherapistData()
@@ -242,10 +250,8 @@ function generateInvoiceBase64() {
 function submitInvoice(e) {
   e.preventDefault()
 
-  if (e.explicitOriginalTarget.value === 'download')
-    downloadInvoice()
-  else if (e.explicitOriginalTarget.value === 'send')
-    sendInvoice()
+  if (e.explicitOriginalTarget.value === 'download') downloadInvoice()
+  else if (e.explicitOriginalTarget.value === 'send') sendInvoice()
 }
 
 function downloadInvoice() {
