@@ -84,11 +84,9 @@ function loadPatientsBackup() {
     $('.patients-list-container').classList.remove('hide')
 
     patients.forEach((patient, i) => {
-      $('.patients-list').innerHTML += `<div class="card patient-card" id="patient-${i}" onclick=selectPatient(${i})>
-          <div class="card-body">
-            ${patient.firstName}<br>
-            ${patient.lastName}
-          </div>
+      $('.patients-list').innerHTML += `<div class="patient-card" id="patient-${i}" onclick=selectPatient(${i})>
+          ${patient.firstName}
+          ${patient.lastName}
         </div>`
     })
   }
