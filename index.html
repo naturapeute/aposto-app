@@ -27,11 +27,8 @@
               <div class="author-form">
                 <div class="form-group">
                   <label class="form-label" for="author-name">Nom ou entreprise</label>
-                  <input class="form-input" type="text" id="author-name" name="author-name" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="author-rcc-number">N° RCC</label>
-                  <input class="form-input" type="text" id="author-rcc-number" name="author-rcc-number" required />
+                  <input class="form-input" type="text" id="author-name" name="author-name"
+                    onblur="loadGLNNumber('author')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-street">Rue et n°</label>
@@ -39,11 +36,13 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-zip">NPA</label>
-                  <input class="form-input" type="text" id="author-zip" name="author-zip" required />
+                  <input class="form-input" type="text" id="author-zip" name="author-zip"
+                    onblur="loadGLNNumber('author')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-city">Localité</label>
-                  <input class="form-input" type="text" id="author-city" name="author-city" required />
+                  <input class="form-input" type="text" id="author-city" name="author-city"
+                    onblur="loadGLNNumber('author')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-email">Email</label>
@@ -52,6 +51,23 @@
                 <div class="form-group">
                   <label class="form-label" for="author-phone">Téléphone</label>
                   <input class="form-input" type="text" id="author-phone" name="author-phone" required />
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label class="form-label" for="author-rcc-number">N°RCC</label>
+                  <input class="form-input" type="text" id="author-rcc-number" name="author-rcc-number"
+                    onblur="loadGLNNumber('author')" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="author-gln-number">N°GLN</label>
+                  <input class="form-input" type="text" id="author-gln-number" name="author-gln-number" required />
+                  <p class="form-input-hint-primary hide">
+                    <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
+                      target="_blank">
+                      Trouver son n°GLN ou faire la demande
+                    </a>
+                  </p>
+                  <p class="form-input-hint-success hide">Nous avons trouvé votre n°GLN.</p>
                 </div>
               </div>
             </div>
@@ -70,16 +86,12 @@
                 <div class="form-group">
                   <label class="form-label" for="therapist-first-name">Prénom</label>
                   <input class="form-input" type="text" id="therapist-first-name" name="therapist-first-name"
-                    required />
+                    onblur="loadGLNNumber('therapist')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-last-name">Nom</label>
-                  <input class="form-input" type="text" id="therapist-last-name" name="therapist-last-name" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="therapist-rcc-number">N° RCC</label>
-                  <input class="form-input" type="text" id="therapist-rcc-number" name="therapist-rcc-number"
-                    required />
+                  <input class="form-input" type="text" id="therapist-last-name" name="therapist-last-name"
+                    onblur="loadGLNNumber('therapist')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-street">Rue et n°</label>
@@ -87,11 +99,13 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-zip">NPA</label>
-                  <input class="form-input" type="text" id="therapist-zip" name="therapist-zip" required />
+                  <input class="form-input" type="text" id="therapist-zip" name="therapist-zip"
+                    onblur="loadGLNNumber('therapist')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-city">Localité</label>
-                  <input class="form-input" type="text" id="therapist-city" name="therapist-city" required />
+                  <input class="form-input" type="text" id="therapist-city" name="therapist-city"
+                    onblur="loadGLNNumber('therapist')" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-email">Email</label>
@@ -100,6 +114,24 @@
                 <div class="form-group">
                   <label class="form-label" for="therapist-phone">Téléphone</label>
                   <input class="form-input" type="text" id="therapist-phone" name="therapist-phone" required />
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-rcc-number">N°RCC</label>
+                  <input class="form-input" type="text" id="therapist-rcc-number" name="therapist-rcc-number"
+                    required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="therapist-gln-number">N°GLN</label>
+                  <input class="form-input" type="text" id="therapist-gln-number" name="therapist-gln-number"
+                    required />
+                  <p class="form-input-hint-primary hide">
+                    <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
+                      target="_blank">
+                      Trouver son n°GLN ou faire la demande
+                    </a>
+                  </p>
+                  <p class="form-input-hint-success hide">Nous avons trouvé votre n°GLN.</p>
                 </div>
               </div>
             </div>

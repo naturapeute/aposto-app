@@ -98,6 +98,85 @@ function loadServicePriceBackup() {
   if (servicePrice) $('#service-price').value = servicePrice
 }
 
+function loadGLNNumber(entity) {
+  if ($(`#${entity}-gln-number`).value) return
+
+  let name = ''
+  let firstName = ''
+  let lastName = ''
+
+  if (entity === 'author') name = $('#author-name').value
+  else {
+    firstName = $('#therapist-first-name').value
+    lastName = $('#therapist-last-name').value
+  }
+
+  const ZIP = $(`#${entity}-zip`).value
+  const city = $(`#${entity}-city`).value
+
+  if (!(name || (firstName && lastName)) || !ZIP || !city) return
+
+  const body = {
+    ZIP: encodeURIComponent(ZIP),
+    city: encodeURIComponent(city)
+  }
+
+  if (entity === 'author') body.name = encodeURIComponent(name)
+  else {
+    body.firstName = encodeURIComponent(firstName)
+    body.lastName = encodeURIComponent(lastName)
+  }
+
+  ;(async () => {
+    let GLNNumber = await fetchGLN(body)
+
+    if (GLNNumber) return fillGLN(entity, GLNNumber)
+
+    delete body.ZIP
+    delete body.city
+
+    GLNNumber = await fetchGLN(body)
+
+    if (GLNNumber) return fillGLN(entity, GLNNumber)
+
+    $(`.${entity}-form .form-input-hint-primary`).classList.remove('hide')
+  })()
+}
+
+async function fetchGLN(data) {
+  try {
+    const response = await fetch(`${apiURL}/gln`, {
+      method: 'POST',
+      headers: {
+        Origin: 'https://app.aposto.ch'
+      },
+      body: JSON.stringify(data)
+    })
+
+    const GLNResult = document.createElement('div')
+    GLNResult.innerHTML = await response.text()
+
+    const resultTable = GLNResult.querySelector('#GVResult')
+
+    if (!resultTable) return
+
+    const resultRows = resultTable.querySelectorAll('tr:not(.dgHeader)')
+
+    if (resultRows.length > 1) return
+
+    return resultRows[0].querySelector('td').innerText
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+function fillGLN(entity, GLNNumber) {
+  const GLNInput = $(`#${entity}-gln-number`)
+  GLNInput.value = GLNNumber
+  GLNInput.disabled = true
+  $(`.${entity}-form .form-input-hint-success`).classList.remove('hide')
+}
+
 function editInfo(e) {
   e.preventDefault()
 
@@ -208,6 +287,7 @@ function sendInvoice(e) {
 function getAuthorData() {
   return {
     name: $('#author-name').value,
+    GLNNumber: $('#author-gln-number').value,
     RCCNumber: $('#author-rcc-number').value,
     street: $('#author-street').value,
     ZIP: $('#author-zip').value,
@@ -221,6 +301,7 @@ function getTherapistData() {
   return {
     firstName: $('#therapist-first-name').value,
     lastName: $('#therapist-last-name').value,
+    GLNNumber: $('#therapist-gln-number').value,
     RCCNumber: $('#therapist-rcc-number').value,
     street: $('#therapist-street').value,
     ZIP: $('#therapist-zip').value,

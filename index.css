@@ -19,7 +19,7 @@ h2 {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .author-col,
@@ -36,6 +36,31 @@ h2 {
   .author-col {
     margin-bottom: 1rem;
   }
+}
+
+.author-col hr,
+.therapist-col hr {
+  width: 75%;
+  border-top: solid .05rem #dadee4;
+  border-bottom: 0;
+  border-right: 0;
+  border-left: 0;
+  margin: 1.25rem auto .95rem auto;
+}
+
+.form-input-hint-primary,
+.form-input-hint-success {
+  font-size: .7rem;
+  margin-top: .2rem;
+  margin-bottom: 0;
+}
+
+.form-input-hint-primary {
+  color: #5755d9;
+}
+
+.form-input-hint-success {
+  color: #32b643;
 }
 
 .btn-edit-info {
