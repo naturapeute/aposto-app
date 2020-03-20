@@ -239,9 +239,16 @@ function generateInvoiceBase64() {
   return btoa(JSON.stringify(invoiceContent))
 }
 
-function downloadInvoice(e) {
+function submitInvoice(e) {
   e.preventDefault()
 
+  if (e.explicitOriginalTarget.value === 'download')
+    downloadInvoice()
+  else if (e.explicitOriginalTarget.value === 'send')
+    sendInvoice()
+}
+
+function downloadInvoice() {
   const invoiceContentBase64 = generateInvoiceBase64()
   const invoiceFilename = `facture-${Date.now()}.pdf`
 
@@ -254,9 +261,7 @@ function downloadInvoice(e) {
   $('#success-alert-download').classList.toggle('hide')
 }
 
-function sendInvoice(e) {
-  e.preventDefault()
-
+function sendInvoice() {
   const invoiceContentBase64 = generateInvoiceBase64()
 
   ;(async () => {

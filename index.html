@@ -12,7 +12,7 @@
 <body>
   <main class="container">
     <h1>Facture</h1>
-    <form class="form-horizontal">
+    <form class="form-horizontal" onsubmit=submitInvoice(event)>
       <h2>Informations générales</h2>
       <div class="columns">
         <div class="column col-6 col-sm-12 author-col">
@@ -281,13 +281,12 @@
       </div>
       <div class="form-group buttons-group">
         <div class="col-4 col-sm-12">
-          <button class="btn btn-primary" title="Técharger la facture en format PDF" onclick="downloadInvoice(event)">
+          <button class="btn btn-primary" title="Técharger la facture en format PDF" value="download">
             Télécharger la facture
           </button>
         </div>
         <div class="col-4 col-sm-12">
-          <button class="btn" title="Envoyer la facture au client, vous recevrez aussi une copie"
-            onclick="sendInvoice(event)">
+          <button class="btn" title="Envoyer la facture au client, vous recevrez aussi une copie" value="send">
             Envoyer la facture au client
           </button>
         </div>
