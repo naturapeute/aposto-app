@@ -264,8 +264,8 @@ function generateInvoiceBase64() {
 function submitInvoice(e) {
   e.preventDefault()
 
-  if (e.explicitOriginalTarget.value === 'download') downloadInvoice()
-  else if (e.explicitOriginalTarget.value === 'send') sendInvoice()
+  if (submitOrigin === 'download') downloadInvoice()
+  else if (submitOrigin === 'send') sendInvoice()
 }
 
 function downloadInvoice() {
