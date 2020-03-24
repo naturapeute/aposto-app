@@ -18,7 +18,7 @@ h2 {
   margin-top: 1rem;
 }
 
-.hide {
+[hidden] {
   display: none !important;
 }
 

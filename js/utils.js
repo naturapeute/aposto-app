@@ -1,8 +1,14 @@
 // const apiURL = 'http://localhost:8080' // DEVELOPMENT
+// const appURL = 'http://localhost:8000' // DEVELOPMENT
 const apiURL = 'https://api.aposto.ch' // PRODUCTION
+const appURL = 'https://app.aposto.ch' // PRODUCTION
 
 function $(query) {
   return document.querySelector(query)
+}
+
+function $$(query) {
+  return Array.from(document.querySelectorAll(query))
 }
 
 const serviceCodes = [

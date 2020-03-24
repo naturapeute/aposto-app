@@ -5,31 +5,39 @@ const intRandom = Math.floor(Math.random() * (100 - 10 + 1) + 10)
 let isInfoEdited = false
 let patients
 
-Array.from(document.querySelectorAll('[data-amount]')).forEach(dataAmountElement => {
-  dataAmountElement.addEventListener('change', updateTotalAmount)
-  dataAmountElement.addEventListener('keyup', updateTotalAmount)
-})
-
-Array.from(document.querySelectorAll('.date-col input')).forEach(dateInput => {
-  dateInput.value = dateObjectToDateInput(new Date())
-})
-
+listenServiceAmountChange()
+initPatientId()
+initServiceDates()
 feedServiceOptions()
 feedCantonOptions()
-
-loadAuthorBackup()
-loadTherapistBackup()
+loadAuthorAndTherapistBackup()
 loadPatientsBackup()
 loadServicePriceBackup()
-
 updateTotalAmount()
+
+function listenServiceAmountChange() {
+  $$('[data-amount]').forEach(dataAmountElement => {
+    dataAmountElement.addEventListener('change', updateTotalAmount)
+    dataAmountElement.addEventListener('keyup', updateTotalAmount)
+  })
+}
+
+function initPatientId() {
+  $('#patient-id').value = Date.now()
+}
+
+function initServiceDates() {
+  $$('.date-col input').forEach(dateInput => {
+    dateInput.value = dateObjectToDateInput(new Date())
+  })
+}
 
 function feedServiceOptions() {
   const template = document.querySelector('#service-template').innerHTML
   const htmlOptions = serviceCodes
     .map(service => template.replace(/\{\{\s*(.*)\s*}}/g, (_, match) => eval(match)))
     .join('')
-  Array.from(document.querySelectorAll('[id^=service-code-]')).forEach(select => (select.innerHTML += htmlOptions))
+  $$('[id^=service-code-]').forEach(select => (select.innerHTML += htmlOptions))
 }
 
 function feedCantonOptions() {
@@ -38,41 +46,25 @@ function feedCantonOptions() {
   )
 }
 
-function loadAuthorBackup() {
+function loadAuthorAndTherapistBackup() {
   const author = JSON.parse(localStorage.getItem('author'))
-
-  if (author) {
-    $('.author-form').classList.add('hide')
-    $('#author-name-display').textContent = author.name
-    $('#author-name').value = author.name
-    $('#author-gln-number').value = author.GLNNumber
-    $('#author-rcc-number').value = author.RCCNumber
-    $('#author-street').value = author.street
-    $('#author-zip').value = author.ZIP
-    $('#author-city').value = author.city
-    $('#author-email').value = author.email
-    $('#author-phone').value = author.phone
-    $('.btn-edit-info').classList.remove('hide')
-  }
-}
-
-function loadTherapistBackup() {
   const therapist = JSON.parse(localStorage.getItem('therapist'))
 
-  if (therapist) {
-    $('.therapist-form').classList.add('hide')
-    $('#therapist-name-display').textContent = `${therapist.firstName} ${therapist.lastName}`
-    $('#therapist-first-name').value = therapist.firstName
-    $('#therapist-last-name').value = therapist.lastName
-    $('#therapist-gln-number').value = therapist.GLNNumber
-    $('#therapist-rcc-number').value = therapist.RCCNumber
-    $('#therapist-street').value = therapist.street
-    $('#therapist-zip').value = therapist.ZIP
-    $('#therapist-city').value = therapist.city
-    $('#therapist-email').value = therapist.email
-    $('#therapist-phone').value = therapist.phone
-    $('.btn-edit-info').classList.remove('hide')
+  if (author) {
+    $('.author-form').hidden = true
+    $('#author-name-display').textContent = author.name
+    $('.btn-edit-info').hidden = false
   }
+
+  bindWriteForPrefix('author', author)
+
+  if (therapist) {
+    $('.therapist-form').hidden = true
+    $('#therapist-name-display').textContent = `${therapist.firstName} ${therapist.lastName}`
+    $('.btn-edit-info').hidden = false
+  }
+
+  bindWriteForPrefix('therapist', therapist)
 }
 
 function loadPatientsBackup() {
@@ -81,10 +73,12 @@ function loadPatientsBackup() {
   if (patients) {
     patients.sort((a, b) => b.frequency - a.frequency)
 
-    $('.patients-list-container').classList.remove('hide')
+    $('.patients-list-container').hidden = false
 
-    patients.forEach((patient, i) => {
-      $('.patients-list').innerHTML += `<button class="btn btn-sm btn-patient" id="patient-${i}" onclick="selectPatient(event, ${i})">
+    patients.forEach((patient) => {
+      $(
+        '.patients-list'
+      ).innerHTML += `<button type="button" class="btn btn-sm btn-patient" onclick="selectPatient(event)" value="${patient._id}">
           ${patient.firstName}
           ${patient.lastName}
         </button>`
@@ -95,7 +89,7 @@ function loadPatientsBackup() {
 function loadServicePriceBackup() {
   const servicePrice = JSON.parse(localStorage.getItem('servicePrice'))
 
-  if (servicePrice) $('#service-price').value = servicePrice
+  if (servicePrice) bindWriteForPrefix('servicePrice', { servicePrice })
 }
 
 function loadGLNNumber(entity) {
@@ -137,9 +131,7 @@ function loadGLNNumber(entity) {
 
     GLNNumber = await fetchGLN(body)
 
-    if (GLNNumber) return fillGLN(entity, GLNNumber)
-
-    $(`.${entity}-form .form-input-hint-primary`).classList.remove('hide')
+    if (GLNNumber) fillGLN(entity, GLNNumber)
   })()
 }
 
@@ -148,7 +140,7 @@ async function fetchGLN(data) {
     const response = await fetch(`${apiURL}/gln`, {
       method: 'POST',
       headers: {
-        Origin: 'https://app.aposto.ch'
+        Origin: appURL
       },
       body: JSON.stringify(data)
     })
@@ -166,7 +158,7 @@ async function fetchGLN(data) {
 
     return resultRows[0].querySelector('td').innerText
   } catch (err) {
-    console.log(err.message)
+    console.error(err.message)
   }
 }
 
@@ -174,45 +166,28 @@ function fillGLN(entity, GLNNumber) {
   const GLNInput = $(`#${entity}-gln-number`)
   GLNInput.value = GLNNumber
   GLNInput.disabled = true
-  $(`.${entity}-form .form-input-hint-success`).classList.remove('hide')
+  $(`.${entity}-form .form-input-hint-success`).hidden = false
+  $(`.${entity}-form .form-input-hint-primary`).hidden = true
 }
 
 function editInfo(e) {
-  e.preventDefault()
-
-  $('.author-form').classList.remove('hide')
-  $('.therapist-form').classList.remove('hide')
-  $('.btn-edit-info').classList.add('hide')
+  $('.author-form').hidden = false
+  $('.therapist-form').hidden = false
+  $('.btn-edit-info').hidden = true
 
   isInfoEdited = true
 }
 
 function emptyPatientInfo(e) {
-  e.preventDefault()
-
-  $('#patient-first-name').value = ''
-  $('#patient-last-name').value = ''
-  $('#patient-street').value = ''
-  $('#patient-zip').value = ''
-  $('#patient-canton').value = ''
-  $('#patient-city').value = ''
-  $('#patient-email').value = ''
-  $('#patient-birthdate').value = ''
-  $('#patient-gender').value = ''
+  bindWriteForPrefix('patient', {})
+  initPatientId()
 }
 
-function selectPatient(e, i) {
-  e.preventDefault()
-
-  $('#patient-first-name').value = patients[i].firstName
-  $('#patient-last-name').value = patients[i].lastName
-  $('#patient-street').value = patients[i].street
-  $('#patient-zip').value = patients[i].ZIP
-  $('#patient-canton').value = patients[i].canton
-  $('#patient-city').value = patients[i].city
-  $('#patient-email').value = patients[i].email
-  $('#patient-birthdate').value = dateObjectToDateInput(new Date(patients[i].birthdate))
-  $('#patient-gender').value = patients[i].gender
+function selectPatient(e) {
+  bindWriteForPrefix(
+    'patient',
+    patients.find(patient => patient._id === e.currentTarget.value)
+  )
 }
 
 function onPriceEdit() {
@@ -220,10 +195,12 @@ function onPriceEdit() {
 }
 
 function updateTotalAmount() {
-  let totalAmount = 0
-  const price = Number($('#service-price').value) / 12
+  const price = Number($('#service-price').value) / 60
 
-  for (let i = 1; i <= 5; i++) totalAmount += (Number($(`#service-duration-${i}`).value) / 5) * price
+  const totalAmount = $$('[id^=service-duration-]').reduce(
+    (total, duration) => total + Number(duration.value) * price,
+    0
+  )
 
   $('#total-amount').textContent = totalAmount.toFixed(2)
 }
@@ -231,26 +208,26 @@ function updateTotalAmount() {
 function onServiceCodeSelected(e, serviceIndex) {
   if (!e.currentTarget.value) {
     $(`#service-duration-${serviceIndex}`).value = ''
-    $(`#service-duration-${serviceIndex}`).required = false
     updateTotalAmount()
-  } else $(`#service-duration-${serviceIndex}`).required = true
+  }
+
+  $(`#service-duration-${serviceIndex}`).required = Boolean(e.currentTarget.value)
 }
 
 function generateInvoiceBase64() {
-  const author = getAuthorData()
-  const therapist = getTherapistData()
+  const author = bindReadForPrefix('author')
+  const therapist = bindReadForPrefix('therapist')
   const patient = getPatientData()
-
   const servicePrice = Number($('#service-price').value)
 
   const invoiceContent = {
-    intRandom: intRandom,
-    timestamp: invoiceDate,
-    author: author,
-    therapist: therapist,
-    patient: patient,
-    servicePrice: servicePrice,
-    services: getServicesData()
+    intRandom,
+    author,
+    therapist,
+    patient,
+    servicePrice,
+    services: getServicesData(),
+    timestamp: invoiceDate
   }
 
   saveData('author', author)
@@ -264,8 +241,9 @@ function generateInvoiceBase64() {
 function submitInvoice(e) {
   e.preventDefault()
 
-  if (submitOrigin === 'download') downloadInvoice()
-  else if (submitOrigin === 'send') sendInvoice()
+  // NOTE : submitAction is initialized in the onclick event of the submit buttons. It can
+  // be downloadInvoice or sendInvoice functions
+  submitAction()
 }
 
 function downloadInvoice() {
@@ -278,7 +256,7 @@ function downloadInvoice() {
   link.target = '_blank'
   link.click()
 
-  $('#success-alert-download').classList.toggle('hide')
+  $('#success-alert-download').hidden = false
 }
 
 function sendInvoice() {
@@ -290,87 +268,47 @@ function sendInvoice() {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Origin: 'https://app.aposto.ch'
+          Origin: appURL
         }
       })
 
-      if (response.status != 200) {
-        console.log('Email sending has failed. Try again later.')
+      if (!response.ok) {
+        console.error('Email sending has failed. Try again later.')
+        $('#error-alert-email').hidden = false
 
         try {
           const errorContent = await response.json()
-
-          console.log(errorContent)
+          console.error(errorContent)
         } catch (err) {
-          console.log(`Body JSON parsing has failed: ${err.message}`)
+          console.error(`Body JSON parsing has failed: ${err.message}`)
         }
-      } else $('#success-alert-email').classList.toggle('hide')
+      } else $('#success-alert-email').hidden = false
     } catch (err) {
-      console.log(`Fetch has failed: ${err.message}`)
+      console.error(`Fetch has failed: ${err.message}`)
+      $('#error-alert-email').hidden = false
     }
   })()
 }
 
-function getAuthorData() {
-  return {
-    name: $('#author-name').value,
-    GLNNumber: $('#author-gln-number').value,
-    RCCNumber: $('#author-rcc-number').value,
-    street: $('#author-street').value,
-    ZIP: $('#author-zip').value,
-    city: $('#author-city').value,
-    email: $('#author-email').value,
-    phone: $('#author-phone').value
-  }
-}
-
-function getTherapistData() {
-  return {
-    firstName: $('#therapist-first-name').value,
-    lastName: $('#therapist-last-name').value,
-    GLNNumber: $('#therapist-gln-number').value,
-    RCCNumber: $('#therapist-rcc-number').value,
-    street: $('#therapist-street').value,
-    ZIP: $('#therapist-zip').value,
-    city: $('#therapist-city').value,
-    email: $('#therapist-email').value,
-    phone: $('#therapist-phone').value
-  }
-}
-
 function getPatientData() {
-  return {
-    firstName: $('#patient-first-name').value,
-    lastName: $('#patient-last-name').value,
-    street: $('#patient-street').value,
-    ZIP: $('#patient-zip').value,
-    city: $('#patient-city').value,
-    email: $('#patient-email').value,
-    birthdate: new Date($('#patient-birthdate').value).getTime(),
-    gender: $('#patient-gender').value,
-    canton: $('#patient-canton').value,
-    frequency: 1
-  }
+  return Object.assign(bindReadForPrefix('patient'), {
+    birthdate: new Date($('#patient-birthdate').value).getTime()
+  })
 }
 
 function getServicesData() {
-  const services = []
+  return $$('[id^=service-code-]').reduce((service, serviceCode, i) => {
+    if (!serviceCode.value) return service
 
-  for (let i = 1; i <= 5; i++) {
-    const serviceCode = Number($(`#service-code-${i}`).value)
-
-    if (serviceCode) {
-      const service = {
-        date: new Date($(`#service-date-${i}`).value).getTime(),
-        code: serviceCode,
-        duration: Number($(`#service-duration-${i}`).value)
+    return [
+      ...service,
+      {
+        date: new Date($(`#service-date-${i + 1}`).value).getTime(),
+        code: Number(serviceCode.value),
+        duration: Number($(`#service-duration-${i + 1}`).value)
       }
-
-      services.push(service)
-    }
-  }
-
-  return services
+    ]
+  }, [])
 }
 
 function saveData(dataName, data) {
@@ -378,26 +316,14 @@ function saveData(dataName, data) {
 }
 
 function savePatient(patient) {
-  const patients = JSON.parse(localStorage.getItem('patients'))
+  const patients = JSON.parse(localStorage.getItem('patients')) || []
 
-  if (patients) {
-    const matchingPatient = patients.find(existingPatient => {
-      return (
-        existingPatient.firstName === patient.firstName &&
-        existingPatient.lastName === patient.lastName &&
-        existingPatient.street === patient.street &&
-        existingPatient.ZIP === patient.ZIP &&
-        existingPatient.city === patient.city &&
-        existingPatient.email === patient.email &&
-        existingPatient.birthdate === patient.birthdate
-      )
-    })
+  const matchingPatient = patients.find(existingPatient => existingPatient._id === patient._id)
 
-    if (matchingPatient) matchingPatient.frequency++
-    else patients.push(patient)
+  if (matchingPatient) matchingPatient.frequency++
+  else patients.push(Object.assign(patient, { frequency: 1 }))
 
-    localStorage.setItem('patients', JSON.stringify(patients))
-  } else localStorage.setItem('patients', JSON.stringify([patient]))
+  localStorage.setItem('patients', JSON.stringify(patients))
 }
 
 function dateObjectToDateInput(date) {
@@ -405,6 +331,62 @@ function dateObjectToDateInput(date) {
   const month = String(date.getMonth() + 1).padStart(2, '0')
 
   return `${date.getFullYear()}-${month}-${day}`
+}
+
+function toDateInput(dateString) {
+  return dateObjectToDateInput(new Date(dateString))
+}
+
+/**
+ * // NOTE //
+ * Write down properties from data to 'value' atrtibute of matching HTML element
+ *
+ * Exemple :
+ * <input id="input-1" type="text" bind="myPrefix.myProperty1" />
+ * <input id="input-2" type="text" bind="myPrefix.myProperty2" />
+ * bindWriteForPrefix('myPrefix', { myProperty1: 'value1', myProperty2: 'value2' })
+ * writes "value1" in the 'value' attribute of input #input-1 and "value2" in 'value' attribute of input #input-2.
+ *
+ * In details : It selects all HTML elements having attribute 'bind' equal to "myPrefix.*". It gets the 'bind' attribute
+ * and parse it to collect the property name and the transformer. The transformer is a function that is applied to the
+ * value to format it. It is provided as a pipe in the 'bind' attribute (ex :
+ *                                                <input ... bind="myPrefix.myProperty | myTransformer" />)
+ * Then, it gets the value from the provided data object and the collected key, applying or not the transformer.
+ * It finally affects the computed value to the 'value' attribute of the element.
+ *
+ * @param prefix The bind attribute prefix
+ * @param data The data object that contains the data to bind with HTML elements
+ */
+function bindWriteForPrefix(prefix, data) {
+  $$(`[bind^="${prefix}."]`).forEach(element => {
+    const [_, key, transformer] = element.getAttribute('bind').match(/\w+\.(\w+)\s*\|?\s*(\w*)/)
+    const value = transformer ? eval(transformer)(data[key]) : data[key]
+
+    element.value = value || ''
+  })
+}
+
+/**
+ * // NOTE //
+ * Read 'value' atrtibute of matching HTML element and collect it in a data object
+ *
+ * Exemple :
+ * <input id="input-1" type="text" bind="myPrefix.myProperty1" value="value1" />
+ * <input id="input-2" type="text" bind="myPrefix.myProperty2" value="value2" />
+ * bindWriteForPrefix('myPrefix') returns the object { myProperty1: 'value1', myProperty2: 'value2' }.
+ *
+ * In details : It selects all HTML elements having attribute 'bind' equal to "myPrefix.*". It gets the 'bind' attribute
+ * and parse it to collect the property name. The transformer is not handled on read.
+ * Finally, it gets the value from the HTML element and add it to the data object
+ *
+ * @param prefix The bind attribute prefix
+ */
+function bindReadForPrefix(prefix) {
+  return $$(`[bind^="${prefix}."]`).reduce((obj, element) => {
+    const [_, key, transformer] = element.getAttribute('bind').match(/\w+\.(\w+)\s*\|?\s*(\w*)/)
+
+    return Object.assign(obj, { [key]: element.value })
+  }, {})
 }
 
 function loadMatomo() {
