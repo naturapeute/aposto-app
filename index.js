@@ -54,17 +54,17 @@ function loadAuthorAndTherapistBackup() {
     $('.author-form').hidden = true
     $('#author-name-display').textContent = author.name
     $('.btn-edit-info').hidden = false
+    bindWriteForPrefix('author', author)
   }
 
-  bindWriteForPrefix('author', author)
 
   if (therapist) {
     $('.therapist-form').hidden = true
     $('#therapist-name-display').textContent = `${therapist.firstName} ${therapist.lastName}`
     $('.btn-edit-info').hidden = false
+    bindWriteForPrefix('therapist', therapist)
   }
 
-  bindWriteForPrefix('therapist', therapist)
 }
 
 function loadPatientsBackup() {
