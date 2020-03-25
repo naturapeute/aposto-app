@@ -1,3 +1,4 @@
+var _paq
 loadMatomo()
 
 const invoiceDate = Date.now()
@@ -57,14 +58,12 @@ function loadAuthorAndTherapistBackup() {
     bindWriteForPrefix('author', author)
   }
 
-
   if (therapist) {
     $('.therapist-form').hidden = true
     $('#therapist-name-display').textContent = `${therapist.firstName} ${therapist.lastName}`
     $('.btn-edit-info').hidden = false
     bindWriteForPrefix('therapist', therapist)
   }
-
 }
 
 function loadPatientsBackup() {
@@ -75,7 +74,7 @@ function loadPatientsBackup() {
 
     $('.patients-list-container').hidden = false
 
-    patients.forEach((patient) => {
+    patients.forEach(patient => {
       $(
         '.patients-list'
       ).innerHTML += `<button type="button" class="btn btn-sm btn-patient" onclick="selectPatient(event)" value="${patient._id}">
@@ -390,7 +389,7 @@ function bindReadForPrefix(prefix) {
 }
 
 function loadMatomo() {
-  var _paq = window._paq || []
+  _paq = window._paq || []
   _paq.push(['trackPageView'])
   _paq.push(['enableLinkTracking'])
   ;(function() {
