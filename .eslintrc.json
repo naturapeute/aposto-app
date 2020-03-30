@@ -19,9 +19,11 @@
     "no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "[A-Z].*"
+        "varsIgnorePattern": "^[A-Z].*|on[A-Z].*",
+        "argsIgnorePattern": "_"
       }
-    ]
+    ],
+    "space-before-function-paren": ["warn", "never"]
   },
   "plugins": [
     "html"
