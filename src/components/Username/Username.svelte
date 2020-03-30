@@ -12,3 +12,5 @@
 </script>
 
 <Button icon="account_circle" on:click={onOpenUserPannel}>{username}</Button>
+
+<style src="./Username.scss"></style>
