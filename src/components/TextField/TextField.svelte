@@ -3,6 +3,7 @@
   import { onMount, onDestroy } from 'svelte'
 
   export let fieldId
+  export let label
 
   let textField
   let thisMDCTextField
@@ -16,15 +17,11 @@
   })
 </script>
 
-<label bind:this={textField} class="mdc-text-field mdc-text-field--outlined">
-  <input type="text" class="mdc-text-field__input" aria-labelledby={fieldId}>
-  <div class="mdc-notched-outline">
-    <div class="mdc-notched-outline__leading"></div>
-    <div class="mdc-notched-outline__notch">
-      <span class="mdc-floating-label" id={fieldId}><slot></slot></span>
-    </div>
-    <div class="mdc-notched-outline__trailing"></div>
-  </div>
+<label bind:this={textField} class="mdc-text-field">
+  <div class="mdc-text-field__ripple"></div>
+  <input class="mdc-text-field__input" type="text" aria-labelledby={fieldId}>
+  <span class="mdc-floating-label" id={fieldId}>{label}</span>
+  <div class="mdc-line-ripple"></div>
 </label>
 
 <style src="./TextField.scss"></style>
