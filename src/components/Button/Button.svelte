@@ -4,7 +4,7 @@
   export let raised = false // eslint-disable-line prefer-const
   export let unelevated = false // eslint-disable-line prefer-const
   export let outlined = false // eslint-disable-line prefer-const
-  export let icon
+  export let icon = null // eslint-disable-line prefer-const
 
   const dispatch = createEventDispatcher()
 
