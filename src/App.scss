@@ -1,6 +1,7 @@
+@use "styles/variables" as *;
 @use "@material/theme" with (
-  $primary: #68b246,
-  $on-primary: #fff
+  $primary: $primary,
+  $on-primary: $on-primary
 );
 @use "@material/button/mdc-button";
 
