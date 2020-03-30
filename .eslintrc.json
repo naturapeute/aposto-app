@@ -28,7 +28,8 @@
   ],
   "settings": {
     "html/html-extensions": [
-      ".svelte"
+      ".svelte",
+      ".html"
     ]
   }
 }
