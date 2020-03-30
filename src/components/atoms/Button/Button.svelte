@@ -15,4 +15,7 @@
   <span class="mdc-button__label">
     <slot></slot>
   </span>
+  {#if icon}
+    <i class="material-icons mdc-button__icon" aria-hidden="true">{icon}</i>
+  {/if}
 </button>
