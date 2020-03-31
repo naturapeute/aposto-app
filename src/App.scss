@@ -1,11 +1,9 @@
-@use "styles/variables" as *;
-@use "@material/theme" with (
-  $primary: $primary,
-  $on-primary: $on-primary
-);
-@use "@material/button/mdc-button";
-@use "@material/icon-button/mdc-icon-button";
-@use "@material/textfield/mdc-text-field";
+@use "styles/main";
+
+header {
+  display: flex;
+  justify-content: flex-end;
+}
 
 main {
   text-align: center;
