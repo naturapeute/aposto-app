@@ -5,11 +5,12 @@
   export let unelevated = false // eslint-disable-line prefer-const
   export let outlined = false // eslint-disable-line prefer-const
   export let icon = null // eslint-disable-line prefer-const
+  export let type = 'button' // eslint-disable-line prefer-const
 
   const dispatch = createEventDispatcher()
 
-  function onClick(event) {
-    dispatch('click', event)
+  const onClick = e => {
+    dispatch('click', e)
   }
 </script>
 
@@ -20,7 +21,8 @@
     {unelevated ? 'mdc-button--unelevated' : ''}
     {outlined ? 'mdc-button--outlined' : ''}
   "
-  on:click={onClick}>
+  on:click={onClick}
+  {type}>
   <div class="mdc-button__ripple"></div>
   <span class="mdc-button__label">
     <slot></slot>

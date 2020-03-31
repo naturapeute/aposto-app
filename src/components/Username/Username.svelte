@@ -6,11 +6,11 @@
 
   const dispatch = createEventDispatcher()
 
-  function onOpenUserPannel() {
-    dispatch('openUserPannel', {})
+  const onOpenUserPanel = () => {
+    dispatch('openUserPanel', {})
   }
 </script>
 
-<Button icon="account_circle" on:click={onOpenUserPannel}>{username}</Button>
+<Button icon="account_circle" on:click={onOpenUserPanel}>{username}</Button>
 
 <style src="./Username.scss"></style>
