@@ -68,6 +68,11 @@
           <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone">Téléphone</TextField>
           <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc">N°RCC</TextField>
           <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln">N°GLN</TextField>
+          <!--
+            NOTE : As Firefox and IE does not properly handle padding-bottom on overflow: scroll containers,
+            a padding-like container is added.
+          -->
+          <div class="user-pannel-content-padding-bottom"></div>
         </div>
         <div class="user-panel-footer">
           <Button type="submit" unelevated>Valider</Button>

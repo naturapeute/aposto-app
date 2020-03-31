@@ -33,9 +33,6 @@ $panel-width: 300px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  position: fixed;
-  z-index:100;
-  background-color: #fff;
 
   .mdc-typography--headline6 {
     margin: 12px;
@@ -47,17 +44,20 @@ $panel-width: 300px;
 }
 
 .user-panel-content {
-  padding: 57px 16px (69px + 16px) 16px;
+  padding: 16px 16px 0 16px;
+  $user-pannel-content-shrink: 57 + 69 + (2 * 16);
+  height: calc(100vh - #{$user-pannel-content-shrink}px);
+  overflow-y: scroll;
+}
+
+.user-pannel-content-padding-bottom {
+  height: 16px;
 }
 
 .user-panel-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
   padding: 16px;
   display: flex;
-  z-index:100;
   width: $panel-width - 2 * 16px;
   justify-content: flex-end;
 }
