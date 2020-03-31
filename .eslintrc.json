@@ -19,7 +19,7 @@
     "no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "^[A-Z].*|on[A-Z].*",
+        "varsIgnorePattern": "^[A-Z].*|on[A-Z].*|.*Transition",
         "argsIgnorePattern": "_"
       }
     ],
