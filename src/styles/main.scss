@@ -6,11 +6,12 @@
 @use "@material/typography/mdc-typography";
 @use "@material/button/mdc-button";
 @use "@material/icon-button/mdc-icon-button";
+@use "@material/textfield";
 @use "@material/textfield/mdc-text-field";
 
 .aposto-form {
   .mdc-text-field {
-    height: 40px;
+    @include textfield.outlined-height(40px);
     margin: 8px 0;
 
     &:first-child {
@@ -20,9 +21,5 @@
     &:last-child {
       margin-bottom: 0;
     }
-  }
-
-  .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
-    transform: translateY(-27px) scale(0.75);
   }
 }
