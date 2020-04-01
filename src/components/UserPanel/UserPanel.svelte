@@ -30,9 +30,11 @@
       duration: 500,
       easing: cubicOut,
       css: (t, u) => {
+        const panelSize = window.screen.width < 768 ? 300 : 600
+
         const right = openned
-          ? -300 + (t * 300)
-          : 0 - (u * 300)
+          ? -panelSize + (t * panelSize)
+          : 0 - (u * panelSize)
 
         return `right: ${right}px;`
       }
@@ -48,29 +50,65 @@
         <h1 class="mdc-typography--headline6">{author.name}</h1>
         <IconButton icon="close" on:click={onCloseClick} />
       </div>
-      <form class="aposto-form" on:submit|preventDefault={onSubmit}>
+      <form on:submit|preventDefault={onSubmit}>
         <div class="user-panel-content">
           <h2 class="mdc-typography--overline">Auteur des factures</h2>
-          <div class="aposto-form-section">
+          <div class="aposto-form">
             <TextField bind:value={_author.name} fieldId="author-name">Nom ou entreprise</TextField>
             <TextField bind:value={_author.street} fieldId="author-street">Rue et n°</TextField>
-            <TextField bind:value={_author.NPA} fieldId="author-zip">NPA</TextField>
-            <TextField bind:value={_author.city} fieldId="author-city">Localité</TextField>
-            <TextField bind:value={_author.email} type="email" fieldId="author-email">Email</TextField>
-            <TextField bind:value={_author.phone} type="tel" fieldId="author-phone">Téléphone</TextField>
-            <TextField bind:value={_author.RCC} type="tel" fieldId="author-rcc">N°RCC</TextField>
-            <TextField bind:value={_author.GLN} type="tel" fieldId="author-gln">N°GLN</TextField>
+            <div class="aposto-form-row">
+              <div class="col-lg-6">
+                <TextField bind:value={_author.NPA} fieldId="author-zip">NPA</TextField>
+              </div>
+              <div class="col-lg-6">
+                <TextField bind:value={_author.city} fieldId="author-city">Localité</TextField>
+              </div>
+            </div>
+            <div class="aposto-form-row">
+              <div class="col-lg-6">
+                <TextField bind:value={_author.email} type="email" fieldId="author-email">Email</TextField>
+              </div>
+              <div class="col-lg-6">
+                <TextField bind:value={_author.phone} type="tel" fieldId="author-phone">Téléphone</TextField>
+              </div>
+            </div>
+            <div class="aposto-form-row">
+              <div class="col-lg-6">
+                <TextField bind:value={_author.RCC} type="tel" fieldId="author-rcc">N°RCC</TextField>
+              </div>
+              <div class="col-lg-6">
+                <TextField bind:value={_author.GLN} type="tel" fieldId="author-gln">N°GLN</TextField>
+              </div>
+            </div>
           </div>
           <h2 class="mdc-typography--overline">Thérapeute</h2>
-          <div class="aposto-form-section">
-            <TextField bind:value={_therapist.firstName} fieldId="therapist-name">Nom ou entreprise</TextField>
-            <TextField bind:value={_therapist.lastName} fieldId="therapist-name">Nom ou entreprise</TextField>
+          <div class="aposto-form">
+            <div class="aposto-form-row">
+              <div class="col-lg-6">
+                <TextField bind:value={_therapist.firstName} fieldId="therapist-first-name">Prénom</TextField>
+              </div>
+              <div class="col-lg-6">
+                <TextField bind:value={_therapist.lastName} fieldId="therapist-last-name">Nom</TextField>
+              </div>
+            </div>
             <TextField bind:value={_therapist.street} fieldId="therapist-street">Rue et n°</TextField>
-            <TextField bind:value={_therapist.NPA} fieldId="therapist-zip">NPA</TextField>
-            <TextField bind:value={_therapist.city} fieldId="therapist-city">Localité</TextField>
+            <div class="aposto-form-row">
+              <div class="col-lg-6">
+                <TextField bind:value={_therapist.NPA} fieldId="therapist-zip">NPA</TextField>
+              </div>
+              <div class="col-lg-6">
+                <TextField bind:value={_therapist.city} fieldId="therapist-city">Localité</TextField>
+              </div>
+            </div>
             <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone">Téléphone</TextField>
-            <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc">N°RCC</TextField>
-            <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln">N°GLN</TextField>
+            <div class="aposto-form-row">
+              <div class="col-lg-6">
+                <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc">N°RCC</TextField>
+              </div>
+              <div class="col-lg-6">
+                <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln">N°GLN</TextField>
+              </div>
+            </div>
           </div>
           <!--
             NOTE : As Firefox and IE does not properly handle padding-bottom on overflow: scroll containers,

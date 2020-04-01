@@ -1,4 +1,7 @@
-$panel-width: 300px;
+@use "../../styles/variables";
+
+$panel-small-width: 300px;
+$panel-large-width: 600px;
 
 .user-panel-container {
   position: absolute;
@@ -17,7 +20,7 @@ $panel-width: 300px;
 }
 
 .user-panel {
-  width: $panel-width;
+  width: $panel-small-width;
   height: 100%;
   position: absolute;
   z-index: 100;
@@ -29,7 +32,7 @@ $panel-width: 300px;
 }
 
 .user-panel-header {
-  width: $panel-width;
+  width: $panel-small-width;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -58,7 +61,7 @@ $panel-width: 300px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 16px;
   display: flex;
-  width: $panel-width - 2 * 16px;
+  width: $panel-small-width - 2 * 16px;
   justify-content: flex-end;
 }
 
@@ -69,5 +72,16 @@ $panel-width: 300px;
 
   &:not(:first-child) {
     margin-top: 16px;
+  }
+}
+
+@media (min-width: variables.$large-width-breakpoint) {
+  .user-panel,
+  .user-panel-header {
+    width: $panel-large-width;
+  }
+
+  .user-panel-footer {
+    width: $panel-large-width - 2 * 16px;
   }
 }

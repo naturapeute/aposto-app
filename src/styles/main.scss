@@ -10,28 +10,56 @@
 @use "@material/textfield/mdc-text-field";
 
 .aposto-form {
+  display: flex;
+  flex-direction: column;
+
   .mdc-text-field {
     @include textfield.outlined-height(variables.$text-field-height);
     margin: 8px 0;
+  }
 
-    &:first-of-type {
-      margin-top: 0;
-    }
+  :first-child {
+    margin-top: 0;
+  }
 
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+  :last-child {
+    margin-bottom: 0;
   }
 }
 
-.aposto-form-section {
-  .mdc-text-field {
-    &:first-of-type {
-      margin-top: 0;
+.aposto-form-row {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+
+  .col-lg-6:first-of-type {
+    margin-top: 0;
+  }
+
+  .col-lg-6 {
+    margin: 8px 0;
+  }
+
+  .col-lg-6:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: variables.$large-width-breakpoint) {
+  .aposto-form-row {
+    flex-direction: row;
+
+    .col-lg-6:first-of-type {
+      margin-left: 0;
     }
 
-    &:last-of-type {
-      margin-bottom: 0;
+    .col-lg-6 {
+      width: 50%;
+      margin: 0 8px;
+    }
+
+    .col-lg-6:last-of-type {
+      margin-right: 0;
     }
   }
 }
