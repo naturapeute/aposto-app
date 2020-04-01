@@ -41,7 +41,7 @@
 </script>
 
 {#if openned}
-  <div class="user-panel-container {openned ? 'openned' : ''}">
+  <div class="user-panel-container">
     <div class="user-panel-blur" transition:fadeTransition={{ duration: 500 }}></div>
     <div class="user-panel" transition:slideTransition>
       <div class="user-panel-header">

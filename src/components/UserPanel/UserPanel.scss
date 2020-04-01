@@ -24,8 +24,8 @@ $panel-width: 300px;
   right: 0;
   background-color: #fff;
   box-shadow: 0;
-  overflow: scroll;
-    box-shadow: -2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+  box-shadow: -2px 0px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 .user-panel-header {
@@ -45,7 +45,7 @@ $panel-width: 300px;
 
 .user-panel-content {
   padding: 16px 16px 0 16px;
-  $user-pannel-content-shrink: 57 + 69 + (2 * 16);
+  $user-pannel-content-shrink: 57 + 69 + 16;
   height: calc(100vh - #{$user-pannel-content-shrink}px);
   overflow-y: scroll;
 }
