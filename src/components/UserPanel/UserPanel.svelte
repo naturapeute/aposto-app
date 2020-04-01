@@ -1,7 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  import { fade as fadeTransition } from 'svelte/transition'
-  import { cubicOut } from 'svelte/easing'
+  import { MDCDrawer } from '@material/drawer'
+  import { createEventDispatcher, onMount, onDestroy, afterUpdate } from 'svelte'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -12,7 +11,24 @@
 
   let _author = { ...author }
   let _therapist = { ...therapist }
+  let drawer
+  let thisMDCDrawer
   const dispatch = createEventDispatcher()
+
+  onMount(() => {
+    thisMDCDrawer = MDCDrawer.attachTo(drawer)
+    drawer.addEventListener('MDCDrawer:opened', () => {
+      document.querySelector('input').focus()
+    })
+  })
+
+  afterUpdate(() => {
+    thisMDCDrawer.open = openned
+  })
+
+  onDestroy(() => {
+    if (thisMDCDrawer) thisMDCDrawer.detroy()
+  })
 
   const onCloseClick = () => {
     dispatch('closeUserPanel', {})
@@ -24,104 +40,49 @@
     dispatch('updateUser', { author: _author, therapist: _therapist })
     dispatch('closeUserPanel', {})
   }
-
-  const slideTransition = (_, __) => {
-    return {
-      duration: 500,
-      easing: cubicOut,
-      css: (t, u) => {
-        const panelSize = window.screen.width < 768 ? 300 : 600
-
-        const right = openned
-          ? -panelSize + (t * panelSize)
-          : 0 - (u * panelSize)
-
-        return `right: ${right}px;`
-      }
-    }
-  }
 </script>
 
-{#if openned}
-  <div class="user-panel-container">
-    <div class="user-panel-blur" on:click={onCloseClick} transition:fadeTransition={{ duration: 500 }}></div>
-    <div class="user-panel" transition:slideTransition>
-      <div class="user-panel-header">
-        <h1 class="mdc-typography--headline6">{author.name}</h1>
-        <IconButton icon="close" title="Fermer ou annuler les modifications" on:click={onCloseClick} />
-      </div>
-      <form on:submit|preventDefault={onSubmit}>
-        <div class="user-panel-content">
-          <h2 class="mdc-typography--overline">Auteur des factures</h2>
-          <div class="aposto-form">
-            <TextField bind:value={_author.name} fieldId="author-name" required>Nom ou entreprise</TextField>
-            <TextField bind:value={_author.street} fieldId="author-street" required>Rue et n°</TextField>
-            <div class="aposto-form-row">
-              <div class="col-lg-6">
-                <TextField bind:value={_author.NPA} fieldId="author-zip" required>NPA</TextField>
-              </div>
-              <div class="col-lg-6">
-                <TextField bind:value={_author.city} fieldId="author-city" required>Localité</TextField>
-              </div>
-            </div>
-            <div class="aposto-form-row">
-              <div class="col-lg-6">
-                <TextField bind:value={_author.email} type="email" fieldId="author-email" required>Email</TextField>
-              </div>
-              <div class="col-lg-6">
-                <TextField bind:value={_author.phone} type="tel" fieldId="author-phone" required>Téléphone</TextField>
-              </div>
-            </div>
-            <div class="aposto-form-row">
-              <div class="col-lg-6">
-                <TextField bind:value={_author.RCC} type="tel" fieldId="author-rcc" required>N°RCC</TextField>
-              </div>
-              <div class="col-lg-6">
-                <TextField bind:value={_author.GLN} type="tel" fieldId="author-gln" required>N°GLN</TextField>
-              </div>
-            </div>
-          </div>
-          <h2 class="mdc-typography--overline">Thérapeute</h2>
-          <div class="aposto-form">
-            <div class="aposto-form-row">
-              <div class="col-lg-6">
-                <TextField bind:value={_therapist.firstName} fieldId="therapist-first-name" required>Prénom</TextField>
-              </div>
-              <div class="col-lg-6">
-                <TextField bind:value={_therapist.lastName} fieldId="therapist-last-name" required>Nom</TextField>
-              </div>
-            </div>
-            <TextField bind:value={_therapist.street} fieldId="therapist-street" required>Rue et n°</TextField>
-            <div class="aposto-form-row">
-              <div class="col-lg-6">
-                <TextField bind:value={_therapist.NPA} fieldId="therapist-zip" required>NPA</TextField>
-              </div>
-              <div class="col-lg-6">
-                <TextField bind:value={_therapist.city} fieldId="therapist-city" required>Localité</TextField>
-              </div>
-            </div>
-            <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone" required>Téléphone</TextField>
-            <div class="aposto-form-row">
-              <div class="col-lg-6">
-                <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc" required>N°RCC</TextField>
-              </div>
-              <div class="col-lg-6">
-                <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln" required>N°GLN</TextField>
-              </div>
-            </div>
-          </div>
-          <!--
-            NOTE : As Firefox and IE does not properly handle padding-bottom on overflow: scroll containers,
-            a padding-like container is added.
-          -->
-          <div class="user-pannel-content-padding-bottom"></div>
-        </div>
-        <div class="user-panel-footer">
-          <Button type="submit" title="Enregistrer les modifications" unelevated>Enregistrer</Button>
-        </div>
-      </form>
+<aside bind:this={drawer} class="mdc-drawer mdc-drawer--modal">
+  <div class="mdc-drawer__header">
+    <div>
+      <h1 class="mdc-drawer__title">Vos informations</h1>
+      <h2 class="mdc-drawer__subtitle">{author.name}</h2>
     </div>
+    <IconButton icon="close" title="Fermer et annuler les modifications" on:click={onCloseClick} />
   </div>
-{/if}
+  <hr class="mdc-list-divider">
+  <form class="drawer-form" on:submit|preventDefault={onSubmit}>
+    <div class="mdc-drawer__content">
+      <h6 class="mdc-list-group__subheader">Auteur des factures</h6>
+      <div class="drawer-form-section aposto-form">
+        <TextField bind:value={_author.name} fieldId="author-name" required>Nom ou entreprise</TextField>
+        <TextField bind:value={_author.street} fieldId="author-street" required>Rue et n°</TextField>
+        <TextField bind:value={_author.NPA} fieldId="author-zip" required>NPA</TextField>
+        <TextField bind:value={_author.city} fieldId="author-city" required>Localité</TextField>
+        <TextField bind:value={_author.email} type="email" fieldId="author-email" required>Email</TextField>
+        <TextField bind:value={_author.phone} type="tel" fieldId="author-phone" required>Téléphone</TextField>
+        <TextField bind:value={_author.RCC} type="tel" fieldId="author-rcc" required>N°RCC</TextField>
+        <TextField bind:value={_author.GLN} type="tel" fieldId="author-gln" required>N°GLN</TextField>
+      </div>
+      <h6 class="mdc-list-group__subheader">Thérapeute</h6>
+      <div class="drawer-form-section aposto-form">
+        <TextField bind:value={_therapist.firstName} fieldId="therapist-first-name" required>Prénom</TextField>
+        <TextField bind:value={_therapist.lastName} fieldId="therapist-last-name" required>Nom</TextField>
+        <TextField bind:value={_therapist.street} fieldId="therapist-street" required>Rue et n°</TextField>
+        <TextField bind:value={_therapist.NPA} fieldId="therapist-zip" required>NPA</TextField>
+        <TextField bind:value={_therapist.city} fieldId="therapist-city" required>Localité</TextField>
+        <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone" required>Téléphone</TextField>
+        <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc" required>N°RCC</TextField>
+        <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln" required>N°GLN</TextField>
+      </div>
+    </div>
+    <hr class="mdc-list-divider">
+    <div class="mdc-drawer__header drawer-footer">
+      <Button type="submit" title="Enregistrer les modifications" unelevated>Enregistrer</Button>
+    </div>
+  </form>
+</aside>
+
+<div class="mdc-drawer-scrim" on:click={onCloseClick}></div>
 
 <style src="./UserPanel.scss"></style>

@@ -1,87 +1,39 @@
 @use "../../styles/variables";
 
-$panel-small-width: 300px;
-$panel-large-width: 600px;
-
-.user-panel-container {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+.mdc-drawer {
+  width: calc(100vw - 56px);
 }
 
-.user-panel-blur {
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  opacity: 0.5;
-  position: absolute;
-  z-index: 99;
-}
-
-.user-panel {
-  width: $panel-small-width;
-  height: 100%;
-  position: absolute;
-  z-index: 100;
-  right: 0;
-  background-color: #fff;
-  box-shadow: 0;
-  overflow-y: scroll;
-  box-shadow: -2px 0px 2px 0px rgba(0, 0, 0, 0.1);
-}
-
-.user-panel-header {
-  width: $panel-small-width;
+.mdc-drawer__header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  align-items: end;
 
-  .mdc-typography--headline6 {
-    margin: 12px;
-  }
-
-  :global(.mdc-icon-button) {
-    font-size: 12pt;
+  .mdc-icon-button {
+    color: rgba(0, 0, 0, 0.6);
   }
 }
 
-.user-panel-content {
-  padding: 16px 16px 0 16px;
-  $user-pannel-content-shrink: 57 + 69 + 16;
-  height: calc(100vh - #{$user-pannel-content-shrink}px);
-  overflow-y: scroll;
+.drawer-form {
+  $header-divider-height: 64 + 3 + 1 + 4;
+  height: calc(100vh - #{$header-divider-height}px);
+
+  .mdc-drawer__content {
+    $header-divider-footer-height: $header-divider-height + 3 + 1 + 4 + 64;
+    height: calc(100vh - #{$header-divider-footer-height}px);
+  }
 }
 
-.user-pannel-content-padding-bottom {
-  height: 16px;
-}
-
-.user-panel-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+.drawer-form-section {
   padding: 16px;
-  display: flex;
-  width: $panel-small-width - 2 * 16px;
-  justify-content: flex-end;
 }
 
-.mdc-typography--overline {
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &:not(:first-child) {
-    margin-top: 16px;
-  }
+.mdc-drawer__header.drawer-footer {
+  align-items: center;
 }
 
 @media (min-width: variables.$large-width-breakpoint) {
-  .user-panel,
-  .user-panel-header {
-    width: $panel-large-width;
-  }
-
-  .user-panel-footer {
-    width: $panel-large-width - 2 * 16px;
+  .mdc-drawer {
+    width: 320px;
   }
 }
