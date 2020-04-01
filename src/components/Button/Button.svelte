@@ -26,10 +26,10 @@
   on:click={onClick}
   {type}>
   <div class="mdc-button__ripple"></div>
-  <span class="mdc-button__label">
-    <slot></slot>
-  </span>
   {#if icon}
     <i class="material-icons mdc-button__icon" aria-hidden="true">{icon}</i>
   {/if}
+  <span class="mdc-button__label">
+    <slot></slot>
+  </span>
 </button>
