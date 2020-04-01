@@ -11,6 +11,8 @@
   }
 </script>
 
-<Button icon="account_circle" on:click={onOpenUserPanel}>{username}</Button>
+<Button icon="account_circle" title="Accéder à mon profil de facturation" on:click={onOpenUserPanel}>
+  {username}
+</Button>
 
 <style src="./Username.scss"></style>

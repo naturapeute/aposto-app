@@ -44,11 +44,11 @@
 
 {#if openned}
   <div class="user-panel-container">
-    <div class="user-panel-blur" transition:fadeTransition={{ duration: 500 }}></div>
+    <div class="user-panel-blur" on:click={onCloseClick} transition:fadeTransition={{ duration: 500 }}></div>
     <div class="user-panel" transition:slideTransition>
       <div class="user-panel-header">
         <h1 class="mdc-typography--headline6">{author.name}</h1>
-        <IconButton icon="close" on:click={onCloseClick} />
+        <IconButton icon="close" title="Fermer ou annuler les modifications" on:click={onCloseClick} />
       </div>
       <form on:submit|preventDefault={onSubmit}>
         <div class="user-panel-content">
@@ -117,7 +117,7 @@
           <div class="user-pannel-content-padding-bottom"></div>
         </div>
         <div class="user-panel-footer">
-          <Button type="submit" unelevated>Valider</Button>
+          <Button type="submit" title="Enregistrer les modifications" unelevated>Enregistrer</Button>
         </div>
       </form>
     </div>

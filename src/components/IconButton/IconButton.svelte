@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte'
 
   export let icon
+  export let title = '' // eslint-disable-line prefer-const
 
   const dispatch = createEventDispatcher()
 
@@ -10,4 +11,4 @@
   }
 </script>
 
-<button class="mdc-icon-button material-icons" on:click={onClick}>{icon}</button>
+<button class="mdc-icon-button material-icons" {title} on:click={onClick}>{icon}</button>
