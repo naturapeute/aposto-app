@@ -1,14 +1,16 @@
 <script>
   // eslint-disable-next-line no-unused-vars
-  import { authorFixture, therapistFixture, patientsFixture } from './fixtures.mjs'
+  import { authorFixture, therapistFixture, patientsFixture, servicesFixture } from './fixtures.mjs'
   import Username from './components/Username/Username.svelte'
   import UserPanel from './components/UserPanel/UserPanel.svelte'
   import TextField from './components/TextField/TextField.svelte'
   import PatientList from './components/PatientList/PatientList.svelte'
+  import TherapyDescription from './components/TherapyDescription/TherapyDescription.svelte'
 
   let author = { ...authorFixture } // eslint-disable-line no-unused-vars
   let therapist = { ...therapistFixture } // eslint-disable-line no-unused-vars
   const patients = [...patientsFixture]
+  const services = [...servicesFixture] // eslint-disable-line no-unused-vars
   let userPanelOpenned = false // eslint-disable-line no-unused-vars
   let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
   let filterPatient = '' // eslint-disable-line prefer-const, no-unused-vars
@@ -64,6 +66,7 @@
     </form>
     <PatientList bind:filterPatient={filterPatient} {patients} on:patientSelected={onPatientSelected} />
   {/if}
+  <TherapyDescription {services} />
 </main>
 
 <style src="App.scss" global></style>

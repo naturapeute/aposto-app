@@ -1,0 +1,48 @@
+.services-bar {
+  width: 100%;
+  height: 12px;
+  display: flex;
+
+  > * {
+    height: 100%;
+    cursor: pointer;
+
+    &:first-child {
+        border-radius: 6px 0 0 6px;
+    }
+
+    &:last-child {
+        border-radius: 0 6px 6px 0;
+    }
+  }
+}
+
+.services-caption {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+
+  > * {
+    margin: 0 16px;
+    display: flex;
+    align-items: center;
+
+    > *:first-child {
+      margin: 0 4px;
+    }
+
+    &:first-child {
+      margin-right: 0;
+    }
+
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.service-caption-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+}
