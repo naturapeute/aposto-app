@@ -223,3 +223,9 @@ export const patientsFixture = [
     lastName: 'Alf'
   }
 ]
+
+export const servicesFixture = [
+  { code: 1003, duration: 5 },
+  { code: 1200, duration: 40 },
+  { code: 1027, duration: 15 }
+]
