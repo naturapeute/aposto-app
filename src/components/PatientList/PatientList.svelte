@@ -2,31 +2,40 @@
   import { createEventDispatcher, beforeUpdate } from 'svelte'
 
   export let patients
-  export let filterFirstName
-  export let filterLastName
+  export let filterPatient
 
   let bestMatches // eslint-disable-line no-unused-vars
   const dispatch = createEventDispatcher()
 
   beforeUpdate(() => {
-    bestMatches = patients.filter(patient => {
-      if (!filterFirstName && !filterLastName) return true
+    bestMatches = patients.reduce((scores, patient) => {
+      const patientScore = filterPatient.split(' ').reduce(
+        (score, word) => {
+          if (!word) return score + 0
 
-      if (!filterFirstName) return patient.lastName.includes(filterLastName)
+          return score + +patient.firstName.toLowerCase().includes(word.toLowerCase()) +
+            +patient.lastName.toLowerCase().includes(word.toLowerCase())
+        }, 0)
 
-      if (!filterLastName) return patient.firstName.includes(filterFirstName)
+      if (patientScore)
+        return [
+          ...scores,
+          {
+            ...patient,
+            score: patientScore
+          }
+        ]
 
-      return patient.firstName.includes(filterFirstName) &&
-        patient.lastName.includes(filterLastName)
-    }).slice(0, 6)
+      return scores
+    }, [])
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6)
   })
 
   const onChipClick = (patientId) => {
     dispatch('patientSelected', { patientId })
   }
 </script>
-
-<h2 class="mdc-typography--headline6">Mes patients</h2>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
   {#each bestMatches as patient}
