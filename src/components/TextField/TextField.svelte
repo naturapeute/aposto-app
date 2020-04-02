@@ -27,7 +27,8 @@
 </script>
 
 <label bind:this={textField} class="mdc-text-field mdc-text-field--outlined">
-  <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId} on:input={onInput} {required}>
+  <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId} on:input={onInput}
+    {required}>
   <div class="mdc-notched-outline">
     <div class="mdc-notched-outline__leading"></div>
     <div class="mdc-notched-outline__notch">
