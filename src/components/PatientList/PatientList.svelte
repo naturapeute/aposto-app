@@ -38,7 +38,7 @@
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
-  {#each bestMatches as patient}
+  {#each bestMatches as patient (patient.id)}
     <li class="mdc-chip" role="row" on:click={() => onChipClick(patient.id)}>
       <div class="mdc-chip__ripple"></div>
       <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">face</i>
@@ -51,4 +51,4 @@
   {/each}
 </ul>
 
-<style src="./PatientList.scss"></style>
+<style src="PatientList.scss"></style>

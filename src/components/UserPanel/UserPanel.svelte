@@ -85,4 +85,4 @@
 
 <div class="mdc-drawer-scrim" on:click={onCloseClick}></div>
 
-<style src="./UserPanel.scss"></style>
+<style src="UserPanel.scss"></style>

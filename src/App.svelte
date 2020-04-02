@@ -2,8 +2,8 @@
   // eslint-disable-next-line no-unused-vars
   import { authorFixture, therapistFixture, patientsFixture } from './fixtures.mjs'
   import Username from './components/Username/Username.svelte'
-  import TextField from './components/TextField/TextField.svelte'
   import UserPanel from './components/UserPanel/UserPanel.svelte'
+  import TextField from './components/TextField/TextField.svelte'
   import PatientList from './components/PatientList/PatientList.svelte'
 
   let author = { ...authorFixture } // eslint-disable-line no-unused-vars
@@ -12,6 +12,7 @@
   let userPanelOpenned = false // eslint-disable-line no-unused-vars
   let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
   let filterPatient = '' // eslint-disable-line prefer-const, no-unused-vars
+  let searchMode = false // eslint-disable-line no-unused-vars
 
   const onToggleUserPanel = () => {
     userPanelOpenned = !userPanelOpenned
@@ -23,11 +24,21 @@
   }
 
   const onChangePatient = () => {
-    selectedPatient = null
+    searchMode = true
+  }
+
+  const onCloseSearch = () => {
+    searchMode = false
+    filterPatient = ''
+  }
+
+  const onSearchMount = (e) => {
+    e.detail.focus()
   }
 
   const onPatientSelected = (e) => {
     selectedPatient = patients.find(patient => patient.id === e.detail.patientId)
+    onCloseSearch()
   }
 </script>
 
@@ -38,15 +49,16 @@
   <Username username={author.name} on:openUserPanel={onToggleUserPanel} />
 </header>
 <main>
-  {#if selectedPatient}
+  {#if !searchMode}
     <p>
       Vous éditez votre facture pour <span class="mdc-typography--button" title="Choisir un autre patient"
         on:click={onChangePatient}>
         {selectedPatient.firstName} {selectedPatient.lastName}</span>.
     </p>
   {:else}
-    <form class="aposto-form" on:submit|preventDefault={() => { return }}>
-      <TextField bind:value={filterPatient} fieldId="patient-search">
+    <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>
+      <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
+        on:trailingIconClick={onCloseSearch} on:mount={onSearchMount}>
         Patient
       </TextField>
     </form>
@@ -54,4 +66,4 @@
   {/if}
 </main>
 
-<style src="./App.scss" global></style>
+<style src="App.scss" global></style>

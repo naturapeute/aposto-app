@@ -15,4 +15,4 @@
   {username}
 </Button>
 
-<style src="./Username.scss"></style>
+<style src="Username.scss"></style>
