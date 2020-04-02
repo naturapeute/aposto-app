@@ -13,7 +13,7 @@
 <h1 class="mdc-typography--headline4">Informations du patient</h1>
 
 <form class="aposto-form">
-  <TextField bind:value={typedPatient.firstName} fieldId="patient-first-name">
+  <TextField bind:value={typedPatient.firstName} fieldId="patient-first-name" autofocus>
     Prénom du patient
   </TextField>
   <TextField bind:value={typedPatient.lastName} fieldId="patient-last-name">

@@ -6,6 +6,7 @@
   export let value = '' // eslint-disable-line prefer-const
   export let type = 'text' // eslint-disable-line prefer-const
   export let required = false // eslint-disable-line prefer-const
+  export let autofocus = false // eslint-disable-line prefer-const
 
   let textField
   let thisMDCTextField
@@ -28,7 +29,7 @@
 
 <label bind:this={textField} class="mdc-text-field mdc-text-field--outlined">
   <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId} on:input={onInput}
-    {required}>
+    {required} {autofocus}>
   <div class="mdc-notched-outline">
     <div class="mdc-notched-outline__leading"></div>
     <div class="mdc-notched-outline__notch">
