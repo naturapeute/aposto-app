@@ -14,12 +14,20 @@
   }
 }
 
+.mdc-drawer__header + .mdc-list-divider {
+  margin-bottom: 0;
+}
+
+.mdc-drawer__content + .mdc-list-divider {
+    margin-top: 0;
+}
+
 .drawer-form {
-  $header-divider-height: 64 + 3 + 1 + 4;
+  $header-divider-height: 64 + 3 + 1;
   height: calc(100vh - #{$header-divider-height}px);
 
   .mdc-drawer__content {
-    $header-divider-footer-height: $header-divider-height + 3 + 1 + 4 + 64;
+    $header-divider-footer-height: $header-divider-height + 1 + 4 + 64;
     height: calc(100vh - #{$header-divider-footer-height}px);
   }
 }

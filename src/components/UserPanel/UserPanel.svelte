@@ -18,7 +18,7 @@
   onMount(() => {
     thisMDCDrawer = MDCDrawer.attachTo(drawer)
     drawer.addEventListener('MDCDrawer:opened', () => {
-      document.querySelector('input').focus()
+      document.querySelector('.mdc-icon-button').blur()
     })
   })
 
@@ -57,7 +57,7 @@
       <div class="drawer-form-section aposto-form">
         <TextField bind:value={_author.name} fieldId="author-name" required>Nom ou entreprise</TextField>
         <TextField bind:value={_author.street} fieldId="author-street" required>Rue et n°</TextField>
-        <TextField bind:value={_author.NPA} fieldId="author-zip" required>NPA</TextField>
+        <TextField bind:value={_author.ZIP} fieldId="author-zip" required>NPA</TextField>
         <TextField bind:value={_author.city} fieldId="author-city" required>Localité</TextField>
         <TextField bind:value={_author.email} type="email" fieldId="author-email" required>Email</TextField>
         <TextField bind:value={_author.phone} type="tel" fieldId="author-phone" required>Téléphone</TextField>
@@ -69,7 +69,7 @@
         <TextField bind:value={_therapist.firstName} fieldId="therapist-first-name" required>Prénom</TextField>
         <TextField bind:value={_therapist.lastName} fieldId="therapist-last-name" required>Nom</TextField>
         <TextField bind:value={_therapist.street} fieldId="therapist-street" required>Rue et n°</TextField>
-        <TextField bind:value={_therapist.NPA} fieldId="therapist-zip" required>NPA</TextField>
+        <TextField bind:value={_therapist.ZIP} fieldId="therapist-zip" required>NPA</TextField>
         <TextField bind:value={_therapist.city} fieldId="therapist-city" required>Localité</TextField>
         <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone" required>Téléphone</TextField>
         <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc" required>N°RCC</TextField>
