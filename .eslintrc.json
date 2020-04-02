@@ -23,7 +23,18 @@
         "argsIgnorePattern": "_"
       }
     ],
-    "space-before-function-paren": ["warn", "never"]
+    "space-before-function-paren": [
+      "warn",
+      "never"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "tabWidth": 2
+      }
+    ],
+    "curly": "off"
   },
   "plugins": [
     "html"
