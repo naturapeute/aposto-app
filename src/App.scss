@@ -12,6 +12,20 @@ main {
   align-items: center;
 }
 
+.mdc-typography--button {
+  color: rgb(68, 68, 68);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mdc-typography--button:hover {
+  color: variables.$primary;
+}
+
+.aposto-form {
+  width: 100%;
+}
+
 @media (min-width: variables.$large-width-breakpoint) {
   main {
     max-width: 500px;
