@@ -77,7 +77,7 @@
       </div>
     </div>
     <hr class="mdc-list-divider">
-    <div class="mdc-drawer__header drawer-footer">
+    <div class="drawer-footer">
       <Button type="submit" title="Enregistrer les modifications" unelevated>Enregistrer</Button>
     </div>
   </form>

@@ -55,7 +55,7 @@
         </tr>
       {/each}
     </tbody>
-    <tfoot class="mdc-data-table__footer-row">
+    <tfoot class="data-table__footer-row">
       <tr>
         <td class="mdc-data-table__header-cell" role="rowheader">Durée de la séance</td>
         <td class="mdc-data-table__cell mdc-data-table__cell--numeric total-duration">{totalDuration}</td>

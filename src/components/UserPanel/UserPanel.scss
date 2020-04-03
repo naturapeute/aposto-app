@@ -36,8 +36,13 @@
   padding: 16px;
 }
 
-.mdc-drawer__header.drawer-footer {
+.drawer-footer {
+  display: flex;
   align-items: center;
+  // Material .mdc-drawer__header class
+  box-sizing: border-box;
+  min-height: 64px;
+  padding: 0 16px 4px;
 }
 
 @media (min-width: variables.$large-width-breakpoint) {
