@@ -229,3 +229,5 @@ export const servicesFixture = [
   { code: 1200, duration: 40 },
   { code: 1027, duration: 15 }
 ]
+
+export const servicePriceFixture = 100

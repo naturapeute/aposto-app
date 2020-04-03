@@ -20,6 +20,10 @@ main {
   font-weight: 700;
   cursor: pointer;
   line-height: inherit;
+
+  &.total-amount {
+    cursor: default;
+  }
 }
 
 .mdc-typography--button:hover {
@@ -28,6 +32,15 @@ main {
 
 .patient-search-form {
   width: 100%;
+}
+
+.service-price-p {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.total-amount-p {
+  margin: 0;
 }
 
 @media (min-width: variables.$large-width-breakpoint) {

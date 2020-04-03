@@ -1,6 +1,12 @@
 <script>
-  // eslint-disable-next-line no-unused-vars
-  import { authorFixture, therapistFixture, patientsFixture, servicesFixture } from './fixtures.mjs'
+  import { beforeUpdate } from 'svelte'
+  import {
+    authorFixture,
+    therapistFixture,
+    patientsFixture,
+    servicesFixture,
+    servicePriceFixture
+  } from './fixtures.mjs'
   import Username from './components/Username/Username.svelte'
   import UserPanel from './components/UserPanel/UserPanel.svelte'
   import TextField from './components/TextField/TextField.svelte'
@@ -11,10 +17,19 @@
   let therapist = { ...therapistFixture } // eslint-disable-line no-unused-vars
   const patients = [...patientsFixture]
   const services = [...servicesFixture] // eslint-disable-line no-unused-vars
+  const servicePrice = servicePriceFixture
   let userPanelOpenned = false // eslint-disable-line no-unused-vars
   let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
   let filterPatient = '' // eslint-disable-line prefer-const, no-unused-vars
   let searchMode = false // eslint-disable-line no-unused-vars
+  let totalAmount
+
+  beforeUpdate(() => {
+    totalAmount = services.reduce(
+      (total, service) => total + (service.duration * servicePrice / 60),
+      0
+    )
+  })
 
   const onToggleUserPanel = () => {
     userPanelOpenned = !userPanelOpenned
@@ -66,6 +81,12 @@
     <PatientList bind:filterPatient={filterPatient} {patients} on:patientSelected={onPatientSelected} />
   {/if}
   <TherapyDescription {services} />
+  <p class="service-price-p">
+    Vous facturez <span class="mdc-typography--button">{servicePrice}CHF</span> de l'heure.
+  </p>
+  <p class="total-amount-p">
+    Le montant de la facture est de <span class="mdc-typography--button total-amount">{totalAmount}CHF</span>.
+  </p>
 </main>
 
 <style src="App.scss" global></style>
