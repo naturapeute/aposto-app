@@ -64,4 +64,4 @@
   </table>
 </div>
 
-<style src="TherapyDescription.scss"></style>
+<style src="FinalizeTherapyDescription.scss"></style>

@@ -11,18 +11,20 @@
   import UserPanel from './components/UserPanel/UserPanel.svelte'
   import TextField from './components/TextField/TextField.svelte'
   import PatientList from './components/PatientList/PatientList.svelte'
-  import TherapyDescription from './components/TherapyDescription/TherapyDescription.svelte'
+  import FinalizeTherapyDescription
+    from './components/FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
+  import FinalizeServicePrice from './components/FinalizeServicePrice/FinalizeServicePrice.svelte'
 
   let author = { ...authorFixture } // eslint-disable-line no-unused-vars
   let therapist = { ...therapistFixture } // eslint-disable-line no-unused-vars
   const patients = [...patientsFixture]
   const services = [...servicesFixture] // eslint-disable-line no-unused-vars
-  const servicePrice = servicePriceFixture
+  let servicePrice = servicePriceFixture // eslint-disable-line prefer-const
   let userPanelOpenned = false // eslint-disable-line no-unused-vars
   let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
   let filterPatient = '' // eslint-disable-line prefer-const, no-unused-vars
-  let searchMode = false // eslint-disable-line no-unused-vars
-  let totalAmount
+  let patientSearchMode = false // eslint-disable-line no-unused-vars
+  let totalAmount // eslint-disable-line no-unused-vars
 
   beforeUpdate(() => {
     totalAmount = services.reduce(
@@ -41,19 +43,19 @@
   }
 
   const onChangePatient = () => {
-    searchMode = true
+    patientSearchMode = true
   }
 
   const onCloseSearch = () => {
-    searchMode = false
+    patientSearchMode = false
     filterPatient = ''
   }
 
-  const onSearchMount = (e) => {
+  const onTextFieldMount = e => {
     e.detail.focus()
   }
 
-  const onPatientSelected = (e) => {
+  const onPatientSelected = e => {
     selectedPatient = patients.find(patient => patient.id === e.detail.patientId)
     onCloseSearch()
   }
@@ -71,19 +73,17 @@
       on:click={onChangePatient}>
       {selectedPatient.firstName} {selectedPatient.lastName}</span>.
   </p>
-  {#if searchMode}
+  {#if patientSearchMode}
     <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>
       <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
-        on:trailingIconClick={onCloseSearch} on:mount={onSearchMount}>
+        on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount}>
         Patient
       </TextField>
     </form>
     <PatientList bind:filterPatient={filterPatient} {patients} on:patientSelected={onPatientSelected} />
   {/if}
-  <TherapyDescription {services} />
-  <p class="service-price-p">
-    Vous facturez <span class="mdc-typography--button">{servicePrice}CHF</span> de l'heure.
-  </p>
+  <FinalizeTherapyDescription {services} />
+  <FinalizeServicePrice bind:servicePrice />
   <p class="total-amount-p">
     Le montant de la facture est de <span class="mdc-typography--button total-amount">{totalAmount}CHF</span>.
   </p>
