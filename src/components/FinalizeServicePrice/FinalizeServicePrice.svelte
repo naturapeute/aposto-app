@@ -18,7 +18,7 @@
 
   const onCloseServicePriceEdit = () => {
     servicePriceEditMode = false
-    servicePriceEdit = 0
+    servicePriceEdit = ''
   }
 
   const onTextFieldMount = e => {
