@@ -10,32 +10,12 @@ main {
   flex-direction: column;
 }
 
-.selected-patient-p {
-  margin-top: 0;
-  margin-bottom: 4px;
+.typography--button-inline.total-amount {
+  cursor: default;
 }
 
-.mdc-typography--button {
-  color: rgb(68, 68, 68);
-  font-weight: 700;
-  cursor: pointer;
-  line-height: inherit;
-
-  &.total-amount {
-    cursor: default;
-  }
-}
-
-.mdc-typography--button:hover {
-  color: variables.$primary;
-
-  &.total-amount {
-    color: inherit;
-  }
-}
-
-.patient-search-form {
-  width: 100%;
+.typography--button-inline:hover.total-amount {
+  color: inherit;
 }
 
 .total-amount-p {

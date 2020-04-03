@@ -9,8 +9,7 @@
   } from './fixtures.mjs'
   import Username from './components/Username/Username.svelte'
   import UserPanel from './components/UserPanel/UserPanel.svelte'
-  import TextField from './components/TextField/TextField.svelte'
-  import PatientList from './components/PatientList/PatientList.svelte'
+  import FinalizePatient from './components/FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from './components/FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
   import FinalizeServicePrice from './components/FinalizeServicePrice/FinalizeServicePrice.svelte'
@@ -22,8 +21,6 @@
   let servicePrice = servicePriceFixture // eslint-disable-line prefer-const
   let userPanelOpenned = false // eslint-disable-line no-unused-vars
   let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
-  let filterPatient = '' // eslint-disable-line prefer-const, no-unused-vars
-  let patientSearchMode = false // eslint-disable-line no-unused-vars
   let totalAmount // eslint-disable-line no-unused-vars
 
   beforeUpdate(() => {
@@ -42,22 +39,8 @@
     therapist = { ...e.detail.therapist }
   }
 
-  const onChangePatient = () => {
-    patientSearchMode = true
-  }
-
-  const onCloseSearch = () => {
-    patientSearchMode = false
-    filterPatient = ''
-  }
-
-  const onTextFieldMount = e => {
-    e.detail.focus()
-  }
-
   const onPatientSelected = e => {
-    selectedPatient = patients.find(patient => patient.id === e.detail.patientId)
-    onCloseSearch()
+    selectedPatient = patients.find(patient => patient.id === e.detail)
   }
 </script>
 
@@ -68,24 +51,11 @@
   <Username username={author.name} on:openUserPanel={onToggleUserPanel} />
 </header>
 <main>
-  <p class="selected-patient-p`">
-    Vous éditez votre facture pour <span class="mdc-typography--button" title="Choisir un autre patient"
-      on:click={onChangePatient}>
-      {selectedPatient.firstName} {selectedPatient.lastName}</span>.
-  </p>
-  {#if patientSearchMode}
-    <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>
-      <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
-        on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount}>
-        Patient
-      </TextField>
-    </form>
-    <PatientList bind:filterPatient={filterPatient} {patients} on:patientSelected={onPatientSelected} />
-  {/if}
+  <FinalizePatient bind:selectedPatient {patients} on:patientSelected={onPatientSelected} />
   <FinalizeTherapyDescription {services} />
   <FinalizeServicePrice bind:servicePrice />
   <p class="total-amount-p">
-    Le montant de la facture est de <span class="mdc-typography--button total-amount">{totalAmount}CHF</span>.
+    Le montant de la facture est de <span class="typography--button-inline total-amount">{totalAmount}CHF</span>.
   </p>
 </main>
 

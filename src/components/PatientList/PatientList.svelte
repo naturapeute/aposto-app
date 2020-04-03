@@ -33,7 +33,7 @@
   })
 
   const onChipClick = patientId => {
-    dispatch('patientSelected', { patientId })
+    dispatch('patientSelected', patientId)
   }
 </script>
 
