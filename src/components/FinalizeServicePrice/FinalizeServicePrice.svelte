@@ -27,8 +27,10 @@
 </script>
 
 <p class="service-price-p">
-  Vous facturez <span class="typography--button-inline" on:click={onEditServicePrice}>
-    {servicePrice}CHF</span> de l'heure.
+  Vous facturez <span class="typography--button-inline" title="Modifier le tarif horaire"
+    on:click={onEditServicePrice}>
+      {servicePrice}CHF
+    </span> de l'heure.
 </p>
 {#if servicePriceEditMode}
   <form class="aposto-form service-price-edit-form" on:submit|preventDefault={onSubmit}>
