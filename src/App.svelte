@@ -7,8 +7,7 @@
     servicesFixture,
     servicePriceFixture
   } from './fixtures.mjs'
-  import Username from './components/Username/Username.svelte'
-  import UserPanel from './components/UserPanel/UserPanel.svelte'
+  import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizePatient from './components/FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from './components/FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
@@ -19,7 +18,6 @@
   const patients = [...patientsFixture]
   const services = [...servicesFixture] // eslint-disable-line no-unused-vars
   let servicePrice = servicePriceFixture // eslint-disable-line prefer-const
-  let userPanelOpenned = false // eslint-disable-line no-unused-vars
   let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
   let totalAmount // eslint-disable-line no-unused-vars
 
@@ -29,10 +27,6 @@
       0
     )
   })
-
-  const onToggleUserPanel = () => {
-    userPanelOpenned = !userPanelOpenned
-  }
 
   const onUpdateUser = e => {
     author = { ...e.detail.author }
@@ -44,12 +38,7 @@
   }
 </script>
 
-<UserPanel openned={userPanelOpenned} {author} {therapist} on:closeUserPanel={onToggleUserPanel}
-  on:updateUser={onUpdateUser} />
-
-<header>
-  <Username username={author.name} on:openUserPanel={onToggleUserPanel} />
-</header>
+<HeaderPanel {author} {therapist} on:updateUser={onUpdateUser} />
 <main>
   <FinalizePatient bind:selectedPatient {patients} on:patientSelected={onPatientSelected} />
   <FinalizeTherapyDescription {services} />
