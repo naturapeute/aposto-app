@@ -51,13 +51,12 @@
   <Username username={author.name} on:openUserPanel={onToggleUserPanel} />
 </header>
 <main>
-  {#if !searchMode}
-    <p>
-      Vous éditez votre facture pour <span class="mdc-typography--button" title="Choisir un autre patient"
-        on:click={onChangePatient}>
-        {selectedPatient.firstName} {selectedPatient.lastName}</span>.
-    </p>
-  {:else}
+  <p style="margin-bottom: 4px;">
+    Vous éditez votre facture pour <span class="mdc-typography--button" title="Choisir un autre patient"
+      on:click={onChangePatient}>
+      {selectedPatient.firstName} {selectedPatient.lastName}</span>.
+  </p>
+  {#if searchMode}
     <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>
       <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
         on:trailingIconClick={onCloseSearch} on:mount={onSearchMount}>

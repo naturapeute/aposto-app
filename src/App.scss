@@ -2,14 +2,12 @@
 @use "styles/main";
 
 main {
-  text-align: center;
   padding: 32px;
   margin: 0 auto;
   $header-padding-height: 36 + (32 * 2);
   min-height: calc(100vh - #{$header-padding-height}px);
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .mdc-typography--button {
