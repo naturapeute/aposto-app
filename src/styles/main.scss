@@ -18,3 +18,26 @@
 p {
   @extend .mdc-typography--body1
 }
+
+.typography--button-inline {
+  font-weight: 700;
+  cursor: pointer;
+  line-height: inherit;
+  // Material .mdc-typography--button class
+  font-size: 0.875rem;
+  /* @alternate */
+  font-size: var(--mdc-typography-button-font-size, 0.875rem);
+  letter-spacing: 0.0892857143em;
+  /* @alternate */
+  letter-spacing: var(--mdc-typography-button-letter-spacing, 0.0892857143em);
+  /* @alternate */
+  -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
+          text-decoration: var(--mdc-typography-button-text-decoration, none);
+  text-transform: uppercase;
+  /* @alternate */
+  text-transform: var(--mdc-typography-button-text-transform, uppercase);
+}
+
+.typography--button-inline:hover {
+  color: variables.$primary;
+}

@@ -27,7 +27,7 @@
 </script>
 
 <p class="service-price-p">
-  Vous facturez <span class="mdc-typography--button" on:click={onEditServicePrice}>
+  Vous facturez <span class="typography--button-inline" on:click={onEditServicePrice}>
     {servicePrice}CHF</span> de l'heure.
 </p>
 {#if servicePriceEditMode}
