@@ -1,4 +1,4 @@
-export function getServiceLightLabel(code) {
+export const getServiceLightLabel = code => {
   for (const serviceCode of serviceCodes) {
     if (serviceCode.value === code)
       return serviceCode.label.replace(', par période de 5 minutes', '')

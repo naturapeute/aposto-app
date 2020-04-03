@@ -32,7 +32,7 @@
       .slice(0, 6)
   })
 
-  const onChipClick = (patientId) => {
+  const onChipClick = patientId => {
     dispatch('patientSelected', { patientId })
   }
 </script>

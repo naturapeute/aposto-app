@@ -48,7 +48,7 @@
       <h1 class="mdc-drawer__title">Vos informations</h1>
       <h2 class="mdc-drawer__subtitle">{author.name}</h2>
     </div>
-    <IconButton icon="close" title="Fermer et annuler les modifications" on:click={onCloseClick} />
+    <IconButton title="Fermer et annuler les modifications" on:click={onCloseClick}>close</IconButton>
   </div>
   <hr class="mdc-list-divider">
   <form class="drawer-form" on:submit|preventDefault={onSubmit}>
@@ -78,7 +78,7 @@
     </div>
     <hr class="mdc-list-divider">
     <div class="drawer-footer">
-      <Button type="submit" title="Enregistrer les modifications" unelevated>Enregistrer</Button>
+      <Button type="submit" title="Enregistrer les modifications" outlined>Enregistrer</Button>
     </div>
   </form>
 </aside>
