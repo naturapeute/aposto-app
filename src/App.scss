@@ -2,7 +2,7 @@
 @use "styles/main";
 
 main {
-  padding: 32px;
+  padding: 32px 16px;
   margin: 0 auto;
   $header-padding-height: 36 + (32 * 2);
   min-height: calc(100vh - #{$header-padding-height}px);
@@ -10,10 +10,16 @@ main {
   flex-direction: column;
 }
 
+.selected-patient-p {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
 .mdc-typography--button {
   color: rgb(68, 68, 68);
   font-weight: 700;
   cursor: pointer;
+  line-height: inherit;
 }
 
 .mdc-typography--button:hover {

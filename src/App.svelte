@@ -51,7 +51,7 @@
   <Username username={author.name} on:openUserPanel={onToggleUserPanel} />
 </header>
 <main>
-  <p style="margin-bottom: 4px;">
+  <p class="selected-patient-p`">
     Vous éditez votre facture pour <span class="mdc-typography--button" title="Choisir un autre patient"
       on:click={onChangePatient}>
       {selectedPatient.firstName} {selectedPatient.lastName}</span>.
