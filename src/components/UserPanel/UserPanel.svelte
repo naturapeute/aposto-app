@@ -1,20 +1,22 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+  import { author, therapist } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
 
   export let openned = false // eslint-disable-line prefer-const
-  export let author
-  export let therapist
 
-  let _author = { ...author }
-  let _therapist = { ...therapist }
+  /* eslint-disable no-undef */
+  let _author = { ...$author }
+  let _therapist = { ...$therapist }
+  /* eslint-enable no-undef */
   let drawer
   let thisMDCDrawer = {}
-  $: thisMDCDrawer.open = openned
   const dispatch = createEventDispatcher()
+
+  $: thisMDCDrawer.open = openned
 
   onMount(() => {
     thisMDCDrawer = MDCDrawer.attachTo(drawer)
@@ -28,14 +30,17 @@
   })
 
   const onCloseClick = () => {
-    dispatch('closeUserPanel', {})
-    _author = { ...author }
-    _therapist = { ...therapist }
+    dispatch('closeUserPanel')
+    /* eslint-disable no-undef */
+    _author = { ...$author }
+    _therapist = { ...$therapist }
+    /* eslint-enable no-undef */
   }
 
   const onSubmit = () => {
-    dispatch('updateUser', { author: _author, therapist: _therapist })
-    dispatch('closeUserPanel', {})
+    author.set({ ..._author })
+    therapist.set({ ..._therapist })
+    dispatch('closeUserPanel')
   }
 </script>
 
@@ -43,7 +48,7 @@
   <div class="mdc-drawer__header">
     <div>
       <h1 class="mdc-drawer__title">Vos informations</h1>
-      <h2 class="mdc-drawer__subtitle">{author.name}</h2>
+      <h2 class="mdc-drawer__subtitle">{$author.name}</h2>
     </div>
     <IconButton title="Fermer et annuler les modifications" on:click={onCloseClick}>close</IconButton>
   </div>

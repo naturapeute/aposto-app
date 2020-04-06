@@ -1,44 +1,32 @@
 <script>
-  import {
-    authorFixture,
-    therapistFixture,
-    patientsFixture,
-    servicesFixture,
-    servicePriceFixture
-  } from './js/fixtures'
+  // eslint-disable-next-line no-unused-vars
+  import { author, therapist, services, servicePrice } from './js/store'
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizePatient from './components/FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from './components/FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
   import FinalizeServicePrice from './components/FinalizeServicePrice/FinalizeServicePrice.svelte'
 
-  let author = { ...authorFixture } // eslint-disable-line no-unused-vars
-  let therapist = { ...therapistFixture } // eslint-disable-line no-unused-vars
-  const patients = [...patientsFixture]
-  const services = [...servicesFixture] // eslint-disable-line no-unused-vars
-  let servicePrice = servicePriceFixture // eslint-disable-line prefer-const
-  let selectedPatient = patients[0] // eslint-disable-line no-unused-vars
   let totalAmount // eslint-disable-line no-unused-vars
-  $: totalAmount = services.reduce(
-    (total, service) => total + (service.duration * servicePrice / 60),
+
+  /* eslint-disable no-undef */
+  $: totalAmount = $services.reduce(
+    (total, service) => total + (service.duration * $servicePrice / 60),
     0
   )
+  /* eslint-enable no-undef */
 
   const onUpdateUser = e => {
-    author = { ...e.detail.author }
-    therapist = { ...e.detail.therapist }
-  }
-
-  const onPatientSelected = e => {
-    selectedPatient = patients.find(patient => patient.id === e.detail)
+    author.set({ ...e.detail.author })
+    therapist.set({ ...e.detail.therapist })
   }
 </script>
 
-<HeaderPanel {author} {therapist} on:updateUser={onUpdateUser} />
+<HeaderPanel on:updateUser={onUpdateUser} />
 <main>
-  <FinalizePatient bind:selectedPatient {patients} on:patientSelected={onPatientSelected} />
-  <FinalizeTherapyDescription {services} />
-  <FinalizeServicePrice bind:servicePrice />
+  <FinalizePatient />
+  <FinalizeTherapyDescription />
+  <FinalizeServicePrice />
   <p class="total-amount-p">
     Le montant de la facture est de <span class="typography--button-inline total-amount">{totalAmount}CHF</span>.
   </p>

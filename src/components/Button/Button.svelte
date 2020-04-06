@@ -1,10 +1,12 @@
 <script>
-  export let raised = false // eslint-disable-line prefer-const
-  export let unelevated = false // eslint-disable-line prefer-const
-  export let outlined = false // eslint-disable-line prefer-const
-  export let icon = null // eslint-disable-line prefer-const
-  export let type = 'button' // eslint-disable-line prefer-const
-  export let title = '' // eslint-disable-line prefer-const
+  /* eslint-disable prefer-const */
+  export let raised = false
+  export let unelevated = false
+  export let outlined = false
+  export let icon = null
+  export let type = 'button'
+  export let title = ''
+  /* eslint-enable prefer-const */
 </script>
 
 <button

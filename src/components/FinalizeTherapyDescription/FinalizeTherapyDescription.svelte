@@ -1,45 +1,20 @@
 <script>
-  import { afterUpdate } from 'svelte'
-  import { getServiceLightLabel } from '../../js/utils' // eslint-disable-line no-unused-vars
+  /* eslint-disable no-unused-vars */
+  import { services } from '../../js/store'
+  import { getServiceLightLabel } from '../../js/utils'
+  /* eslint-enable no-unused-vars */
 
-  export let services = [ // eslint-disable-line prefer-const
-    { code: 1200, duration: 5 },
-    { code: 1003, duration: 55 }
-  ]
+  let totalDuration // eslint-disable-line no-unused-vars
 
-  let totalDuration
-
-  afterUpdate(() => {
-    const colorPalette = [
-      '#1e6721',
-      '#428a32',
-      '#68b246',
-      '#8bcb68',
-      '#bbe1a7'
-    ]
-
-    totalDuration = services.reduce((total, service) => total + service.duration, 0)
-
-    services.forEach((service, i) => {
-      const servicePercentage = (service.duration * 100) / totalDuration
-      const serviceDiv = document.querySelector(`#service-bar-${i}`)
-      const randomIndex = Math.floor(Math.random() * colorPalette.length)
-
-      serviceDiv.style.width = `${servicePercentage}%`
-      serviceDiv.style.backgroundColor = colorPalette[randomIndex]
-      colorPalette.splice(randomIndex, 1)
-    })
-  })
+  /* eslint-disable no-undef */
+  $: serviceEditMode = $services.map(_ => false)
+  $: totalDuration = $services.reduce((total, service) => total + service.duration, 0)
+  /* eslint-enable no-undef */
 </script>
 
 <h2 class="mdc-typography--headline5">Votre séance</h2>
-<div class="services-bar">
-  {#each services as service, i}
-    <div id="service-bar-{i}"></div>
-  {/each}
-</div>
 <div class="mdc-data-table">
-  <table class="mdc-data-table__table" aria-label="Dessert calories">
+  <table class="mdc-data-table__table" aria-label="Votre séance">
     <thead>
       <tr class="mdc-data-table__header-row">
         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Thérapie</th>
@@ -48,7 +23,7 @@
       </tr>
     </thead>
     <tbody class="mdc-data-table__content">
-      {#each services as service, i}
+      {#each $services as service, i}
         <tr class="mdc-data-table__row">
           <td class="mdc-data-table__cell">{getServiceLightLabel(service.code)}</td>
           <td class="mdc-data-table__cell mdc-data-table__cell--numeric">{service.duration}</td>

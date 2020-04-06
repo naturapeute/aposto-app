@@ -1,9 +1,7 @@
 <script>
+  import { author, therapist } from '../../js/store' // eslint-disable-line no-unused-vars
   import UserPanel from '../UserPanel/UserPanel.svelte'
   import Button from '../Button/Button.svelte'
-
-  export let author
-  export let therapist
 
   let userPanelOpenned = false // eslint-disable-line no-unused-vars
 
@@ -12,11 +10,11 @@
   }
 </script>
 
-<UserPanel openned={userPanelOpenned} {author} {therapist} on:closeUserPanel={onToggleUserPanel} on:updateUser />
+<UserPanel openned={userPanelOpenned} on:closeUserPanel={onToggleUserPanel} />
 
 <header>
   <Button icon="account_circle" title="Accéder à mon profil de facturation" on:click={onToggleUserPanel}>
-    {author.name}
+    {$author.name}
   </Button>
 </header>
 

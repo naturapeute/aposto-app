@@ -1,21 +1,3 @@
-.services-bar {
-  width: 100%;
-  height: 12px;
-  display: flex;
-
-  > * {
-    height: 100%;
-
-    &:first-child {
-        border-radius: 6px 0 0 6px;
-    }
-
-    &:last-child {
-        border-radius: 0 6px 6px 0;
-    }
-  }
-}
-
 .mdc-data-table {
   margin-top: 12px;
 }

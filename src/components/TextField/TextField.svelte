@@ -3,10 +3,12 @@
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
 
   export let fieldId
-  export let value = '' // eslint-disable-line prefer-const
-  export let type = 'text' // eslint-disable-line prefer-const
-  export let required = false // eslint-disable-line prefer-const
-  export let trailingIcon = null // eslint-disable-line prefer-const
+  export let value = ''
+  /* eslint-disable prefer-const */
+  export let type = 'text'
+  export let required = false
+  export let trailingIcon = null
+  /* eslint-enable prefer-const */
 
   let textField
   let thisMDCTextField
@@ -29,7 +31,7 @@
   }
 
   const onTrailingIconClick = () => {
-    dispatch('trailingIconClick', {})
+    dispatch('trailingIconClick')
   }
 </script>
 

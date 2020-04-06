@@ -1,14 +1,12 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { selectedPatient } from '../../js/store' // eslint-disable-line no-unused-vars
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
 
-  export let selectedPatient
-  export let patients
-
-  let filterPatient = '' // eslint-disable-line prefer-const, no-unused-vars
-  let patientSearchMode = false // eslint-disable-line no-unused-vars
-  const dispatch = createEventDispatcher()
+  /* eslint-disable no-unused-vars */
+  let filterPatient = '' // eslint-disable-line prefer-const
+  let patientSearchMode = false
+  /* eslint-enable no-unused-vars */
 
   const onChangePatient = () => {
     patientSearchMode = true
@@ -22,17 +20,12 @@
   const onTextFieldMount = e => {
     e.detail.focus()
   }
-
-  const onPatientSelected = e => {
-    dispatch('patientSelected', e.detail)
-    onCloseSearch()
-  }
 </script>
 
 <p class="selected-patient-p">
   Vous éditez votre facture pour <span class="typography--button-inline" title="Choisir un autre patient"
     on:click={onChangePatient}>
-    {selectedPatient.firstName} {selectedPatient.lastName}</span>.
+    {$selectedPatient.firstName} {$selectedPatient.lastName}</span>.
 </p>
 {#if patientSearchMode}
   <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>
@@ -41,7 +34,7 @@
       Patient
     </TextField>
   </form>
-  <PatientList bind:filterPatient={filterPatient} {patients} on:patientSelected={onPatientSelected} />
+  <PatientList bind:filterPatient={filterPatient} on:patientSelected={onCloseSearch} />
 {/if}
 
 <style src="FinalizePatient.scss"></style>

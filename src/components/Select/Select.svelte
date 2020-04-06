@@ -2,8 +2,7 @@
   import { onMount } from 'svelte'
   import { MDCSelect } from '@material/select'
 
-  // eslint-disable-next-line prefer-const
-  export let options = [{ value: '', label: '' }]
+  export let options = [{ value: '', label: '' }] // eslint-disable-line prefer-const
   export let value = ''
 
   let select
