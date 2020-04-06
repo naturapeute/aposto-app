@@ -36,7 +36,7 @@
 </script>
 
 <label bind:this={textField}
-  class="mdc-text-field mdc-text-field--outlined {trailingIcon ? 'mdc-text-field--with-trailing-icon' : ''}">
+  class="mdc-text-field mdc-text-field--outlined" class:mdc-text-field--with-trailing-icon="{trailingIcon}">
   <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId} on:input={onInput}
     {required}>
   {#if trailingIcon}

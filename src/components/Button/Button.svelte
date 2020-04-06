@@ -10,12 +10,10 @@
 </script>
 
 <button
-  class="
-    mdc-button
-    {raised ? 'mdc-button--raised' : ''}
-    {unelevated ? 'mdc-button--unelevated' : ''}
-    {outlined ? 'mdc-button--outlined' : ''}
-  "
+  class="mdc-button"
+  class:mdc-button--raised="{raised}"
+  class:mdc-button--unelevated="{unelevated}"
+  class:mdc-button--outlined="{outlined}"
   {title}
   on:click
   {type}>
