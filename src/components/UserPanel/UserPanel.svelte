@@ -1,7 +1,7 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
-  import { author, therapist } from '../../js/store'
+  import { author, therapist, servicePrice } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -11,6 +11,7 @@
   /* eslint-disable no-undef */
   let _author = { ...$author }
   let _therapist = { ...$therapist }
+  let _servicePrice = $servicePrice
   /* eslint-enable no-undef */
   let drawer
   let thisMDCDrawer = {}
@@ -34,12 +35,14 @@
     /* eslint-disable no-undef */
     _author = { ...$author }
     _therapist = { ...$therapist }
+    _servicePrice = $servicePrice
     /* eslint-enable no-undef */
   }
 
   const onSubmit = () => {
     author.set({ ..._author })
     therapist.set({ ..._therapist })
+    servicePrice.set(_servicePrice)
     dispatch('closeUserPanel')
   }
 </script>
@@ -76,6 +79,10 @@
         <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone" required>Téléphone</TextField>
         <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc" required>N°RCC</TextField>
         <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln" required>N°GLN</TextField>
+      </div>
+      <h6 class="mdc-list-group__subheader">Tarif horaire</h6>
+      <div class="drawer-form-section aposto-form">
+        <TextField bind:value={_servicePrice} type="number" fieldId="service-price" required>Tarif horaire</TextField>
       </div>
     </div>
     <hr class="mdc-list-divider">
