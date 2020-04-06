@@ -6,7 +6,7 @@
     patientsFixture,
     servicesFixture,
     servicePriceFixture
-  } from './fixtures.mjs'
+  } from 'js/fixtures'
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizePatient from './components/FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
