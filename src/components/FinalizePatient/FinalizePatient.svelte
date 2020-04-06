@@ -10,7 +10,7 @@
   let patientSearchMode = false // eslint-disable-line no-unused-vars
   const dispatch = createEventDispatcher()
 
-const onChangePatient = () => {
+  const onChangePatient = () => {
     patientSearchMode = true
   }
 
