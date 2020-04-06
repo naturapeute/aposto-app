@@ -14,6 +14,9 @@
 @use "@material/list/mdc-list";
 @use "@material/chips/mdc-chips";
 @use "@material/data-table/mdc-data-table";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/menu/mdc-menu";
+@use "@material/select/mdc-select";
 
 p {
   @extend .mdc-typography--body1
