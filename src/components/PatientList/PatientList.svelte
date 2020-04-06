@@ -1,39 +1,39 @@
 <script>
-  import { createEventDispatcher, beforeUpdate } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
 
   export let patients
   export let filterPatient
 
   let bestMatches // eslint-disable-line no-unused-vars
+  $: bestMatches = getBestMatches(filterPatient)
   const dispatch = createEventDispatcher()
-
-  beforeUpdate(() => {
-    bestMatches = patients.reduce((scores, patient) => {
-      const patientScore = filterPatient.split(' ').reduce(
-        (score, word) => {
-          if (!word) return score + 0
-
-          return score + +patient.firstName.toLowerCase().includes(word.toLowerCase()) +
-            +patient.lastName.toLowerCase().includes(word.toLowerCase())
-        }, 0)
-
-      if (patientScore)
-        return [
-          ...scores,
-          {
-            ...patient,
-            score: patientScore
-          }
-        ]
-
-      return scores
-    }, [])
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 6)
-  })
 
   const onChipClick = patientId => {
     dispatch('patientSelected', patientId)
+  }
+
+  function getBestMatches(_filterPatient) {
+    return _filterPatient.split(' ').reduce((scores, word) => {
+      patients.forEach((patient, i) => {
+        scores[i].score += getPatientScore(patient, word)
+      })
+
+      return scores
+    }, initialPatientScores())
+      .filter(patient => patient.score)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6)
+  }
+
+  function initialPatientScores() {
+    return patients.map(patient => { return { ...patient, score: 0 } })
+  }
+
+  function getPatientScore(patient, word) {
+    if (!word) return 0
+
+    return +patient.firstName.toLowerCase().includes(word.toLowerCase()) +
+      +patient.lastName.toLowerCase().includes(word.toLowerCase())
   }
 </script>
 

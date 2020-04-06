@@ -20,6 +20,10 @@
   margin-top: 12px;
 }
 
+.mdc-data-table__row {
+  cursor: pointer;
+}
+
 .data-table__footer-row {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   // Material .mdc-data-table__header-row class

@@ -1,6 +1,6 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
-  import { createEventDispatcher, onMount, onDestroy, afterUpdate } from 'svelte'
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -12,7 +12,8 @@
   let _author = { ...author }
   let _therapist = { ...therapist }
   let drawer
-  let thisMDCDrawer
+  let thisMDCDrawer = {}
+  $: thisMDCDrawer.open = openned
   const dispatch = createEventDispatcher()
 
   onMount(() => {
@@ -20,10 +21,6 @@
     drawer.addEventListener('MDCDrawer:opened', () => {
       document.querySelector('.mdc-icon-button').blur()
     })
-  })
-
-  afterUpdate(() => {
-    thisMDCDrawer.open = openned
   })
 
   onDestroy(() => {
