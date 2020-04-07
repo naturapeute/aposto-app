@@ -19,7 +19,7 @@
   {type}>
   <div class="mdc-button__ripple"></div>
   {#if icon}
-    <i class="material-icons mdc-button__icon" aria-hidden="true">{icon}</i>
+    <i class="material-icons-round mdc-button__icon" aria-hidden="true">{icon}</i>
   {/if}
   <span class="mdc-button__label">
     <slot></slot>

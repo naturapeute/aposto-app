@@ -40,7 +40,7 @@
   <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId} on:input={onInput}
     {required}>
   {#if trailingIcon}
-    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button"
+    <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button"
       on:click={onTrailingIconClick}>
       {trailingIcon}
     </i>
