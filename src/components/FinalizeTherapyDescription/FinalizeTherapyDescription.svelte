@@ -12,7 +12,7 @@
   /* eslint-enable no-undef */
 </script>
 
-<h2 class="mdc-typography--headline5">Votre séance</h2>
+<h2 class="mdc-typography--headline5 therapy-headline">Votre séance</h2>
 <div class="mdc-data-table">
   <table class="mdc-data-table__table" aria-label="Votre séance">
     <thead>

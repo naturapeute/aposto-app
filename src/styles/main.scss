@@ -17,6 +17,7 @@
 @use "@material/menu-surface/mdc-menu-surface";
 @use "@material/menu/mdc-menu";
 @use "@material/select/mdc-select";
+@use "@material/card/mdc-card";
 
 p {
   @extend .mdc-typography--body1
@@ -50,5 +51,13 @@ p {
 
   & > *:first-child {
     margin-right: 16px;
+  }
+}
+
+.card-subsection {
+  padding: 16px;
+
+  & > * {
+    width: 100%;
   }
 }

@@ -8,6 +8,7 @@ main {
   min-height: calc(100vh - #{$header-padding-height}px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .typography--button-inline.total-amount {
@@ -19,7 +20,7 @@ main {
 }
 
 .total-amount-p {
-  margin-top: 32px;
+  margin: 0;
 }
 
 @media (min-width: variables.$large-width-breakpoint) {

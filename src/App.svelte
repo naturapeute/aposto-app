@@ -23,12 +23,22 @@
 
 <HeaderPanel on:updateUser={onUpdateUser} />
 <main>
-  <FinalizePatient />
-  <FinalizeTherapyDescription />
-  <p class="total-amount-p finalize-p">
-    <i class="material-icons-round">monetization_on</i>
-    <span class="typography--button-inline total-amount">{totalAmount}CHF</span>
-  </p>
+  <div class="mdc-card">
+    <div class="card-subsection">
+      <FinalizePatient />
+    </div>
+    <div class="card-subsection">
+      <FinalizeTherapyDescription />
+    </div>
+    <div class="card-subsection">
+      <p class="total-amount-p finalize-p">
+        <i class="material-icons-round">monetization_on</i>
+        <span class="typography--button-inline total-amount">
+          {totalAmount}CHF
+        </span>
+      </p>
+    </div>
+  </div>
 </main>
 
 <style src="App.scss" global></style>
