@@ -1,21 +1,38 @@
-.therapy-headline {
-  margin-top: 0;
+.therapy-description{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  > * {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 }
 
-.mdc-data-table__row {
-  cursor: pointer;
+.service-duration {
+  position: absolute;
+  color: #fff;
+  font-size: 8pt;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.data-table__footer-row {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  // Material .mdc-data-table__header-row class
-  background-color: inherit;
+
+.service-timeline {
+  width: 4px;
+  margin: 0 26px 0 6px;
+  height: 100%;
 }
 
-.total-duration {
-  // Material .mdc-data-table__header-cell class
-  height: 56px;
-  font-weight: 500;
-  /* @alternate */
-  font-weight: var(--mdc-typography-subtitle2-font-weight, 500);
+.service-label {
+  background-color: initial;
+  height: 20px;
+  border-radius: 10px;
+  padding: 0 8px;
 }

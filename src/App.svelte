@@ -25,6 +25,11 @@
 <main>
   <div class="mdc-card">
     <div class="card-subsection">
+      <h2 class="mdc-typography--headline5 finalize-headline">
+        Finalisation de votre facture
+      </h2>
+    </div>
+    <div class="card-subsection">
       <FinalizePatient />
     </div>
     <div class="card-subsection">
@@ -34,7 +39,7 @@
       <p class="total-amount-p finalize-p">
         <i class="material-icons-round">monetization_on</i>
         <span class="typography--button-inline total-amount">
-          {totalAmount}CHF
+          {totalAmount.toFixed(2)}CHF
         </span>
       </p>
     </div>

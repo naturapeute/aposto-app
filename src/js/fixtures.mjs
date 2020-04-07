@@ -225,9 +225,9 @@ export const patientsFixture = [
 ]
 
 export const servicesFixture = [
-  { code: 1003, duration: 5 },
-  { code: 1200, duration: 40 },
-  { code: 1027, duration: 15 }
+  { code: 1003, duration: 5, color: '#f46d6d' },
+  { code: 1200, duration: 40, color: '#9fdfcd' },
+  { code: 1027, duration: 15, color: '#baabda' }
 ]
 
 export const servicePriceFixture = 100

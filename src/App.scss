@@ -2,12 +2,24 @@
 @use "styles/main";
 
 main {
-  padding: 64px 8px 0 8px;
+  padding: 96px 8px 32px 8px;
   margin: 0 auto;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 128px);
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.finalize-headline {
+  margin: 0;
+}
+
+.finalize-p {
+  display: flex;
+
+  & > *:first-child {
+    margin-right: 16px;
+  }
 }
 
 .typography--button-inline.total-amount {

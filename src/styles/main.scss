@@ -13,7 +13,6 @@
 @use "@material/drawer/mdc-drawer";
 @use "@material/list/mdc-list";
 @use "@material/chips/mdc-chips";
-@use "@material/data-table/mdc-data-table";
 @use "@material/menu-surface/mdc-menu-surface";
 @use "@material/menu/mdc-menu";
 @use "@material/select/mdc-select";
@@ -45,14 +44,6 @@ p {
 
 .typography--button-inline:hover {
   color: variables.$primary;
-}
-
-.finalize-p {
-  display: flex;
-
-  & > *:first-child {
-    margin-right: 16px;
-  }
 }
 
 .card-subsection {
