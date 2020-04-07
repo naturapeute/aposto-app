@@ -2,10 +2,9 @@
 @use "styles/main";
 
 main {
-  padding: 32px 16px;
+  padding: 64px 8px 0 8px;
   margin: 0 auto;
-  $header-padding-height: 36 + (32 * 2);
-  min-height: calc(100vh - #{$header-padding-height}px);
+  min-height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,5 +1,18 @@
-:global(.mdc-button__ripple) {
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+@use "../../styles/variables";
+
+:global(.mdc-button) :global(.mdc-button__ripple::before) {
+  background-color: #fff;
+}
+
+:global(.mdc-button) :global(.mdc-button__icon) {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+  color: #fff;
+}
+
+:global(.mdc-top-app-bar__title) {
+  color: variables.$on-primary;
+  text-transform: initial;
+  padding-left: 8px;
 }

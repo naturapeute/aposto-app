@@ -32,6 +32,7 @@
     "@material/select": "^5.1.0",
     "@material/textfield": "^5.1.0",
     "@material/theme": "^5.1.0",
+    "@material/top-app-bar": "^5.1.0",
     "@material/typography": "^5.1.0",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",

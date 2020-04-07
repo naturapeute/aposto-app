@@ -6,6 +6,7 @@
   export let icon = null
   export let type = 'button'
   export let title = ''
+  export let navigation = false
   /* eslint-enable prefer-const */
 </script>
 
@@ -19,9 +20,12 @@
   {type}>
   <div class="mdc-button__ripple"></div>
   {#if icon}
-    <i class="material-icons-round mdc-button__icon" aria-hidden="true">{icon}</i>
+    <i class="material-icons-round mdc-button__icon" class:mdc-top-app-bar__navigation-icon="{navigation}"
+      aria-hidden="true">
+      {icon}
+    </i>
   {/if}
-  <span class="mdc-button__label">
+  <span class="mdc-button__label" class:mdc-top-app-bar__title="{navigation}">
     <slot></slot>
   </span>
 </button>

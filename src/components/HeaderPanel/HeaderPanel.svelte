@@ -12,10 +12,14 @@
 
 <UserPanel openned={userPanelOpenned} on:closeUserPanel={onToggleUserPanel} />
 
-<header>
-  <Button icon="account_circle" title="Accéder à mon profil de facturation" on:click={onToggleUserPanel}>
-    {$author.name}
-  </Button>
+<header class="mdc-top-app-bar">
+  <div class="mdc-top-app-bar__row">
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+      <Button icon="account_circle" title="Accéder à mon profil de facturation" on:click={onToggleUserPanel} navigation>
+        {$author.name}
+      </Button>
+    </section>
+  </div>
 </header>
 
 <style src='HeaderPanel.scss'></style>

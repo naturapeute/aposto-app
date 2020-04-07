@@ -18,6 +18,7 @@
 @use "@material/menu/mdc-menu";
 @use "@material/select/mdc-select";
 @use "@material/card/mdc-card";
+@use "@material/top-app-bar/mdc-top-app-bar";
 
 p {
   @extend .mdc-typography--body1
