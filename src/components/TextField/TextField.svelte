@@ -35,13 +35,13 @@
   }
 </script>
 
-<label bind:this={textField}
-  class="mdc-text-field mdc-text-field--outlined" class:mdc-text-field--with-trailing-icon="{trailingIcon}">
-  <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId} on:input={onInput}
-    {required}>
+<label bind:this={textField} class="mdc-text-field mdc-text-field--outlined"
+  class:mdc-text-field--with-trailing-icon="{trailingIcon}">
+  <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId}
+    on:input={onInput} {required}>
   {#if trailingIcon}
-    <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button"
-      on:click={onTrailingIconClick}>
+    <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing"
+      tabindex="0" role="button" on:click={onTrailingIconClick}>
       {trailingIcon}
     </i>
   {/if}

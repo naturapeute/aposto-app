@@ -15,7 +15,8 @@
 <header class="mdc-top-app-bar">
   <div class="mdc-top-app-bar__row">
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <Button icon="account_circle" title="Accéder à mon profil de facturation" on:click={onToggleUserPanel} navigation>
+      <Button icon="account_circle" title="Accéder à mon profil de facturation"
+        on:click={onToggleUserPanel} navigation>
         {$author.name}
       </Button>
     </section>

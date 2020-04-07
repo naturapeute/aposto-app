@@ -30,8 +30,8 @@
   <div class="mdc-select__menu mdc-menu mdc-menu-surface select-width">
     <ul class="mdc-list">
       {#each options as option}
-        <li class="mdc-list-item" class:mdc-list-item--selected="{option.value === value}" data-value={option.value}
-          aria-selected="true">
+        <li class="mdc-list-item" class:mdc-list-item--selected="{option.value === value}"
+          data-value={option.value} aria-selected="true">
           {option.label}
         </li>
       {/each}

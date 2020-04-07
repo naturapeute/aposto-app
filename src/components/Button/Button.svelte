@@ -10,18 +10,13 @@
   /* eslint-enable prefer-const */
 </script>
 
-<button
-  class="mdc-button"
-  class:mdc-button--raised="{raised}"
-  class:mdc-button--unelevated="{unelevated}"
-  class:mdc-button--outlined="{outlined}"
-  {title}
-  on:click
-  {type}>
+<button class="mdc-button" class:mdc-button--raised="{raised}"
+  class:mdc-button--unelevated="{unelevated}" class:mdc-button--outlined="{outlined}" {title}
+  on:click {type}>
   <div class="mdc-button__ripple"></div>
   {#if icon}
-    <i class="material-icons-round mdc-button__icon" class:mdc-top-app-bar__navigation-icon="{navigation}"
-      aria-hidden="true">
+    <i class="material-icons-round mdc-button__icon"
+      class:mdc-top-app-bar__navigation-icon="{navigation}" aria-hidden="true">
       {icon}
     </i>
   {/if}
