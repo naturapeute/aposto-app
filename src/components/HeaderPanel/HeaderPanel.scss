@@ -1,6 +1,6 @@
 @use "../../styles/variables";
 
-:global(.mdc-button) :global(.mdc-button__ripple::before) {
+.mdc-top-app-bar__section :global(.mdc-button) :global(.mdc-button__ripple::before) {
   background-color: #fff;
 }
 

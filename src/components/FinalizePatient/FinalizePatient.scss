@@ -1,8 +1,26 @@
+@use "../../styles/variables";
+
 .selected-patient-p {
   margin: 0;
 }
 
+.patient-edit {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: variables.$primary;
+  }
+}
+
 .patient-search-form {
-  margin-top: 8px;
+  margin-top: 12px;
   width: 100%;
+}
+
+.edit-icon {
+  font-size: 16px;
+  height: 16px;
+  margin-left: 4px;
 }

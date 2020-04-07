@@ -24,9 +24,11 @@
 
 <p class="selected-patient-p finalize-p">
   <i class="material-icons-round">face</i>
-  <span class="typography--button-inline" title="Choisir un autre patient"
-    on:click={onChangePatient}>
-    {$selectedPatient.firstName} {$selectedPatient.lastName}
+  <span class="patient-edit" on:click={onChangePatient}>
+    <span class="typography--button-inline" title="Choisir un autre patient">
+      {$selectedPatient.firstName} {$selectedPatient.lastName}
+    </span>
+    <i class="material-icons-round edit-icon">edit</i>
   </span>
 </p>
 {#if patientSearchMode}
