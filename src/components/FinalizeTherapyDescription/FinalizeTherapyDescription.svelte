@@ -43,7 +43,10 @@
         <div class="mdc-chip__ripple"></div>
         <span role="gridcell">
           <span tabindex="0" class="mdc-chip__primary-action">
-            <span class="mdc-chip__text">{getServiceLightLabel(service.code)}</span>
+            <span class="mdc-chip__text">
+              {getServiceLightLabel(service.code)}
+              <i class="material-icons-round edit-icon">edit</i>
+            </span>
           </span>
         </span>
       </div>
