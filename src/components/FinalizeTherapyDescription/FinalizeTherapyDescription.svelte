@@ -18,7 +18,7 @@
 
   afterUpdate(() => {
     $services.forEach((service, i) => { // eslint-disable-line no-undef
-      let serviceHeight = (24 * 12) * (service.duration / totalDuration)
+      let serviceHeight = (16 * 12) * (service.duration / totalDuration)
 
       if (serviceHeight < 24) serviceHeight = 24
 
