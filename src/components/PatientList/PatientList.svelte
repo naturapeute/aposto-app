@@ -45,7 +45,7 @@
   {#each bestMatches as patient (patient.id)}
     <li class="mdc-chip" role="row" on:click={() => onChipClick(patient.id)}>
       <div class="mdc-chip__ripple"></div>
-      <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">face</i>
+      <i class="material-icons-round mdc-chip__icon mdc-chip__icon--leading">face</i>
       <span role="gridcell">
         <span role="button" tabindex="0" class="mdc-chip__primary-action">
           <span class="mdc-chip__text">{patient.firstName} {patient.lastName}</span>

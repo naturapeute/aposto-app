@@ -25,8 +25,9 @@
 <main>
   <FinalizePatient />
   <FinalizeTherapyDescription />
-  <p class="total-amount-p">
-    Le montant de la facture est de <span class="typography--button-inline total-amount">{totalAmount}CHF</span>.
+  <p class="total-amount-p finalize-p">
+    <i class="material-icons-round">monetization_on</i>
+    <span class="typography--button-inline total-amount">{totalAmount}CHF</span>
   </p>
 </main>
 

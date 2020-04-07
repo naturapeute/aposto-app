@@ -22,10 +22,12 @@
   }
 </script>
 
-<p class="selected-patient-p">
-  Vous éditez votre facture pour <span class="typography--button-inline" title="Choisir un autre patient"
+<p class="selected-patient-p finalize-p">
+  <i class="material-icons-round">face</i>
+  <span class="typography--button-inline" title="Choisir un autre patient"
     on:click={onChangePatient}>
-    {$selectedPatient.firstName} {$selectedPatient.lastName}</span>.
+    {$selectedPatient.firstName} {$selectedPatient.lastName}
+  </span>
 </p>
 {#if patientSearchMode}
   <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>

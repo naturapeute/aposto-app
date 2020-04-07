@@ -44,3 +44,11 @@ p {
 .typography--button-inline:hover {
   color: variables.$primary;
 }
+
+.finalize-p {
+  display: flex;
+
+  & > *:first-child {
+    margin-right: 16px;
+  }
+}
