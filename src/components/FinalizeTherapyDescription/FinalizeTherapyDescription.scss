@@ -1,42 +1,69 @@
+@use "../../styles/variables";
+
 .therapy-description{
   list-style-type: none;
   padding: 0;
   margin: 0;
 
   > * {
-    position: relative;
     display: flex;
     align-items: center;
   }
 }
 
-.service-duration {
-  position: absolute;
-  color: #fff;
-  font-size: 8pt;
-  width: 16px;
-  height: 16px;
-  border-radius: 8px;
-  bottom: 0;
+.service-timeline {
+  width: 36px;
+  margin-right: 20px;
+  height: 100%;
+  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
+  font-weight: 700;
 }
 
+.service:first-of-type .service-timeline {
+  border-top-right-radius: 18px;
+  border-top-left-radius: 18px;
+}
 
-.service-timeline {
-  width: 4px;
-  margin: 0 26px 0 6px;
-  height: 100%;
+.service:not(:first-of-type) .service-timeline {
+  margin-top: -18px;
+  padding-top: 18px;
 }
 
 .service-label {
   background-color: initial;
-  height: 20px;
-  border-radius: 10px;
-  padding: 0 8px;
+  font-weight: 700;
 
   & .edit-icon {
     font-size: 10px;
+  }
+}
+
+.service-total-duration .service-timeline {
+  background-color: variables.$text-color;
+  height: 36px;
+}
+
+@for $i from 0 through 4 {
+  #service-#{$i} {
+    .service-timeline {
+      background-color: var(--service-#{$i}-color);
+    }
+
+    .service-label {
+      color: var(--service-#{$i}-color);
+      border: 1px solid var(--service-#{$i}-color);
+    }
+
+    .mdc-chip__ripple {
+      &::before,
+      &::after {
+        background-color: var(--service-#{$i}-color);
+      }
+    }
   }
 }

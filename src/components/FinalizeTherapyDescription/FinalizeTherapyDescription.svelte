@@ -4,35 +4,27 @@
   import { getServiceLightLabel } from '../../js/utils'
 
   $: totalDuration = $services.reduce((total, service) => total + service.duration, 0)
-  $: $services.reduce((endTime, service) => {
-    service.endTime = endTime + service.duration
-
-    return service.endTime
-  }, 0)
 
   afterUpdate(() => {
     $services.forEach((service, i) => {
-      let serviceHeight = (16 * 12) * (service.duration / totalDuration)
+      let serviceHeight = (20 * 12) * (service.duration / totalDuration)
 
-      if (serviceHeight < 24) serviceHeight = 24
+      if (serviceHeight < 36) serviceHeight = 36
 
-      document.querySelector(`#service-timeline-${i}`).style.height = `${serviceHeight}px`
-      document.querySelector(`#service-timeline-${i} .service-timeline`).style.backgroundColor =
-        service.color
-      document.querySelector(`#service-timeline-${i} .service-duration`).style.backgroundColor =
-        service.color
-      document.querySelector(`#service-timeline-${i} .service-label`).style.color = service.color
-      document.querySelector(`#service-timeline-${i} .service-label`).style.border =
-        `1px solid ${service.color}`
+      const serviceListItem = document.querySelector(`#service-${i}`)
+      serviceListItem.style.height = `${serviceHeight}px`
+      serviceListItem.style.setProperty(`--service-${i}-color`, service.color)
+      document.querySelector(`#service-${i} .service-timeline`).style.zIndex = $services.length - i
     })
   })
 </script>
 
 <ul class="therapy-description">
   {#each $services as service, i}
-    <li id="service-timeline-{i}">
-      <div class="service-timeline"></div>
-      <div class="service-duration">{service.endTime}</div>
+    <li class="service" id="service-{i}">
+      <div class="service-timeline">
+        <span>{service.duration}'</span>
+      </div>
       <div class="mdc-chip service-label">
         <div class="mdc-chip__ripple"></div>
         <span role="gridcell">
@@ -46,6 +38,11 @@
       </div>
     </li>
   {/each}
+  <li class="service service-total-duration">
+    <div class="service-timeline">
+      <span>{totalDuration}'</span>
+    </div>
+  </li>
 </ul>
 
 <style src="FinalizeTherapyDescription.scss"></style>
