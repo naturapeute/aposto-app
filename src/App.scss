@@ -13,14 +13,6 @@ main {
   }
 }
 
-.typography--button-inline.total-amount {
-  cursor: default;
-}
-
-.typography--button-inline:hover.total-amount {
-  color: inherit;
-}
-
 @media (min-width: variables.$large-width-breakpoint) {
   main {
     max-width: 400px;

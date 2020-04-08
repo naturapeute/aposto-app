@@ -5,6 +5,8 @@
   export let services
 
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
+  $: totalDurationHours = Math.floor(totalDuration / 60)
+  $: totalDurationMinutes = Math.round(((totalDuration / 60) - totalDurationHours) * 60)
 
   afterUpdate(() => {
     services.forEach((service, i) => {
@@ -39,11 +41,14 @@
       </div>
     </li>
   {/each}
-  <li class="service service-total-duration">
-    <div class="service-timeline">
-      <span>{totalDuration}'</span>
-    </div>
-  </li>
 </ul>
+<p class="finalize-p total-duration">
+  <i class="material-icons-round">schedule</i>
+  <span class="typography--button-inline no-click-inline">
+    {totalDurationHours}h{#if totalDurationMinutes}
+      {totalDurationMinutes}
+    {/if}
+  </span>
+</p>
 
 <style src="FinalizeTherapyDescription.scss"></style>

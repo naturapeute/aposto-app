@@ -1,5 +1,3 @@
-@use "../../styles/variables";
-
 .therapy-description{
   list-style-type: none;
   padding: 0;
@@ -43,11 +41,6 @@
   }
 }
 
-.service-total-duration .service-timeline {
-  background-color: variables.$text-color;
-  height: 36px;
-}
-
 @for $i from 0 through 4 {
   #service-#{$i} {
     .service-timeline {
@@ -66,4 +59,8 @@
       }
     }
   }
+}
+
+.total-duration {
+  margin-top: 8px;
 }

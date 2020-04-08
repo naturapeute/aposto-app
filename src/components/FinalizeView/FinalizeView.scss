@@ -26,3 +26,11 @@
     height: 60px;
   }
 }
+
+:global(.typography--button-inline.no-click-inline) {
+  cursor: default;
+}
+
+:global(.typography--button-inline:hover.no-click-inline) {
+  color: inherit;
+}
