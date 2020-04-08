@@ -7,6 +7,7 @@
   export let type = 'text'
   export let required = false
   export let trailingIcon = null
+  export let noAutoComplete = false
 
   let textField
   let thisMDCTextField
@@ -36,7 +37,7 @@
 <label bind:this={textField} class="mdc-text-field mdc-text-field--outlined"
   class:mdc-text-field--with-trailing-icon="{trailingIcon}">
   <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId}
-    on:input={onInput} {required}>
+    on:input={onInput} {required}  autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
     <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>
