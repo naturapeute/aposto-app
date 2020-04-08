@@ -30,11 +30,11 @@
         </span>
       </p>
     </div>
-    <div class="mdc-card send-card">
-      <IconButton type="submit" title="Valider les informations de la facture">
-        send
-      </IconButton>
-    </div>
+  </div>
+  <div class="send-button">
+    <IconButton type="submit" title="Valider les informations de la facture">
+      send
+    </IconButton>
   </div>
 </form>
 
