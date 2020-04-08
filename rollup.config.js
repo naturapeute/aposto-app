@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 import autoPreprocess from 'svelte-preprocess'
+import replace from '@rollup/plugin-replace'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -28,6 +29,17 @@ export default {
         includePaths: [
           './node_modules'
         ]
+      })
+    }),
+    replace({
+      // NOTE : Credits to Firthous
+      // https://medium.com/@firthous.dev/how-to-setup-env-variables-to-your-svelte-js-app-c1579430f032
+      process: JSON.stringify({
+        env: {
+          PROD: production,
+          API_URL: production ? 'https://api.aposto.ch' : 'http://localhost:8080',
+          APP_URL: production ? 'https://etceterra.github.io/aposto-beta/' : 'http://localhost:5000'
+        }
       })
     }),
 
@@ -59,11 +71,11 @@ export default {
   }
 }
 
-function serve () {
+function serve() {
   let started = false
 
   return {
-    writeBundle () {
+    writeBundle() {
       if (!started) {
         started = true
 
