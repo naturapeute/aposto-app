@@ -1,12 +1,10 @@
 <script>
-  import { selectedPatient } from '../../js/store' // eslint-disable-line no-unused-vars
+  import { selectedPatient } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
 
-  /* eslint-disable no-unused-vars */
-  let filterPatient = '' // eslint-disable-line prefer-const
+  let filterPatient = ''
   let patientSearchMode = false
-  /* eslint-enable no-unused-vars */
 
   const onChangePatient = () => {
     patientSearchMode = true
@@ -32,7 +30,7 @@
   </span>
 </p>
 {#if patientSearchMode}
-  <form class="aposto-form patient-search-form" on:submit|preventDefault={() => { return }}>
+  <form class="aposto-form patient-search-form" on:submit|preventDefault={() => {}}>
     <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
       on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount}>
       Patient

@@ -6,13 +6,11 @@
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
 
-  export let openned = false // eslint-disable-line prefer-const
+  export let openned = false
 
-  /* eslint-disable no-undef */
   let _author = { ...$author }
   let _therapist = { ...$therapist }
   let _servicePrice = $servicePrice
-  /* eslint-enable no-undef */
   let drawer
   let thisMDCDrawer = {}
   const dispatch = createEventDispatcher()
@@ -32,11 +30,9 @@
 
   const onCloseClick = () => {
     dispatch('closeUserPanel')
-    /* eslint-disable no-undef */
     _author = { ...$author }
     _therapist = { ...$therapist }
     _servicePrice = $servicePrice
-    /* eslint-enable no-undef */
   }
 
   const onSubmit = () => {

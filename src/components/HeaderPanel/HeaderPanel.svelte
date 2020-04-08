@@ -1,9 +1,9 @@
 <script>
-  import { author, therapist } from '../../js/store' // eslint-disable-line no-unused-vars
+  import { author } from '../../js/store'
   import UserPanel from '../UserPanel/UserPanel.svelte'
   import Button from '../Button/Button.svelte'
 
-  let userPanelOpenned = false // eslint-disable-line no-unused-vars
+  let userPanelOpenned = false
 
   const onToggleUserPanel = () => {
     userPanelOpenned = !userPanelOpenned

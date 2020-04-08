@@ -1,12 +1,10 @@
 <script>
-  /* eslint-disable prefer-const */
   export let raised = false
   export let unelevated = false
   export let outlined = false
   export let icon = null
   export let type = 'button'
   export let title = ''
-  /* eslint-enable prefer-const */
 </script>
 
 <button class="mdc-button" class:mdc-button--raised="{raised}"

@@ -4,11 +4,9 @@
 
   export let fieldId
   export let value = ''
-  /* eslint-disable prefer-const */
   export let type = 'text'
   export let required = false
   export let trailingIcon = null
-  /* eslint-enable prefer-const */
 
   let textField
   let thisMDCTextField

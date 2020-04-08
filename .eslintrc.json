@@ -19,7 +19,6 @@
     "no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "^[A-Z].*|on[A-Z].*|.*Transition",
         "argsIgnorePattern": "_"
       }
     ],
@@ -34,16 +33,29 @@
         "tabWidth": 2
       }
     ],
-    "curly": "off",
-    "no-labels": "off"
+    "curly": [
+      "warn",
+      "multi-or-nest"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxBOF": 2,
+        "maxEOF": 1
+      }
+    ],
+    "import/first": "off"
   },
   "plugins": [
-    "html"
+    "svelte3"
   ],
-  "settings": {
-    "html/html-extensions": [
-      ".svelte",
-      ".html"
-    ]
-  }
+  "overrides": [
+    {
+      "files": [
+        "**/*.svelte"
+      ],
+      "processor": "svelte3/svelte3"
+    }
+  ]
 }

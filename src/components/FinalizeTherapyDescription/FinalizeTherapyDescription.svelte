@@ -1,23 +1,17 @@
 <script>
   import { afterUpdate } from 'svelte'
-  /* eslint-disable no-unused-vars */
   import { services } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
-  /* eslint-enable no-unused-vars */
 
-  let totalDuration
-
-  /* eslint-disable no-undef */
   $: totalDuration = $services.reduce((total, service) => total + service.duration, 0)
   $: $services.reduce((endTime, service) => {
     service.endTime = endTime + service.duration
 
     return service.endTime
   }, 0)
-  /* eslint-enable no-undef */
 
   afterUpdate(() => {
-    $services.forEach((service, i) => { // eslint-disable-line no-undef
+    $services.forEach((service, i) => {
       let serviceHeight = (16 * 12) * (service.duration / totalDuration)
 
       if (serviceHeight < 24) serviceHeight = 24

@@ -1,23 +1,21 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { patients, selectedPatient } from '../../js/store' // eslint-disable-line no-unused-vars
+  import { patients, selectedPatient } from '../../js/store'
 
   export let filterPatient
 
-  let bestMatches // eslint-disable-line no-unused-vars
   const dispatch = createEventDispatcher()
 
   $: bestMatches = getBestMatches(filterPatient)
 
   const onChipClick = patientId => {
-    // eslint-disable-next-line no-undef
     selectedPatient.set($patients.find(patient => patient.id === patientId))
     dispatch('patientSelected')
   }
 
   function getBestMatches(_filterPatient) {
     return _filterPatient.split(' ').reduce((scores, word) => {
-      $patients.forEach((patient, i) => { // eslint-disable-line no-undef
+      $patients.forEach((patient, i) => {
         scores[i].score += getPatientScore(patient, word)
       })
 
@@ -29,7 +27,6 @@
   }
 
   function initialPatientScores() {
-    // eslint-disable-next-line no-undef
     return $patients.map(patient => { return { ...patient, score: 0 } })
   }
 
