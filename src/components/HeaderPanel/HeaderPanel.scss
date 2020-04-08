@@ -1,18 +1,31 @@
 @use "../../styles/variables";
 
-.mdc-top-app-bar__section :global(.mdc-button) :global(.mdc-button__ripple::before) {
-  background-color: #fff;
+.header {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 1;
+
+  :global(.mdc-button) {
+    margin-top: 56px;
+
+    & :global(.mdc-button__ripple) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
 }
 
-:global(.mdc-button) :global(.mdc-button__icon) {
-  font-size: 24px;
-  height: 24px;
-  width: 24px;
-  color: #fff;
-}
-
-:global(.mdc-top-app-bar__title) {
+.mdc-top-app-bar__title {
   color: variables.$on-primary;
-  text-transform: initial;
-  padding-left: 8px;
+  text-align: center;
+  padding: 0;
+  width: 100%;
+}
+
+@media (min-width: 599px) {
+  .header :global(.mdc-button) {
+    margin-top: 64px;
+  }
 }

@@ -1,10 +1,11 @@
 <script>
   // eslint-disable-next-line no-unused-vars
-  import { author, therapist, services, servicePrice } from './js/store'
+  import { author, therapist, selectedPatient, servicePrice, services } from './js/store'
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizePatient from './components/FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from './components/FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
+  import IconButton from './components/IconButton/IconButton.svelte'
 
   let totalAmount // eslint-disable-line no-unused-vars
 
@@ -21,29 +22,31 @@
   }
 </script>
 
-<HeaderPanel on:updateUser={onUpdateUser} />
+<HeaderPanel on:updateUser={onUpdateUser}>Clôture de votre séance</HeaderPanel>
 <main>
-  <div class="mdc-card">
-    <div class="card-subsection">
-      <h2 class="mdc-typography--headline5 finalize-headline">
-        Finalisation de votre facture
-      </h2>
+  <form>
+    <div class="card-set">
+      <div class="mdc-card">
+        <FinalizePatient />
+      </div>
+      <div class="mdc-card">
+        <FinalizeTherapyDescription />
+      </div>
+      <div class="mdc-card">
+        <p class="finalize-p">
+          <i class="material-icons-round">monetization_on</i>
+          <span class="typography--button-inline total-amount">
+            {totalAmount.toFixed(2)}CHF
+          </span>
+        </p>
+      </div>
+      <div class="mdc-card button-card">
+        <IconButton type="submit" title="Valider les informations de la facture">
+          send
+        </IconButton>
+      </div>
     </div>
-    <div class="card-subsection">
-      <FinalizePatient />
-    </div>
-    <div class="card-subsection">
-      <FinalizeTherapyDescription />
-    </div>
-    <div class="card-subsection">
-      <p class="total-amount-p finalize-p">
-        <i class="material-icons-round">monetization_on</i>
-        <span class="typography--button-inline total-amount">
-          {totalAmount.toFixed(2)}CHF
-        </span>
-      </p>
-    </div>
-  </div>
+  </form>
 </main>
 
 <style src="App.scss" global></style>

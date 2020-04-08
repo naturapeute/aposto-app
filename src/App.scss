@@ -2,21 +2,20 @@
 @use "styles/main";
 
 main {
-  padding: 96px 8px 32px 8px;
+  padding: 124px 8px 32px 8px;
   margin: 0 auto;
-  min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 156px);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+  align-items: center;
 
-.finalize-headline {
-  margin: 0;
-  text-align: center;
+  > * {
+    width: 100%;
+  }
 }
 
 .finalize-p {
   display: flex;
+  margin: 0;
 
   & > *:first-child {
     margin-right: 16px;
@@ -31,12 +30,26 @@ main {
   color: inherit;
 }
 
-.total-amount-p {
-  margin: 0;
+.button-card {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: variables.$primary;
+
+  & > * {
+    width: 48px;
+  }
 }
 
 @media (min-width: variables.$large-width-breakpoint) {
   main {
     max-width: 400px;
+  }
+}
+
+@media (min-width: 599px) {
+  main {
+    padding-top: 132px;
+    min-height: calc(100vh - 164px);
   }
 }

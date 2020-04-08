@@ -46,7 +46,19 @@ p {
   color: variables.$primary;
 }
 
-.card-subsection {
+.card-set > .mdc-card {
+  margin: 16px 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.mdc-card {
   padding: 16px;
 
   & > * {

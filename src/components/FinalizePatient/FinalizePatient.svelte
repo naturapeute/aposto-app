@@ -22,7 +22,7 @@
   }
 </script>
 
-<p class="selected-patient-p finalize-p">
+<p class="finalize-p">
   <i class="material-icons-round">face</i>
   <span class="patient-edit" on:click={onChangePatient}>
     <span class="typography--button-inline" title="Choisir un autre patient">
