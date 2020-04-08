@@ -20,11 +20,17 @@
   justify-content: center;
   color: variables.$primary;
 
-  & > :global(.mdc-icon-button) {
-    $icon-size: 52;
-    font-size: #{$icon-size}px;
-    width: #{$icon-size + 2 * 12}px;
-    height: #{$icon-size + 2 * 12}px;
+  & > :global(.mdc-fab) {
+    $button-size: 72;
+    width: #{$button-size}px;
+    height: #{$button-size}px;
+
+    & :global(.mdc-fab__icon) {
+      $icon-size: 32;
+      font-size: #{$icon-size}px;
+      width: #{$icon-size}px;
+      height: #{$icon-size}px;
+    }
   }
 }
 

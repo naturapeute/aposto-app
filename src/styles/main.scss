@@ -1,7 +1,9 @@
 @use "variables";
 @use "@material/theme" with (
   $primary: variables.$primary,
-  $on-primary: variables.$on-primary
+  $on-primary: variables.$on-primary,
+  $secondary: variables.$secondary,
+  $on-secondary: variables.$on-secondary
 );
 
 @use "form";
@@ -18,6 +20,7 @@
 @use "@material/select/mdc-select";
 @use "@material/card/mdc-card";
 @use "@material/top-app-bar/mdc-top-app-bar";
+@use "@material/fab/mdc-fab";
 
 p {
   @extend .mdc-typography--body1

@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="send-button">
-    <IconButton type="submit" title="Valider les informations de la facture">
+    <IconButton type="submit" title="Valider les informations de la facture" fabLabel="Envoyer" fab>
       send
     </IconButton>
   </div>
