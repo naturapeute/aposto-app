@@ -60,12 +60,12 @@
                 <div class="form-group">
                   <label class="form-label" for="author-rcc-number">N°RCC</label>
                   <input class="form-input" type="text" id="author-rcc-number" name="author-rcc-number"
-                    bind="author.RCCNumber" onblur="loadGLNNumber('author')" required />
+                    bind="author.RCC" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="author-gln-number">N°GLN</label>
                   <input class="form-input" type="text" id="author-gln-number" name="author-gln-number"
-                    bind="author.GLNNumber" required />
+                    bind="author.GLN" required />
                   <p class="form-input-hint-primary">
                     <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
                       target="_blank">
@@ -114,11 +114,6 @@
                     onblur="loadGLNNumber('therapist')" required />
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="therapist-email">Email</label>
-                  <input class="form-input" type="text" id="therapist-email" name="therapist-email"
-                    bind="therapist.email" required />
-                </div>
-                <div class="form-group">
                   <label class="form-label" for="therapist-phone">Téléphone</label>
                   <input class="form-input" type="text" id="therapist-phone" name="therapist-phone"
                     bind="therapist.phone" required />
@@ -127,12 +122,12 @@
                 <div class="form-group">
                   <label class="form-label" for="therapist-rcc-number">N°RCC</label>
                   <input class="form-input" type="text" id="therapist-rcc-number" name="therapist-rcc-number"
-                    bind="therapist.RCCNumber" required />
+                    bind="therapist.RCC" required />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="therapist-gln-number">N°GLN</label>
                   <input class="form-input" type="text" id="therapist-gln-number" name="therapist-gln-number"
-                    bind="therapist.GLNNumber" required />
+                    bind="therapist.GLN" required />
                   <p class="form-input-hint-primary">
                     <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
                       target="_blank">
