@@ -1,12 +1,13 @@
 <script>
   import { afterUpdate } from 'svelte'
-  import { services } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
 
-  $: totalDuration = $services.reduce((total, service) => total + service.duration, 0)
+  export let services
+
+  $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
 
   afterUpdate(() => {
-    $services.forEach((service, i) => {
+    services.forEach((service, i) => {
       let serviceHeight = (20 * 12) * (service.duration / totalDuration)
 
       if (serviceHeight < 36) serviceHeight = 36
@@ -14,13 +15,13 @@
       const serviceListItem = document.querySelector(`#service-${i}`)
       serviceListItem.style.height = `${serviceHeight}px`
       serviceListItem.style.setProperty(`--service-${i}-color`, service.color)
-      document.querySelector(`#service-${i} .service-timeline`).style.zIndex = $services.length - i
+      document.querySelector(`#service-${i} .service-timeline`).style.zIndex = services.length - i
     })
   })
 </script>
 
 <ul class="therapy-description">
-  {#each $services as service, i}
+  {#each services as service, i}
     <li class="service" id="service-{i}">
       <div class="service-timeline">
         <span>{service.duration}'</span>

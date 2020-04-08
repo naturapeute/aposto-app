@@ -1,15 +1,16 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { patients, selectedPatient } from '../../js/store'
+  import { patients } from '../../js/store'
 
   export let filterPatient
+  export let patient
 
   const dispatch = createEventDispatcher()
 
   $: bestMatches = getBestMatches(filterPatient)
 
   const onChipClick = patientId => {
-    selectedPatient.set($patients.find(patient => patient.id === patientId))
+    patient = { ...$patients.find(patient => patient.id === patientId) }
     dispatch('patientSelected')
   }
 

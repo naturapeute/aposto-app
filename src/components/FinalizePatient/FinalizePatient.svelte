@@ -1,7 +1,8 @@
 <script>
-  import { selectedPatient } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
+
+  export let patient
 
   let filterPatient = ''
   let patientSearchMode = false
@@ -24,7 +25,7 @@
   <i class="material-icons-round">face</i>
   <span class="patient-edit" on:click={onChangePatient}>
     <span class="typography--button-inline" title="Choisir un autre patient">
-      {$selectedPatient.firstName} {$selectedPatient.lastName}
+      {patient.firstName} {patient.lastName}
     </span>
     <i class="material-icons-round edit-icon">edit</i>
   </span>
@@ -36,7 +37,7 @@
       Patient
     </TextField>
   </form>
-  <PatientList bind:filterPatient={filterPatient} on:patientSelected={onCloseSearch} />
+  <PatientList bind:filterPatient={filterPatient} bind:patient on:patientSelected={onCloseSearch} />
 {/if}
 
 <style src="FinalizePatient.scss"></style>

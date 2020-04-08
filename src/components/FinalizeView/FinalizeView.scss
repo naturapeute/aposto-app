@@ -1,0 +1,28 @@
+@use "../../styles/variables";
+
+:global(.finalize-p) {
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  & > :global(*:first-child) {
+    margin-right: 20px;
+    height: 36px;
+    width: 36px;
+    font-size: 36px;
+  }
+}
+
+.send-card {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: variables.$primary;
+  font-size: 36px;
+
+  & > :global(.mdc-icon-button) {
+    font-size: 36px;
+    width: 60px;
+    height: 60px;
+  }
+}
