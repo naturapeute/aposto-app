@@ -1,5 +1,9 @@
 @use "../../styles/variables";
 
+.mdc-linear-progress {
+  z-index: 6;
+}
+
 .mdc-linear-progress__bar-inner {
   border-color: variables.$secondary;
 }

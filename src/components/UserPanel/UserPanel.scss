@@ -2,7 +2,6 @@
 
 .mdc-drawer {
   width: calc(100vw - 56px);
-  z-index: 100;
 }
 
 .mdc-drawer__header {
@@ -44,10 +43,6 @@
   box-sizing: border-box;
   min-height: 64px;
   padding: 0 16px 4px;
-}
-
-.mdc-drawer-scrim {
-  z-index: 99;
 }
 
 @media (min-width: variables.$large-width-breakpoint) {

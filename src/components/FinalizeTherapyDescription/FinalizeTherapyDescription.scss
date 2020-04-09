@@ -2,6 +2,8 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column-reverse;
 
   > * {
     display: flex;
@@ -22,12 +24,12 @@
   font-weight: 700;
 }
 
-.service:first-of-type .service-timeline {
+.service:last-of-type .service-timeline {
   border-top-right-radius: 18px;
   border-top-left-radius: 18px;
 }
 
-.service:not(:first-of-type) .service-timeline {
+.service:not(:last-of-type) .service-timeline {
   margin-top: -18px;
   padding-top: 18px;
 }

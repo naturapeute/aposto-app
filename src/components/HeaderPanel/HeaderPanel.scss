@@ -4,7 +4,7 @@
   position: fixed;
   width: 100%;
   background: #fff;
-  z-index: 98;
+  z-index: 4;
 
   :global(.mdc-button) {
     margin-top: 56px;
@@ -19,7 +19,6 @@
 
 :global(.mdc-linear-progress) {
   position: fixed;
-  z-index: 2;
   margin-top: 56px;
 }
 

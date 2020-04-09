@@ -17,14 +17,13 @@
       const serviceListItem = document.querySelector(`#service-${i}`)
       serviceListItem.style.height = `${serviceHeight}px`
       serviceListItem.style.setProperty(`--service-${i}-color`, service.color)
-      document.querySelector(`#service-${i} .service-timeline`).style.zIndex = services.length - i
     })
   })
 </script>
 
 <ul class="therapy-description">
-  {#each services as service, i}
-    <li class="service" id="service-{i}">
+  {#each [...services].reverse() as service, i}
+    <li class="service" id="service-{services.length - 1 - i}">
       <div class="service-timeline">
         <span>{service.duration}'</span>
       </div>
