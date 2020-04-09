@@ -24,14 +24,10 @@
   width: 100%;
 }
 
-.mdc-linear-progress {
+:global(.mdc-linear-progress) {
   position: fixed;
   z-index: 2;
   margin-top: 56px;
-}
-
-.mdc-linear-progress__bar-inner {
-  border-color: variables.$secondary;
 }
 
 @media (min-width: 599px) {
@@ -39,7 +35,7 @@
     margin-top: 64px;
   }
 
-  .mdc-linear-progress {
+  :global(.mdc-linear-progress) {
     margin-top: 64px;
   }
 }
