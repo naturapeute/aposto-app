@@ -5,19 +5,19 @@
   export let options = [{ value: '', label: '' }]
   export let value = ''
 
+  let element
   let select
-  let thisMDCSelect
 
   onMount(() => {
-    thisMDCSelect = new MDCSelect(select)
+    select = new MDCSelect(element)
 
-    thisMDCSelect.listen('MDCSelect:change', () => {
-      value = thisMDCSelect.value
+    select.listen('MDCSelect:change', () => {
+      value = select.value
     })
   })
 </script>
 
-<div bind:this={select} class="mdc-select">
+<div bind:this={element} class="mdc-select">
   <div class="mdc-select__anchor select-width">
     <i class="mdc-select__dropdown-icon"></i>
     <div class="mdc-select__selected-text"></div>

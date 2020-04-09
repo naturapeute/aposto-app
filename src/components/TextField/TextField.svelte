@@ -9,17 +9,17 @@
   export let trailingIcon = null
   export let noAutoComplete = false
 
+  let element
   let textField
-  let thisMDCTextField
   const dispatch = createEventDispatcher()
 
   onMount(() => {
-    thisMDCTextField = new MDCTextField(textField)
-    dispatch('mount', textField)
+    textField = new MDCTextField(element)
+    dispatch('mount', element)
   })
 
   onDestroy(() => {
-    if (thisMDCTextField) thisMDCTextField.destroy()
+    if (textField) textField.destroy()
   })
 
   // NOTE : Credits to Rich Harris (https://stackoverflow.com/a/57393751)
@@ -34,7 +34,7 @@
   }
 </script>
 
-<label bind:this={textField} class="mdc-text-field mdc-text-field--outlined"
+<label bind:this={element} class="mdc-text-field mdc-text-field--outlined"
   class:mdc-text-field--with-trailing-icon="{trailingIcon}">
   <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId}
     on:input={onInput} {required}  autocomplete="{noAutoComplete ? 'off' : ''}">

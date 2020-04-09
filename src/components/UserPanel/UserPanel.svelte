@@ -11,21 +11,21 @@
   let _author = { ...$author }
   let _therapist = { ...$therapist }
   let _servicePrice = $servicePrice
-  let drawer
-  let thisMDCDrawer = {}
+  let element
+  let drawer = {}
   const dispatch = createEventDispatcher()
 
-  $: thisMDCDrawer.open = openned
+  $: drawer.open = openned
 
   onMount(() => {
-    thisMDCDrawer = MDCDrawer.attachTo(drawer)
-    drawer.addEventListener('MDCDrawer:opened', () => {
+    drawer = MDCDrawer.attachTo(element)
+    element.addEventListener('MDCDrawer:opened', () => {
       document.querySelector('.mdc-icon-button').blur()
     })
   })
 
   onDestroy(() => {
-    if (thisMDCDrawer) thisMDCDrawer.detroy()
+    if (drawer) drawer.detroy()
   })
 
   const onCloseClick = () => {
@@ -43,7 +43,7 @@
   }
 </script>
 
-<aside bind:this={drawer} class="mdc-drawer mdc-drawer--modal">
+<aside bind:this={element} class="mdc-drawer mdc-drawer--modal">
   <div class="mdc-drawer__header">
     <div>
       <h1 class="mdc-drawer__title">Vos informations</h1>
