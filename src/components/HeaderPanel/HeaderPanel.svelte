@@ -1,6 +1,7 @@
 <script>
   import { author, loading } from '../../js/store'
   import UserPanel from '../UserPanel/UserPanel.svelte'
+  import TopAppBar from '../TopAppBar/TopAppBar.svelte'
   import Button from '../Button/Button.svelte'
   import LinearProgress from '../LinearProgress/LinearProgress.svelte'
 
@@ -14,15 +15,7 @@
 <UserPanel openned={userPanelOpenned} on:closeUserPanel={onToggleUserPanel} />
 
 <header class="header">
-  <div class="mdc-top-app-bar">
-    <div class="mdc-top-app-bar__row">
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <span class="mdc-top-app-bar__title">
-          <slot></slot>
-        </span>
-      </section>
-    </div>
-  </div>
+  <TopAppBar><slot></slot></TopAppBar>
   {#if $loading}
     <LinearProgress intermediate />
   {/if}

@@ -1,0 +1,8 @@
+@use "../../styles/variables";
+
+.mdc-top-app-bar__title {
+  color: variables.$on-primary;
+  text-align: center;
+  padding: 0;
+  width: 100%;
+}
