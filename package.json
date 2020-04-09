@@ -29,6 +29,7 @@
     "@material/drawer": "^5.1.0",
     "@material/fab": "^5.1.0",
     "@material/icon-button": "^5.1.0",
+    "@material/linear-progress": "^5.1.0",
     "@material/select": "^5.1.0",
     "@material/textfield": "^5.1.0",
     "@material/theme": "^5.1.0",

@@ -1,5 +1,5 @@
 <script>
-  import { author } from '../../js/store'
+  import { author, loading } from '../../js/store'
   import UserPanel from '../UserPanel/UserPanel.svelte'
   import Button from '../Button/Button.svelte'
 
@@ -22,6 +22,19 @@
       </section>
     </div>
   </div>
+  {#if $loading}
+    <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate" aria-label="Barre de chargement"
+      aria-valuemin="0" aria-valuemax="1">
+      <div class="mdc-linear-progress__buffering-dots"></div>
+      <div class="mdc-linear-progress__buffer"></div>
+      <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+        <span class="mdc-linear-progress__bar-inner"></span>
+      </div>
+      <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+        <span class="mdc-linear-progress__bar-inner"></span>
+      </div>
+    </div>
+  {/if}
   <Button icon="account_circle" title="Accéder à mon profil de facturation"
     on:click={onToggleUserPanel}>
     {$author.name}

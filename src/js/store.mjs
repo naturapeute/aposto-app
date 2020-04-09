@@ -10,3 +10,5 @@ export const author = writable({ ...authorFixture })
 export const therapist = writable({ ...therapistFixture })
 export const patients = writable([...patientsFixture])
 export const servicePrice = writable(servicePriceFixture)
+
+export const loading = writable(false)
