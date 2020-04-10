@@ -1,0 +1,15 @@
+@use "@material/theme";
+
+.dialog-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.cancel-button {
+  color: theme.$error;
+
+  .mdc-button__ripple::before,
+  .mdc-button .mdc-button__ripple::after {
+    background-color: theme.$error;
+  }
+}
