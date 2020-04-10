@@ -25,7 +25,20 @@
     width: #{$button-size}px;
     height: #{$button-size}px;
 
-    & :global(.mdc-fab__icon) {
+    &:disabled {
+      opacity: 0.5;
+
+      &:hover {
+        cursor: progress;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+
+        :global(.mdc-fab__ripple::before) {
+          opacity: 0;
+        }
+      }
+    }
+
+    :global(.mdc-fab__icon) {
       $icon-size: 32;
       font-size: #{$icon-size}px;
       width: #{$icon-size}px;
