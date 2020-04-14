@@ -26,7 +26,7 @@
 </script>
 
 <Dialog bind:this={dialog} dialogId="dialog-confirm-send">
-  <span slot="dialog-title">Confirmer l'envoi</span>
+  <span slot="dialog-title">Envoyer par mail</span>
 
   <div slot="dialog-body">
     <p>
@@ -50,10 +50,10 @@
 
   <div slot="dialog-footer">
     <Button className="cancel-button" dialog dialogAction="close" dialogInitialFocus>
-      Annuler
+      Éditer
     </Button>
     <Button unelevated dialog dialogAction="accept" on:click={onConfirm}>
-      Confirmer
+      Envoyer
     </Button>
   </div>
 </Dialog>

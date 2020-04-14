@@ -1,4 +1,4 @@
-@use "@material/theme";
+@use "aposto-theme" as *;
 
 .dialog-checkbox {
   display: flex;
@@ -6,10 +6,10 @@
 }
 
 :global(.mdc-button.cancel-button) {
-  color: theme.$error;
+  color: $text-color;
 
   :global(.mdc-button__ripple::before),
   :global(.mdc-button .mdc-button__ripple::after) {
-    background-color: theme.$error;
+    background-color: $text-color;
   }
 }
