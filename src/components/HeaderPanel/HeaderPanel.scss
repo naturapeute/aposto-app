@@ -6,14 +6,14 @@
   background: #fff;
   z-index: 4;
 
-  :global(.mdc-button) {
+  &:not(.loading) :global(.mdc-button) {
     margin-top: 56px;
+  }
 
-    :global(.mdc-button__ripple) {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+  :global(.mdc-button) :global(.mdc-button__ripple) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
 
@@ -23,7 +23,7 @@
 }
 
 @media (min-width: 599px) {
-  .header :global(.mdc-button) {
+  .header:not(.loading) :global(.mdc-button) {
     margin-top: 64px;
   }
 

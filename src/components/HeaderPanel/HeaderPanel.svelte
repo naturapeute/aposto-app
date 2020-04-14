@@ -14,7 +14,7 @@
 
 <UserPanel openned={userPanelOpenned} on:closeUserPanel={onToggleUserPanel} />
 
-<header class="header">
+<header class="header" class:loading={$loading}>
   <TopAppBar><slot></slot></TopAppBar>
   {#if $loading}
     <LinearProgress intermediate />
