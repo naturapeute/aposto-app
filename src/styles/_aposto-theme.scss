@@ -7,3 +7,10 @@ $text-color: #444;
 $text-field-height: 40px;
 
 $large-width-breakpoint: 640px;
+
+@use "@material/theme" with (
+  $primary: $primary,
+  $on-primary: $on-primary,
+  $secondary: $secondary,
+  $on-secondary: $on-secondary
+);

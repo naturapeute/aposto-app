@@ -1,10 +1,4 @@
 @use "aposto-theme" as *;
-@use "@material/theme" with (
-  $primary: $primary,
-  $on-primary: $on-primary,
-  $secondary: $secondary,
-  $on-secondary: $on-secondary
-);
 
 @use "form";
 
