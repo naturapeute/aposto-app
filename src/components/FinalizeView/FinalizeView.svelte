@@ -7,6 +7,7 @@
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import Button from '../Button/Button.svelte'
+  import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
   import { sendInvoice } from '../../services/InvoiceService'
 
   export let patient
@@ -15,6 +16,7 @@
   let errorSnackbar
   let confirmDialog
   const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
+  let successSend = false
 
   $: totalAmount = services.reduce(
     (total, service) => total + (service.duration * $servicePrice / 60),
@@ -40,7 +42,7 @@
       services.map(e => ({ ...e }))
     )
       .then(() => {
-        // TODO : Handle success
+        successSend = true
       })
       .catch((err) => {
         errorSnackbar.open()
@@ -88,5 +90,9 @@
 
 <FinalizeConfirmDialog bind:this={confirmDialog} {patient}
   on:confirm={onConfirmSend} />
+
+{#if successSend}
+  <SuccessSendScrim {patient} />
+{/if}
 
 <style src="FinalizeView.scss"></style>
