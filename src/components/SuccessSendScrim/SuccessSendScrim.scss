@@ -1,0 +1,39 @@
+.success-scrim,
+.success-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+}
+
+.success-scrim {
+  background-color: #fff;
+  opacity: 0.95;
+}
+
+.success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & :first-child {
+    margin-bottom: 56px;
+  }
+
+  & > :global(*) {
+    max-width: 400px;
+    text-align: center;
+    width: 100%;
+
+    &.mdc-button {
+      margin-top: 32px;
+    }
+  }
+
+  & > p {
+    margin: 0;
+  }
+}
