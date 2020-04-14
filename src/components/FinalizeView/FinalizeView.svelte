@@ -1,14 +1,18 @@
 <script>
-  import { servicePrice, loading } from '../../js/store'
+  import { author, therapist, servicePrice, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from '../FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
+  import Snackbar from '../Snackbar/Snackbar.svelte'
+  import Button from '../Button/Button.svelte'
+  import { sendInvoice } from '../../services/InvoiceService'
 
   export let patient
   export let services
 
+  let errorSnackbar
   let confirmDialog
   let dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
 
@@ -27,7 +31,25 @@
   const onConfirmSend = () => {
     loading.set(true)
     document.querySelector('.send-button > *').disabled = true
-    // TODO : Sending
+
+    sendInvoice(
+      { ...$author },
+      { ...$therapist },
+      { ...patient },
+      $servicePrice,
+      services.map(e => ({ ...e }))
+    )
+      .then(() => {
+        // TODO : Handle success
+      })
+      .catch((err) => {
+        errorSnackbar.open()
+        console.error(err)
+        document.querySelector('.send-button > *').disabled = false
+      })
+      .finally(() => {
+        loading.set(false)
+      })
   }
 </script>
 
@@ -53,8 +75,18 @@
       send
     </IconButton>
   </div>
+  <Snackbar bind:this={errorSnackbar}>
+    <span slot="label">L'envoi de la facture a échoué. Veuillez réessayer plus tard...</span>
+
+    <div slot="actions">
+      <Button on:click={onSendInvoice} snackbar>
+        Réessayer
+      </Button>
+    </div>
+  </Snackbar>
 </form>
 
-<FinalizeConfirmDialog bind:this={confirmDialog} bind:dontShowAgain {patient} on:confirm={onConfirmSend} />
+<FinalizeConfirmDialog bind:this={confirmDialog} bind:dontShowAgain {patient}
+  on:confirm={onConfirmSend} />
 
 <style src="FinalizeView.scss"></style>
