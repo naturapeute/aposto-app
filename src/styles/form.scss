@@ -1,4 +1,4 @@
-@use "variables";
+@use "aposto-theme";
 
 @use "@material/textfield";
 
@@ -7,7 +7,7 @@
   flex-direction: column;
 
   .mdc-text-field {
-    @include textfield.outlined-height(variables.$text-field-height);
+    @include textfield.outlined-height(aposto-theme.$text-field-height);
     margin: 8px 0;
   }
 

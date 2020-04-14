@@ -1,9 +1,9 @@
-@use "variables";
+@use "aposto-theme";
 @use "@material/theme" with (
-  $primary: variables.$primary,
-  $on-primary: variables.$on-primary,
-  $secondary: variables.$secondary,
-  $on-secondary: variables.$on-secondary
+  $primary: aposto-theme.$primary,
+  $on-primary: aposto-theme.$on-primary,
+  $secondary: aposto-theme.$secondary,
+  $on-secondary: aposto-theme.$on-secondary
 );
 
 @use "form";
@@ -50,7 +50,7 @@ p {
 }
 
 .typography--button-inline:hover {
-  color: variables.$primary;
+  color: aposto-theme.$primary;
 }
 
 .card-set > .mdc-card {

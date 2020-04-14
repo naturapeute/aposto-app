@@ -1,4 +1,4 @@
-@use "variables";
+@use "aposto-theme";
 
 .mdc-drawer {
   width: calc(100vw - 56px);
@@ -45,7 +45,7 @@
   padding: 0 16px 4px;
 }
 
-@media (min-width: variables.$large-width-breakpoint) {
+@media (min-width: aposto-theme.$large-width-breakpoint) {
   .mdc-drawer {
     width: 320px;
   }

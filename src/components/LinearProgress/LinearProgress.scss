@@ -1,9 +1,9 @@
-@use "variables";
+@use "aposto-theme";
 
 .mdc-linear-progress {
   z-index: 6;
 }
 
 .mdc-linear-progress__bar-inner {
-  border-color: variables.$secondary;
+  border-color: aposto-theme.$secondary;
 }
