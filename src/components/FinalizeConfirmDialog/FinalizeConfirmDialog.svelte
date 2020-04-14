@@ -3,6 +3,7 @@
   import { author } from '../../js/store'
   import Dialog from '../Dialog/Dialog.svelte'
   import Checkbox from '../Checkbox/Checkbox.svelte'
+  import Button from '../Button/Button.svelte'
 
   export let patient
   export let dontShowAgain
@@ -48,16 +49,12 @@
   </div>
 
   <div slot="dialog-footer">
-    <button type="button" class="mdc-button mdc-dialog__button cancel-button"
-      data-mdc-dialog-action="close" data-mdc-dialog-initial-focus>
-      <div class="mdc-button__ripple"></div>
-      <span class="mdc-button__label">Annuler</span>
-    </button>
-    <button type="button" class="mdc-button mdc-button--unelevated mdc-dialog__button"
-      data-mdc-dialog-action="accept" on:click={onConfirm}>
-      <div class="mdc-button__ripple"></div>
-      <span class="mdc-button__label">Confirmer</span>
-    </button>
+    <Button className="cancel-button" dialog dialogAction="close" dialogInitialFocus>
+      Annuler
+    </Button>
+    <Button unelevated dialog dialogAction="accept" on:click={onConfirm}>
+      Confirmer
+    </Button>
   </div>
 </Dialog>
 
