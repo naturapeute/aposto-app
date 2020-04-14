@@ -1,4 +1,4 @@
-@use "aposto-theme";
+@use "aposto-theme" as *;
 
 .patient-edit {
   display: flex;
@@ -6,7 +6,7 @@
   cursor: pointer;
 
   &:hover {
-    color: aposto-theme.$primary;
+    color: $primary;
   }
 }
 

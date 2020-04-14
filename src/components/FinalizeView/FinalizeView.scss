@@ -1,4 +1,4 @@
-@use "aposto-theme";
+@use "aposto-theme" as *;
 
 :global(.finalize-p) {
   display: flex;
@@ -18,7 +18,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  color: aposto-theme.$primary;
+  color: $primary;
 
   & > :global(.mdc-fab) {
     $button-size: 72;

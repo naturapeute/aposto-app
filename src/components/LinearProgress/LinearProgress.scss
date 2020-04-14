@@ -1,9 +1,9 @@
-@use "aposto-theme";
+@use "aposto-theme" as *;
 
 .mdc-linear-progress {
   z-index: 6;
 }
 
 .mdc-linear-progress__bar-inner {
-  border-color: aposto-theme.$secondary;
+  border-color: $secondary;
 }

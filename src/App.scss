@@ -1,4 +1,4 @@
-@use "aposto-theme";
+@use "aposto-theme" as *;
 @use "main";
 
 main {
@@ -13,7 +13,7 @@ main {
   }
 }
 
-@media (min-width: aposto-theme.$large-width-breakpoint) {
+@media (min-width: $large-width-breakpoint) {
   main {
     max-width: 400px;
   }
