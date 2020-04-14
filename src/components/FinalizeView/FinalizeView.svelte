@@ -14,7 +14,7 @@
 
   let errorSnackbar
   let confirmDialog
-  let dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
+  const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
 
   $: totalAmount = services.reduce(
     (total, service) => total + (service.duration * $servicePrice / 60),
@@ -86,7 +86,7 @@
   </Snackbar>
 </form>
 
-<FinalizeConfirmDialog bind:this={confirmDialog} bind:dontShowAgain {patient}
+<FinalizeConfirmDialog bind:this={confirmDialog} {patient}
   on:confirm={onConfirmSend} />
 
 <style src="FinalizeView.scss"></style>

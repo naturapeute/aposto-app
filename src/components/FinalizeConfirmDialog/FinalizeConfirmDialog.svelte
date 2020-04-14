@@ -6,7 +6,6 @@
   import Button from '../Button/Button.svelte'
 
   export let patient
-  export let dontShowAgain
 
   export const open = () => {
     dialog.open()
@@ -17,6 +16,7 @@
   }
 
   let dialog
+  let dontShowAgain = false
   const dispatch = createEventDispatcher()
 
   const onConfirm = () => {
