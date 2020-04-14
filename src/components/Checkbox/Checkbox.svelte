@@ -46,7 +46,7 @@
 
 <div bind:this={elementFormField} class="mdc-form-field">
   <div bind:this={elementCheckbox} class="mdc-checkbox">
-    <input bind:value={checked} type="checkbox" class="mdc-checkbox__native-control"
+    <input bind:checked type="checkbox" class="mdc-checkbox__native-control"
       id="{checkboxId}" />
     <div class="mdc-checkbox__background">
       <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">

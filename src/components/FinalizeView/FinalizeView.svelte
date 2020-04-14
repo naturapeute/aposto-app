@@ -10,7 +10,7 @@
   export let services
 
   let confirmDialog
-  let dontShowAgain = window.localStorage.getItem('dontShowAgainConfirmSend')
+  let dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
 
   $: totalAmount = services.reduce(
     (total, service) => total + (service.duration * $servicePrice / 60),

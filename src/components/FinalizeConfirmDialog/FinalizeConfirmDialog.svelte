@@ -20,7 +20,7 @@
   const dispatch = createEventDispatcher()
 
   const onConfirm = () => {
-    window.localStorage.setItem('dontShowAgainConfirmSend', true)
+    if (dontShowAgain) window.localStorage.setItem('dontShowAgainConfirmSend', true)
     dispatch('confirm')
   }
 </script>
