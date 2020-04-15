@@ -1,4 +1,4 @@
-.therapy-description{
+.therapy-description {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -34,32 +34,19 @@
   padding-top: 18px;
 }
 
-.service-label {
-  background-color: initial;
+:global(.service-label) {
   font-weight: 700;
 
-  .edit-icon {
-    font-size: 10px;
+  :global(.mdc-chip__icon) {
+    font-size: 12px;
+    width: 12px;
+    height: 12px;
   }
 }
 
 @for $i from 0 through 4 {
-  #service-#{$i} {
-    .service-timeline {
-      background-color: var(--service-#{$i}-color);
-    }
-
-    .service-label {
-      color: var(--service-#{$i}-color);
-      border: 1px solid var(--service-#{$i}-color);
-    }
-
-    .mdc-chip__ripple {
-      &::before,
-      &::after {
-        background-color: var(--service-#{$i}-color);
-      }
-    }
+  #service-#{$i} .service-timeline {
+    background-color: var(--service-#{$i}-color);
   }
 }
 

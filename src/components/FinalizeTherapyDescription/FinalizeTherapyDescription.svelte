@@ -1,6 +1,7 @@
 <script>
   import { afterUpdate } from 'svelte'
   import { getServiceLightLabel } from '../../js/utils'
+  import Chip from '../Chip/Chip.svelte'
 
   export let services
 
@@ -27,17 +28,9 @@
       <div class="service-timeline">
         <span>{service.duration}'</span>
       </div>
-      <div class="mdc-chip service-label">
-        <div class="mdc-chip__ripple"></div>
-        <span role="gridcell">
-          <span tabindex="0" class="mdc-chip__primary-action">
-            <span class="mdc-chip__text">
-              {getServiceLightLabel(service.code)}
-              <i class="material-icons-round edit-icon">edit</i>
-            </span>
-          </span>
-        </span>
-      </div>
+      <Chip className="service-label" trailingIcon="edit" color={service.color}>
+        {getServiceLightLabel(service.code)}
+      </Chip>
     </li>
   {/each}
 </ul>
