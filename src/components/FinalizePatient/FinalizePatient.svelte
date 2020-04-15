@@ -2,10 +2,10 @@
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
 
-  export let patient
+  export let patient = null
 
   let filterPatient = ''
-  let patientSearchMode = false
+  let patientSearchMode = !patient
 
   const onChangePatient = () => {
     patientSearchMode = true
@@ -21,15 +21,17 @@
   }
 </script>
 
-<p class="finalize-p">
-  <i class="material-icons-round">face</i>
-  <span class="patient-edit" on:click={onChangePatient}>
-    <span class="typography--button-inline" title="Choisir un autre patient">
-      {patient.firstName} {patient.lastName}
+{#if patient}
+  <p class="finalize-p">
+    <i class="material-icons-round">face</i>
+    <span class="patient-edit" on:click={onChangePatient}>
+      <span class="typography--button-inline" title="Choisir un autre patient">
+        {patient.firstName} {patient.lastName}
+      </span>
+      <i class="material-icons-round edit-icon">edit</i>
     </span>
-    <i class="material-icons-round edit-icon">edit</i>
-  </span>
-</p>
+  </p>
+{/if}
 {#if patientSearchMode}
   <form class="aposto-form patient-search-form" on:submit|preventDefault={() => {}}>
     <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"

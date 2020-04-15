@@ -10,7 +10,7 @@
   import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
   import { sendInvoice } from '../../services/InvoiceService'
 
-  export let patient
+  export let patient = null
   export let services
 
   let errorSnackbar
@@ -33,7 +33,6 @@
 
   const onConfirmSend = () => {
     loading.set(true)
-    document.querySelector('.send-button > *').disabled = true
 
     sendInvoice(
       { ...$author },
@@ -48,7 +47,6 @@
       .catch((err) => {
         errorSnackbar.open()
         console.error(err)
-        document.querySelector('.send-button > *').disabled = false
       })
       .finally(() => {
         loading.set(false)
@@ -73,8 +71,9 @@
       </p>
     </div>
   </div>
-  <div class="send-button">
-    <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer" fab>
+  <div class="send-button" class:loading={$loading}>
+    <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer" fab
+      disabled={!patient || $loading}>
       send
     </IconButton>
   </div>
@@ -89,10 +88,12 @@
   </Snackbar>
 </form>
 
-<FinalizeConfirmDialog bind:this={confirmDialog} {patient}
-  on:confirm={onConfirmSend} />
+{#if patient}
+  <FinalizeConfirmDialog bind:this={confirmDialog} {patient}
+    on:confirm={onConfirmSend} />
+{/if}
 
-{#if successSend}
+{#if patient && successSend}
   <SuccessSendScrim {patient} />
 {/if}
 
