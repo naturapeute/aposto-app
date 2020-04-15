@@ -59,7 +59,7 @@
 <form on:submit|preventDefault={onSendInvoice}>
   <div class="card-set">
     <div class="mdc-card">
-      <FinalizePatient {patient} />
+      <FinalizePatient bind:patient />
     </div>
     <div class="mdc-card">
       <FinalizeTherapyDescription {services} />
