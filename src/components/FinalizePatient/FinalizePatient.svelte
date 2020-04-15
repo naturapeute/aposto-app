@@ -12,7 +12,9 @@
   }
 
   const onCloseSearch = () => {
-    patientSearchMode = false
+    if (patient)
+      patientSearchMode = false
+
     filterPatient = ''
   }
 
