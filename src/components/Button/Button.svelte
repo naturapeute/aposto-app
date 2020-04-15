@@ -16,7 +16,7 @@
   class:mdc-button--unelevated="{unelevated}" class:mdc-button--outlined="{outlined}"
   class:mdc-dialog__button="{dialog}" class:mdc-snackbar__action="{snackbar}"
   data-mdc-dialog-action="{dialogAction}" data-mdc-dialog-initial-focus="{dialogInitialFocus}"
-  {title} on:click {type}>
+  {title} {type} on:click>
   <div class="mdc-button__ripple"></div>
   {#if icon}
     <i class="material-icons-round mdc-button__icon" aria-hidden="true">
