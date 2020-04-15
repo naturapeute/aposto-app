@@ -15,7 +15,6 @@
 
   let errorSnackbar
   let confirmDialog
-  const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
   let successSend = false
 
   $: totalAmount = services.reduce(
@@ -24,6 +23,8 @@
   )
 
   const onSendInvoice = () => {
+    const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
+
     if (!dontShowAgain)
       confirmDialog.open()
     else
