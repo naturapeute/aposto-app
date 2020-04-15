@@ -40,8 +40,9 @@
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
   {/if}
-  <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId}
-    on:input={onInput} {required} autocomplete="{noAutoComplete ? 'off' : ''}">
+  <input {value} {type} class="mdc-text-field__input" id={fieldId} name={fieldId}
+    aria-labelledby={fieldId} on:input={onInput} {required}
+    autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
     <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>
