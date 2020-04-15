@@ -6,6 +6,7 @@
   export let value = ''
   export let type = 'text'
   export let required = false
+  export let outlined = false
   export let trailingIcon = null
   export let noAutoComplete = false
 
@@ -34,25 +35,35 @@
   }
 </script>
 
-<label bind:this={element} class="mdc-text-field mdc-text-field--outlined"
+<label bind:this={element} class="mdc-text-field" class:mdc-text-field--outlined="{outlined}"
   class:mdc-text-field--with-trailing-icon="{trailingIcon}">
+  {#if !outlined}
+    <div class="mdc-text-field__ripple"></div>
+  {/if}
   <input {value} {type} class="mdc-text-field__input" name={fieldId} aria-labelledby={fieldId}
-    on:input={onInput} {required}  autocomplete="{noAutoComplete ? 'off' : ''}">
+    on:input={onInput} {required} autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
     <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>
       {trailingIcon}
     </i>
   {/if}
-  <div class="mdc-notched-outline">
-    <div class="mdc-notched-outline__leading"></div>
-    <div class="mdc-notched-outline__notch">
-      <span class="mdc-floating-label" id={fieldId}>
-        <slot></slot>
-      </span>
+  {#if outlined}
+    <div class="mdc-notched-outline">
+      <div class="mdc-notched-outline__leading"></div>
+      <div class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id={fieldId}>
+          <slot></slot>
+        </span>
+      </div>
+      <div class="mdc-notched-outline__trailing"></div>
     </div>
-    <div class="mdc-notched-outline__trailing"></div>
-  </div>
+  {:else}
+    <span class="mdc-floating-label" id={fieldId}>
+      <slot></slot>
+    </span>
+    <div class="mdc-line-ripple"></div>
+  {/if}
 </label>
 
 <style src="TextField.scss"></style>

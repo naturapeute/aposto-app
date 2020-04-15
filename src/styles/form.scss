@@ -7,8 +7,15 @@
   flex-direction: column;
 
   .mdc-text-field {
-    @include textfield.outlined-height($text-field-height);
     margin: 8px 0;
+  }
+
+  .mdc-text-field:not(.mdc-text-field--outlined) {
+    @include textfield.fill-color($text-field-fill-color);
+  }
+
+  .mdc-text-field.mdc-text-field--outlined {
+    @include textfield.outlined-height($outlined-text-field-height);
   }
 
   :first-child {
