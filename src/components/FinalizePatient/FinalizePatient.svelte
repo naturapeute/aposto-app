@@ -33,7 +33,7 @@
 {#if patientSearchMode}
   <form class="aposto-form patient-search-form" on:submit|preventDefault={() => {}}>
     <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
-      on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount} noAutoComplete>
+      on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount} outlined noAutoComplete>
       Patient
     </TextField>
   </form>
