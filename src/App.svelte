@@ -7,8 +7,8 @@
   const selectedServices = [...selectedServicesFixture]
 
   const onUpdateUser = e => {
-    author.set({ ...e.detail.author })
-    therapist.set({ ...e.detail.therapist })
+    $author = { ...e.detail.author }
+    $therapist = { ...e.detail.therapist }
   }
 </script>
 

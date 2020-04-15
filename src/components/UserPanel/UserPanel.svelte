@@ -36,9 +36,9 @@
   }
 
   const onSubmit = () => {
-    author.set({ ..._author })
-    therapist.set({ ..._therapist })
-    servicePrice.set(_servicePrice)
+    $author = { ..._author }
+    $therapist = { ..._therapist }
+    $servicePrice = _servicePrice
     dispatch('closeUserPanel')
   }
 </script>

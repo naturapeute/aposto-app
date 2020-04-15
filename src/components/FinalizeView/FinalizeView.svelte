@@ -32,7 +32,7 @@
   }
 
   const onConfirmSend = () => {
-    loading.set(true)
+    $loading = true
 
     sendInvoice(
       { ...$author },
@@ -49,7 +49,7 @@
         console.error(err)
       })
       .finally(() => {
-        loading.set(false)
+        $loading = false
       })
   }
 </script>
