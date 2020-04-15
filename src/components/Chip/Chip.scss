@@ -1,0 +1,16 @@
+.colored {
+  color: var(--chip-color);
+  border: 1px solid var(--chip-color);
+  background-color: initial;
+
+  .mdc-chip__ripple {
+    &::before,
+    &::after {
+      background-color: var(--chip-color);
+    }
+  }
+
+  .mdc-chip__icon {
+    color: var(--chip-color);
+  }
+}
