@@ -301,8 +301,16 @@ export const patientsFixture = [
 
 export const servicePriceFixture = 100
 
+export const preferedServicesFixture = [
+  { code: 1003, color: '#f46d6d' },
+  { code: 1004, color: '#75b79e' },
+  { code: 1005, color: '#f8a978' },
+  { code: 1200, color: '#424874' },
+  { code: 1027, color: '#baabda' }
+]
+
 export const selectedServicesFixture = [
-  { code: 1003, duration: 5, color: '#f46d6d' },
-  { code: 1200, duration: 40, color: '#9fdfcd' },
-  { code: 1027, duration: 15, color: '#baabda' }
+  { ...preferedServicesFixture[0], duration: 5 },
+  { ...preferedServicesFixture[3], duration: 40 },
+  { ...preferedServicesFixture[4], duration: 15 }
 ]
