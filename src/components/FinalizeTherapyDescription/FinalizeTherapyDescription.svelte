@@ -7,10 +7,11 @@
   import TextField from '../TextField/TextField.svelte'
   import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
+  import Button from '../Button/Button.svelte'
 
   export let services
 
-  let serviceEditModeIndex = -1
+  let serviceEditModeId = -1
 
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
   $: totalDurationHours = Math.floor(totalDuration / 60)
@@ -25,13 +26,17 @@
   })
 
   afterUpdate(() => {
-    services.forEach((service, i) => {
-      const serviceListItem = document.querySelector(`#service-${i}`)
+    services.forEach(service => {
+      const serviceListItem = document.querySelector(`#service-${service.id}`)
 
-      if (i !== serviceEditModeIndex)
-        serviceListItem.style.setProperty(`--service-${i}-height`, `${serviceHeights[i]}px`)
+      if (service.id !== serviceEditModeId) {
+        serviceListItem.style.setProperty(
+          `--service-${service.id}-height`,
+          `${serviceHeights[service.id]}px`
+        )
+      }
 
-      serviceListItem.style.setProperty(`--service-${i}-color`, service.color)
+      serviceListItem.style.setProperty(`--service-${service.id}-color`, service.color)
     })
   })
 
@@ -40,10 +45,10 @@
     const h = parseFloat(getComputedStyle(node).height)
     const o = +getComputedStyle(node).opacity
 
-    const index = Number(node.getAttribute('data-index'))
+    const id = Number(node.getAttribute('data-id'))
 
-    document.querySelector(`#service-${index}`).style.setProperty(
-      `--service-${index}-height`,
+    document.querySelector(`#service-${id}`).style.setProperty(
+      `--service-${id}-height`,
       `${parseFloat(getComputedStyle(node).height) + 2 * 16}px`
     )
 
@@ -60,29 +65,51 @@
     }
   }
 
-  function servicesReversedIndex(i) {
-    return services.length - 1 - i
+  const onEditService = id => {
+    serviceEditModeId = id
   }
 
-  const onEditService = i => {
-    serviceEditModeIndex = i
-  }
+  const onSelectedService = (e, id) => {
+    services = services.map(service => {
+      if (service.id === id) {
+        service.code = e.detail
+        service.color = $preferedServices.find(
+          preferedService => preferedService.code === e.detail
+        ).color
+      }
 
-  const onSelectedService = (e, i) => {
-    services[i].code = e.detail
-    services[i].color = $preferedServices.find(
-      preferedService => preferedService.code === e.detail
-    ).color
+      return service
+    })
   }
 
   const onAddService = () => {
-    services.push({
-      id: services.length + 1,
-      code: $preferedServices[0].code,
-      duration: 5,
-      color: $preferedServices[0].color
-    })
-    serviceEditModeIndex = services.length - 1
+    services = [
+      ...services,
+      {
+        id: services.length,
+        code: $preferedServices[0].code,
+        duration: 5,
+        color: $preferedServices[0].color
+      }
+    ]
+    serviceEditModeId = services.length - 1
+  }
+
+  const onDeleteService = id => {
+    services = services.reduce((newServices, service) => {
+      if (service.id === id) return newServices
+
+      if (service.id > id) {
+        const updatedService = { ...service }
+
+        updatedService.id--
+
+        return [...newServices, updatedService]
+      }
+
+      return [...newServices, service]
+    }, [])
+    serviceEditModeId = -1
   }
 </script>
 
@@ -95,24 +122,29 @@
     </div>
   </li>
   {#each [...services].reverse() as service, i (service.id)}
-    <li id="service-{servicesReversedIndex(i)}" class="service">
+    <li id="service-{service.id}" class="service">
       <div class="service-timeline">
         <span>{service.duration}'</span>
       </div>
-      <div class="service-label-container">
-        {#if servicesReversedIndex(i) !== serviceEditModeIndex}
-          <Chip className="service-label"
-            title="Éditer la thérapie {`"${getServiceLightLabel(service.code)}"`}"
-            trailingIcon="edit" color="{service.color}"
-            on:click={() => onEditService(servicesReversedIndex(i))}>
-            {getServiceLightLabel(service.code)}
-          </Chip>
+      <div class="service-control-container" class:edit-mode={service.id === serviceEditModeId}>
+        {#if service.id !== serviceEditModeId}
+          <div class="service-label-container">
+            <Chip className="service-label" title="Éditer la thérapie {`"
+              ${getServiceLightLabel(service.code)}"`}" trailingIcon="edit" color="{service.color}"
+              on:click={() => onEditService(service.id)}>
+              {getServiceLightLabel(service.code)}
+            </Chip>
+            <Button className="service-delete" title="Supprimer la thérapie {`"
+              ${getServiceLightLabel(service.code)}"`}" on:click={onDeleteService(service.id)}>
+              Supprimer
+            </Button>
+          </div>
         {:else}
-          <form class="aposto-form" data-index="{servicesReversedIndex(i)}" transition:fade>
+          <form class="aposto-form" data-id="{service.id}" transition:fade>
             <PreferedServiceList selectedServiceCode="{service.code}"
-              on:selectedService={(e) => onSelectedService(e, servicesReversedIndex(i))} />
+              on:selectedService={(e) => onSelectedService(e, service.id)} />
             <TextField bind:value={service.duration}
-              fieldId={`service-duration-input-${servicesReversedIndex(i)}`}
+              fieldId={`service-duration-input-${service.id}`}
               type="number" outlined>
               Durée
             </TextField>
