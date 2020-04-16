@@ -43,7 +43,8 @@
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
   {#each bestMatches as patient (patient.id)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(patient.id)}>
-      <Chip leadingIcon="face" touchWrapper>
+      <Chip title="Sélectionner le patient {patient.firstName} {patient.lastName}" leadingIcon="face"
+        touchWrapper>
         {patient.firstName} {patient.lastName}
       </Chip>
     </li>

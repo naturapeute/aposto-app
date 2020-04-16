@@ -1,5 +1,5 @@
 <script>
-  export let title = ''
+  export let title
   export let type = 'button'
   export let fab = false
   export let disabled = false
@@ -11,7 +11,7 @@
     <slot></slot>
   </button>
 {:else}
-  <button class="mdc-fab" aria-label={fabLabel} {disabled}>
+  <button class="mdc-fab" aria-label={fabLabel} {title} {disabled}>
     <div class="mdc-fab__ripple"></div>
     <span class="mdc-fab__icon material-icons-round">
       <slot></slot>

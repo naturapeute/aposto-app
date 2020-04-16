@@ -81,7 +81,8 @@
     <span slot="label">L'envoi de la facture a échoué. Veuillez réessayer plus tard...</span>
 
     <div slot="actions">
-      <Button on:click={onSendInvoice} snackbar>
+      <Button on:click={onSendInvoice} title="Réessayer d'envoyer la facture par mail au patient"
+        snackbar>
         Réessayer
       </Button>
     </div>

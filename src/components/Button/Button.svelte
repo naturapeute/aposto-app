@@ -6,7 +6,7 @@
   export let snackbar = false
   export let icon = null
   export let type = 'button'
-  export let title = ''
+  export let title
   export let dialogAction = null
   export let dialogInitialFocus = null
   export let className = ''

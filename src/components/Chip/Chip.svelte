@@ -1,6 +1,7 @@
 <script>
   export let touchWrapper = false
   export let selected = false
+  export let title
   export let leadingIcon = ''
   export let trailingIcon = ''
   export let color = ''
@@ -12,7 +13,7 @@
 </script>
 
 <div bind:this={element} class="mdc-chip {className}" class:mdc-chip--touch={touchWrapper}
-  class:mdc-chip--selected={selected} class:colored={color} on:click>
+  class:mdc-chip--selected={selected} class:colored={color} {title} on:click>
   <div class="mdc-chip__ripple"></div>
   {#if leadingIcon}
     <i class="material-icons-round mdc-chip__icon mdc-chip__icon--leading">

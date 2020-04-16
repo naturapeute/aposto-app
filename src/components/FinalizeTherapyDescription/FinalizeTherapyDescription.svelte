@@ -83,7 +83,9 @@
       </div>
       <div class="service-label-container">
         {#if servicesReversedIndex(i) !== serviceEditModeIndex}
-          <Chip className="service-label" trailingIcon="edit" color="{service.color}"
+          <Chip className="service-label"
+            title="Éditer la thérapie {`"${getServiceLightLabel(service.code)}"`}"
+            trailingIcon="edit" color="{service.color}"
             on:click={() => onEditService(servicesReversedIndex(i))}>
             {getServiceLightLabel(service.code)}
           </Chip>

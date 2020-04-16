@@ -13,7 +13,7 @@
       {patient.firstName} {patient.lastName}</span>.
   </p>
   <p>Vous devriez recevoir une copie dans votre boîte mail sous peu.</p>
-  <Button>
+  <Button title="Créer une nouvelle facture">
     Créer une nouvelle facture
   </Button>
 </div>

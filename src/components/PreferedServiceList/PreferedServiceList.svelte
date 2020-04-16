@@ -16,7 +16,8 @@
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
   {#each $preferedServices as preferedService (preferedService.code)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(preferedService.code)}>
-      <Chip leadingIcon="spa" color="{preferedService.color}"
+      <Chip title="Sélectionner le service {`"${getServiceLightLabel(preferedService.code)}"`}"
+        leadingIcon="spa" color="{preferedService.color}"
         selected={preferedService.code === selectedServiceCode} touchWrapper>
         {getServiceLightLabel(preferedService.code)}
       </Chip>
