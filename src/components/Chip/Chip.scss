@@ -3,6 +3,10 @@
   border: 1px solid var(--chip-color);
   background-color: initial;
 
+  &.mdc-chip.mdc-chip--selected:hover {
+    color: var(--chip-color);
+  }
+
   .mdc-chip__ripple {
     &::before,
     &::after {
