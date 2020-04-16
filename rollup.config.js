@@ -42,7 +42,7 @@ export default {
         env: {
           PROD: production,
           API_URL: production ? 'https://api.aposto.ch' : 'http://localhost:8080',
-          APP_URL: production ? 'https://etceterra.github.io/aposto-beta/' : 'http://localhost:5000'
+          APP_URL: production ? 'https://beta.aposto.ch/' : 'http://localhost:5000'
         }
       })
     }),
