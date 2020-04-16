@@ -26,11 +26,10 @@
 
 .service {
   transition: height 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
 
-  & .aposto-form {
-    flex: 1;
-    overflow: hidden;
-  }
+.service-label-container {
+  flex: 1;
 }
 
 .service:last-of-type .service-timeline {

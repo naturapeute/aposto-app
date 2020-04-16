@@ -9,7 +9,7 @@
 
   export let services
 
-  const serviceEditModes = services.map(_ => false)
+  let serviceEditModeIndex = -1
 
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
   $: totalDurationHours = Math.floor(totalDuration / 60)
@@ -27,7 +27,7 @@
     services.forEach((service, i) => {
       const serviceListItem = document.querySelector(`#service-${i}`)
 
-      if (!serviceEditModes[i])
+      if (i !== serviceEditModeIndex)
         serviceListItem.style.setProperty(`--service-${i}-height`, `${serviceHeights[i]}px`)
 
       serviceListItem.style.setProperty(`--service-${i}-color`, service.color)
@@ -64,7 +64,7 @@
   }
 
   const onEditService = (i) => {
-    serviceEditModes[i] = true
+    serviceEditModeIndex = i
   }
 
   const onSelectedService = (e, i) => {
@@ -81,24 +81,24 @@
       <div class="service-timeline">
         <span>{service.duration}'</span>
       </div>
-      {#if !serviceEditModes[servicesReversedIndex(i)]}
-        <div class="service-label-container">
+      <div class="service-label-container">
+        {#if servicesReversedIndex(i) !== serviceEditModeIndex}
           <Chip className="service-label" trailingIcon="edit" color="{service.color}"
             on:click={() => onEditService(servicesReversedIndex(i))}>
             {getServiceLightLabel(service.code)}
           </Chip>
-        </div>
-      {:else}
-        <form class="aposto-form" data-index="{servicesReversedIndex(i)}" transition:fade>
-          <PreferedServiceList selectedServiceCode="{service.code}"
-            on:selectedService={(e) => onSelectedService(e, servicesReversedIndex(i))} />
-          <TextField bind:value={service.duration}
-            fieldId={`service-duration-input-${servicesReversedIndex(i)}`}
-            type="number" outlined>
-            Durée
-          </TextField>
-        </form>
-      {/if}
+        {:else}
+          <form class="aposto-form" data-index="{servicesReversedIndex(i)}" transition:fade>
+            <PreferedServiceList selectedServiceCode="{service.code}"
+              on:selectedService={(e) => onSelectedService(e, servicesReversedIndex(i))} />
+            <TextField bind:value={service.duration}
+              fieldId={`service-duration-input-${servicesReversedIndex(i)}`}
+              type="number" outlined>
+              Durée
+            </TextField>
+          </form>
+        {/if}
+      </div>
     </li>
   {/each}
 </ul>
