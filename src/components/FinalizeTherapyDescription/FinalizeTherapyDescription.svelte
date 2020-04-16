@@ -6,6 +6,7 @@
   import Chip from '../Chip/Chip.svelte'
   import TextField from '../TextField/TextField.svelte'
   import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
+  import IconButton from '../IconButton/IconButton.svelte'
 
   export let services
 
@@ -63,7 +64,7 @@
     return services.length - 1 - i
   }
 
-  const onEditService = (i) => {
+  const onEditService = i => {
     serviceEditModeIndex = i
   }
 
@@ -73,10 +74,27 @@
       preferedService => preferedService.code === e.detail
     ).color
   }
+
+  const onAddService = () => {
+    services.push({
+      id: services.length + 1,
+      code: $preferedServices[0].code,
+      duration: 5,
+      color: $preferedServices[0].color
+    })
+    serviceEditModeIndex = services.length - 1
+  }
 </script>
 
 <ul class="therapy-description">
-  {#each [...services].reverse() as service, i}
+  <li class="service service-add">
+    <div class="service-timeline">
+      <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
+        add
+      </IconButton>
+    </div>
+  </li>
+  {#each [...services].reverse() as service, i (service.id)}
     <li id="service-{servicesReversedIndex(i)}" class="service">
       <div class="service-timeline">
         <span>{service.duration}'</span>
