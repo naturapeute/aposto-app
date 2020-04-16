@@ -1,17 +1,15 @@
 <script>
   import { afterUpdate } from 'svelte'
   import { cubicOut } from 'svelte/easing'
-  import { getServiceLightLabel } from '../../js/utils'
   import { preferedServices } from '../../js/store'
+  import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
   import TextField from '../TextField/TextField.svelte'
-  import Select from '../Select/Select.svelte'
+  import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
 
   export let services
 
-  const serviceEdits = services.map(e => ({ ...e }))
-
-  $: serviceEditModes = services.map(_ => false)
+  const serviceEditModes = services.map(_ => false)
 
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
   $: totalDurationHours = Math.floor(totalDuration / 60)
@@ -29,7 +27,9 @@
     services.forEach((service, i) => {
       const serviceListItem = document.querySelector(`#service-${i}`)
 
-      serviceListItem.style.setProperty(`--service-${i}-height`, `${serviceHeights[i]}px`)
+      if (!serviceEditModes[i])
+        serviceListItem.style.setProperty(`--service-${i}-height`, `${serviceHeights[i]}px`)
+
       serviceListItem.style.setProperty(`--service-${i}-color`, service.color)
     })
   })
@@ -38,6 +38,13 @@
     const mt = parseFloat(getComputedStyle(node).marginTop)
     const h = parseFloat(getComputedStyle(node).height)
     const o = +getComputedStyle(node).opacity
+
+    const index = Number(node.getAttribute('data-index'))
+
+    document.querySelector(`#service-${index}`).style.setProperty(
+      `--service-${index}-height`,
+      `${parseFloat(getComputedStyle(node).height) + 2 * 16}px`
+    )
 
     return {
       duration: 400,
@@ -52,34 +59,40 @@
     }
   }
 
+  function servicesReversedIndex(i) {
+    return services.length - 1 - i
+  }
+
   const onEditService = (i) => {
     serviceEditModes[i] = true
+  }
+
+  const onSelectedService = (e, i) => {
+    services[i].code = e.detail
+    services[i].color = $preferedServices.find(
+      preferedService => preferedService.code === e.detail
+    ).color
   }
 </script>
 
 <ul class="therapy-description">
-  {#each [...services].reverse() as service, i (service.code)}
-    <li id="service-{services.length - 1 - i}" class="service"
-      class:edit-mode={serviceEditModes[services.length - 1 - i]}>
+  {#each [...services].reverse() as service, i}
+    <li id="service-{servicesReversedIndex(i)}" class="service">
       <div class="service-timeline">
         <span>{service.duration}'</span>
       </div>
       <div class="service-label-container">
-        <Chip className="service-label" trailingIcon="edit" color="{service.color}"
-        on:click={() => onEditService(services.length - 1 - i)}>
-          {getServiceLightLabel(service.code)}
-        </Chip>
-        {#if serviceEditModes[services.length - 1 - i]}
-          <form class="aposto-form" transition:fade>
-            <Select bind:value={serviceEdits[services.length - 1 - i].code}
-              fieldId={`service-code-select-${services.length - 1 - i}`}
-              options={$preferedServices.map(preferedService =>
-                ({ value: preferedService.code, label: getServiceLightLabel(preferedService.code) })
-              )} outlined>
-              Thérapie
-            </Select>
-            <TextField bind:value={serviceEdits[services.length - 1 - i].duration}
-              fieldId={`service-duration-input-${services.length - 1 - i}`}
+        {#if !serviceEditModes[servicesReversedIndex(i)]}
+          <Chip className="service-label" trailingIcon="edit" color="{service.color}"
+            on:click={() => onEditService(servicesReversedIndex(i))}>
+            {getServiceLightLabel(service.code)}
+          </Chip>
+        {:else}
+          <form class="aposto-form" data-index="{servicesReversedIndex(i)}" transition:fade>
+            <PreferedServiceList selectedServiceCode="{service.code}"
+              on:selectedService={(e) => onSelectedService(e, servicesReversedIndex(i))} />
+            <TextField bind:value={service.duration}
+              fieldId={`service-duration-input-${servicesReversedIndex(i)}`}
               type="number" outlined>
               Durée
             </TextField>
