@@ -1,3 +1,13 @@
+.mdc-chip {
+  max-width: 100%;
+
+  .chip-label {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .colored {
   color: var(--chip-color);
   border: 1px solid var(--chip-color);

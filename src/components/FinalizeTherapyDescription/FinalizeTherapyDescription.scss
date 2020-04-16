@@ -26,6 +26,11 @@
 
 .service {
   transition: height 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+  & .aposto-form {
+    flex: 1;
+    overflow: hidden;
+  }
 }
 
 .service:last-of-type .service-timeline {
@@ -36,13 +41,6 @@
 .service:not(:last-of-type) .service-timeline {
   margin-top: -18px;
   padding-top: 18px;
-}
-
-.service-label-container {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  flex: 1;
 }
 
 :global(.service-label) {

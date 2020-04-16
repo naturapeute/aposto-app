@@ -81,24 +81,24 @@
       <div class="service-timeline">
         <span>{service.duration}'</span>
       </div>
-      <div class="service-label-container">
-        {#if !serviceEditModes[servicesReversedIndex(i)]}
+      {#if !serviceEditModes[servicesReversedIndex(i)]}
+        <div class="service-label-container">
           <Chip className="service-label" trailingIcon="edit" color="{service.color}"
             on:click={() => onEditService(servicesReversedIndex(i))}>
             {getServiceLightLabel(service.code)}
           </Chip>
-        {:else}
-          <form class="aposto-form" data-index="{servicesReversedIndex(i)}" transition:fade>
-            <PreferedServiceList selectedServiceCode="{service.code}"
-              on:selectedService={(e) => onSelectedService(e, servicesReversedIndex(i))} />
-            <TextField bind:value={service.duration}
-              fieldId={`service-duration-input-${servicesReversedIndex(i)}`}
-              type="number" outlined>
-              Durée
-            </TextField>
-          </form>
-        {/if}
-      </div>
+        </div>
+      {:else}
+        <form class="aposto-form" data-index="{servicesReversedIndex(i)}" transition:fade>
+          <PreferedServiceList selectedServiceCode="{service.code}"
+            on:selectedService={(e) => onSelectedService(e, servicesReversedIndex(i))} />
+          <TextField bind:value={service.duration}
+            fieldId={`service-duration-input-${servicesReversedIndex(i)}`}
+            type="number" outlined>
+            Durée
+          </TextField>
+        </form>
+      {/if}
     </li>
   {/each}
 </ul>

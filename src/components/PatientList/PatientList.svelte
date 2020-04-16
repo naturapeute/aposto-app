@@ -1,7 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { patients } from '../../js/store'
-  import TouchWrapper from '../TouchWrapper/TouchWrapper.svelte'
   import Chip from '../Chip/Chip.svelte'
 
   export let filterPatient
@@ -43,12 +42,10 @@
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
   {#each bestMatches as patient (patient.id)}
-    <li on:click={() => onChipClick(patient.id)}>
-      <TouchWrapper>
-        <Chip leadingIcon="face" touchWrapper>
-          {patient.firstName} {patient.lastName}
-        </Chip>
-      </TouchWrapper>
+    <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(patient.id)}>
+      <Chip leadingIcon="face" touchWrapper>
+        {patient.firstName} {patient.lastName}
+      </Chip>
     </li>
   {/each}
 </ul>

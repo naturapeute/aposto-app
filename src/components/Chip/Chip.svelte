@@ -19,7 +19,7 @@
       {leadingIcon}
     </i>
   {/if}
-  <span role="gridcell">
+  <span class="chip-label" role="gridcell">
     <span tabindex="0" class="mdc-chip__primary-action">
       <span class="mdc-chip__text">
         <slot></slot>
