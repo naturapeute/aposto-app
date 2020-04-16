@@ -6,10 +6,9 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "init-deploy": "rm -rf public/.git && cd public && git init && git add . && git commit -m \"Initial commit\"",
-    "remote-deploy": "cd public && git remote add origin git@github.com:etceterra/aposto-beta.git",
-    "push-deploy": "cd public && git push --force origin master:gh-pages",
-    "deploy": "npm run init-deploy && npm run remote-deploy && npm run push-deploy",
+    "init-deploy": "cd public && git add . && git commit -m \"New build\"",
+    "push-deploy": "cd public && git push origin master:gh-pages",
+    "deploy": "npm run init-deploy && npm run push-deploy",
     "build-deploy": "npm run build && npm run deploy"
   },
   "repository": {
