@@ -27,8 +27,11 @@
 
   onMount(() => {
     window.addEventListener('click', e => {
+      if (serviceEditModeId === -1) return
+
       const serviceForm = document.querySelector(`#service-${serviceEditModeId}-form`)
-      if (serviceEditModeId > -1 && serviceForm && !serviceForm.contains(e.target))
+
+      if (!e.target.closest(`#service-${serviceEditModeId}-label`) && !serviceForm.contains(e.target))
         onCloseEditService()
     })
   })
@@ -143,7 +146,7 @@
       </div>
       <div class="service-control-container" class:edit-mode={service.id === serviceEditModeId}>
         {#if service.id !== serviceEditModeId}
-          <div class="service-label-container">
+          <div id="service-{service.id}-label" class="service-label-container">
             <Chip className="service-label" title="Éditer la thérapie {`"
               ${getServiceLightLabel(service.code)}"`}" trailingIcon="edit" color="{service.color}"
               on:click={() => onEditService(service.id)}>
