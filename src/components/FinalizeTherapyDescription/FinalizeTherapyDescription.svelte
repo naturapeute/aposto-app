@@ -1,19 +1,13 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte'
-  import { cubicOut } from 'svelte/easing'
+  import { beforeUpdate } from 'svelte'
   import { preferedServices } from '../../js/store'
-  import { getServiceLightLabel } from '../../js/utils'
-  import Chip from '../Chip/Chip.svelte'
-  import TextField from '../TextField/TextField.svelte'
-  import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
-  import Button from '../Button/Button.svelte'
+  import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
 
   export let services
 
+  let serviceIdCounter = 0
   let serviceEditModeId = -1
-
-  $: services.forEach((service, i) => { service.id = i })
 
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
   $: totalDurationHours = Math.floor(totalDuration / 60)
@@ -27,99 +21,34 @@
     return serviceHeight
   })
 
-  onMount(() => {
-    window.addEventListener('click', e => {
-      if (serviceEditModeId === -1) return
-
-      const serviceForm = document.querySelector(`#service-${serviceEditModeId}-form`)
-
-      if (!e.target.closest(`#service-${serviceEditModeId}-label`) &&
-        !e.target.closest('.service-add') && !serviceForm.contains(e.target))
-        onCloseEditService()
-    })
-  })
-
-  afterUpdate(() => {
+  beforeUpdate(() => {
     services.forEach(service => {
-      const serviceListItem = document.querySelector(`#service-${service.id}`)
-
-      if (service.id !== serviceEditModeId) {
-        serviceListItem.style.setProperty(
-          `--service-${service.id}-height`,
-          `${serviceHeights[service.id]}px`
-        )
-      }
-
-      serviceListItem.style.setProperty(`--service-${service.id}-color`, service.color)
+      if (service.id === undefined)
+        service.id = serviceIdCounter++
     })
   })
-
-  function fade(node) {
-    const mt = parseFloat(getComputedStyle(node).marginTop)
-    const h = parseFloat(getComputedStyle(node).height)
-    const o = +getComputedStyle(node).opacity
-
-    const id = Number(node.getAttribute('data-id'))
-
-    document.querySelector(`#service-${id}`).style.setProperty(
-      `--service-${id}-height`,
-      `${parseFloat(getComputedStyle(node).height) + 2 * 16}px`
-    )
-
-    return {
-      duration: 400,
-      easing: cubicOut,
-      css: t => {
-        return `
-        opacity: ${t * o};
-        margin-top: ${t * mt}px;
-        height: ${t * h}px;
-      `
-      }
-    }
-  }
-
-  function onEditService(id) {
-    serviceEditModeId = id
-  }
-
-  function onCloseEditService() {
-    serviceEditModeId = -1
-  }
-
-  function onSelectedService(e, id) {
-    services = services.map(service => {
-      if (service.id === id) {
-        service.code = e.detail
-        service.color = $preferedServices.find(
-          preferedService => preferedService.code === e.detail
-        ).color
-      }
-
-      return service
-    })
-  }
 
   function onAddService() {
     services = [
       ...services,
       {
+        id: serviceIdCounter++,
         code: $preferedServices[0].code,
         duration: 5,
         color: $preferedServices[0].color
       }
     ]
-    serviceEditModeId = services.length - 1
+    serviceEditModeId = serviceIdCounter - 1
   }
 
-  function onDeleteService(id) {
+  function onDeleteService(e) {
     services = services.reduce((newServices, service) => {
-      if (service.id === id) return newServices
+      if (service.id === e.detail) return newServices
 
       return [...newServices, service]
     }, [])
 
-    onCloseEditService()
+    serviceEditModeId = -1
   }
 </script>
 
@@ -134,37 +63,8 @@
     </li>
   {/if}
   {#each [...services].reverse() as service, i (service.id)}
-    <li id="service-{service.id}" class="service">
-      <div class="service-timeline">
-        <span>{service.duration}'</span>
-      </div>
-      <div class="service-control-container" class:edit-mode={service.id === serviceEditModeId}>
-        {#if service.id !== serviceEditModeId}
-          <div id="service-{service.id}-label" class="service-label-container">
-            <Chip className="service-label" title="Éditer la thérapie {`"
-              ${getServiceLightLabel(service.code)}"`}" leadingIcon="spa" trailingIcon="edit" color="{service.color}"
-              on:click={() => onEditService(service.id)}>
-              {getServiceLightLabel(service.code)}
-            </Chip>
-            <Button className="service-delete" title="Supprimer la thérapie {`"
-              ${getServiceLightLabel(service.code)}"`}" on:click={onDeleteService(service.id)}>
-              Supprimer
-            </Button>
-          </div>
-        {:else}
-          <form id="service-{service.id}-form" class="aposto-form" data-id="{service.id}"
-            transition:fade on:submit|preventDefault={onCloseEditService}>
-            <PreferedServiceList selectedServiceCode="{service.code}"
-              on:selectedService={(e) => onSelectedService(e, service.id)} />
-            <TextField bind:value={service.duration}
-              fieldId={`service-duration-input-${service.id}`}
-              type="number" outlined>
-              Durée
-            </TextField>
-          </form>
-        {/if}
-      </div>
-    </li>
+    <ServiceDescription bind:service bind:serviceEditModeId {totalDuration}
+      on:deleteService={onDeleteService} />
   {/each}
 </ul>
 <p class="finalize-p total-duration">

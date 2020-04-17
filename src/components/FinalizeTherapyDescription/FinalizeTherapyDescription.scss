@@ -1,6 +1,4 @@
 @use "aposto-theme" as *;
-@use "@material/theme";
-@use "@material/button";
 
 .therapy-description {
   list-style-type: none;
@@ -8,14 +6,9 @@
   margin: 0;
   display: flex;
   flex-direction: column-reverse;
-
-  > * {
-    display: flex;
-    align-items: center;
-  }
 }
 
-.service-timeline {
+:global(.service-timeline) {
   flex-shrink: 0;
   flex-basis: 36px;
   max-width: 36px;
@@ -30,68 +23,19 @@
   font-weight: 700;
 }
 
-.service {
-  transition: height 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
-}
-
-.service-control-container {
-  flex-grow: 1;
-  overflow: hidden;
+:global(.service) {
   display: flex;
-  flex-direction: column;
-
-  &.edit-mode {
-    display: unset;
-  }
+  align-items: center;
 }
 
-.service-label-container {
-  display: flex;
-  overflow: hidden;
-}
-
-.service:last-of-type .service-timeline {
+:global(.service:last-of-type .service-timeline) {
   border-top-right-radius: 18px;
   border-top-left-radius: 18px;
 }
 
-.service:not(:last-of-type) .service-timeline {
+:global(.service:not(:last-of-type) .service-timeline) {
   margin-top: -18px;
   padding-top: 18px;
-}
-
-:global(.service-label) {
-  font-weight: 700;
-  min-width: 0;
-  flex-shrink: 100;
-
-  :global(.mdc-chip__icon) {
-    font-size: 12px;
-    width: 12px;
-    height: 12px;
-  }
-}
-
-:global(.mdc-button.service-delete) {
-  margin-left: 8px;
-  font-size: 12px;
-  color: theme.$error;
-  @include button.height(32px);
-
-  :global(.mdc-button__ripple::before),
-  :global(.mdc-button__ripple::after) {
-    background-color: theme.$error;
-  }
-}
-
-@for $i from 0 through 4 {
-  #service-#{$i} {
-    height: var(--service-#{$i}-height);
-
-    .service-timeline {
-      background-color: var(--service-#{$i}-color);
-    }
-  }
 }
 
 .service-add {
