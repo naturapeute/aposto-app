@@ -51,7 +51,7 @@
   <div slot="dialog-footer">
     <Button className="cancel-button" title="Revenir à l'édition de la facture" dialog
       dialogAction="close" dialogInitialFocus>
-      Éditer
+      Revenir
     </Button>
     <Button title="Confirmer l'envoi de la facture" unelevated dialog dialogAction="accept"
       on:click={onConfirm}>
