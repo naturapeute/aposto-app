@@ -23,4 +23,4 @@
       </Chip>
     </li>
   {/each}
-  </ul>
+</ul>

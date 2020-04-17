@@ -310,7 +310,7 @@ export const preferedServicesFixture = [
 ]
 
 export const selectedServicesFixture = [
-  { id: 0, ...preferedServicesFixture[0], duration: 5 },
-  { id: 1, ...preferedServicesFixture[3], duration: 40 },
-  { id: 2, ...preferedServicesFixture[4], duration: 15 }
+  { ...preferedServicesFixture[0], duration: 5 },
+  { ...preferedServicesFixture[3], duration: 40 },
+  { ...preferedServicesFixture[4], duration: 15 }
 ]

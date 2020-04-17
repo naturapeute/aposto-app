@@ -13,6 +13,8 @@
 
   let serviceEditModeId = -1
 
+  $: services.forEach((service, i) => { service.id = i })
+
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
   $: totalDurationHours = Math.floor(totalDuration / 60)
   $: totalDurationMinutes = Math.round(((totalDuration / 60) - totalDurationHours) * 60)
@@ -31,7 +33,8 @@
 
       const serviceForm = document.querySelector(`#service-${serviceEditModeId}-form`)
 
-      if (!e.target.closest(`#service-${serviceEditModeId}-label`) && !serviceForm.contains(e.target))
+      if (!e.target.closest(`#service-${serviceEditModeId}-label`) &&
+        !e.target.closest('.service-add') && !serviceForm.contains(e.target))
         onCloseEditService()
     })
   })
@@ -101,7 +104,6 @@
     services = [
       ...services,
       {
-        id: services.length,
         code: $preferedServices[0].code,
         duration: 5,
         color: $preferedServices[0].color
@@ -113,14 +115,6 @@
   function onDeleteService(id) {
     services = services.reduce((newServices, service) => {
       if (service.id === id) return newServices
-
-      if (service.id > id) {
-        const updatedService = { ...service }
-
-        updatedService.id--
-
-        return [...newServices, updatedService]
-      }
 
       return [...newServices, service]
     }, [])
