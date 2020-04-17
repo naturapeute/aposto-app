@@ -1,4 +1,4 @@
-export const getServiceLightLabel = code => {
+export function getServiceLightLabel(code) {
   const match = serviceCodes.find(serviceCode => serviceCode.value === code)
 
   return match ? match.lightLabel : ''

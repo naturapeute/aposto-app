@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte'
   import { MDCSnackbar } from '@material/snackbar'
 
-  export const open = () => {
+  export function open() {
     snackbar.open()
   }
 

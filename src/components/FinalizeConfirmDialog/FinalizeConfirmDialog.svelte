@@ -7,11 +7,11 @@
 
   export let patient
 
-  export const open = () => {
+  export function open() {
     dialog.open()
   }
 
-  export const close = () => {
+  export function close() {
     dialog.close()
   }
 
@@ -19,7 +19,7 @@
   let dontShowAgain = false
   const dispatch = createEventDispatcher()
 
-  const onConfirm = () => {
+  function onConfirm() {
     if (dontShowAgain) window.localStorage.setItem('dontShowAgainConfirmSend', true)
     dispatch('confirm')
   }

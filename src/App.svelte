@@ -6,7 +6,7 @@
 
   const selectedServices = [...selectedServicesFixture]
 
-  const onUpdateUser = e => {
+  function onUpdateUser(e) {
     $author = { ...e.detail.author }
     $therapist = { ...e.detail.therapist }
   }

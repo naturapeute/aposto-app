@@ -73,15 +73,15 @@
     }
   }
 
-  const onEditService = id => {
+  function onEditService(id) {
     serviceEditModeId = id
   }
 
-  const onCloseEditService = () => {
+  function onCloseEditService() {
     serviceEditModeId = -1
   }
 
-  const onSelectedService = (e, id) => {
+  function onSelectedService(e, id) {
     services = services.map(service => {
       if (service.id === id) {
         service.code = e.detail
@@ -94,7 +94,7 @@
     })
   }
 
-  const onAddService = () => {
+  function onAddService() {
     services = [
       ...services,
       {
@@ -107,7 +107,7 @@
     serviceEditModeId = services.length - 1
   }
 
-  const onDeleteService = id => {
+  function onDeleteService(id) {
     services = services.reduce((newServices, service) => {
       if (service.id === id) return newServices
 

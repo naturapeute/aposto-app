@@ -1,4 +1,4 @@
-export const sendInvoice = async (author, therapist, patient, servicePrice, services) => {
+export async function sendInvoice(author, therapist, patient, servicePrice, services) {
   delete patient.id
 
   services.forEach(service => {

@@ -10,7 +10,7 @@
 
   $: bestMatches = getBestMatches(filterPatient)
 
-  const onChipClick = patientId => {
+  function onChipClick(patientId) {
     patient = { ...$patients.find(patient => patient.id === patientId) }
     dispatch('patientSelected')
   }

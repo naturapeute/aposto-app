@@ -7,18 +7,18 @@
   let filterPatient = ''
   let patientSearchMode = !patient
 
-  const onChangePatient = () => {
+  function onChangePatient() {
     patientSearchMode = true
   }
 
-  const onCloseSearch = () => {
+  function onCloseSearch() {
     if (patient)
       patientSearchMode = false
 
     filterPatient = ''
   }
 
-  const onTextFieldMount = e => {
+  function onTextFieldMount(e) {
     e.detail.focus()
   }
 </script>

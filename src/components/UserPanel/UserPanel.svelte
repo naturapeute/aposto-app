@@ -28,14 +28,14 @@
     if (drawer) drawer.detroy()
   })
 
-  const onCloseClick = () => {
+  function onCloseClick() {
     dispatch('closeUserPanel')
     _author = { ...$author }
     _therapist = { ...$therapist }
     _servicePrice = $servicePrice
   }
 
-  const onSubmit = () => {
+  function onSubmit() {
     $author = { ..._author }
     $therapist = { ..._therapist }
     $servicePrice = _servicePrice

@@ -8,7 +8,7 @@
 
   const dispatch = createEventDispatcher()
 
-  const onChipClick = (code) => {
+  function onChipClick(code) {
     dispatch('selectedService', code)
   }
 </script>

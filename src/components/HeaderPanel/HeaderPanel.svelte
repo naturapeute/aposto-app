@@ -7,7 +7,7 @@
 
   let userPanelOpenned = false
 
-  const onToggleUserPanel = () => {
+  function onToggleUserPanel() {
     userPanelOpenned = !userPanelOpenned
   }
 </script>

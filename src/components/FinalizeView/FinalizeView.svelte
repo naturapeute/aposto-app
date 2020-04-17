@@ -22,7 +22,7 @@
     0
   )
 
-  const onSendInvoice = () => {
+  function onSendInvoice() {
     const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
 
     if (!dontShowAgain)
@@ -31,7 +31,7 @@
       onConfirmSend()
   }
 
-  const onConfirmSend = () => {
+  function onConfirmSend() {
     $loading = true
 
     sendInvoice(

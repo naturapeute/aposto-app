@@ -24,13 +24,13 @@
   })
 
   // NOTE : Credits to Rich Harris (https://stackoverflow.com/a/57393751)
-  const onInput = e => {
+  function onInput(e) {
     value = type.match(/^(number|range)$/)
       ? +e.target.value
       : e.target.value
   }
 
-  const onTrailingIconClick = () => {
+  function onTrailingIconClick() {
     dispatch('trailingIconClick')
   }
 </script>

@@ -4,11 +4,11 @@
 
   export let dialogId
 
-  export const open = () => {
+  export function open() {
     dialog.open()
   }
 
-  export const close = () => {
+  export function close() {
     dialog.close()
   }
 
