@@ -4,6 +4,16 @@ export function getServiceLightLabel(code) {
   return match ? match.lightLabel : ''
 }
 
+export function getDurationLabel(duration) {
+  if (duration < 60)
+    return `${duration}'`
+
+  const durationHours = Math.floor(duration / 60)
+  const durationMinutes = Math.round(((duration / 60) - durationHours) * 60)
+
+  return `${durationHours}h${durationMinutes || ''}`
+}
+
 const serviceCodes = [
   { value: 1003, lightLabel: 'Acupressure' },
   { value: 1004, lightLabel: 'Acupuncture' },

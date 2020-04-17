@@ -6,7 +6,7 @@
   import Chip from '../Chip/Chip.svelte'
   import Button from '../Button/Button.svelte'
   import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
-  import TextField from '../TextField/TextField.svelte'
+  import DurationList from '../DurationList/DurationList.svelte'
 
   export let service
   export let serviceEditModeId
@@ -104,10 +104,7 @@
         on:submit|preventDefault={onCloseEditService}>
         <PreferedServiceList selectedServiceCode="{service.code}"
           on:selectedService={onSelectedService} />
-        <TextField bind:value={service.duration} fieldId="service-duration-input" type="number"
-          outlined>
-          Durée
-        </TextField>
+        <DurationList bind:selectedServiceDuration={service.duration} />
       </form>
     {/if}
   </div>

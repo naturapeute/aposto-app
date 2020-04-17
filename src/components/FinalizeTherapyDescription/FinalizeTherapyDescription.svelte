@@ -1,5 +1,6 @@
 <script>
   import { beforeUpdate } from 'svelte'
+  import { getDurationLabel } from '../../js/utils'
   import { preferedServices } from '../../js/store'
   import IconButton from '../IconButton/IconButton.svelte'
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
@@ -10,8 +11,6 @@
   let serviceEditModeId = -1
 
   $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
-  $: totalDurationHours = Math.floor(totalDuration / 60)
-  $: totalDurationMinutes = Math.round(((totalDuration / 60) - totalDurationHours) * 60)
 
   $: serviceHeights = services.map(service => {
     let serviceHeight = (20 * 12) * (service.duration / totalDuration)
@@ -70,9 +69,7 @@
 <p class="finalize-p total-duration">
   <i class="material-icons-round">schedule</i>
   <span class="typography--button-inline no-click-inline">
-    {totalDurationHours}h{#if totalDurationMinutes}
-      {totalDurationMinutes}
-    {/if}
+    {getDurationLabel(totalDuration)}
   </span>
 </p>
 
