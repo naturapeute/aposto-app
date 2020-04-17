@@ -15,6 +15,7 @@
 
   let errorSnackbar
   let confirmDialog
+  let askConfirm = false
   let successSend = false
 
   $: totalAmount = services.reduce(
@@ -27,6 +28,8 @@
 
     if (!dontShowAgain)
       confirmDialog.open()
+    else if (!askConfirm)
+      askConfirm = true
     else
       onConfirmSend()
   }
@@ -72,8 +75,9 @@
     </div>
   </div>
   <div class="send-button" class:loading={$loading}>
-    <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer" fab
-      disabled={!patient || $loading}>
+    <IconButton className={askConfirm ? 'confirm-button' : ''} type="submit"
+      title="{askConfirm ? "Confimer l'envoi" : "Envoyer la facture par mail au patient"}"
+      fabLabel="Envoyer" fab disabled={!patient || $loading}>
       send
     </IconButton>
   </div>

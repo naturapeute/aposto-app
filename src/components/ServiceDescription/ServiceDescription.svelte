@@ -52,8 +52,6 @@
   }
 
   function onSelectedService(e) {
-    // TODO : Check it is updating
-
     service.code = e.detail
     service.color = $preferedServices.find(
       preferedService => preferedService.code === e.detail
