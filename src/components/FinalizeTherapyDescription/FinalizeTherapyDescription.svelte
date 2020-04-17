@@ -148,7 +148,7 @@
         {#if service.id !== serviceEditModeId}
           <div id="service-{service.id}-label" class="service-label-container">
             <Chip className="service-label" title="Éditer la thérapie {`"
-              ${getServiceLightLabel(service.code)}"`}" trailingIcon="edit" color="{service.color}"
+              ${getServiceLightLabel(service.code)}"`}" leadingIcon="spa" trailingIcon="edit" color="{service.color}"
               on:click={() => onEditService(service.id)}>
               {getServiceLightLabel(service.code)}
             </Chip>
