@@ -127,13 +127,15 @@
 </script>
 
 <ul class="therapy-description">
-  <li class="service service-add">
-    <div class="service-timeline">
-      <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
-        add
-      </IconButton>
-    </div>
-  </li>
+  {#if services.length < 5}
+    <li class="service service-add">
+      <div class="service-timeline">
+        <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
+          add
+        </IconButton>
+      </div>
+    </li>
+  {/if}
   {#each [...services].reverse() as service, i (service.id)}
     <li id="service-{service.id}" class="service">
       <div class="service-timeline">
