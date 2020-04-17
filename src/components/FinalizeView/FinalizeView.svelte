@@ -63,7 +63,7 @@
       <FinalizePatient bind:patient />
     </div>
     <div class="mdc-card">
-      <FinalizeTherapyDescription {services} />
+      <FinalizeTherapyDescription bind:services />
     </div>
     <div class="mdc-card">
       <p class="finalize-p">
