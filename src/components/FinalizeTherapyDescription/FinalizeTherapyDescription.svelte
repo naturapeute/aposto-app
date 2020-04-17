@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from 'svelte'
+  import { onMount, afterUpdate } from 'svelte'
   import { cubicOut } from 'svelte/easing'
   import { preferedServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
@@ -23,6 +23,14 @@
     if (serviceHeight < 36) serviceHeight = 36
 
     return serviceHeight
+  })
+
+  onMount(() => {
+    window.addEventListener('click', e => {
+      const serviceForm = document.querySelector(`#service-${serviceEditModeId}-form`)
+      if (serviceEditModeId > -1 && serviceForm && !serviceForm.contains(e.target))
+        onCloseEditService()
+    })
   })
 
   afterUpdate(() => {
@@ -69,6 +77,10 @@
     serviceEditModeId = id
   }
 
+  const onCloseEditService = () => {
+    serviceEditModeId = -1
+  }
+
   const onSelectedService = (e, id) => {
     services = services.map(service => {
       if (service.id === id) {
@@ -109,7 +121,8 @@
 
       return [...newServices, service]
     }, [])
-    serviceEditModeId = -1
+
+    onCloseEditService()
   }
 </script>
 
@@ -140,7 +153,8 @@
             </Button>
           </div>
         {:else}
-          <form class="aposto-form" data-id="{service.id}" transition:fade>
+          <form id="service-{service.id}-form" class="aposto-form" data-id="{service.id}"
+            transition:fade on:submit|preventDefault={onCloseEditService}>
             <PreferedServiceList selectedServiceCode="{service.code}"
               on:selectedService={(e) => onSelectedService(e, service.id)} />
             <TextField bind:value={service.duration}
