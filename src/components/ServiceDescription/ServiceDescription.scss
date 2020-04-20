@@ -1,4 +1,4 @@
-@use "@material/theme";
+@use "aposto-theme" as *;
 @use "@material/button";
 
 .service {
@@ -41,11 +41,11 @@
 :global(.mdc-button.service-delete) {
   margin-left: 8px;
   font-size: 12px;
-  color: theme.$error;
+  color: $ligth-gray;
   @include button.height(32px);
 
   :global(.mdc-button__ripple::before),
   :global(.mdc-button__ripple::after) {
-    background-color: theme.$error;
+    background-color: $ligth-gray;
   }
 }

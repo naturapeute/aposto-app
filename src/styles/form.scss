@@ -15,10 +15,6 @@
     @include textfield.fill-color($text-field-fill-color);
   }
 
-  .mdc-text-field.mdc-text-field--outlined {
-    @include textfield.outlined-height($outlined-text-field-height);
-  }
-
   :first-child {
     margin-top: 0;
   }
