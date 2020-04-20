@@ -1,4 +1,5 @@
 <script>
+  export let thisElement = null
   export let raised = false
   export let unelevated = false
   export let outlined = false
@@ -12,7 +13,7 @@
   export let className = ''
 </script>
 
-<button class="mdc-button {className}" class:mdc-button--raised="{raised}"
+<button bind:this={thisElement} class="mdc-button {className}" class:mdc-button--raised="{raised}"
   class:mdc-button--unelevated="{unelevated}" class:mdc-button--outlined="{outlined}"
   class:mdc-dialog__button="{dialog}" class:mdc-snackbar__action="{snackbar}"
   data-mdc-dialog-action="{dialogAction}" data-mdc-dialog-initial-focus="{dialogInitialFocus}"

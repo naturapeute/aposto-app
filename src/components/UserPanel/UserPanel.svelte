@@ -10,13 +10,18 @@
 
   let element
   let drawer = {}
+  let submitButtonElement
   const dispatch = createEventDispatcher()
 
   $: drawer.open = openned
 
   onMount(() => {
-    drawer = MDCDrawer.attachTo(element)
-    element.addEventListener('MDCDrawer:opened', () => {
+    drawer = new MDCDrawer(element)
+    // NOTE : We are overriding the Material scrim click handler as we only want to close the drawer
+    // on scrim click if and only if the form is valid
+    Object.getPrototypeOf(drawer.foundation_).handleScrimClick = () => { }
+
+    drawer.listen('MDCDrawer:opened', () => {
       document.querySelector('.mdc-icon-button').blur()
     })
   })
@@ -26,11 +31,15 @@
   })
 
   function onClose() {
+    submitButtonElement.click()
+  }
+
+  function onSubmit() {
     dispatch('closeUserPanel')
   }
 </script>
 
-<aside bind:this={element} class="mdc-drawer mdc-drawer--modal">
+<aside bind:this={element} class="mdc-drawer mdc-drawer--modal" dismissible={false}>
   <div class="mdc-drawer__header">
     <div>
       <h1 class="mdc-drawer__title">Vos informations</h1>
@@ -42,7 +51,7 @@
   </div>
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
-    <form class="aposto-form drawer-form" on:submit|preventDefault={onClose}>
+    <form class="aposto-form drawer-form" on:submit|preventDefault={onSubmit}>
       <h6 class="mdc-list-group__subheader">Auteur des factures</h6>
       <div class="drawer-form-section">
         <TextField bind:value={$author.name} fieldId="author-name" required>
@@ -96,7 +105,8 @@
           Tarif horaire
         </TextField>
       </div>
-      <Button className="drawer-submit-button" type="submit" title="Enregistrer les modifications">
+      <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
+        title="Enregistrer les modifications">
         Enregistrer
       </Button>
     </form>
