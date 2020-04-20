@@ -116,7 +116,8 @@
         on:submit|preventDefault={onCloseEditService}>
         <PreferedServiceList selectedServiceCode="{service.code}"
           on:selectedService={onSelectedService} />
-        <DurationList bind:selectedServiceDuration={service.duration} />
+        <DurationList bind:selectedServiceDuration={service.duration}
+          selectedServiceColor="{service.color}" />
       </form>
     {/if}
   </div>

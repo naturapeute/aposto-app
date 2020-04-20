@@ -1,12 +1,21 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, afterUpdate } from 'svelte'
   import { preferedServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
 
   export let selectedServiceCode
 
+  let iconElement
   const dispatch = createEventDispatcher()
+
+  afterUpdate(() => {
+    const selectedServiceColor = $preferedServices.find(
+      preferedService => preferedService.code === selectedServiceCode
+    ).color
+
+    iconElement.style.setProperty('--selected-service-color', selectedServiceColor)
+  })
 
   function onChipClick(code) {
     dispatch('selectedService', code)
@@ -14,7 +23,7 @@
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
-  <i class="material-icons-round">spa</i>
+  <i bind:this={iconElement} class="material-icons-round">spa</i>
   {#each $preferedServices as preferedService (preferedService.code)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(preferedService.code)}>
       <Chip title="Sélectionner le service {`"${getServiceLightLabel(preferedService.code)}"`}"

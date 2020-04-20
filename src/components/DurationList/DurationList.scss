@@ -3,9 +3,9 @@
   width: 32px;
   font-size: 32px;
   margin: 8px 4px;
+  color: var(--selected-service-color);
 }
 
 :global(.duration-chip) {
-  font-weight: 500;
   text-transform: uppercase;
 }

@@ -1,10 +1,17 @@
 <script>
+  import { afterUpdate } from 'svelte'
   import { getDurationLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
 
   export let selectedServiceDuration
+  export let selectedServiceColor
 
+  let iconElement
   const durations = [...range(5, 60, 5), 75, 90]
+
+  afterUpdate(() => {
+    iconElement.style.setProperty('--selected-service-color', selectedServiceColor)
+  })
 
   function range(start, end, step) {
     const length = Math.floor((end - start) / step) + 1
@@ -18,11 +25,11 @@
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
-  <i class="material-icons-round">schedule</i>
+  <i bind:this={iconElement} class="material-icons-round">schedule</i>
   {#each durations as duration (duration)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(duration)}>
       <Chip className="duration-chip" title="Sélectionner la durée  {`"${getDurationLabel(duration)}"`}"
-        selected={duration === selectedServiceDuration} touchWrapper>
+        color={selectedServiceColor} selected={duration === selectedServiceDuration} touchWrapper>
         {getDurationLabel(duration)}
       </Chip>
     </li>
