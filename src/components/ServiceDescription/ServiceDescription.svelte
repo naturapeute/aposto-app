@@ -21,7 +21,14 @@
   $: editMode = service.id === serviceEditModeId
 
   onMount(() => {
-    window.addEventListener('ontouchstart' in window ? 'touchstart' : 'click', closeOnClickOut)
+    window.addEventListener(
+      'ontouchstart' in window ? 'touchstart' : 'click',
+      (e) => {
+        if (editMode && !e.target.closest('.service-label-container') &&
+          !e.target.closest('.service-add') && serviceFormElement &&
+          !serviceFormElement.contains(e.target))
+          onCloseEditService()
+      })
   })
 
   afterUpdate(() => {
@@ -30,14 +37,6 @@
 
     serviceElement.style.setProperty('--service-color', service.color)
   })
-
-  function closeOnClickOut(e) {
-    if (!editMode) return
-
-    if (!e.target.closest('.service-label-container') && !e.target.closest('.service-add') &&
-      serviceFormElement && !serviceFormElement.contains(e.target))
-      onCloseEditService()
-  }
 
   function onEditService() {
     serviceEditModeId = service.id

@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import { slide } from 'svelte/transition'
   import { author, therapist, servicePrice, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
@@ -25,6 +25,15 @@
     (total, service) => total + (service.duration * $servicePrice / 60),
     0
   )
+
+  onMount(() => {
+    window.addEventListener(
+      'ontouchstart' in window ? 'touchstart' : 'click',
+      (e) => {
+        if (askConfirm && !e.target.closest('.confirm-button'))
+          askConfirm = false
+      })
+  })
 
   function onSendInvoice() {
     const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
@@ -86,14 +95,14 @@
   </div>
   <div class="submit-buttons-container">
     {#if !askConfirm}
-      <div class="send-button" out:slide="{{ duration: 400 }}">
+      <div class="send-button" transition:slide="{{ duration: 400 }}">
         <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
           fab disabled={!patient}>
           send
         </IconButton>
       </div>
     {:else}
-      <div class="confirm-button" class:loading={$loading} in:slide="{{ duration: 400 }}">
+      <div class="confirm-button" class:loading={$loading} transition:slide="{{ duration: 400 }}">
         <Button type="submit" title="Confimer l'envoi de la facture par mail au patient"  icon="send"
           raised disabled={$loading}>
           Confirmer l'envoi
