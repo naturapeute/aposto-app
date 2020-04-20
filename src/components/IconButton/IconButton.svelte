@@ -8,7 +8,8 @@
 </script>
 
 {#if !fab}
-  <button class="mdc-icon-button material-icons-outlined {className}" {type} {title} on:click {disabled}>
+  <button class="mdc-icon-button material-icons-outlined {className}" {type} {title} on:click
+    {disabled}>
     <slot></slot>
   </button>
 {:else}

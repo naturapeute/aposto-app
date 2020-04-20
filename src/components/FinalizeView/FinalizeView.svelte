@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { slide } from 'svelte/transition'
   import { author, therapist, servicePrice, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
@@ -83,12 +84,22 @@
       </p>
     </div>
   </div>
-  <div class="send-button" class:loading={$loading}>
-    <IconButton className={askConfirm ? 'confirm-button' : ''} type="submit"
-      title="{askConfirm ? "Confimer l'envoi" : "Envoyer la facture par mail au patient"}"
-      fabLabel="Envoyer" fab disabled={!patient || $loading}>
-      send
-    </IconButton>
+  <div class="submit-buttons-container">
+    {#if !askConfirm}
+      <div class="send-button" out:slide="{{ duration: 400 }}">
+        <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
+          fab disabled={!patient}>
+          send
+        </IconButton>
+      </div>
+    {:else}
+      <div class="confirm-button" class:loading={$loading} in:slide="{{ duration: 400 }}">
+        <Button type="submit" title="Confimer l'envoi de la facture par mail au patient"  icon="send"
+          raised disabled={$loading}>
+          Confirmer l'envoi
+        </Button>
+      </div>
+    {/if}
   </div>
   <Snackbar bind:this={errorSnackbar}>
     <span slot="label">L'envoi de la facture a échoué. Veuillez réessayer plus tard...</span>

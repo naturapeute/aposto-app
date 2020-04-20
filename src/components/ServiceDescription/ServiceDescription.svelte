@@ -59,14 +59,12 @@
   }
 
   function fade(node) {
-    const mt = parseFloat(getComputedStyle(node).marginTop)
-    const h = parseFloat(getComputedStyle(node).height)
-    const o = +getComputedStyle(node).opacity
+    const style = getComputedStyle(node)
+    const mt = parseFloat(style.marginTop)
+    const h = parseFloat(style.height)
+    const o = +style.opacity
 
-    serviceElement.style.setProperty(
-      '--service-height',
-      `${parseFloat(getComputedStyle(node).height) + 2 * 16}px`
-    )
+    serviceElement.style.setProperty('--service-height', `${h + 2 * 16}px`)
 
     return {
       duration: 400,
