@@ -19,7 +19,7 @@
   {title} {type} on:click>
   <div class="mdc-button__ripple"></div>
   {#if icon}
-    <i class="material-icons-round mdc-button__icon" aria-hidden="true">
+    <i class="material-icons-outlined mdc-button__icon" aria-hidden="true">
       {icon}
     </i>
   {/if}

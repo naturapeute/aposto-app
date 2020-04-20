@@ -25,7 +25,7 @@
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
-  <i bind:this={iconElement} class="material-icons-round">schedule</i>
+  <i bind:this={iconElement} class="material-icons-outlined">schedule</i>
   {#each durations as duration (duration)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(duration)}>
       <Chip className="duration-chip" title="Sélectionner la durée  {`"${getDurationLabel(duration)}"`}"

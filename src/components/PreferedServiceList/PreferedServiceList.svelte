@@ -23,7 +23,7 @@
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
-  <i bind:this={iconElement} class="material-icons-round">spa</i>
+  <i bind:this={iconElement} class="material-icons-outlined">spa</i>
   {#each $preferedServices as preferedService (preferedService.code)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(preferedService.code)}>
       <Chip title="Sélectionner le service {`"${getServiceLightLabel(preferedService.code)}"`}"

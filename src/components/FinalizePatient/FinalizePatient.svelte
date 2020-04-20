@@ -26,12 +26,12 @@
 
 {#if patient}
   <p class="finalize-p">
-    <i class="material-icons-round">face</i>
+    <i class="material-icons-outlined">face</i>
     <span class="patient-edit" on:click={onChangePatient}>
       <span class="typography--button-inline" title="Choisir un autre patient">
         {patient.firstName} {patient.lastName}
       </span>
-      <i class="material-icons-round edit-icon">edit</i>
+      <i class="material-icons-outlined edit-icon">edit</i>
     </span>
   </p>
 {/if}

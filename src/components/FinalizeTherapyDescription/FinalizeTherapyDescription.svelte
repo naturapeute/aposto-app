@@ -67,7 +67,7 @@
   {/each}
 </ul>
 <p class="finalize-p total-duration">
-  <i class="material-icons-round">schedule</i>
+  <i class="material-icons-outlined">schedule</i>
   <span class="typography--button-inline no-click-inline">
     {getDurationLabel(totalDuration)}
   </span>

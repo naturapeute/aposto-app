@@ -16,7 +16,7 @@
   class:mdc-chip--selected={selected} class:colored={color} {title} on:click>
   <div class="mdc-chip__ripple"></div>
   {#if leadingIcon}
-    <i class="material-icons-round mdc-chip__icon mdc-chip__icon--leading">
+    <i class="material-icons-outlined mdc-chip__icon mdc-chip__icon--leading">
       {leadingIcon}
     </i>
   {/if}
@@ -29,7 +29,7 @@
   </span>
   {#if trailingIcon}
     <span role="gridcell">
-      <i class="material-icons-round mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1"
+      <i class="material-icons-outlined mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1"
         role="button">
         {trailingIcon}
       </i>

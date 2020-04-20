@@ -45,7 +45,7 @@
     aria-labelledby={fieldId} on:input={onInput} {required}
     autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
-    <i class="material-icons-round mdc-text-field__icon mdc-text-field__icon--trailing"
+    <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>
       {trailingIcon}
     </i>
