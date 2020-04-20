@@ -8,9 +8,6 @@
 
   export let openned = false
 
-  let _author = { ...$author }
-  let _therapist = { ...$therapist }
-  let _servicePrice = $servicePrice
   let element
   let drawer = {}
   const dispatch = createEventDispatcher()
@@ -28,17 +25,7 @@
     if (drawer) drawer.detroy()
   })
 
-  function onCloseClick() {
-    dispatch('closeUserPanel')
-    _author = { ...$author }
-    _therapist = { ...$therapist }
-    _servicePrice = $servicePrice
-  }
-
-  function onSubmit() {
-    $author = { ..._author }
-    $therapist = { ..._therapist }
-    $servicePrice = _servicePrice
+  function onClose() {
     dispatch('closeUserPanel')
   }
 </script>
@@ -49,76 +36,73 @@
       <h1 class="mdc-drawer__title">Vos informations</h1>
       <h2 class="mdc-drawer__subtitle">{$author.name}</h2>
     </div>
-    <IconButton title="Fermer et annuler les modifications" on:click={onCloseClick}>
+    <IconButton title="Fermer et annuler les modifications" on:click={onClose}>
       close
     </IconButton>
   </div>
   <hr class="mdc-list-divider">
-  <form class="drawer-form" on:submit|preventDefault={onSubmit}>
-    <div class="mdc-drawer__content">
+  <div class="mdc-drawer__content">
+    <form class="aposto-form drawer-form" on:submit|preventDefault={onClose}>
       <h6 class="mdc-list-group__subheader">Auteur des factures</h6>
-      <div class="drawer-form-section aposto-form">
-        <TextField bind:value={_author.name} fieldId="author-name" required>
+      <div class="drawer-form-section">
+        <TextField bind:value={$author.name} fieldId="author-name" required>
           Nom ou entreprise
         </TextField>
-        <TextField bind:value={_author.street} fieldId="author-street" required>
+        <TextField bind:value={$author.street} fieldId="author-street" required>
           Rue et n°
         </TextField>
-        <TextField bind:value={_author.ZIP} fieldId="author-zip" required>NPA</TextField>
-        <TextField bind:value={_author.city} fieldId="author-city" required>Localité</TextField>
-        <TextField bind:value={_author.email} type="email" fieldId="author-email" required>
+        <TextField bind:value={$author.ZIP} fieldId="author-zip" required>NPA</TextField>
+        <TextField bind:value={$author.city} fieldId="author-city" required>Localité</TextField>
+        <TextField bind:value={$author.email} type="email" fieldId="author-email" required>
           Email
         </TextField>
-        <TextField bind:value={_author.phone} type="tel" fieldId="author-phone" required>
+        <TextField bind:value={$author.phone} type="tel" fieldId="author-phone" required>
           Téléphone
         </TextField>
-        <TextField bind:value={_author.RCC} type="tel" fieldId="author-rcc" required>
+        <TextField bind:value={$author.RCC} type="tel" fieldId="author-rcc" required>
           N°RCC
         </TextField>
-        <TextField bind:value={_author.GLN} type="tel" fieldId="author-gln" required>
+        <TextField bind:value={$author.GLN} type="tel" fieldId="author-gln" required>
           N°GLN
         </TextField>
       </div>
       <h6 class="mdc-list-group__subheader">Thérapeute</h6>
-      <div class="drawer-form-section aposto-form">
-        <TextField bind:value={_therapist.firstName} fieldId="therapist-first-name" required>
+      <div class="drawer-form-section">
+        <TextField bind:value={$therapist.firstName} fieldId="therapist-first-name" required>
           Prénom
         </TextField>
-        <TextField bind:value={_therapist.lastName} fieldId="therapist-last-name" required>
+        <TextField bind:value={$therapist.lastName} fieldId="therapist-last-name" required>
           Nom
         </TextField>
-        <TextField bind:value={_therapist.street} fieldId="therapist-street" required>
+        <TextField bind:value={$therapist.street} fieldId="therapist-street" required>
           Rue et n°
         </TextField>
-        <TextField bind:value={_therapist.ZIP} fieldId="therapist-zip" required>NPA</TextField>
-        <TextField bind:value={_therapist.city} fieldId="therapist-city" required>
+        <TextField bind:value={$therapist.ZIP} fieldId="therapist-zip" required>NPA</TextField>
+        <TextField bind:value={$therapist.city} fieldId="therapist-city" required>
           Localité
         </TextField>
-        <TextField bind:value={_therapist.phone} type="tel" fieldId="therapist-phone" required>
+        <TextField bind:value={$therapist.phone} type="tel" fieldId="therapist-phone" required>
           Téléphone</TextField>
-        <TextField bind:value={_therapist.RCC} type="tel" fieldId="therapist-rcc" required>
+        <TextField bind:value={$therapist.RCC} type="tel" fieldId="therapist-rcc" required>
           N°RCC
         </TextField>
-        <TextField bind:value={_therapist.GLN} type="tel" fieldId="therapist-gln" required>
+        <TextField bind:value={$therapist.GLN} type="tel" fieldId="therapist-gln" required>
           N°GLN
         </TextField>
       </div>
       <h6 class="mdc-list-group__subheader">Tarif horaire</h6>
-      <div class="drawer-form-section aposto-form">
-        <TextField bind:value={_servicePrice} type="number" fieldId="service-price" required>
+      <div class="drawer-form-section">
+        <TextField bind:value={$servicePrice} type="number" fieldId="service-price" required>
           Tarif horaire
         </TextField>
       </div>
-    </div>
-    <hr class="mdc-list-divider">
-    <div class="drawer-footer">
-      <Button type="submit" title="Enregistrer les modifications" unelevated>
+      <Button className="drawer-submit-button" type="submit" title="Enregistrer les modifications">
         Enregistrer
       </Button>
-    </div>
-  </form>
+    </form>
+  </div>
 </aside>
 
-<div class="mdc-drawer-scrim" on:click={onCloseClick}></div>
+<div class="mdc-drawer-scrim" on:click={onClose}></div>
 
 <style src="UserPanel.scss"></style>
