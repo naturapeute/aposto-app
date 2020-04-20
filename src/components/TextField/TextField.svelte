@@ -9,6 +9,7 @@
   export let outlined = false
   export let trailingIcon = null
   export let noAutoComplete = false
+  export let placeholder = ''
 
   let element
   let textField
@@ -40,7 +41,7 @@
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
   {/if}
-  <input {value} {type} class="mdc-text-field__input" id={fieldId} name={fieldId}
+  <input {value} {type} class="mdc-text-field__input" id={fieldId} {placeholder} name={fieldId}
     aria-labelledby={fieldId} on:input={onInput} {required}
     autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
