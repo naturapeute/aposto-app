@@ -4,17 +4,21 @@
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizeView from './components/FinalizeView/FinalizeView.svelte'
 
-  const selectedServices = [...selectedServicesFixture]
+  let selectedServices = selectedServicesFixture.map(e => ({ ...e }))
 
   function onUpdateUser(e) {
     $author = { ...e.detail.author }
     $therapist = { ...e.detail.therapist }
   }
+
+  function onNewInvoice() {
+    selectedServices = selectedServicesFixture.map(e => ({ ...e }))
+  }
 </script>
 
 <HeaderPanel on:updateUser={onUpdateUser}>Clôture de votre séance</HeaderPanel>
 <main>
-  <FinalizeView services={selectedServices} />
+  <FinalizeView services={selectedServices} on:newInvoice={onNewInvoice} />
 </main>
 
 <style src="App.scss" global></style>

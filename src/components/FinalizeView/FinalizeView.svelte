@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import { author, therapist, servicePrice, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
@@ -17,6 +18,7 @@
   let confirmDialog
   let askConfirm = false
   let successSend = false
+  const dispatch = createEventDispatcher()
 
   $: totalAmount = services.reduce(
     (total, service) => total + (service.duration * $servicePrice / 60),
@@ -54,6 +56,13 @@
       .finally(() => {
         $loading = false
       })
+  }
+
+  function onNewInvoice() {
+    dispatch('newInvoice')
+    patient = null
+    askConfirm = false
+    successSend = false
   }
 </script>
 
@@ -99,7 +108,7 @@
 {/if}
 
 {#if patient && successSend}
-  <SuccessSendScrim {patient} />
+  <SuccessSendScrim {patient} on:newInvoice={onNewInvoice} />
 {/if}
 
 <style src="FinalizeView.scss"></style>

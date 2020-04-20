@@ -5,7 +5,8 @@
   export let patient = null
 
   let filterPatient = ''
-  let patientSearchMode = !patient
+
+  $: patientSearchMode = !patient
 
   function onChangePatient() {
     patientSearchMode = true
