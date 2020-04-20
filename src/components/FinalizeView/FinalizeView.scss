@@ -59,7 +59,7 @@ $submit-button-icon-size: 32;
   & > :global(.mdc-button) {
     width: 100%;
     height: #{$submit-button-size}px;
-    font-size: 24px;
+    font-size: 20px;
 
     :global(.mdc-button__icon) {
       font-size: #{$submit-button-icon-size}px;
