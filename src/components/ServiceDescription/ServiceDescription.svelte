@@ -80,9 +80,21 @@
       }
     }
   }
+
+  function growShrink(node) {
+    const h = parseFloat(getComputedStyle(node).height)
+
+    return {
+      duration: 400,
+      easing: cubicOut,
+      css: t => {
+        return `height: ${t * h}px;`
+      }
+    }
+  }
 </script>
 
-<li bind:this={serviceElement} class="service">
+<li bind:this={serviceElement} class="service" transition:growShrink>
   <div class="service-timeline">
     <span>{service.duration}'</span>
   </div>
