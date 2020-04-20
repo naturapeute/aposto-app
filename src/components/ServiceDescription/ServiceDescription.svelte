@@ -21,7 +21,7 @@
   $: editMode = service.id === serviceEditModeId
 
   onMount(() => {
-    window.addEventListener('click', closeOnClickOut)
+    window.addEventListener('ontouchstart' in window ? 'touchstart' : 'click', closeOnClickOut)
   })
 
   afterUpdate(() => {
