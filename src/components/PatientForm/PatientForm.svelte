@@ -50,14 +50,13 @@
     required>
     Sexe
   </Select>
-  <TextField bind:value={patient.birthdate} type="date" fieldId="patient-birthdate"
-    trailingIcon="event" required>
+  <TextField bind:value={patient.birthdate} type="date" fieldId="patient-birthdate" required>
     Date de naissance
   </TextField>
   <TextField bind:value={patient.email} type="email" fieldId="patient-email" required>
     Email
   </TextField>
-  <Button type="submit" title="Enregistrer les modifications">
+  <Button type="submit" title="Enregistrer les modifications" unelevated>
     Créer
   </Button>
 </form>

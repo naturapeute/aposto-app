@@ -8,12 +8,17 @@
   flex-direction: column;
 
   .mdc-text-field,
-  .mdc-select {
+  .mdc-select,
+  .mdc-button {
     margin: 8px 0;
   }
 
   .mdc-text-field {
     @include textfield.fill-color($form-field-fill-color);
+
+    ::-webkit-calendar-picker-indicator {
+      display: none;
+    }
   }
 
   .mdc-select {

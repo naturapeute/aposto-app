@@ -18,6 +18,9 @@
   onMount(() => {
     textField = new MDCTextField(element)
     dispatch('mount', element)
+
+    if (type === 'date')
+      trailingIcon = 'event'
   })
 
   onDestroy(() => {
@@ -32,7 +35,10 @@
   }
 
   function onTrailingIconClick() {
-    dispatch('trailingIconClick')
+    if (type === 'date')
+      element.click()
+    else
+      dispatch('trailingIconClick')
   }
 </script>
 
