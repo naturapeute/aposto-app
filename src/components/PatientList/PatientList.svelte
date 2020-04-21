@@ -10,9 +10,13 @@
 
   $: bestMatches = getBestMatches(filterPatient)
 
-  function onChipClick(patientId) {
+  function onSelectPatient(patientId) {
     patient = { ...$patients.find(patient => patient.id === patientId) }
     dispatch('patientSelected')
+  }
+
+  function onCreatePatient() {
+    dispatch('createPatient')
   }
 
   function getBestMatches(_filterPatient) {
@@ -41,8 +45,16 @@
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
+  {#if filterPatient}
+    <li class="mdc-touch-target-wrapper" on:click={onCreatePatient}>
+      <Chip title="Créer le nouveau patient {filterPatient}" leadingIcon="add"
+        touchWrapper>
+        Créer <span class="create-patient">{filterPatient}</span>
+      </Chip>
+    </li>
+  {/if}
   {#each bestMatches as patient (patient.id)}
-    <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(patient.id)}>
+    <li class="mdc-touch-target-wrapper" on:click={() => onSelectPatient(patient.id)}>
       <Chip title="Sélectionner le patient {patient.firstName} {patient.lastName}" leadingIcon="face"
         touchWrapper>
         {patient.firstName} {patient.lastName}

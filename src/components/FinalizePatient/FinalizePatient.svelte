@@ -1,12 +1,14 @@
 <script>
+  import { patients } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
+  import PatientForm from '../PatientForm/PatientForm.svelte'
 
   export let patient = null
 
   let filterPatient = ''
-
   let patientSearchMode = false
+  let patientCreateMode = false
 
   function onChangePatient() {
     patientSearchMode = true
@@ -16,11 +18,28 @@
     if (patient)
       patientSearchMode = false
 
+    patientCreateMode = false
     filterPatient = ''
   }
 
   function onTextFieldMount(e) {
     e.detail.focus()
+  }
+
+  function onCreatePatient() {
+    patientCreateMode = true
+  }
+
+  function onPatientCreated(e) {
+    const newPatient = {
+      ...e.detail,
+      birthdate: new Date(e.detail.birthdate).getTime()
+    }
+
+    patientCreateMode = false
+    $patients = [newPatient, ...$patients]
+    patient = { ...newPatient }
+    onCloseSearch()
   }
 </script>
 
@@ -43,7 +62,11 @@
       Patient
     </TextField>
   </form>
-  <PatientList bind:filterPatient={filterPatient} bind:patient on:patientSelected={onCloseSearch} />
+  <PatientList bind:filterPatient={filterPatient} bind:patient on:patientSelected={onCloseSearch}
+    on:createPatient={onCreatePatient} />
+{/if}
+{#if patientCreateMode}
+  <PatientForm {filterPatient} on:patientCreated={onPatientCreated} />
 {/if}
 
 <style src="FinalizePatient.scss"></style>
