@@ -5,7 +5,7 @@
   export let fieldId
   export let options = [{ value: '', label: '' }]
   export let value = ''
-  export let outlined = false
+  export let required = false
 
   let element
   let select
@@ -22,27 +22,15 @@
   })
 </script>
 
-<div bind:this={element} class="mdc-select" class:mdc-select--outlined={outlined}>
-  <div class="mdc-select__anchor select-width">
+<div bind:this={element} class="mdc-select" class:mdc-select--required={required}>
+  <div class="mdc-select__anchor">
     <i class="mdc-select__dropdown-icon"></i>
     <div id={selectedTextId} class="mdc-select__selected-text" role="button" aria-haspopup="listbox"
-      aria-labelledby="{labelId} {selectedTextId}"></div>
-    {#if outlined}
-        <div class="mdc-notched-outline">
-          <div class="mdc-notched-outline__leading"></div>
-          <div class="mdc-notched-outline__notch">
-            <span id={labelId} class="mdc-floating-label">
-              <slot></slot>
-            </span>
-          </div>
-          <div class="mdc-notched-outline__trailing"></div>
-        </div>
-      {:else}
-        <span id={labelId} class="mdc-floating-label">
-          <slot></slot>
-        </span>
-        <div class="mdc-line-ripple"></div>
-      {/if}
+      aria-labelledby="{labelId} {selectedTextId}" aria-required="{required}"></div>
+    <span id={labelId} class="mdc-floating-label">
+      <slot></slot>
+    </span>
+    <div class="mdc-line-ripple"></div>
   </div>
 
   <div class="mdc-select__menu mdc-menu mdc-menu-surface select-width" role="listbox">
