@@ -1,6 +1,7 @@
 @use "aposto-theme" as *;
 
 @use "@material/textfield";
+@use "@material/select";
 
 .aposto-form {
   display: flex;
@@ -11,8 +12,12 @@
     margin: 8px 0;
   }
 
-  .mdc-text-field:not(.mdc-text-field--outlined) {
-    @include textfield.fill-color($text-field-fill-color);
+  .mdc-text-field {
+    @include textfield.fill-color($form-field-fill-color);
+  }
+
+  .mdc-select {
+    @include select.container-fill-color($form-field-fill-color)
   }
 
   :first-child {
@@ -21,5 +26,9 @@
 
   :last-child {
     margin-bottom: 0;
+  }
+
+  .mdc-select .mdc-select__anchor {
+    width: 100%;
   }
 }

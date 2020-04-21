@@ -44,5 +44,3 @@
     </ul>
   </div>
 </div>
-
-<style src="Select.scss"></style>
