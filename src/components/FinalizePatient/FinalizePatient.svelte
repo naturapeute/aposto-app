@@ -6,7 +6,7 @@
 
   let filterPatient = ''
 
-  $: patientSearchMode = !patient
+  let patientSearchMode = false
 
   function onChangePatient() {
     patientSearchMode = true
@@ -35,7 +35,7 @@
     </span>
   </p>
 {/if}
-{#if patientSearchMode}
+{#if !patient || patientSearchMode}
   <form class="aposto-form patient-search-form" on:submit|preventDefault={() => {}}>
     <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
       placeholder="Rechercher un patient..."
