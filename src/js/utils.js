@@ -14,6 +14,21 @@ export function getDurationLabel(duration) {
   return `${durationHours}h${durationMinutes || ''}`
 }
 
+export function getCantonOptions() {
+  return [
+    { value: '', label: '' },
+    ...cantons.map(canton => ({ value: canton, label: canton }))
+  ]
+}
+
+export function getGenderOptions() {
+  return [
+    { value: '', label: '' },
+    { value: 'male', label: 'Homme' },
+    { value: 'female', label: 'Femme' }
+  ]
+}
+
 const serviceCodes = [
   { value: 1003, lightLabel: 'Acupressure' },
   { value: 1004, lightLabel: 'Acupuncture' },
@@ -119,3 +134,37 @@ const serviceCodes = [
   { value: 1207, lightLabel: "Thérapie de l'ordre / Diététique" },
   { value: 1210, lightLabel: 'Spiraldynamik' }
 ].sort((a, b) => a.value - b.value)
+
+const cantons = [
+  'AG',
+  'AI',
+  'AR',
+  'BE',
+  'BL',
+  'BS',
+  'FR',
+  'GE',
+  'GL',
+  'GR',
+  'JU',
+  'LU',
+  'NE',
+  'NW',
+  'OW',
+  'SG',
+  'SH',
+  'SO',
+  'SZ',
+  'TI',
+  'TG',
+  'UR',
+  'VD',
+  'VS',
+  'ZG',
+  'ZH',
+  'LI',
+  'A',
+  'D',
+  'F',
+  'I'
+]
