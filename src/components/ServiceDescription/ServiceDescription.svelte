@@ -4,7 +4,7 @@
   import { preferedServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
-  import Button from '../Button/Button.svelte'
+  import IconButton from '../IconButton/IconButton.svelte'
   import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
   import DurationList from '../DurationList/DurationList.svelte'
 
@@ -103,10 +103,11 @@
           trailingIcon="edit" color="{service.color}" on:click={onEditService}>
           {getServiceLightLabel(service.code)}
         </Chip>
-        <Button className="service-delete" title="Supprimer la thérapie {`"
-          ${getServiceLightLabel(service.code)}"`}" on:click={onDeleteService}>
-          Supprimer
-        </Button>
+        <IconButton className="service-delete"
+          title="Supprimer la thérapie {`"${getServiceLightLabel(service.code)}"`}"
+          on:click={onDeleteService}>
+          delete
+        </IconButton>
       </div>
     {:else}
       <form bind:this={serviceFormElement} class="aposto-form" transition:fade
