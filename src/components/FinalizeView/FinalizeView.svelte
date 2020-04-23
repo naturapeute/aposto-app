@@ -95,11 +95,16 @@
   </div>
   <div class="submit-buttons-container">
     {#if !askConfirm}
-      <div class="send-button" transition:slide="{{ duration: 400 }}">
+      <div class="send-button" transition:slide="{{ duration: 400 }}" on:click={() => { console.log('Prout') }}>
         <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
           fab disabled={!patient}>
           send
         </IconButton>
+        {#if !patient}
+          <p class="send-error-text">
+            Veuillez sélectionner un patient pour finaliser votre facture.
+          </p>
+        {/if}
       </div>
     {:else}
       <div class="confirm-button" class:loading={$loading} transition:slide="{{ duration: 400 }}">

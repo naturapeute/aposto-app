@@ -1,4 +1,5 @@
 @use "aposto-theme" as *;
+@use "@material/theme";
 
 :global(.finalize-p) {
   display: flex;
@@ -27,12 +28,12 @@ $submit-button-icon-size: 32;
 .send-button {
   width: 100%;
   display: flex;
-  justify-content: center;
-  color: $primary;
+  flex-direction: column;
 
   & > :global(.mdc-fab) {
     width: #{$submit-button-size}px;
     height: #{$submit-button-size}px;
+    margin: 0 auto;
 
     &:disabled {
       opacity: 0.5;
@@ -52,6 +53,13 @@ $submit-button-icon-size: 32;
       width: #{$submit-button-icon-size}px;
       height: #{$submit-button-icon-size}px;
     }
+  }
+
+  .send-error-text {
+    color: theme.$error;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 0;
   }
 }
 
