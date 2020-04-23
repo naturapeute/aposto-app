@@ -8,4 +8,8 @@
 
 :global(.duration-chip) {
   text-transform: uppercase;
+
+  &.mdc-chip.colored {
+    border: 1px solid #fff
+  }
 }

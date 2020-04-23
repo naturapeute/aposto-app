@@ -26,7 +26,8 @@
   <i bind:this={iconElement} class="material-icons-outlined">spa</i>
   {#each $preferedServices as preferedService (preferedService.code)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(preferedService.code)}>
-      <Chip title="Sélectionner le service {`"${getServiceLightLabel(preferedService.code)}"`}"
+      <Chip className="prefered-service-chip"
+        title="Sélectionner le service {`"${getServiceLightLabel(preferedService.code)}"`}"
         color="{preferedService.color}" selected={preferedService.code === selectedServiceCode}
         touchWrapper>
         {getServiceLightLabel(preferedService.code)}

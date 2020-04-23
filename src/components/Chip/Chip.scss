@@ -24,6 +24,10 @@
     }
   }
 
+  &:hover .mdc-chip__ripple::before {
+    opacity: 0.1;
+  }
+
   .mdc-chip__icon {
     color: var(--chip-color);
   }
