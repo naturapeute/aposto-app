@@ -14,7 +14,7 @@
       const selectedServiceColor = $preferedServices.find(
         preferedService => preferedService.code === selectedServiceCode
       ).color
-  
+
       iconElement.style.setProperty('--selected-service-color', selectedServiceColor)
     }
   })
@@ -26,16 +26,26 @@
   function onDeletePreferedService(code) {
     $preferedServices = $preferedServices.filter(preferedService => preferedService.code !== code)
   }
+
+  function onAddService() {
+    dispatch('addService')
+  }
 </script>
 
-<ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
+<ul class="mdc-chip-set" class:mdc-chip-set--choice={selectedServiceCode} role="grid">
   {#if selectedServiceCode}
     <i bind:this={iconElement} class="material-icons-outlined">spa</i>
+  {:else if $preferedServices.length < 10}
+    <li class="mdc-touch-target-wrapper" on:click={onAddService}>
+      <Chip title="Ajouter une thérapie" leadingIcon="add" touchWrapper>
+        Ajouter une thérapie
+      </Chip>
+    </li>
   {/if}
   {#each $preferedServices as preferedService (preferedService.code)}
     <li class="mdc-touch-target-wrapper" on:click={() => onSelectService(preferedService.code)}>
       <Chip className="{selectedServiceCode ? 'prefered-service-chip' : ''}"
-        title="Sélectionner le service {`"${getServiceLightLabel(preferedService.code)}"`}"
+        title="Sélectionner la thérapie {`"${getServiceLightLabel(preferedService.code)}"`}"
         color="{preferedService.color}" selected={preferedService.code === selectedServiceCode}
         trailingIcon={selectedServiceCode ? null : 'delete'}
         on:trailingIconClick={() => onDeletePreferedService(preferedService.code)} touchWrapper>
