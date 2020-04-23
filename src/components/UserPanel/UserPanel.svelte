@@ -1,24 +1,27 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+  import { slide } from 'svelte/transition'
   import { author, therapist, servicePrice } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
   import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
+  import AddPreferedServiceForm from '../AddPreferedServiceForm/AddPreferedServiceForm.svelte'
 
   export let openned = false
 
   let element
   let drawer = {}
   let submitButtonElement
+  let addPreferedServiceMode = false
   const dispatch = createEventDispatcher()
 
   $: drawer.open = openned
 
   onMount(() => {
     drawer = new MDCDrawer(element)
-    // NOTE : We are overriding the Material scrim click handler as we only want to close the drawer
+    // FIXME : We are overriding the Material scrim click handler as we only want to close the drawer
     // on scrim click if and only if the form is valid
     Object.getPrototypeOf(drawer.foundation_).handleScrimClick = () => { }
 
@@ -33,6 +36,14 @@
 
   function onClose() {
     submitButtonElement.click()
+  }
+
+  function onAddPreferedService() {
+    addPreferedServiceMode = true
+  }
+
+  function onCloseAdd() {
+    addPreferedServiceMode = false
   }
 
   function onSubmit() {
@@ -106,8 +117,16 @@
           Tarif horaire
         </TextField>
       </div>
-      <h6 class="mdc-list-group__subheader">Thérapies</h6>
-      <PreferedServiceList />
+      <h6 class="mdc-list-group__subheader">Thérapies préférées</h6>
+      <div class="drawer-form-section">
+        {#if !addPreferedServiceMode}
+          <div transition:slide>
+            <PreferedServiceList on:addService={onAddPreferedService} />
+          </div>
+        {:else}
+          <AddPreferedServiceForm on:cancelAdd={onCloseAdd} on:addedService={onCloseAdd} />
+        {/if}
+      </div>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">
         Enregistrer
