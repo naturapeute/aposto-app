@@ -5,6 +5,7 @@
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
+  import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
 
   export let openned = false
 
@@ -105,6 +106,8 @@
           Tarif horaire
         </TextField>
       </div>
+      <h6 class="mdc-list-group__subheader">Thérapies</h6>
+      <PreferedServiceList />
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">
         Enregistrer

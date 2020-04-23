@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { selectedServicesFixture } from './js/fixtures'
-  import { author, therapist, servicePrice } from './js/store'
+  import { author, therapist, servicePrice, preferedServices } from './js/store'
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizeView from './components/FinalizeView/FinalizeView.svelte'
   import Snackbar from './components/Snackbar/Snackbar.svelte'
@@ -14,6 +14,7 @@
     author.subscribe(_ => { userUpdated = true })
     therapist.subscribe(_ => { userUpdated = true })
     servicePrice.subscribe(_ => { userUpdated = true })
+    preferedServices.subscribe(_ => { userUpdated = true })
     userUpdated = false
   })
 
