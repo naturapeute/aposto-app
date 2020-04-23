@@ -62,11 +62,13 @@
       Patient
     </TextField>
   </form>
-  <PatientList bind:filterPatient={filterPatient} bind:patient on:patientSelected={onCloseSearch}
-    on:createPatient={onCreatePatient} />
-{/if}
-{#if patientCreateMode}
-  <PatientForm {filterPatient} on:patientCreated={onPatientCreated} />
+  {#if !patientCreateMode}
+    <PatientList bind:filterPatient={filterPatient} bind:patient on:patientSelected={onCloseSearch}
+      on:createPatient={onCreatePatient} />
+  {/if}
+  {#if patientCreateMode}
+    <PatientForm {filterPatient} on:patientCreated={onPatientCreated} />
+  {/if}
 {/if}
 
 <style src="FinalizePatient.scss"></style>

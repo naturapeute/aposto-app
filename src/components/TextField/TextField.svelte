@@ -10,6 +10,7 @@
   export let trailingIcon = null
   export let noAutoComplete = false
   export let placeholder = ''
+  export let className = ''
 
   let element
   let textField
@@ -46,8 +47,8 @@
   }
 </script>
 
-<label bind:this={element} class="mdc-text-field" class:mdc-text-field--outlined="{outlined}"
-  class:mdc-text-field--with-trailing-icon="{trailingIcon}">
+<label bind:this={element} class="mdc-text-field {className}"
+  class:mdc-text-field--outlined="{outlined}" class:mdc-text-field--with-trailing-icon="{trailingIcon}">
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
   {/if}

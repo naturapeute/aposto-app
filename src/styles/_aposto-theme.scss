@@ -9,6 +9,8 @@ $warning: #ffc107;
 $form-field-fill-color: #fff;
 
 $large-width-breakpoint: 640px;
+$xsmall-width-breakpoint: 370px;
+$top-app-bar-height-breakpoint: 599px;
 
 @use "@material/theme" with (
   $primary: $primary,

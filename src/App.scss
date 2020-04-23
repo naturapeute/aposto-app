@@ -7,19 +7,14 @@ main {
   min-height: calc(100vh - 156px);
   display: flex;
   align-items: center;
+  max-width: 400px;
 
   > * {
     width: 100%;
   }
 }
 
-@media (min-width: $large-width-breakpoint) {
-  main {
-    max-width: 400px;
-  }
-}
-
-@media (min-width: 599px) {
+@media (min-width: $top-app-bar-height-breakpoint) {
   main {
     padding-top: 132px;
     min-height: calc(100vh - 164px);

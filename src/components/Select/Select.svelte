@@ -6,6 +6,7 @@
   export let options = [{ value: '', label: '' }]
   export let value = ''
   export let required = false
+  export let className = ''
 
   let element
   let select
@@ -22,7 +23,7 @@
   })
 </script>
 
-<div bind:this={element} class="mdc-select" class:mdc-select--required={required}>
+<div bind:this={element} class="mdc-select {className}" class:mdc-select--required={required}>
   <div class="mdc-select__anchor">
     <i class="mdc-select__dropdown-icon"></i>
     <div id={selectedTextId} class="mdc-select__selected-text" role="button" aria-haspopup="listbox"

@@ -9,7 +9,8 @@
 
   .mdc-text-field,
   .mdc-select,
-  .mdc-button {
+  .mdc-button,
+  .row {
     margin: 8px 0;
   }
 
@@ -31,5 +32,41 @@
 
   .mdc-select .mdc-select__anchor {
     width: 100%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: $xsmall-width-breakpoint) {
+    .row-xs {
+      flex-direction: row;
+
+      .mdc-text-field,
+      .mdc-select {
+        margin: 0 8px;
+    
+        &:first-child {
+          margin-left: 0;
+        }
+    
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .col-40 {
+        width: 40%;
+      }
+
+      .col-50 {
+        width: 50%;
+      }
+
+      .col-60 {
+        width: 60%;
+      }
+    }
   }
 }

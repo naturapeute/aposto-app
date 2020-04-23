@@ -27,36 +27,47 @@
 </script>
 
 <form class="aposto-form" on:submit|preventDefault={onPatientCreated} transition:slide>
-  <TextField bind:value={patient.firstName} fieldId="patient-first-name" required>
-    Prénom
-  </TextField>
-  <TextField bind:value={patient.lastName} fieldId="patient-last-name" required>
-    Nom
+  <div class="row row-xs">
+    <TextField className="col-50" bind:value={patient.firstName} fieldId="patient-first-name"
+      required>
+      Prénom
+    </TextField>
+    <TextField className="col-50" bind:value={patient.lastName} fieldId="patient-last-name"
+      required>
+      Nom
+    </TextField>
+  </div>
+  <div class="row row-xs">
+    <TextField className="col-60" bind:value={patient.birthdate} type="date" fieldId="patient-birthdate"
+      required>
+      Date de naissance
+    </TextField>
+    <Select className="col-40" bind:value={patient.gender} fieldId="patient-gender"
+      options={getGenderOptions()} required>
+      Sexe
+    </Select>
+  </div>
+  <TextField bind:value={patient.email} type="email" fieldId="patient-email" required>
+    Email
   </TextField>
   <TextField bind:value={patient.street} fieldId="patient-street" required>
     Rue et n°
   </TextField>
-  <TextField bind:value={patient.ZIP} fieldId="patient-zip" required>
-    NPA
-  </TextField>
   <TextField bind:value={patient.city} fieldId="patient-city" required>
     Localité
   </TextField>
-  <Select bind:value={patient.canton} fieldId="patient-canton" options={getCantonOptions()}
-    required>
-    Canton
-  </Select>
-  <Select bind:value={patient.gender} fieldId="patient-gender" options={getGenderOptions()}
-    required>
-    Sexe
-  </Select>
-  <TextField bind:value={patient.birthdate} type="date" fieldId="patient-birthdate" required>
-    Date de naissance
-  </TextField>
-  <TextField bind:value={patient.email} type="email" fieldId="patient-email" required>
-    Email
-  </TextField>
+  <div class="row row-xs">
+    <TextField className="col-50" bind:value={patient.ZIP} fieldId="patient-zip" required>
+      NPA
+    </TextField>
+    <Select className="col-50" bind:value={patient.canton} fieldId="patient-canton"
+      options={getCantonOptions()} required>
+      Canton
+    </Select>
+  </div>
   <Button type="submit" title="Enregistrer les modifications" unelevated>
     Créer
   </Button>
 </form>
+
+<style src="PatientForm.scss"></style>
