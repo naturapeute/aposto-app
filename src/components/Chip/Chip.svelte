@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
+
   export let touchWrapper = false
   export let selected = false
   export let title
@@ -8,8 +10,13 @@
   export let className = ''
 
   let element
+  const dispatch = createEventDispatcher()
 
   $: if (element && color) element.style.setProperty('--chip-color', color)
+
+  function onTrailingIconClick() {
+    dispatch('trailingIconClick')
+  }
 </script>
 
 <div bind:this={element} class="mdc-chip {className}" class:mdc-chip--touch={touchWrapper}
@@ -30,7 +37,7 @@
   {#if trailingIcon}
     <span role="gridcell">
       <i class="material-icons-outlined mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1"
-        role="button">
+        role="button" on:click={onTrailingIconClick}>
         {trailingIcon}
       </i>
     </span>
