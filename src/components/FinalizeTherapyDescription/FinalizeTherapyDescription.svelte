@@ -1,5 +1,4 @@
 <script>
-  import { beforeUpdate } from 'svelte'
   import { getDurationLabel } from '../../js/utils'
   import { preferedServices } from '../../js/store'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -20,11 +19,20 @@
     return serviceHeight
   })
 
-  beforeUpdate(() => {
-    services.forEach(service => {
-      if (service.id === undefined)
-        service.id = serviceIdCounter++
-    })
+  $: services = services.map(service => {
+    if (service.id === undefined)
+      service.id = serviceIdCounter++
+
+    const matchingPreferedService = $preferedServices.find(
+      preferedService => service.code === preferedService.code
+    )
+
+    if (!matchingPreferedService) {
+      service.code = $preferedServices[0].code
+      service.color = $preferedServices[0].color
+    }
+
+    return service
   })
 
   function onAddService() {
