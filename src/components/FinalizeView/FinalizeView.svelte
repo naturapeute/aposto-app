@@ -104,7 +104,7 @@
     {:else}
       <div class="confirm-button" class:loading={$loading} transition:slide="{{ duration: 400 }}">
         <Button type="submit" title="Confimer l'envoi de la facture par mail au patient"  icon="send"
-          raised disabled={$loading}>
+          outlined disabled={$loading}>
           Confirmer l'envoi
         </Button>
       </div>
