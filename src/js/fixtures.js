@@ -1,3 +1,5 @@
+import { serviceColors } from './utils'
+
 export const authorFixture = {
   name: 'Cabinet de Gordan',
   street: '92320 Glacier Hill Terrace',
@@ -302,11 +304,11 @@ export const patientsFixture = [
 export const servicePriceFixture = 100
 
 export const preferedServicesFixture = [
-  { code: 1003, color: '#f46d6d' },
-  { code: 1004, color: '#75b79e' },
-  { code: 1005, color: '#f8a978' },
-  { code: 1200, color: '#424874' },
-  { code: 1027, color: '#baabda' }
+  { code: 1003, color: serviceColors[0] },
+  { code: 1004, color: serviceColors[1] },
+  { code: 1005, color: serviceColors[2] },
+  { code: 1200, color: serviceColors[3] },
+  { code: 1027, color: serviceColors[4] }
 ]
 
 export const selectedServicesFixture = [

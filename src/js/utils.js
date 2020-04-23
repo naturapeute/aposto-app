@@ -29,7 +29,7 @@ export function getGenderOptions() {
   ]
 }
 
-const serviceCodes = [
+export const serviceCodes = [
   { value: 1003, lightLabel: 'Acupressure' },
   { value: 1004, lightLabel: 'Acupuncture' },
   { value: 1005, lightLabel: 'Massage des points d’acupuncture' },
@@ -167,4 +167,17 @@ const cantons = [
   'D',
   'F',
   'I'
+]
+
+export const serviceColors = [
+  '#f46d6d',
+  '#75b79e',
+  '#f8a978',
+  '#424874',
+  '#baabda',
+  '#679b9b',
+  '#856c8b',
+  '#a8d3da',
+  '#d77fa1',
+  '#6e5773'
 ]
