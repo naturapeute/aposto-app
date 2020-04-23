@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import { author, loading } from '../../js/store'
   import UserPanel from '../UserPanel/UserPanel.svelte'
   import TopAppBar from '../TopAppBar/TopAppBar.svelte'
@@ -6,9 +7,13 @@
   import LinearProgress from '../LinearProgress/LinearProgress.svelte'
 
   let userPanelOpenned = false
+  const dispatch = createEventDispatcher()
 
   function onToggleUserPanel() {
     userPanelOpenned = !userPanelOpenned
+  
+    if (!userPanelOpenned)
+      dispatch('userPannelClosed')
   }
 </script>
 
