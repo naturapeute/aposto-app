@@ -15,10 +15,6 @@
 
   .mdc-text-field {
     @include textfield.fill-color($form-field-fill-color);
-
-    ::-webkit-calendar-picker-indicator {
-      display: none;
-    }
   }
 
   .mdc-select {

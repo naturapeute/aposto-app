@@ -19,8 +19,12 @@
     textField = new MDCTextField(element)
     dispatch('mount', element)
 
-    if (type === 'date')
-      trailingIcon = 'event'
+    if (type === 'date') {
+      if (navigator.userAgent.includes('Chrome') && navigator.vendor.includes('Google Inc'))
+        trailingIcon = ''
+      else
+        trailingIcon = 'event'
+    }
   })
 
   onDestroy(() => {
