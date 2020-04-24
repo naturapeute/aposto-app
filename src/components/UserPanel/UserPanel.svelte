@@ -7,6 +7,8 @@
   import IconButton from '../IconButton/IconButton.svelte'
   import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
   import AddPreferedServiceForm from '../AddPreferedServiceForm/AddPreferedServiceForm.svelte'
+  import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
+  import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
 
   export let openned = false
 
@@ -62,67 +64,77 @@
   </header>
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
-    <form class="aposto-form drawer-form" on:submit|preventDefault={onSubmit}>
-      <h6 class="mdc-list-group__subheader">Auteur des factures</h6>
-      <div class="drawer-form-section">
-        <TextField bind:value={$author.name} fieldId="author-name" required>
-          Nom ou entreprise
-        </TextField>
-        <TextField bind:value={$author.street} fieldId="author-street" required>
-          Rue et n°
-        </TextField>
-        <TextField bind:value={$author.ZIP} fieldId="author-zip" required>NPA</TextField>
-        <TextField bind:value={$author.city} fieldId="author-city" required>Localité</TextField>
-        <TextField bind:value={$author.email} type="email" fieldId="author-email" required>
-          Email
-        </TextField>
-        <TextField bind:value={$author.phone} type="tel" fieldId="author-phone" required>
-          Téléphone
-        </TextField>
-        <TextField bind:value={$author.RCC} type="tel" fieldId="author-rcc" required>
-          N°RCC
-        </TextField>
-        <TextField bind:value={$author.GLN} type="tel" fieldId="author-gln" required>
-          N°GLN
-        </TextField>
-      </div>
-      <h6 class="mdc-list-group__subheader">Thérapeute</h6>
-      <div class="drawer-form-section">
-        <TextField bind:value={$therapist.firstName} fieldId="therapist-first-name" required>
-          Prénom
-        </TextField>
-        <TextField bind:value={$therapist.lastName} fieldId="therapist-last-name" required>
-          Nom
-        </TextField>
-        <TextField bind:value={$therapist.street} fieldId="therapist-street" required>
-          Rue et n°
-        </TextField>
-        <TextField bind:value={$therapist.ZIP} fieldId="therapist-zip" required>NPA</TextField>
-        <TextField bind:value={$therapist.city} fieldId="therapist-city" required>
-          Localité
-        </TextField>
-        <TextField bind:value={$therapist.phone} type="tel" fieldId="therapist-phone" required>
-          Téléphone</TextField>
-        <TextField bind:value={$therapist.RCC} type="tel" fieldId="therapist-rcc" required>
-          N°RCC
-        </TextField>
-        <TextField bind:value={$therapist.GLN} type="tel" fieldId="therapist-gln" required>
-          N°GLN
-        </TextField>
-      </div>
-      <h6 class="mdc-list-group__subheader">Tarif horaire</h6>
-      <div class="drawer-form-section">
-        <TextField bind:value={$servicePrice} type="number" fieldId="service-price" required>
-          Tarif horaire
-        </TextField>
-      </div>
-      <h6 class="mdc-list-group__subheader">Thérapies préférées</h6>
-      <div class="drawer-form-section">
-        <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
-        {#if addPreferedServiceMode}
-          <AddPreferedServiceForm on:cancelAdd={onCloseAdd} on:addedService={onCloseAdd} />
-        {/if}
-      </div>
+    <form class="aposto-form" on:submit|preventDefault={onSubmit}>
+      <ExpansionPanelSet>
+        <ExpansionPanel>
+          <div slot="summary">Auteur des factures</div>
+          <div slot="content">
+            <TextField bind:value={$author.name} fieldId="author-name" required>
+              Nom ou entreprise
+            </TextField>
+            <TextField bind:value={$author.street} fieldId="author-street" required>
+              Rue et n°
+            </TextField>
+            <TextField bind:value={$author.ZIP} fieldId="author-zip" required>NPA</TextField>
+            <TextField bind:value={$author.city} fieldId="author-city" required>Localité</TextField>
+            <TextField bind:value={$author.email} type="email" fieldId="author-email" required>
+              Email
+            </TextField>
+            <TextField bind:value={$author.phone} type="tel" fieldId="author-phone" required>
+              Téléphone
+            </TextField>
+            <TextField bind:value={$author.RCC} type="tel" fieldId="author-rcc" required>
+              N°RCC
+            </TextField>
+            <TextField bind:value={$author.GLN} type="tel" fieldId="author-gln" required>
+              N°GLN
+            </TextField>
+          </div>
+        </ExpansionPanel>
+        <ExpansionPanel>
+          <div slot="summary">Thérapeute</div>
+          <div slot="content">
+            <TextField bind:value={$therapist.firstName} fieldId="therapist-first-name" required>
+              Prénom
+            </TextField>
+            <TextField bind:value={$therapist.lastName} fieldId="therapist-last-name" required>
+              Nom
+            </TextField>
+            <TextField bind:value={$therapist.street} fieldId="therapist-street" required>
+              Rue et n°
+            </TextField>
+            <TextField bind:value={$therapist.ZIP} fieldId="therapist-zip" required>NPA</TextField>
+            <TextField bind:value={$therapist.city} fieldId="therapist-city" required>
+              Localité
+            </TextField>
+            <TextField bind:value={$therapist.phone} type="tel" fieldId="therapist-phone" required>
+              Téléphone</TextField>
+            <TextField bind:value={$therapist.RCC} type="tel" fieldId="therapist-rcc" required>
+              N°RCC
+            </TextField>
+            <TextField bind:value={$therapist.GLN} type="tel" fieldId="therapist-gln" required>
+              N°GLN
+            </TextField>
+          </div>
+        </ExpansionPanel>
+        <ExpansionPanel>
+          <div slot="summary">Tarif horaire</div>
+          <div slot="content">
+            <TextField bind:value={$servicePrice} type="number" fieldId="service-price" required>
+              Tarif horaire
+            </TextField>
+          </div>
+        </ExpansionPanel>
+        <ExpansionPanel>
+          <div slot="summary">Thérapies préférées</div>
+          <div slot="content">
+            <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
+            {#if addPreferedServiceMode}
+              <AddPreferedServiceForm on:cancelAdd={onCloseAdd} on:addedService={onCloseAdd} />
+            {/if}
+          </div>
+        </ExpansionPanel>
+      </ExpansionPanelSet>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">
         Enregistrer
