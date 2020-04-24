@@ -25,7 +25,10 @@
       [...serviceColors]
     )[0]
 
-    $preferedServices.push({ code: e.detail, color: availableColor })
+    $preferedServices = [
+      ...$preferedServices,
+      { code: e.detail, color: availableColor }
+    ]
 
     dispatch('addedService')
   }
@@ -39,3 +42,5 @@
   </TextField>
   <ServiceList filterService={filterService} on:serviceSelected={onServiceSelected} />
 </form>
+
+<style src="AddPreferedServiceForm.scss"></style>

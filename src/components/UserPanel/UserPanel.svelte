@@ -1,7 +1,6 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
-  import { slide } from 'svelte/transition'
   import { author, therapist, servicePrice } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
@@ -119,11 +118,8 @@
       </div>
       <h6 class="mdc-list-group__subheader">Thérapies préférées</h6>
       <div class="drawer-form-section">
-        {#if !addPreferedServiceMode}
-          <div transition:slide>
-            <PreferedServiceList on:addService={onAddPreferedService} />
-          </div>
-        {:else}
+        <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
+        {#if addPreferedServiceMode}
           <AddPreferedServiceForm on:cancelAdd={onCloseAdd} on:addedService={onCloseAdd} />
         {/if}
       </div>
