@@ -1,4 +1,5 @@
 <script>
+  import { slide } from 'svelte/transition'
   import { patients } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
@@ -46,16 +47,15 @@
 {#if patient}
   <p class="finalize-p">
     <i class="material-icons-outlined">face</i>
-    <span class="patient-edit" on:click={onChangePatient}>
-      <span class="typography--button-inline" title="Choisir un autre patient">
-        {patient.firstName} {patient.lastName}
-      </span>
+    <button type="button" class="typography--button-inline patient-edit"
+      title="Choisir un autre patient" on:click={onChangePatient}>
+      {patient.firstName} {patient.lastName}
       <i class="material-icons-outlined edit-icon">edit</i>
-    </span>
+    </button>
   </p>
 {/if}
 {#if !patient || patientSearchMode}
-  <form class="aposto-form patient-search-form" on:submit|preventDefault>
+  <form class="aposto-form patient-search-form" on:submit|preventDefault transition:slide>
     <TextField bind:value={filterPatient} fieldId="patient-search" trailingIcon="close"
       placeholder="Rechercher un patient..."
       on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount} outlined noAutoComplete>

@@ -31,16 +31,16 @@
   <div slot="dialog-body">
     <p>
       Cette action va générer la facture et l'envoyer à
-      <span class="typography--button-inline no-click-inline">
+      <strong class="typography--button-inline no-click-inline">
         {patient.firstName} {patient.lastName} ({patient.email})
-      </span>
+      </strong>
       par mail.
     </p>
     <p>
       Vous recevrez également une copie dans votre boîte mail
-      <span class="typography--button-inline no-click-inline">
+      <strong class="typography--button-inline no-click-inline">
         {$author.email}
-      </span>
+      </strong>
       .
     </p>
     <Checkbox bind:checked={dontShowAgain} checkboxId="dont-show-again">

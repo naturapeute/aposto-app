@@ -22,12 +22,17 @@
 @use "@material/snackbar/mdc-snackbar";
 
 p {
-  @extend .mdc-typography--body1
+  @extend .mdc-typography--body1;
 }
 
 .typography--button-inline {
+  color: $text-color;
+  background: none;
+  border: none;
   font-weight: 700;
   cursor: pointer;
+  text-align: left;
+  padding: 0;
   line-height: inherit;
   // Material .mdc-typography--button class
   font-size: 0.875rem;
@@ -38,7 +43,7 @@ p {
   letter-spacing: var(--mdc-typography-button-letter-spacing, 0.0892857143em);
   /* @alternate */
   -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
-          text-decoration: var(--mdc-typography-button-text-decoration, none);
+  text-decoration: var(--mdc-typography-button-text-decoration, none);
   text-transform: uppercase;
   /* @alternate */
   text-transform: var(--mdc-typography-button-text-transform, uppercase);
@@ -48,15 +53,28 @@ p {
   color: $primary;
 }
 
-.card-set > .mdc-card {
-  margin: 16px 0;
+.typography--button-inline.no-click-inline {
+  cursor: default;
 
-  &:first-of-type {
-    margin-top: 0;
+  &:hover {
+    color: $text-color;
   }
+}
 
-  &:last-of-type {
-    margin-bottom: 0;
+.card-set {
+  padding-left: 0;
+  margin: 0;
+
+  & > .mdc-card {
+    margin: 16px 0;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 }
 

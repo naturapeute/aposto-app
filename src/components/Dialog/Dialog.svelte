@@ -26,8 +26,8 @@
 
 <div bind:this={element} class="mdc-dialog">
   <div class="mdc-dialog__container">
-    <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true"
-      aria-labelledby={dialogId} aria-describedby="dialog-content">
+    <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby={dialogId}
+      aria-describedby="dialog-content">
       <h2 class="mdc-dialog__title" id={dialogId}>
         <slot name="dialog-title"></slot>
       </h2>

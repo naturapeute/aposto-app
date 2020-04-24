@@ -51,7 +51,7 @@
 </script>
 
 <aside bind:this={element} class="mdc-drawer mdc-drawer--modal" dismissible={false}>
-  <div class="mdc-drawer__header">
+  <header class="mdc-drawer__header">
     <div>
       <h1 class="mdc-drawer__title">Vos informations</h1>
       <h2 class="mdc-drawer__subtitle">{$author.name}</h2>
@@ -59,7 +59,7 @@
     <IconButton title="Fermer et annuler les modifications" on:click={onClose}>
       close
     </IconButton>
-  </div>
+  </header>
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
     <form class="aposto-form drawer-form" on:submit|preventDefault={onSubmit}>

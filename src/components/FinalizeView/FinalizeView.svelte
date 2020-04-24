@@ -30,7 +30,7 @@
     window.addEventListener(
       'ontouchstart' in window ? 'touchstart' : 'click',
       (e) => {
-        if (askConfirm && !e.target.closest('.confirm-button'))
+        if (askConfirm && !e.target.closest('.confirm-button-container'))
           askConfirm = false
       })
   })
@@ -47,6 +47,7 @@
   }
 
   function onConfirmSend() {
+    askConfirm = false
     $loading = true
 
     sendInvoice(
@@ -77,27 +78,28 @@
 </script>
 
 <form on:submit|preventDefault={onSendInvoice}>
-  <div class="card-set">
-    <div class="mdc-card">
+  <ul class="card-set">
+    <li class="mdc-card">
       <FinalizePatient bind:patient />
-    </div>
-    <div class="mdc-card">
+    </li>
+    <li class="mdc-card">
       <FinalizeTherapyDescription bind:services />
-    </div>
-    <div class="mdc-card">
+    </li>
+    <li class="mdc-card">
       <p class="finalize-p">
         <i class="material-icons-outlined">monetization_on</i>
-        <span class="typography--button-inline no-click-inline">
+        <strong class="typography--button-inline no-click-inline">
           {totalAmount.toFixed(2)}CHF
-        </span>
+        </strong>
       </p>
-    </div>
-  </div>
+    </li>
+  </ul>
   <div class="submit-buttons-container">
     {#if !askConfirm}
-      <div class="send-button" transition:slide="{{ duration: 400 }}" on:click={() => { console.log('Prout') }}>
-        <IconButton type="submit" title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
-          fab disabled={!patient}>
+      <div class="send-button-container" transition:slide="{{ duration: 400 }}">
+        <IconButton className={$loading ? 'loading' : ''} type="submit"
+          title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
+          fab disabled={!patient || $loading}>
           send
         </IconButton>
         {#if !patient}
@@ -107,8 +109,8 @@
         {/if}
       </div>
     {:else}
-      <div class="confirm-button" class:loading={$loading} transition:slide="{{ duration: 400 }}">
-        <Button type="submit" title="Confimer l'envoi de la facture par mail au patient"  icon="send"
+      <div class="confirm-button-container" transition:slide="{{ duration: 400 }}">
+        <Button type="submit" title="Confimer l'envoi de la facture par mail au patient" icon="send"
           outlined disabled={$loading}>
           Confirmer l'envoi
         </Button>

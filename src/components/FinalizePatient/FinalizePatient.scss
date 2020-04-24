@@ -1,13 +1,8 @@
 @use "aposto-theme" as *;
 
 .patient-edit {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    color: $primary;
-  }
 }
 
 .patient-search-form {

@@ -76,9 +76,9 @@
 </ul>
 <p class="finalize-p total-duration">
   <i class="material-icons-outlined">schedule</i>
-  <span class="typography--button-inline no-click-inline">
+  <strong class="typography--button-inline no-click-inline">
     {getDurationLabel(totalDuration)}
-  </span>
+  </strong>
 </p>
 
 <style src="FinalizeTherapyDescription.scss"></style>
