@@ -21,7 +21,7 @@
     return _filterService.split(' ').reduce((scores, word) => {
       serviceCodes.forEach((service, i) => {
         if (!$preferedServices.find(preferedService => preferedService.code === service.value))
-          scores[i].score += getServiceScore(service.lightLabel, word)
+          scores[i].score += getServiceScore(service, word)
       })
 
       return scores
@@ -35,10 +35,11 @@
     return serviceCodes.map(service => { return { ...service, score: 0 } })
   }
 
-  function getServiceScore(serviceLabel, word) {
+  function getServiceScore(service, word) {
     if (!word) return 0
 
-    return +serviceLabel.toLowerCase().includes(word.toLowerCase())
+    return +service.lightLabel.toLowerCase().includes(word.toLowerCase()) +
+      +String(service.value).includes(word)
   }
 </script>
 
