@@ -102,11 +102,9 @@
           fab disabled={!patient || $loading}>
           send
         </IconButton>
-        {#if !patient}
-          <p class="send-error-text">
-            Veuillez sélectionner un patient pour finaliser votre facture.
-          </p>
-        {/if}
+        <p class="send-error-text" hidden={patient}>
+          Veuillez sélectionner un patient pour finaliser votre facture.
+        </p>
       </div>
     {:else}
       <div class="confirm-button-container" transition:slide="{{ duration: 400 }}">

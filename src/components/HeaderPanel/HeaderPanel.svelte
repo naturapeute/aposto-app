@@ -11,7 +11,7 @@
 
   function onToggleUserPanel() {
     userPanelOpenned = !userPanelOpenned
-  
+
     if (!userPanelOpenned)
       dispatch('userPannelClosed')
   }
@@ -20,10 +20,10 @@
 <UserPanel openned={userPanelOpenned} on:closeUserPanel={onToggleUserPanel} />
 
 <header class="header" class:loading={$loading}>
-  <TopAppBar><slot></slot></TopAppBar>
-  {#if $loading}
-    <LinearProgress intermediate />
-  {/if}
+  <TopAppBar>
+    <slot></slot>
+  </TopAppBar>
+  <LinearProgress intermediate />
   <Button icon="account_circle" title="Accéder à mon profil de facturation"
     on:click={onToggleUserPanel}>
     {$author.name}
