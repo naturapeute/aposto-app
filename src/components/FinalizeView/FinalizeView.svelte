@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { slide } from 'svelte/transition'
   import { author, therapist, servicePrice, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
@@ -26,14 +26,10 @@
     0
   )
 
-  onMount(() => {
-    window.addEventListener(
-      'ontouchstart' in window ? 'touchstart' : 'click',
-      (e) => {
-        if (askConfirm && !e.target.closest('.confirm-button-container'))
-          askConfirm = false
-      })
-  })
+  function onMaybeClickOut(e) {
+    if (askConfirm && !e.target.closest('.confirm-button-container'))
+      askConfirm = false
+  }
 
   function onSendInvoice() {
     const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
@@ -76,6 +72,8 @@
     successSend = false
   }
 </script>
+
+<svelte:window on:click={onMaybeClickOut} on:touchstart={onMaybeClickOut} />
 
 <form on:submit|preventDefault={onSendInvoice}>
   <ul class="card-set">

@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount, afterUpdate } from 'svelte'
+  import { createEventDispatcher, afterUpdate } from 'svelte'
   import { cubicOut } from 'svelte/easing'
   import { preferedServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
@@ -20,16 +20,12 @@
     ? (20 * 12) * (service.duration / totalDuration) : 36
   $: editMode = service.id === serviceEditModeId
 
-  onMount(() => {
-    window.addEventListener(
-      'ontouchstart' in window ? 'touchstart' : 'click',
-      (e) => {
-        if (editMode && !e.target.closest('.service-label-container') &&
-          !e.target.closest('.service-add') && serviceFormElement &&
-          !serviceFormElement.contains(e.target))
-          onCloseEditService()
-      })
-  })
+  function onMaybeClickOut(e) {
+    if (editMode && !e.target.closest('.service-label-container') &&
+      !e.target.closest('.service-add') && serviceFormElement &&
+      !serviceFormElement.contains(e.target))
+      onCloseEditService()
+  }
 
   afterUpdate(() => {
     if (!editMode)
@@ -90,6 +86,8 @@
     }
   }
 </script>
+
+<svelte:window on:click={onMaybeClickOut} on:touchstart={onMaybeClickOut} />
 
 <li bind:this={serviceElement} class="service" transition:growShrink>
   <div class="service-timeline">
