@@ -16,6 +16,7 @@
   let drawer = {}
   let submitButtonElement
   let addPreferedServiceMode = false
+  const expansionPanelOpennedStates = [false, false, false, false]
   const dispatch = createEventDispatcher()
 
   $: drawer.open = openned
@@ -37,6 +38,14 @@
 
   function onClose() {
     submitButtonElement.click()
+  }
+
+  function onOpenExpansionPanel(index) {
+    expansionPanelOpennedStates.forEach((expansionPanelOpennedState, i) => {
+      if (i === index) return
+
+      if (expansionPanelOpennedState) expansionPanelOpennedStates[i] = false
+    })
   }
 
   function onAddPreferedService() {
@@ -66,7 +75,8 @@
   <div class="mdc-drawer__content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
       <ExpansionPanelSet>
-        <ExpansionPanel>
+        <ExpansionPanel bind:openned={expansionPanelOpennedStates[0]}
+          on:open={() => onOpenExpansionPanel(0)}>
           <div slot="summary">Auteur des factures</div>
           <div slot="content">
             <TextField bind:value={$author.name} fieldId="author-name" required>
@@ -91,7 +101,8 @@
             </TextField>
           </div>
         </ExpansionPanel>
-        <ExpansionPanel>
+        <ExpansionPanel bind:openned={expansionPanelOpennedStates[1]}
+          on:open={() => onOpenExpansionPanel(1)}>
           <div slot="summary">Thérapeute</div>
           <div slot="content">
             <TextField bind:value={$therapist.firstName} fieldId="therapist-first-name" required>
@@ -117,7 +128,8 @@
             </TextField>
           </div>
         </ExpansionPanel>
-        <ExpansionPanel>
+        <ExpansionPanel bind:openned={expansionPanelOpennedStates[2]}
+          on:open={() => onOpenExpansionPanel(2)}>
           <div slot="summary">Tarif horaire</div>
           <div slot="content">
             <TextField bind:value={$servicePrice} type="number" fieldId="service-price" required>
@@ -125,7 +137,8 @@
             </TextField>
           </div>
         </ExpansionPanel>
-        <ExpansionPanel>
+        <ExpansionPanel bind:openned={expansionPanelOpennedStates[3]}
+          on:open={() => onOpenExpansionPanel(3)}>
           <div slot="summary">Thérapies préférées</div>
           <div slot="content">
             <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
