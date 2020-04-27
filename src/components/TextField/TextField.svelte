@@ -48,7 +48,8 @@
 </script>
 
 <label bind:this={element} class="mdc-text-field {className}"
-  class:mdc-text-field--outlined="{outlined}" class:mdc-text-field--with-trailing-icon="{trailingIcon}">
+  class:mdc-text-field--filled={!outlined} class:mdc-text-field--outlined="{outlined}"
+  class:mdc-text-field--with-trailing-icon="{trailingIcon}">
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
   {/if}
