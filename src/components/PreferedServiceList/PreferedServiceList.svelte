@@ -22,6 +22,8 @@
 
     if (addPreferedServiceMode)
       addPreferedServiceElement.style.display = 'none'
+    if (addPreferedServiceElement && !addPreferedServiceMode)
+      addPreferedServiceElement.style.display = 'inline'
   })
 
   function onSelectService(code) {
