@@ -3,7 +3,7 @@
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   background: #fff;
 
-  &.openned {
+  &.opened {
     .expansion-panel-summary {
       &:hover {
         background: #fff;
@@ -12,10 +12,6 @@
       &::after {
         transform: rotate(-135deg);
       }
-    }
-
-    .expansion-panel-content {
-      height: unset;
     }
   }
 }
@@ -44,6 +40,4 @@
 
 .expansion-panel-content {
   padding: 16px;
-  height: 0;
-  transition: height 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
 }

@@ -6,18 +6,18 @@
   import Button from '../Button/Button.svelte'
   import LinearProgress from '../LinearProgress/LinearProgress.svelte'
 
-  let userPanelOpenned = false
+  let userPanelOpened = false
   const dispatch = createEventDispatcher()
 
   function onToggleUserPanel() {
-    userPanelOpenned = !userPanelOpenned
+    userPanelOpened = !userPanelOpened
 
-    if (!userPanelOpenned)
+    if (!userPanelOpened)
       dispatch('userPannelClosed')
   }
 </script>
 
-<UserPanel openned={userPanelOpenned} on:closeUserPanel={onToggleUserPanel} />
+<UserPanel opened={userPanelOpened} on:closeUserPanel={onToggleUserPanel} />
 
 <header class="header" class:loading={$loading}>
   <TopAppBar>
