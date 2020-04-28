@@ -1,6 +1,7 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+  import { slide } from 'svelte/transition'
   import { author } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -12,11 +13,14 @@
     from '../ServicePriceFormExpansionPanel/ServicePriceFormExpansionPanel.svelte'
   import PreferedServicesFormExpansionPanel
     from '../PreferedServicesFormExpansionPanel/PreferedServicesFormExpansionPanel.svelte'
+  import AuthentificationForm
+    from '../AuthentificationForm/AuthentificationForm.svelte'
 
   export let opened = false
 
   let element
   let drawer = {}
+  let authentificationMode = true
   let formElement
   let submitButtonElement
 
@@ -78,6 +82,10 @@
     submitButtonElement.click()
   }
 
+  function onLocalMode() {
+    authentificationMode = false
+  }
+
   function onSubmit() {
     dispatch('closeUserPanel')
   }
@@ -110,11 +118,16 @@
   </header>
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
+    {#if authentificationMode}
+      <div transition:slide>
+        <AuthentificationForm on:localMode={onLocalMode} />
+      </div>
+    {/if}
     <form bind:this={formElement} class="aposto-form" on:submit|preventDefault={onSubmit}>
       <ExpansionPanelSet>
         {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
-          <svelte:component bind:this={formExpansionPanel.element} this={formExpansionPanel.component}
-            expansionPanelId={formExpansionPanel.id} bind:opened={formExpansionPanel.opened}
+          <svelte:component this={formExpansionPanel.component} expansionPanelId={formExpansionPanel.id}
+            bind:opened={formExpansionPanel.opened}
             on:askToggle={() => onExpansionPanelAskToggle(formExpansionPanel.id)} />
         {/each}
       </ExpansionPanelSet>

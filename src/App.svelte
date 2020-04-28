@@ -7,7 +7,7 @@
   import Snackbar from './components/Snackbar/Snackbar.svelte'
 
   let saveUserSnackbar
-  let selectedServices = selectedServicesFixture.map(e => ({ ...e }))
+  let selectedServices = []
   let userUpdated
 
   onMount(() => {

@@ -10,7 +10,7 @@
 <ExpansionPanel {expansionPanelId} bind:opened on:askToggle>
   <div slot="summary">Tarif horaire</div>
   <div slot="content">
-    <TextField bind:value={$servicePrice} type="number" fieldId="service-price" required>
+    <TextField bind:value={$servicePrice} type="number" fieldId="service-price" min="1" required>
       Tarif horaire
     </TextField>
   </div>

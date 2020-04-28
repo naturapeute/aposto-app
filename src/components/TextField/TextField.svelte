@@ -11,6 +11,7 @@
   export let noAutoComplete = false
   export let placeholder = ''
   export let className = ''
+  export let min = null
 
   let element
   let textField
@@ -54,7 +55,7 @@
     <div class="mdc-text-field__ripple"></div>
   {/if}
   <input {value} {type} class="mdc-text-field__input" id={fieldId} {placeholder} name={fieldId}
-    aria-labelledby={fieldId} on:input={onInput} {required}
+    aria-labelledby={fieldId} on:input={onInput} {min} {required}
     autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
     <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
