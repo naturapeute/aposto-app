@@ -49,17 +49,14 @@
       document.querySelector('.mdc-icon-button').blur()
     })
 
-    const formValid = formElement.checkValidity()
+    opened = !formElement.checkValidity()
 
-    if (!formValid) {
-      opened = true
-      formExpansionPanels = formExpansionPanels.reduce(
-        (newformExpansionPanels, formExpansionPanel) => {
-          return [...newformExpansionPanels, closeIfValid(formExpansionPanel)]
-        },
-        []
-      )
-    }
+    formExpansionPanels = formExpansionPanels.reduce(
+      (newformExpansionPanels, formExpansionPanel) => {
+        return [...newformExpansionPanels, closeIfValid(formExpansionPanel)]
+      },
+      []
+    )
   })
 
   onDestroy(() => {
