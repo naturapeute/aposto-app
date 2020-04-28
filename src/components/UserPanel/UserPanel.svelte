@@ -1,25 +1,43 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
-  import { author, therapist, servicePrice } from '../../js/store'
-  import TextField from '../TextField/TextField.svelte'
+  import { author } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
-  import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
-  import AddPreferedServiceForm from '../AddPreferedServiceForm/AddPreferedServiceForm.svelte'
-  import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
+  import AuthorFormExpansionPanel from '../AuthorFormExpansionPanel/AuthorFormExpansionPanel.svelte'
+  import TherapistFormExpansionPanel
+    from '../TherapistFormExpansionPanel/TherapistFormExpansionPanel.svelte'
+  import ServicePriceFormExpansionPanel
+    from '../ServicePriceFormExpansionPanel/ServicePriceFormExpansionPanel.svelte'
+  import PreferedServicesFormExpansionPanel
+    from '../PreferedServicesFormExpansionPanel/PreferedServicesFormExpansionPanel.svelte'
 
-  export let openned = false
+  export let opened = false
 
   let element
   let drawer = {}
+  let formElement
   let submitButtonElement
-  let addPreferedServiceMode = false
-  const expansionPanelOpennedStates = [false, false, false, false]
+
+  let formExpansionPanels = [
+    { component: AuthorFormExpansionPanel, opened: true, id: 'author-form-expansion-panel' },
+    { component: TherapistFormExpansionPanel, opened: true, id: 'therapist-form-expansion-panel' },
+    {
+      component: ServicePriceFormExpansionPanel,
+      opened: true,
+      id: 'service-price-form-expansion-panel'
+    },
+    {
+      component: PreferedServicesFormExpansionPanel,
+      opened: true,
+      id: 'prefered-services-form-expansion-panel'
+    }
+  ]
+
   const dispatch = createEventDispatcher()
 
-  $: drawer.open = openned
+  $: drawer.open = opened
 
   onMount(() => {
     drawer = new MDCDrawer(element)
@@ -30,34 +48,56 @@
     drawer.listen('MDCDrawer:opened', () => {
       document.querySelector('.mdc-icon-button').blur()
     })
+
+    const formValid = formElement.checkValidity()
+
+    if (!formValid) {
+      opened = true
+      formExpansionPanels = formExpansionPanels.reduce(
+        (newformExpansionPanels, formExpansionPanel) => {
+          return [...newformExpansionPanels, closeIfValid(formExpansionPanel)]
+        },
+        []
+      )
+    }
   })
 
   onDestroy(() => {
     if (drawer) drawer.detroy()
   })
 
+  function closeIfValid(formExpansionPanel) {
+    const invalidFields =
+      formElement.querySelectorAll(`#${formExpansionPanel.id} :invalid`)
+
+    if (invalidFields.length) {
+      submitButtonElement.click()
+      return { ...formExpansionPanel }
+    } else
+      return { ...formExpansionPanel, opened: false }
+  }
+
   function onClose() {
     submitButtonElement.click()
   }
 
-  function onOpenExpansionPanel(index) {
-    expansionPanelOpennedStates.forEach((expansionPanelOpennedState, i) => {
-      if (i === index) return
-
-      if (expansionPanelOpennedState) expansionPanelOpennedStates[i] = false
-    })
-  }
-
-  function onAddPreferedService() {
-    addPreferedServiceMode = true
-  }
-
-  function onCloseAdd() {
-    addPreferedServiceMode = false
-  }
-
   function onSubmit() {
     dispatch('closeUserPanel')
+  }
+
+  function onExpansionPanelAskToggle(formExpansionPanelId) {
+    formExpansionPanels = formExpansionPanels.reduce(
+      (newFormExpansionPanels, formExpansionPanel) => {
+        if (formExpansionPanel.id === formExpansionPanelId) {
+          if (formExpansionPanel.opened)
+            return [...newFormExpansionPanels, closeIfValid(formExpansionPanel)]
+          else
+            return [...newFormExpansionPanels, { ...formExpansionPanel, opened: true }]
+        } else
+          return [...newFormExpansionPanels, closeIfValid(formExpansionPanel)]
+      },
+      []
+    )
   }
 </script>
 
@@ -73,80 +113,13 @@
   </header>
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
-    <form class="aposto-form" on:submit|preventDefault={onSubmit}>
+    <form bind:this={formElement} class="aposto-form" on:submit|preventDefault={onSubmit}>
       <ExpansionPanelSet>
-        <ExpansionPanel bind:openned={expansionPanelOpennedStates[0]}
-          on:open={() => onOpenExpansionPanel(0)}>
-          <div slot="summary">Auteur des factures</div>
-          <div slot="content">
-            <TextField bind:value={$author.name} fieldId="author-name" required>
-              Nom ou entreprise
-            </TextField>
-            <TextField bind:value={$author.street} fieldId="author-street" required>
-              Rue et n°
-            </TextField>
-            <TextField bind:value={$author.ZIP} fieldId="author-zip" required>NPA</TextField>
-            <TextField bind:value={$author.city} fieldId="author-city" required>Localité</TextField>
-            <TextField bind:value={$author.email} type="email" fieldId="author-email" required>
-              Email
-            </TextField>
-            <TextField bind:value={$author.phone} type="tel" fieldId="author-phone" required>
-              Téléphone
-            </TextField>
-            <TextField bind:value={$author.RCC} type="tel" fieldId="author-rcc" required>
-              N°RCC
-            </TextField>
-            <TextField bind:value={$author.GLN} type="tel" fieldId="author-gln" required>
-              N°GLN
-            </TextField>
-          </div>
-        </ExpansionPanel>
-        <ExpansionPanel bind:openned={expansionPanelOpennedStates[1]}
-          on:open={() => onOpenExpansionPanel(1)}>
-          <div slot="summary">Thérapeute</div>
-          <div slot="content">
-            <TextField bind:value={$therapist.firstName} fieldId="therapist-first-name" required>
-              Prénom
-            </TextField>
-            <TextField bind:value={$therapist.lastName} fieldId="therapist-last-name" required>
-              Nom
-            </TextField>
-            <TextField bind:value={$therapist.street} fieldId="therapist-street" required>
-              Rue et n°
-            </TextField>
-            <TextField bind:value={$therapist.ZIP} fieldId="therapist-zip" required>NPA</TextField>
-            <TextField bind:value={$therapist.city} fieldId="therapist-city" required>
-              Localité
-            </TextField>
-            <TextField bind:value={$therapist.phone} type="tel" fieldId="therapist-phone" required>
-              Téléphone</TextField>
-            <TextField bind:value={$therapist.RCC} type="tel" fieldId="therapist-rcc" required>
-              N°RCC
-            </TextField>
-            <TextField bind:value={$therapist.GLN} type="tel" fieldId="therapist-gln" required>
-              N°GLN
-            </TextField>
-          </div>
-        </ExpansionPanel>
-        <ExpansionPanel bind:openned={expansionPanelOpennedStates[2]}
-          on:open={() => onOpenExpansionPanel(2)}>
-          <div slot="summary">Tarif horaire</div>
-          <div slot="content">
-            <TextField bind:value={$servicePrice} type="number" fieldId="service-price" required>
-              Tarif horaire
-            </TextField>
-          </div>
-        </ExpansionPanel>
-        <ExpansionPanel bind:openned={expansionPanelOpennedStates[3]}
-          on:open={() => onOpenExpansionPanel(3)}>
-          <div slot="summary">Thérapies préférées</div>
-          <div slot="content">
-            <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
-            {#if addPreferedServiceMode}
-              <AddPreferedServiceForm on:cancelAdd={onCloseAdd} on:addedService={onCloseAdd} />
-            {/if}
-          </div>
-        </ExpansionPanel>
+        {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
+          <svelte:component bind:this={formExpansionPanel.element} this={formExpansionPanel.component}
+            expansionPanelId={formExpansionPanel.id} bind:opened={formExpansionPanel.opened}
+            on:askToggle={() => onExpansionPanelAskToggle(formExpansionPanel.id)} />
+        {/each}
       </ExpansionPanelSet>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">
