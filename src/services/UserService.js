@@ -25,19 +25,14 @@ export async function saveUser(
   patients
 ) {
   const extraData = {
-    author: {
-      name: author.name,
-      RCC: author.RCC,
-      GLN: author.GLN
-    },
-    therapist: {
-      RCC: therapist.RCC,
-      GLN: therapist.GLN
-    },
+    author: { ...author },
+    therapist: { ...therapist },
     servicePrice: servicePrice,
     preferedServices: preferedServices.map(e => ({ ...e })),
     patients: patients.map(e => ({ ...e }))
   }
+
+  console.log(JSON.stringify({ extraData: extraData }))
 
   const response = await fetch(`https://terrapeute.ch/api/therapist/${terrapeuteUserID}`, {
     method: 'PATCH',
