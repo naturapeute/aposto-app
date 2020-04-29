@@ -13,7 +13,7 @@
     userPanelOpened = !userPanelOpened
 
     if (!userPanelOpened)
-      dispatch('userPannelClosed')
+      dispatch('userPanelClosed')
   }
 </script>
 

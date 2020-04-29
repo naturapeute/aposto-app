@@ -18,7 +18,7 @@
     userUpdated = false
   })
 
-  function onUserPannelClosed() {
+  function onUserPanelClosed() {
     if (userUpdated) {
       saveUserSnackbar.open()
       userUpdated = false
@@ -30,7 +30,7 @@
   }
 </script>
 
-<HeaderPanel on:userPannelClosed={onUserPannelClosed}>Clôture de votre séance</HeaderPanel>
+<HeaderPanel on:userPanelClosed={onUserPanelClosed}>Clôture de votre séance</HeaderPanel>
 <main>
   <FinalizeView services={selectedServices} on:newInvoice={onNewInvoice} />
 

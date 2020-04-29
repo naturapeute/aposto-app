@@ -53,11 +53,14 @@
     disabled={$loading}>
     Se connecter via Terrapeute
   </Button>
-  <a class="join-terrapeute" href="https://pro.terrapeute.ch/join">
-    Rejoindre le réseau Terrapeute
+  <a class="mdc-button" href="https://pro.terrapeute.ch/join">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">
+      Rejoindre Terrapeute
+    </span>
   </a>
-  <Button title="Continuer en local" on:click={onLocalMode} disabled={$loading}>
-    Continuer en local
+  <Button title="Essayer en démo" on:click={onLocalMode} disabled={$loading}>
+    Essayer en démo
   </Button>
 </form>
 
