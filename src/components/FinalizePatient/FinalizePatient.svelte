@@ -1,9 +1,18 @@
 <script>
   import { slide } from 'svelte/transition'
-  import { patients } from '../../js/store'
+  import {
+    terrapeuteUserID,
+    author,
+    therapist,
+    servicePrice,
+    preferedServices,
+    patients,
+    loading
+  } from '../../js/store'
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
   import PatientForm from '../PatientForm/PatientForm.svelte'
+  import { saveUser } from '../../services/UserService'
 
   export let patient = null
 
@@ -39,6 +48,20 @@
 
     patientCreateMode = false
     $patients = [newPatient, ...$patients]
+    $loading = true
+
+    saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
+      .then((_) => {
+        // TODO
+      })
+      .catch((err) => {
+        console.error(err)
+        // TODO
+      })
+      .finally(() => {
+        $loading = false
+      })
+
     patient = { ...newPatient }
     onCloseSearch()
   }

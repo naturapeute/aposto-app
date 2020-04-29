@@ -38,8 +38,8 @@
     </TextField>
   </div>
   <div class="row row-xs">
-    <TextField className="col-60" bind:value={patient.birthdate} type="date" fieldId="patient-birthdate"
-      required>
+    <TextField className="col-60" bind:value={patient.birthdate} type="date"
+      fieldId="patient-birthdate" required>
       Date de naissance
     </TextField>
     <Select className="col-40" bind:value={patient.gender} fieldId="patient-gender"
