@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
   import { selectedServicesFixture } from './js/fixtures'
   import { author, therapist, servicePrice, preferedServices } from './js/store'
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
@@ -8,15 +8,24 @@
 
   let saveUserSnackbar
   let selectedServices = []
+  const storeUnsubscribes = []
   let userUpdated
 
   onMount(() => {
-    author.subscribe(_ => { userUpdated = true })
-    therapist.subscribe(_ => { userUpdated = true })
-    servicePrice.subscribe(_ => { userUpdated = true })
-    preferedServices.subscribe(_ => { userUpdated = true })
+    storeUnsubscribes.push(author.subscribe(_ => { onUserUpdated() }))
+    storeUnsubscribes.push(therapist.subscribe(_ => { onUserUpdated() }))
+    storeUnsubscribes.push(servicePrice.subscribe(_ => { onUserUpdated() }))
+    storeUnsubscribes.push(preferedServices.subscribe(_ => { onUserUpdated() }))
     userUpdated = false
   })
+
+  onDestroy(() => {
+    storeUnsubscribes.forEach(storeUnsubscribe => { storeUnsubscribe() })
+  })
+
+  function onUserUpdated() {
+    userUpdated = true
+  }
 
   function onUserPanelClosed() {
     if (userUpdated) {
