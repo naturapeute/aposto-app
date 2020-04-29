@@ -2,8 +2,13 @@
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { author } from '../../js/store'
-  import Button from '../Button/Button.svelte'
+  import { author, therapist, servicePrice, preferedServices } from '../../js/store'
+  import {
+    isAuthorValid,
+    isTherapistValid,
+    isServicePriceValid,
+    isPreferedServicesValid
+  } from '../../js/utils'
   import IconButton from '../IconButton/IconButton.svelte'
   import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
   import AuthorFormExpansionPanel from '../AuthorFormExpansionPanel/AuthorFormExpansionPanel.svelte'
@@ -21,22 +26,12 @@
   let element
   let drawer = {}
   let authentificationMode = true
-  let formElement
-  let submitButtonElement
 
-  let formExpansionPanels = [
-    { component: AuthorFormExpansionPanel, opened: true, id: 'author-form-expansion-panel' },
-    { component: TherapistFormExpansionPanel, opened: true, id: 'therapist-form-expansion-panel' },
-    {
-      component: ServicePriceFormExpansionPanel,
-      opened: true,
-      id: 'service-price-form-expansion-panel'
-    },
-    {
-      component: PreferedServicesFormExpansionPanel,
-      opened: true,
-      id: 'prefered-services-form-expansion-panel'
-    }
+  const formExpansionPanels = [
+    { component: AuthorFormExpansionPanel, id: 'author-form-expansion-panel' },
+    { component: TherapistFormExpansionPanel, id: 'therapist-form-expansion-panel' },
+    { component: ServicePriceFormExpansionPanel, id: 'service-price-form-expansion-panel' },
+    { component: PreferedServicesFormExpansionPanel, id: 'prefered-services-form-expansion-panel' }
   ]
 
   const dispatch = createEventDispatcher()
@@ -53,56 +48,34 @@
       document.querySelector('.mdc-icon-button').blur()
     })
 
-    opened = !formElement.checkValidity()
-
-    formExpansionPanels = formExpansionPanels.reduce(
-      (newformExpansionPanels, formExpansionPanel) => {
-        return [...newformExpansionPanels, closeIfValid(formExpansionPanel)]
-      },
-      []
-    )
+    opened = !isAuthorValid($author) || !isTherapistValid($therapist) ||
+      !isServicePriceValid($servicePrice) || !isPreferedServicesValid($preferedServices)
   })
 
   onDestroy(() => {
     if (drawer) drawer.detroy()
   })
 
-  function closeIfValid(formExpansionPanel) {
-    const invalidFields =
-      formElement.querySelectorAll(`#${formExpansionPanel.id} :invalid`)
-
-    if (invalidFields.length) {
-      submitButtonElement.click()
-      return { ...formExpansionPanel }
-    } else
-      return { ...formExpansionPanel, opened: false }
-  }
-
   function onClose() {
-    submitButtonElement.click()
+    const validClose = formExpansionPanels.reduce(
+      (_validClose, formExpansionPanel) => _validClose && formExpansionPanel.instance.askClose(),
+      true
+    )
+
+    if (validClose)
+      dispatch('closeUserPanel')
   }
 
   function onLocalMode() {
     authentificationMode = false
   }
 
-  function onSubmit() {
-    dispatch('closeUserPanel')
-  }
+  function onExpansionPanelOpen(id) {
+    formExpansionPanels.forEach(formExpansionPanel => {
+      if (formExpansionPanel.id === id) return
 
-  function onExpansionPanelAskToggle(formExpansionPanelId) {
-    formExpansionPanels = formExpansionPanels.reduce(
-      (newFormExpansionPanels, formExpansionPanel) => {
-        if (formExpansionPanel.id === formExpansionPanelId) {
-          if (formExpansionPanel.opened)
-            return [...newFormExpansionPanels, closeIfValid(formExpansionPanel)]
-          else
-            return [...newFormExpansionPanels, { ...formExpansionPanel, opened: true }]
-        } else
-          return [...newFormExpansionPanels, closeIfValid(formExpansionPanel)]
-      },
-      []
-    )
+      formExpansionPanel.instance.askClose()
+    })
   }
 </script>
 
@@ -123,19 +96,12 @@
         <AuthentificationForm on:localMode={onLocalMode} />
       </div>
     {/if}
-    <form bind:this={formElement} class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <ExpansionPanelSet>
-        {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
-          <svelte:component this={formExpansionPanel.component} expansionPanelId={formExpansionPanel.id}
-            bind:opened={formExpansionPanel.opened}
-            on:askToggle={() => onExpansionPanelAskToggle(formExpansionPanel.id)} />
-        {/each}
-      </ExpansionPanelSet>
-      <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
-        title="Enregistrer les modifications">
-        Enregistrer
-      </Button>
-    </form>
+    <ExpansionPanelSet>
+      {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
+        <svelte:component this={formExpansionPanel.component} bind:this={formExpansionPanel.instance}
+          expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
+      {/each}
+    </ExpansionPanelSet>
   </div>
 </aside>
 

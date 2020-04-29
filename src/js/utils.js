@@ -29,6 +29,28 @@ export function getGenderOptions() {
   ]
 }
 
+export function isAuthorValid(author) {
+  return author.name && author.street && author.ZIP && author.city &&
+    isEmailValid(author.email) && author.phone && author.RCC && author.GLN
+}
+
+export function isTherapistValid(therapist) {
+  return therapist.firstName && therapist.lastName && therapist.street && therapist.ZIP &&
+    therapist.city && therapist.phone && therapist.RCC && therapist.GLN
+}
+
+export function isServicePriceValid(servicePrice) {
+  return servicePrice > 0
+}
+
+export function isPreferedServicesValid(preferedServices) {
+  return preferedServices.length
+}
+
+function isEmailValid(email) {
+  return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
+}
+
 export const serviceCodes = [
   { value: 1003, lightLabel: 'Acupressure' },
   { value: 1004, lightLabel: 'Acupuncture' },

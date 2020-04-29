@@ -17,7 +17,7 @@
   }
 </script>
 
-<UserPanel opened={userPanelOpened} on:closeUserPanel={onToggleUserPanel} />
+<UserPanel bind:opened={userPanelOpened} on:closeUserPanel={onToggleUserPanel} />
 
 <header class="header" class:loading={$loading}>
   <TopAppBar>
