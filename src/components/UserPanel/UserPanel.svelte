@@ -2,7 +2,14 @@
   import { MDCDrawer } from '@material/drawer'
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { author, therapist, servicePrice, preferedServices } from '../../js/store'
+  import {
+    terrapeuteUserID,
+    author,
+    therapist,
+    servicePrice,
+    preferedServices,
+    loading
+  } from '../../js/store'
   import {
     isAuthorValid,
     isTherapistValid,
@@ -20,12 +27,15 @@
     from '../PreferedServicesFormExpansionPanel/PreferedServicesFormExpansionPanel.svelte'
   import AuthentificationForm
     from '../AuthentificationForm/AuthentificationForm.svelte'
+  import Snackbar from '../Snackbar/Snackbar.svelte'
+  import { saveUser } from '../../services/UserService'
 
   export let opened = false
 
   let element
   let drawer = {}
   let authentificationMode = true
+  let failedPatchSnackbar
 
   const formExpansionPanels = [
     { component: AuthorFormExpansionPanel, id: 'author-form-expansion-panel' },
@@ -62,8 +72,23 @@
       true
     )
 
-    if (validClose)
-      dispatch('closeUserPanel')
+    if (validClose) {
+      if ($terrapeuteUserID) {
+        saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices)
+          .then((body) => {
+            console.log(body)
+            dispatch('closeUserPanel')
+          })
+          .catch((err) => {
+            console.error(err)
+            failedPatchSnackbar.open()
+          })
+          .finally(() => {
+            $loading = false
+          })
+      } else
+        dispatch('closeUserPanel')
+    }
   }
 
   function onAuthentificationDone() {
@@ -107,5 +132,11 @@
 </aside>
 
 <div class="mdc-drawer-scrim" on:click={onClose}></div>
+
+<Snackbar bind:this={failedPatchSnackbar}>
+  <span slot="label">
+    La sauvegarde de vos informations auprès du réseau Terrapeute a échoué. Veuillez réessayer.
+  </span>
+</Snackbar>
 
 <style src="UserPanel.scss"></style>
