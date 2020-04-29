@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { author, therapist, loading } from '../../js/store'
+  import { terrapeuteUserID, author, therapist, loading } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import TextField from '../TextField/TextField.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
@@ -30,6 +30,10 @@
           $therapist.ZIP = body.offices[0].zipCode
           $therapist.city = body.offices[0].city
         }
+
+        $terrapeuteUserID = body.id
+
+        onAuthentificationDone()
       })
       .catch((err) => {
         console.error(err)
@@ -40,8 +44,8 @@
       })
   }
 
-  function onLocalMode() {
-    dispatch('localMode')
+  function onAuthentificationDone() {
+    dispatch('done')
   }
 </script>
 
@@ -59,9 +63,14 @@
       Rejoindre Terrapeute
     </span>
   </a>
-  <Button title="Essayer en démo" on:click={onLocalMode} disabled={$loading}>
+  <Button title="Essayer en démo" on:click={onAuthentificationDone} disabled={$loading}>
     Essayer en démo
   </Button>
+  <p class="demo-hint">
+    En mode démo, vous avez accès à l'intégralité de l'application, mais aucune de vos informations
+    n'est enregistrée. Vous devrez donc saisir de nouveau cos informations de thérapeute la
+    prochaine fois que vous revenez.
+  </p>
 </form>
 
 <Snackbar bind:this={failedAuthentificationSnackbar}>

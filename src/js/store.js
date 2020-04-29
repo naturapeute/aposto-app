@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store'
 
+export const terrapeuteUserID = writable(null)
 export const author = writable({
   name: '',
   street: '',

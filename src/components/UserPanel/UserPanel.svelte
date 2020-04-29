@@ -66,7 +66,7 @@
       dispatch('closeUserPanel')
   }
 
-  function onLocalMode() {
+  function onAuthentificationDone() {
     authentificationMode = false
   }
 
@@ -93,15 +93,16 @@
   <div class="mdc-drawer__content">
     {#if authentificationMode}
       <div transition:slide>
-        <AuthentificationForm on:localMode={onLocalMode} />
+        <AuthentificationForm on:done={onAuthentificationDone} />
       </div>
+    {:else}
+      <ExpansionPanelSet>
+        {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
+          <svelte:component this={formExpansionPanel.component} bind:this={formExpansionPanel.instance}
+            expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
+        {/each}
+      </ExpansionPanelSet>
     {/if}
-    <ExpansionPanelSet>
-      {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
-        <svelte:component this={formExpansionPanel.component} bind:this={formExpansionPanel.instance}
-          expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
-      {/each}
-    </ExpansionPanelSet>
   </div>
 </aside>
 
