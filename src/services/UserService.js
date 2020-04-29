@@ -21,7 +21,8 @@ export async function saveUser(
   author,
   therapist,
   servicePrice,
-  preferedServices
+  preferedServices,
+  patients
 ) {
   const extraData = {
     author: {
@@ -34,7 +35,8 @@ export async function saveUser(
       GLN: therapist.GLN
     },
     servicePrice: servicePrice,
-    preferedServices: preferedServices.map(e => ({ ...e }))
+    preferedServices: preferedServices.map(e => ({ ...e })),
+    patients: patients.map(e => ({ ...e }))
   }
 
   const response = await fetch(`https://terrapeute.ch/api/therapist/${terrapeuteUserID}`, {
@@ -43,7 +45,7 @@ export async function saveUser(
       'Content-Type': 'application/json',
       Origin: process.env.APP_URL
     },
-    body: JSON.stringify(extraData)
+    body: JSON.stringify({ extraData: extraData })
   })
 
   if (response.ok)

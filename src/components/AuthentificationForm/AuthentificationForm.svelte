@@ -1,6 +1,14 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { terrapeuteUserID, author, therapist, loading } from '../../js/store'
+  import {
+    terrapeuteUserID,
+    author,
+    therapist,
+    servicePrice,
+    preferedServices,
+    patients,
+    loading
+  } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import TextField from '../TextField/TextField.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
@@ -32,6 +40,31 @@
         }
 
         $terrapeuteUserID = body.id
+
+        if (body.extraData) {
+          if (body.extraData.author) {
+            body.extraData.author.name && ($author.name = body.extraData.author.name)
+            body.extraData.author.RCC && ($author.RCC = body.extraData.author.RCC)
+            body.extraData.author.GLN && ($author.GLN = body.extraData.author.GLN)
+          }
+
+          if (body.extraData.therapist) {
+            body.extraData.therapist.firstName &&
+              ($therapist.firstName = body.extraData.therapist.firstName)
+            body.extraData.therapist.lastName &&
+              ($therapist.lastName = body.extraData.therapist.lastName)
+            body.extraData.therapist.RCC && ($therapist.RCC = body.extraData.therapist.RCC)
+            body.extraData.therapist.GLN && ($therapist.GLN = body.extraData.therapist.GLN)
+          }
+
+          body.extraData.servicePrice && ($servicePrice = body.extraData.servicePrice)
+
+          body.extraData.preferedServices &&
+            ($preferedServices = body.extraData.preferedServices.map(e => ({ ...e })))
+
+          body.extraData.patients &&
+            ($patients = body.extraData.patients.map(e => ({ ...e })))
+        }
 
         onAuthentificationDone()
       })

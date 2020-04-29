@@ -8,6 +8,7 @@
     therapist,
     servicePrice,
     preferedServices,
+    patients,
     loading
   } from '../../js/store'
   import {
@@ -74,9 +75,10 @@
 
     if (validClose) {
       if ($terrapeuteUserID) {
-        saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices)
-          .then((body) => {
-            console.log(body)
+        $loading = true
+
+        saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
+          .then((_) => {
             dispatch('closeUserPanel')
           })
           .catch((err) => {
