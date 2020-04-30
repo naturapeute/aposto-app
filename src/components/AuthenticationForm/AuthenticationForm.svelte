@@ -76,8 +76,7 @@
 
         onAuthenticationDone()
       })
-      .catch((err) => {
-        console.error(err)
+      .catch((_) => {
         failedAuthenticationSnackbar.open()
       })
       .finally(() => {
@@ -116,8 +115,8 @@
 
 <Snackbar bind:this={failedAuthenticationSnackbar}>
   <span slot="label">
-    Votre connexion auprès du réseau Terrapeute a échoué. Assurez-vous d'être bien inscrit dans le
-    réseau.
+    Votre connexion auprès du réseau Terrapeute a échoué. Assurez-vous d'être bien inscrit auprès du
+    réseau et d'avoir renseigné l'adresse mail correspondant à votre inscription.
   </span>
 </Snackbar>
 
