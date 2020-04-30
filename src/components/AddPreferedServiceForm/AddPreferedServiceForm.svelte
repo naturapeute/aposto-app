@@ -41,7 +41,7 @@
 </script>
 
 <form class="aposto-form" on:submit|preventDefault transition:slide>
-  <TextField bind:value={filterService} fieldId="service-search" trailingIcon="close"
+  <TextField bind:value={filterService} fieldID="service-search" trailingIcon="close"
     placeholder="Rechercher un service..." on:trailingIconClick={onCancelAdd}
     on:mount={onTextFieldMount} outlined noAutoComplete>
     Service

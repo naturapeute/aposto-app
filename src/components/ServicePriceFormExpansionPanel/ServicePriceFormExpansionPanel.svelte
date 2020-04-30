@@ -43,7 +43,7 @@
   <div slot="summary">Tarif horaire</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$servicePrice} type="number" fieldId="service-price" min="1" required>
+      <TextField bind:value={$servicePrice} type="number" fieldID="service-price" min="1" required>
         Tarif horaire
       </TextField>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"

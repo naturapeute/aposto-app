@@ -2,7 +2,7 @@
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import { MDCTextField } from '@material/textfield'
 
-  export let fieldId
+  export let fieldID
   export let value = ''
   export let type = 'text'
   export let required = false
@@ -12,10 +12,13 @@
   export let placeholder = ''
   export let className = ''
   export let min = null
+  export let helperText = false
 
   let element
   let textField
   const dispatch = createEventDispatcher()
+
+  $: helperTextID = `${fieldID}-helper-text`
 
   onMount(() => {
     textField = new MDCTextField(element)
@@ -54,8 +57,9 @@
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
   {/if}
-  <input {value} {type} class="mdc-text-field__input" id={fieldId} {placeholder} name={fieldId}
-    aria-labelledby={fieldId} on:input={onInput} {min} {required}
+  <input {value} {type} class="mdc-text-field__input" id={fieldID} {placeholder} name={fieldID}
+    aria-labelledby={fieldID} aria-controls="{helperText ? helperTextID : ''}"
+    aria-describedby="{helperText ? helperTextID : ''}" on:input={onInput} {min} {required}
     autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
     <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
@@ -67,18 +71,25 @@
     <div class="mdc-notched-outline">
       <div class="mdc-notched-outline__leading"></div>
       <div class="mdc-notched-outline__notch">
-        <span class="mdc-floating-label" id={fieldId}>
+        <span class="mdc-floating-label" id={fieldID}>
           <slot></slot>
         </span>
       </div>
       <div class="mdc-notched-outline__trailing"></div>
     </div>
   {:else}
-    <span class="mdc-floating-label" id={fieldId}>
+    <span class="mdc-floating-label" id={fieldID}>
       <slot></slot>
     </span>
     <div class="mdc-line-ripple"></div>
   {/if}
 </label>
+{#if helperText}
+  <div class="mdc-text-field-helper-line">
+    <div id="helperTextID" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">
+      <slot name="helper-text"></slot>
+    </div>
+  </div>
+{/if}
 
 <style src="TextField.scss"></style>

@@ -5,6 +5,7 @@
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import TextField from '../TextField/TextField.svelte'
   import Button from '../Button/Button.svelte'
+  import { getGLN } from '../../services/UserService'
 
   export let expansionPanelId
 
@@ -19,7 +20,22 @@
 
   let opened
   let submitButtonElement
+  let GLNNotFound = false
   const dispatch = createEventDispatcher()
+
+  $: if (!$author.GLN && $author.name && $author.ZIP && $author.city) {
+    getGLN($author.name, '', '', $author.ZIP, $author.city)
+      .then(GLN => {
+        $author.GLN = GLN
+        GLNNotFound = false
+      })
+      .catch((_) => {
+        GLNNotFound = true
+      })
+  }
+
+  $: if ($author.GLN)
+    GLNNotFound = false
 
   onMount(() => {
     opened = !isAuthorValid($author)
@@ -43,25 +59,34 @@
   <div slot="summary">Auteur des factures</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$author.name} fieldId="author-name" required>
+      <TextField bind:value={$author.name} fieldID="author-name" required>
         Nom ou entreprise
       </TextField>
-      <TextField bind:value={$author.street} fieldId="author-street" required>
+      <TextField bind:value={$author.street} fieldID="author-street" required>
         Rue et n°
       </TextField>
-      <TextField bind:value={$author.ZIP} fieldId="author-zip" required>NPA</TextField>
-      <TextField bind:value={$author.city} fieldId="author-city" required>Localité</TextField>
-      <TextField bind:value={$author.email} type="email" fieldId="author-email" required>
+      <TextField bind:value={$author.ZIP} fieldID="author-zip" required>NPA</TextField>
+      <TextField bind:value={$author.city} fieldID="author-city" required>Localité</TextField>
+      <TextField bind:value={$author.email} type="email" fieldID="author-email" required>
         Email
       </TextField>
-      <TextField bind:value={$author.phone} type="tel" fieldId="author-phone" required>
+      <TextField bind:value={$author.phone} type="tel" fieldID="author-phone" required>
         Téléphone
       </TextField>
-      <TextField bind:value={$author.RCC} type="tel" fieldId="author-rcc" required>
+      <TextField bind:value={$author.RCC} type="tel" fieldID="author-rcc" required>
         N°RCC
       </TextField>
-      <TextField bind:value={$author.GLN} type="tel" fieldId="author-gln" required>
+      <TextField bind:value={$author.GLN} type="tel" fieldID="author-gln" helperText={GLNNotFound}
+        required>
         N°GLN
+        <span slot="helper-text">
+          {#if GLNNotFound}
+            <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
+              target="_blank">
+              Trouver son n°GLN ou faire la demande
+            </a>
+          {/if}
+        </span>
       </TextField>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">

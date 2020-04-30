@@ -91,7 +91,7 @@
 </script>
 
 <form class="aposto-form" on:submit|preventDefault={onAuthenticate}>
-  <TextField bind:value={email} type="email" fieldId="authentification-email" required>
+  <TextField bind:value={email} type="email" fieldID="authentification-email" required>
     Email
   </TextField>
   <Button type="submit" title="Se connecter via le réseau Terrapeute" unelevated

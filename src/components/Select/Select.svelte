@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { MDCSelect } from '@material/select'
 
-  export let fieldId
+  export let fieldID
   export let options = [{ value: '', label: '' }]
   export let value = ''
   export let required = false
@@ -11,8 +11,8 @@
   let element
   let select
 
-  $: labelId = `${fieldId}-label`
-  $: selectedTextId = `${fieldId}-selected-text`
+  $: labelID = `${fieldID}-label`
+  $: selectedTextID = `${fieldID}-selected-text`
 
   onMount(() => {
     select = new MDCSelect(element)
@@ -26,9 +26,9 @@
 <div bind:this={element} class="mdc-select {className}" class:mdc-select--required={required}>
   <div class="mdc-select__anchor">
     <i class="mdc-select__dropdown-icon"></i>
-    <div id={selectedTextId} class="mdc-select__selected-text" role="button" aria-haspopup="listbox"
-      aria-labelledby="{labelId} {selectedTextId}" aria-required="{required}"></div>
-    <span id={labelId} class="mdc-floating-label">
+    <div id={selectedTextID} class="mdc-select__selected-text" role="button" aria-haspopup="listbox"
+      aria-labelledby="{labelID} {selectedTextID}" aria-required="{required}"></div>
+    <span id={labelID} class="mdc-floating-label">
       <slot></slot>
     </span>
     <div class="mdc-line-ripple"></div>

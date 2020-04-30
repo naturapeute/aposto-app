@@ -20,6 +20,7 @@
 @use "@material/form-field/mdc-form-field";
 @use "@material/checkbox/mdc-checkbox";
 @use "@material/snackbar/mdc-snackbar";
+@use "@material/textfield/helper-text/mdc-text-field-helper-text";
 
 p {
   @extend .mdc-typography--body1;

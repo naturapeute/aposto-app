@@ -34,39 +34,39 @@
 
 <form class="aposto-form" on:submit|preventDefault={onPatientUpdatedOrCreated} transition:slide>
   <div class="row row-xs">
-    <TextField className="col-50" bind:value={localPatient.firstName} fieldId="patient-first-name"
+    <TextField className="col-50" bind:value={localPatient.firstName} fieldID="patient-first-name"
       required>
       Prénom
     </TextField>
-    <TextField className="col-50" bind:value={localPatient.lastName} fieldId="patient-last-name"
+    <TextField className="col-50" bind:value={localPatient.lastName} fieldID="patient-last-name"
       required>
       Nom
     </TextField>
   </div>
   <div class="row row-xs">
     <TextField className="col-60" bind:value={localPatient.birthdate} type="date"
-      fieldId="patient-birthdate" required>
+      fieldID="patient-birthdate" required>
       Date de naissance
     </TextField>
-    <Select className="col-40" bind:value={localPatient.gender} fieldId="patient-gender"
+    <Select className="col-40" bind:value={localPatient.gender} fieldID="patient-gender"
       options={getGenderOptions()} required>
       Sexe
     </Select>
   </div>
-  <TextField bind:value={localPatient.email} type="email" fieldId="patient-email" required>
+  <TextField bind:value={localPatient.email} type="email" fieldID="patient-email" required>
     Email
   </TextField>
-  <TextField bind:value={localPatient.street} fieldId="patient-street" required>
+  <TextField bind:value={localPatient.street} fieldID="patient-street" required>
     Rue et n°
   </TextField>
-  <TextField bind:value={localPatient.city} fieldId="patient-city" required>
+  <TextField bind:value={localPatient.city} fieldID="patient-city" required>
     Localité
   </TextField>
   <div class="row row-xs">
-    <TextField className="col-50" bind:value={localPatient.ZIP} fieldId="patient-zip" required>
+    <TextField className="col-50" bind:value={localPatient.ZIP} fieldID="patient-zip" required>
       NPA
     </TextField>
-    <Select className="col-50" bind:value={localPatient.canton} fieldId="patient-canton"
+    <Select className="col-50" bind:value={localPatient.canton} fieldID="patient-canton"
       options={getCantonOptions()} required>
       Canton
     </Select>
