@@ -6,7 +6,7 @@
   background: #fff;
   z-index: 4;
 
-  &:not(.loading) :global(.mdc-button) {
+  :global(.mdc-button) {
     margin-top: 56px;
   }
 
@@ -23,8 +23,8 @@
 }
 
 @media (min-width: 599px) {
-  .header:not(.loading) :global(.mdc-button) {
-    margin-top: 64px;
+  .header :global(.mdc-button) {
+      margin-top: 64px;
   }
 
   :global(.mdc-linear-progress) {
