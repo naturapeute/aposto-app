@@ -13,6 +13,7 @@
   import PatientList from '../PatientList/PatientList.svelte'
   import PatientForm from '../PatientForm/PatientForm.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
+  import Snackbar from '../Snackbar/Snackbar.svelte'
   import { saveUser } from '../../services/UserService'
 
   export let patient = null
@@ -21,6 +22,8 @@
   let patientSearchMode = false
   let patientCreateMode = false
   let patientUpdateMode = false
+  let succeedPatchSnackbar
+  let failedPatchSnackbar
 
   function onChangePatient() {
     patientSearchMode = true
@@ -73,20 +76,24 @@
 
     $loading = true
 
-    saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
-      .then((_) => {
-        // TODO
-      })
-      .catch((err) => {
-        console.error(err)
-        // TODO
-      })
-      .finally(() => {
-        $loading = false
-      })
-
-    patient = { ...newPatient }
-    onCloseSearch()
+    if ($terrapeuteUserID) {
+      saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
+        .then((_) => {
+          patient = { ...newPatient }
+          onCloseSearch()
+          succeedPatchSnackbar.open()
+        })
+        .catch((err) => {
+          console.error(err)
+          failedPatchSnackbar.open()
+        })
+        .finally(() => {
+          $loading = false
+        })
+    } else {
+      patient = { ...newPatient }
+      onCloseSearch()
+    }
   }
 </script>
 
@@ -122,5 +129,17 @@
   <PatientForm {filterPatient} patient={patientUpdateMode ? patient : null}
     on:patientUpdatedOrCreated={onPatientUpdatedOrCreated} />
 {/if}
+
+<Snackbar bind:this={succeedPatchSnackbar}>
+  <span slot="label">
+    Votre patient a été sauvegardé sur le réseau Terrapeute.
+  </span>
+</Snackbar>
+
+<Snackbar bind:this={failedPatchSnackbar}>
+  <span slot="label">
+    La sauvegarde de votre patient auprès du réseau Terrapeute a échoué. Veuillez réessayer...
+  </span>
+</Snackbar>
 
 <style src="FinalizePatient.scss"></style>

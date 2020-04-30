@@ -137,7 +137,7 @@
 
 <Snackbar bind:this={failedPatchSnackbar}>
   <span slot="label">
-    La sauvegarde de vos informations auprès du réseau Terrapeute a échoué. Veuillez réessayer.
+    La sauvegarde de vos informations auprès du réseau Terrapeute a échoué. Veuillez réessayer...
   </span>
 </Snackbar>
 

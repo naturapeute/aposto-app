@@ -51,8 +51,8 @@
         successSend = true
       })
       .catch((err) => {
-        errorSnackbar.open()
         console.error(err)
+        errorSnackbar.open()
       })
       .finally(() => {
         $loading = false
