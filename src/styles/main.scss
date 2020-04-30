@@ -30,7 +30,6 @@ p {
   background: none;
   border: none;
   font-weight: 700;
-  cursor: pointer;
   text-align: left;
   padding: 0;
   line-height: inherit;
@@ -47,18 +46,6 @@ p {
   text-transform: uppercase;
   /* @alternate */
   text-transform: var(--mdc-typography-button-text-transform, uppercase);
-}
-
-.typography--button-inline:hover {
-  color: $primary;
-}
-
-.typography--button-inline.no-click-inline {
-  cursor: default;
-
-  &:hover {
-    color: $text-color;
-  }
 }
 
 .card-set {

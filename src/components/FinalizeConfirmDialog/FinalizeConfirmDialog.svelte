@@ -31,14 +31,14 @@
   <div slot="dialog-body">
     <p>
       Cette action va générer la facture et l'envoyer à
-      <strong class="typography--button-inline no-click-inline">
+      <strong class="typography--button-inline">
         {patient.firstName} {patient.lastName} ({patient.email})
       </strong>
       par mail.
     </p>
     <p>
       Vous recevrez également une copie dans votre boîte mail
-      <strong class="typography--button-inline no-click-inline">
+      <strong class="typography--button-inline">
         {$author.email}
       </strong>
       .

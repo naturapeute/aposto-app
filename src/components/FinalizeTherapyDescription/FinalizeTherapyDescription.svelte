@@ -76,7 +76,7 @@
 </ul>
 <p class="finalize-p total-duration">
   <i class="material-icons-outlined">schedule</i>
-  <strong class="typography--button-inline no-click-inline">
+  <strong class="typography--button-inline">
     {getDurationLabel(totalDuration)}
   </strong>
 </p>

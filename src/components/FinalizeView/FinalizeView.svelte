@@ -86,7 +86,7 @@
     <li class="mdc-card">
       <p class="finalize-p">
         <i class="material-icons-outlined">monetization_on</i>
-        <strong class="typography--button-inline no-click-inline">
+        <strong class="typography--button-inline">
           {totalAmount.toFixed(2)}CHF
         </strong>
       </p>

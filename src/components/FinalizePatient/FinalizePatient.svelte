@@ -12,6 +12,7 @@
   import TextField from '../TextField/TextField.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
   import PatientForm from '../PatientForm/PatientForm.svelte'
+  import IconButton from '../IconButton/IconButton.svelte'
   import { saveUser } from '../../services/UserService'
 
   export let patient = null
@@ -19,9 +20,16 @@
   let filterPatient = ''
   let patientSearchMode = false
   let patientCreateMode = false
+  let patientUpdateMode = false
 
   function onChangePatient() {
     patientSearchMode = true
+    patientCreateMode = false
+    patientUpdateMode = false
+  }
+
+  function onUpdatePatient() {
+    patientUpdateMode = true
   }
 
   function onCloseSearch() {
@@ -29,6 +37,7 @@
       patientSearchMode = false
 
     patientCreateMode = false
+    patientUpdateMode = false
     filterPatient = ''
   }
 
@@ -40,14 +49,28 @@
     patientCreateMode = true
   }
 
-  function onPatientCreated(e) {
+  function onPatientUpdatedOrCreated(e) {
     const newPatient = {
       ...e.detail,
       birthdate: new Date(e.detail.birthdate).getTime()
     }
 
-    patientCreateMode = false
-    $patients = [newPatient, ...$patients]
+    if (patientCreateMode) {
+      $patients = [newPatient, ...$patients]
+      patientCreateMode = false
+    }
+
+    if (patientUpdateMode) {
+      const patientToUpdate = $patients.find(patient => patient.id === newPatient.id)
+
+      Object.keys(patientToUpdate).forEach(key => {
+        if (key !== 'id')
+          patientToUpdate[key] = newPatient[key]
+      })
+
+      patientUpdateMode = false
+    }
+
     $loading = true
 
     saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
@@ -70,11 +93,16 @@
 {#if patient}
   <p class="finalize-p">
     <i class="material-icons-outlined">face</i>
-    <button type="button" class="typography--button-inline patient-edit"
-      title="Choisir un autre patient" on:click={onChangePatient}>
+    <strong class="typography--button-inline">
       {patient.firstName} {patient.lastName}
-      <i class="material-icons-outlined edit-icon">edit</i>
-    </button>
+    </strong>
+    <IconButton title="Mettre à jour les informations de {patient.firstName} {patient.lastName}"
+      on:click={onUpdatePatient}>
+      edit
+    </IconButton>
+    <IconButton title="Choisir un autre patient" on:click={onChangePatient}>
+      search
+    </IconButton>
   </p>
 {/if}
 {#if !patient || patientSearchMode}
@@ -86,12 +114,13 @@
     </TextField>
   </form>
   {#if !patientCreateMode}
-    <PatientList filterPatient={filterPatient} bind:patient on:patientSelected={onCloseSearch}
+    <PatientList {filterPatient} bind:patient on:patientSelected={onCloseSearch}
       on:createPatient={onCreatePatient} />
   {/if}
-  {#if patientCreateMode}
-    <PatientForm {filterPatient} on:patientCreated={onPatientCreated} />
-  {/if}
+{/if}
+{#if patientUpdateMode || patientCreateMode}
+  <PatientForm {filterPatient} patient={patientUpdateMode ? patient : null}
+    on:patientUpdatedOrCreated={onPatientUpdatedOrCreated} />
 {/if}
 
 <style src="FinalizePatient.scss"></style>

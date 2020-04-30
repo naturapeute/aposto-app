@@ -16,7 +16,7 @@
   <h1 class="mdc-typography--headline2">C'est envoyé !</h1>
   <p>
     Votre nouvelle facture a bien été envoyée à <strong
-      class="typography--button-inline no-click-inline">
+      class="typography--button-inline">
       {patient.firstName} {patient.lastName}
     </strong>.
   </p>

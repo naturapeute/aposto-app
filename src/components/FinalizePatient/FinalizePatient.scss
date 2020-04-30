@@ -1,8 +1,14 @@
 @use "aposto-theme" as *;
 
-.patient-edit {
-  display: inline-flex;
-  align-items: center;
+.finalize-p :global(.mdc-icon-button) {
+  &:first-of-type {
+    margin-left: 16px;
+  }
+
+  &:last-of-type {
+    margin-left: auto;
+    margin-right: 0;
+  }
 }
 
 .patient-search-form {
