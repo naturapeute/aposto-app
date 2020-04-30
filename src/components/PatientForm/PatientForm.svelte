@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { getCantonOptions, getGenderOptions, getDateInput } from '../../js/utils'
+  import { getCantonOptions, genderOptions, getDateInput } from '../../js/utils'
   import TextField from '../TextField/TextField.svelte'
   import Select from '../Select/Select.svelte'
   import Button from '../Button/Button.svelte'
@@ -49,7 +49,7 @@
       Date de naissance
     </TextField>
     <Select className="col-40" bind:value={localPatient.gender} fieldID="patient-gender"
-      options={getGenderOptions()} required>
+      options={genderOptions} required>
       Sexe
     </Select>
   </div>

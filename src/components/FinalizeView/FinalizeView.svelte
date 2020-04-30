@@ -46,13 +46,7 @@
     askConfirm = false
     $loading = true
 
-    sendInvoice(
-      { ...$author },
-      { ...$therapist },
-      { ...patient },
-      $servicePrice,
-      services.map(e => ({ ...e }))
-    )
+    sendInvoice($author, $therapist, patient, $servicePrice, services)
       .then(() => {
         successSend = true
       })

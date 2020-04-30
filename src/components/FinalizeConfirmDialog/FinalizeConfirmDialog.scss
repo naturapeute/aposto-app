@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-:global(.mdc-button.cancel-button) {
+.confirm-dialog-footer :global(.mdc-button.cancel-button) {
   color: $text-color;
 
   :global(.mdc-button__ripple::before),

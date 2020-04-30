@@ -18,12 +18,14 @@
   margin-bottom: 0;
 }
 
-.mdc-drawer__content + .mdc-list-divider {
-  margin-top: 0;
-}
+.mdc-drawer__content {
+  & + .mdc-list-divider {
+    margin-top: 0;
+  }
 
-:global(.drawer-submit-button) {
-  display: none;
+  :global(.drawer-submit-button) {
+    display: none;
+  }
 }
 
 @media (min-width: $large-width-breakpoint) {

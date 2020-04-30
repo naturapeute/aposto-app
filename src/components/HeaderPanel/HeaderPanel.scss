@@ -15,19 +15,22 @@
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
   }
-}
-
-:global(.mdc-linear-progress) {
-  position: fixed;
-  margin-top: 56px;
-}
-
-@media (min-width: 599px) {
-  .header :global(.mdc-button) {
-      margin-top: 64px;
-  }
 
   :global(.mdc-linear-progress) {
-    margin-top: 64px;
+    position: fixed;
+    margin-top: 56px;
+  }
+}
+
+
+@media (min-width: 599px) {
+  .header {
+    :global(.mdc-button) {
+        margin-top: 64px;
+    }
+
+    :global(.mdc-linear-progress) {
+      margin-top: 64px;
+    }
   }
 }

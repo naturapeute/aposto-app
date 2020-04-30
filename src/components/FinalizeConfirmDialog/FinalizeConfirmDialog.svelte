@@ -48,7 +48,7 @@
     </Checkbox>
   </div>
 
-  <div slot="dialog-footer">
+  <div class="confirm-dialog-footer" slot="dialog-footer">
     <Button className="cancel-button" title="Revenir à l'édition de la facture" dialog
       dialogAction="close" dialogInitialFocus>
       Revenir

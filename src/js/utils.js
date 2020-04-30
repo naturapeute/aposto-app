@@ -21,13 +21,11 @@ export function getCantonOptions() {
   ]
 }
 
-export function getGenderOptions() {
-  return [
-    { value: '', label: '' },
-    { value: 'male', label: 'Homme' },
-    { value: 'female', label: 'Femme' }
-  ]
-}
+export const genderOptions = [
+  { value: '', label: '' },
+  { value: 'male', label: 'Homme' },
+  { value: 'female', label: 'Femme' }
+]
 
 export function isAuthorValid(author) {
   return author.name && author.street && author.ZIP && author.city &&

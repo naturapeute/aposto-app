@@ -1,7 +1,7 @@
 export async function sendInvoice(author, therapist, patient, servicePrice, services) {
-  delete patient.id
+  const APIServices = services.map(e => ({ ...e }))
 
-  services.forEach(service => {
+  APIServices.forEach(service => {
     delete service.color
     service.date = Date.now()
   })
@@ -9,11 +9,13 @@ export async function sendInvoice(author, therapist, patient, servicePrice, serv
   const invoiceContent = {
     author,
     therapist,
-    patient,
+    patient: { ...patient },
     servicePrice,
-    services,
+    APIServices,
     timestamp: Date.now()
   }
+
+  delete invoiceContent.patient.id
 
   const invoiceContentBase64 = btoa(JSON.stringify(invoiceContent))
 

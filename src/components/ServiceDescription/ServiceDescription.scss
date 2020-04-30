@@ -1,5 +1,4 @@
 @use "aposto-theme" as *;
-@use "@material/icon-button";
 
 .service {
   transition: height 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -24,22 +23,25 @@
 .service-label-container {
   display: flex;
   overflow: hidden;
-}
 
-:global(.service-label) {
-  font-weight: 700;
-  min-width: 0;
-  flex-shrink: 100;
+  :global(.service-label) {
+    font-weight: 700;
+    min-width: 0;
+    flex-shrink: 100;
 
-  :global(.mdc-chip__icon) {
-    font-size: 12px;
-    width: 12px;
-    height: 12px;
+    :global(.mdc-chip__icon) {
+      font-size: 12px;
+      width: 12px;
+      height: 12px;
+    }
   }
-}
 
-:global(.mdc-icon-button.service-delete) {
-  margin-left: 8px;
-  color: $ligth-gray;
-  @include icon-button.icon-size(18px);
+  :global(.mdc-icon-button.service-delete) {
+    margin-left: 8px;
+    color: $ligth-gray;
+    width: 36px;
+    height: 36px;
+    padding: 9px;
+    font-size: 18px;
+  }
 }

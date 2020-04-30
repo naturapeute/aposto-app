@@ -6,37 +6,38 @@
   margin: 0;
   display: flex;
   flex-direction: column-reverse;
+
+  :global(.service-timeline) {
+    flex-shrink: 0;
+    flex-basis: 36px;
+    max-width: 36px;
+    margin-right: 20px;
+    height: 100%;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  :global(.service) {
+    display: flex;
+    align-items: center;
+
+    &:last-of-type :global(.service-timeline) {
+      border-top-right-radius: 18px;
+      border-top-left-radius: 18px;
+    }
+
+    &:not(:last-of-type) :global(.service-timeline) {
+      margin-top: -18px;
+      padding-top: 18px;
+    }
+  }
 }
 
-:global(.service-timeline) {
-  flex-shrink: 0;
-  flex-basis: 36px;
-  max-width: 36px;
-  margin-right: 20px;
-  height: 100%;
-  border-bottom-right-radius: 18px;
-  border-bottom-left-radius: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-weight: 700;
-}
-
-:global(.service) {
-  display: flex;
-  align-items: center;
-}
-
-:global(.service:last-of-type .service-timeline) {
-  border-top-right-radius: 18px;
-  border-top-left-radius: 18px;
-}
-
-:global(.service:not(:last-of-type) .service-timeline) {
-  margin-top: -18px;
-  padding-top: 18px;
-}
 
 .service-add {
   height: 36px;

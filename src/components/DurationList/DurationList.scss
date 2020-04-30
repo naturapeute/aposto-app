@@ -6,7 +6,7 @@
   color: var(--selected-service-color);
 }
 
-:global(.duration-chip) {
+.mdc-chip-set :global(.duration-chip) {
   text-transform: uppercase;
 
   &.mdc-chip.colored {
