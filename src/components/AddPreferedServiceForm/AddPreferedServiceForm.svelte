@@ -15,6 +15,7 @@
 
   function onTextFieldMount(e) {
     e.detail.focus()
+
     const drawerContentElement = e.detail.closest('.mdc-drawer__content')
     drawerContentElement.scroll({
       top: drawerContentElement.scrollHeight,
