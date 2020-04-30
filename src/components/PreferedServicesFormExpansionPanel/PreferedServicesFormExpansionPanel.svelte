@@ -18,7 +18,6 @@
     return !open
   }
 
-  let addPreferedServiceMode = false
   let open
   let missingPreferedServicesSnackbar
   const dispatch = createEventDispatcher()
@@ -35,22 +34,14 @@
       dispatch('open')
     }
   }
-
-  function onAddPreferedService() {
-    addPreferedServiceMode = true
-  }
-
-  function onCloseAdd() {
-    addPreferedServiceMode = false
-  }
 </script>
 
 <ExpansionPanel {expansionPanelId} bind:open on:askToggle={onAskToggle}>
   <div slot="summary">Thérapies préférées</div>
   <div slot="content">
-    <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
-    {#if addPreferedServiceMode}
-      <AddPreferedServiceForm on:cancelAdd={onCloseAdd} on:addedService={onCloseAdd} />
+    <PreferedServiceList />
+    {#if $preferedServices.length < 10}
+      <AddPreferedServiceForm />
     {/if}
   </div>
 </ExpansionPanel>

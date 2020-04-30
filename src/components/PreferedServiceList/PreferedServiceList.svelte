@@ -5,10 +5,8 @@
   import Chip from '../Chip/Chip.svelte'
 
   export let selectedServiceCode = null
-  export let addPreferedServiceMode = false
 
   let iconElement
-  let addPreferedServiceElement
   const dispatch = createEventDispatcher()
 
   afterUpdate(() => {
@@ -19,11 +17,6 @@
 
       iconElement.style.setProperty('--selected-service-color', selectedServiceColor)
     }
-
-    if (addPreferedServiceMode)
-      addPreferedServiceElement.style.display = 'none'
-    if (addPreferedServiceElement && !addPreferedServiceMode)
-      addPreferedServiceElement.style.display = 'inline'
   })
 
   function onSelectService(code) {
@@ -32,11 +25,6 @@
 
   function onDeletePreferedService(code) {
     $preferedServices = $preferedServices.filter(preferedService => preferedService.code !== code)
-  }
-
-  function onAddService() {
-    addPreferedServiceMode = true
-    dispatch('addService')
   }
 </script>
 
@@ -55,13 +43,6 @@
       </Chip>
     </li>
   {/each}
-  {#if !selectedServiceCode && $preferedServices.length < 10}
-    <li bind:this={addPreferedServiceElement} class="mdc-touch-target-wrapper" on:click={onAddService}>
-      <Chip title="Ajouter une thérapie" leadingIcon="add" touchWrapper>
-        Ajouter une thérapie
-      </Chip>
-    </li>
-  {/if}
 </ul>
 
 <style src="PreferedServiceList.scss"></style>
