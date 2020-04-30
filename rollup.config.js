@@ -1,10 +1,10 @@
-import svelte from 'rollup-plugin-svelte'
-import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import livereload from 'rollup-plugin-livereload'
-import { terser } from 'rollup-plugin-terser'
-import { scss, globalStyle } from 'svelte-preprocess'
+import resolve from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
+import livereload from 'rollup-plugin-livereload'
+import svelte from 'rollup-plugin-svelte'
+import { terser } from 'rollup-plugin-terser'
+import { globalStyle, scss } from 'svelte-preprocess'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -42,7 +42,7 @@ export default {
         env: {
           PROD: production,
           API_URL: production ? 'https://api.aposto.ch' : 'http://localhost:8080',
-          APP_URL: production ? 'https://beta.aposto.ch/' : 'http://localhost:5000'
+          APP_URL: production ? 'https://app.aposto.ch/' : 'http://localhost:5000'
         }
       })
     }),
