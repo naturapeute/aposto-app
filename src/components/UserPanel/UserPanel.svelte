@@ -26,8 +26,8 @@
     from '../ServicePriceFormExpansionPanel/ServicePriceFormExpansionPanel.svelte'
   import PreferedServicesFormExpansionPanel
     from '../PreferedServicesFormExpansionPanel/PreferedServicesFormExpansionPanel.svelte'
-  import AuthentificationForm
-    from '../AuthentificationForm/AuthentificationForm.svelte'
+  import AuthenticationForm
+    from '../AuthenticationForm/AuthenticationForm.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import { saveUser } from '../../services/UserService'
 
@@ -35,7 +35,7 @@
 
   let element
   let drawer = {}
-  let authentificationMode = true
+  let authenticationMode = true
   let failedPatchSnackbar
 
   const formExpansionPanels = [
@@ -93,8 +93,8 @@
     }
   }
 
-  function onAuthentificationDone() {
-    authentificationMode = false
+  function onAuthenticationDone() {
+    authenticationMode = false
   }
 
   function onExpansionPanelOpen(id) {
@@ -118,9 +118,9 @@
   </header>
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
-    {#if authentificationMode}
+    {#if authenticationMode}
       <div transition:slide>
-        <AuthentificationForm on:done={onAuthentificationDone} />
+        <AuthenticationForm on:done={onAuthenticationDone} />
       </div>
     {:else}
       <ExpansionPanelSet>

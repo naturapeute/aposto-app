@@ -15,7 +15,7 @@
   import { authenticate } from '../../services/UserService'
 
   let email
-  let failedAuthentificationSnackbar
+  let failedAuthenticationSnackbar
   const dispatch = createEventDispatcher()
 
   function onAuthenticate() {
@@ -74,24 +74,24 @@
             ($patients = body.extraData.patients.map(e => ({ ...e })))
         }
 
-        onAuthentificationDone()
+        onAuthenticationDone()
       })
       .catch((err) => {
         console.error(err)
-        failedAuthentificationSnackbar.open()
+        failedAuthenticationSnackbar.open()
       })
       .finally(() => {
         $loading = false
       })
   }
 
-  function onAuthentificationDone() {
+  function onAuthenticationDone() {
     dispatch('done')
   }
 </script>
 
 <form class="aposto-form" on:submit|preventDefault={onAuthenticate}>
-  <TextField bind:value={email} type="email" fieldID="authentification-email" required>
+  <TextField bind:value={email} type="email" fieldID="authentication-email" required>
     Email
   </TextField>
   <Button type="submit" title="Se connecter via le réseau Terrapeute" unelevated
@@ -104,7 +104,7 @@
       Rejoindre Terrapeute
     </span>
   </a>
-  <Button title="Essayer en démo" on:click={onAuthentificationDone} disabled={$loading}>
+  <Button title="Essayer en démo" on:click={onAuthenticationDone} disabled={$loading}>
     Essayer en démo
   </Button>
   <p class="demo-hint">
@@ -114,11 +114,11 @@
   </p>
 </form>
 
-<Snackbar bind:this={failedAuthentificationSnackbar}>
+<Snackbar bind:this={failedAuthenticationSnackbar}>
   <span slot="label">
     Votre connexion auprès du réseau Terrapeute a échoué. Assurez-vous d'être bien inscrit dans le
     réseau.
   </span>
 </Snackbar>
 
-<style src="AuthentificationForm.scss"></style>
+<style src="AuthenticationForm.scss"></style>
