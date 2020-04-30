@@ -10,26 +10,26 @@
 
   export function askClose() {
     if (isServicePriceValid($servicePrice))
-      opened = false
+      open = false
     else
       submitButtonElement.click()
 
-    return !opened
+    return !open
   }
 
-  let opened
+  let open
   let submitButtonElement
   const dispatch = createEventDispatcher()
 
   onMount(() => {
-    opened = !isServicePriceValid($servicePrice)
+    open = !isServicePriceValid($servicePrice)
   })
 
   function onAskToggle() {
-    if (opened)
+    if (open)
       askClose()
     else {
-      opened = true
+      open = true
       dispatch('open')
     }
   }
@@ -39,7 +39,7 @@
   }
 </script>
 
-<ExpansionPanel {expansionPanelId} bind:opened on:askToggle={onAskToggle}>
+<ExpansionPanel {expansionPanelId} bind:open on:askToggle={onAskToggle}>
   <div slot="summary">Tarif horaire</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>

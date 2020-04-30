@@ -31,7 +31,7 @@
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import { saveUser } from '../../services/UserService'
 
-  export let opened = false
+  export let open = false
 
   let element
   let drawer = {}
@@ -47,7 +47,7 @@
 
   const dispatch = createEventDispatcher()
 
-  $: drawer.open = opened
+  $: drawer.open = open
 
   onMount(() => {
     drawer = new MDCDrawer(element)
@@ -59,7 +59,7 @@
       document.querySelector('.mdc-icon-button').blur()
     })
 
-    opened = !isAuthorValid($author) || !isTherapistValid($therapist) ||
+    open = !isAuthorValid($author) || !isTherapistValid($therapist) ||
       !isServicePriceValid($servicePrice) || !isPreferedServicesValid($preferedServices)
   })
 

@@ -11,14 +11,14 @@
 
   export function askClose() {
     if (isAuthorValid($author))
-      opened = false
+      open = false
     else
       submitButtonElement.click()
 
-    return !opened
+    return !open
   }
 
-  let opened
+  let open
   let submitButtonElement
   let GLNNotFound = false
   const dispatch = createEventDispatcher()
@@ -38,14 +38,14 @@
     GLNNotFound = false
 
   onMount(() => {
-    opened = !isAuthorValid($author)
+    open = !isAuthorValid($author)
   })
 
   function onAskToggle() {
-    if (opened)
+    if (open)
       askClose()
     else {
-      opened = true
+      open = true
       dispatch('open')
     }
   }
@@ -55,7 +55,7 @@
   }
 </script>
 
-<ExpansionPanel {expansionPanelId} bind:opened on:askToggle={onAskToggle}>
+<ExpansionPanel {expansionPanelId} bind:open on:askToggle={onAskToggle}>
   <div slot="summary">Auteur des factures</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>

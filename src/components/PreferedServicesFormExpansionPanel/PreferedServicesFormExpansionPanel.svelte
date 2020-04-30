@@ -11,27 +11,27 @@
 
   export function askClose() {
     if (isPreferedServicesValid($preferedServices))
-      opened = false
+      open = false
     else
       missingPreferedServicesSnackbar.open()
 
-    return !opened
+    return !open
   }
 
   let addPreferedServiceMode = false
-  let opened
+  let open
   let missingPreferedServicesSnackbar
   const dispatch = createEventDispatcher()
 
   onMount(() => {
-    opened = !isPreferedServicesValid($preferedServices)
+    open = !isPreferedServicesValid($preferedServices)
   })
 
   function onAskToggle() {
-    if (opened)
+    if (open)
       askClose()
     else {
-      opened = true
+      open = true
       dispatch('open')
     }
   }
@@ -45,7 +45,7 @@
   }
 </script>
 
-<ExpansionPanel {expansionPanelId} bind:opened on:askToggle={onAskToggle}>
+<ExpansionPanel {expansionPanelId} bind:open on:askToggle={onAskToggle}>
   <div slot="summary">Thérapies préférées</div>
   <div slot="content">
     <PreferedServiceList bind:addPreferedServiceMode on:addService={onAddPreferedService} />
