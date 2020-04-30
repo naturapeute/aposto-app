@@ -1,0 +1,65 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-var": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
+    "space-before-function-paren": [
+      "warn",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 100,
+        "tabWidth": 2
+      }
+    ],
+    "curly": [
+      "warn",
+      "multi-or-nest"
+    ],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxBOF": 2,
+        "maxEOF": 1
+      }
+    ],
+    "import/first": "off"
+  },
+  "plugins": [
+    "svelte3"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.svelte"
+      ],
+      "processor": "svelte3/svelte3"
+    }
+  ]
+}

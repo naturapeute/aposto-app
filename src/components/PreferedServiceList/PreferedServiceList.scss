@@ -1,0 +1,11 @@
+:global(.prefered-service-chip.mdc-chip.colored) {
+  border: 1px solid #fff;
+}
+
+.material-icons-outlined {
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+  margin: 8px 4px;
+  color: var(--selected-service-color);
+}

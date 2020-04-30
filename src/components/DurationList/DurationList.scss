@@ -1,0 +1,15 @@
+.material-icons-outlined {
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+  margin: 8px 4px;
+  color: var(--selected-service-color);
+}
+
+:global(.duration-chip) {
+  text-transform: uppercase;
+
+  &.mdc-chip.colored {
+    border: 1px solid #fff
+  }
+}

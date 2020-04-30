@@ -1,0 +1,72 @@
+@use "aposto-theme" as *;
+
+@use "@material/textfield";
+@use "@material/select";
+
+.aposto-form {
+  display: flex;
+  flex-direction: column;
+
+  .mdc-text-field,
+  .mdc-select,
+  .mdc-button,
+  .row {
+    margin: 8px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .mdc-text-field {
+    @include textfield.fill-color($form-field-fill-color);
+  }
+
+  .mdc-select {
+    @include select.container-fill-color($form-field-fill-color);
+  }
+
+  .mdc-select .mdc-select__anchor {
+    width: 100%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: $xsmall-width-breakpoint) {
+    .row-xs {
+      flex-direction: row;
+
+      .mdc-text-field,
+      .mdc-select {
+        margin: 0 8px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .col-40 {
+        width: 40%;
+      }
+
+      .col-50 {
+        width: 50%;
+      }
+
+      .col-60 {
+        width: 60%;
+      }
+    }
+  }
+}

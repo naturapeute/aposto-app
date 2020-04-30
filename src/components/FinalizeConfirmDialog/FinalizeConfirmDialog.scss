@@ -1,0 +1,15 @@
+@use "aposto-theme" as *;
+
+.dialog-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+:global(.mdc-button.cancel-button) {
+  color: $text-color;
+
+  :global(.mdc-button__ripple::before),
+  :global(.mdc-button .mdc-button__ripple::after) {
+    background-color: $text-color;
+  }
+}

@@ -1,0 +1,33 @@
+@use "aposto-theme" as *;
+
+.mdc-drawer {
+  width: calc(100vw - 56px);
+}
+
+.mdc-drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .mdc-icon-button {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.mdc-drawer__header + .mdc-list-divider {
+  margin-bottom: 0;
+}
+
+.mdc-drawer__content + .mdc-list-divider {
+  margin-top: 0;
+}
+
+:global(.drawer-submit-button) {
+  display: none;
+}
+
+@media (min-width: $large-width-breakpoint) {
+  .mdc-drawer {
+    width: 320px;
+  }
+}

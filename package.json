@@ -1,0 +1,63 @@
+{
+  "name": "aposto-app",
+  "version": "1.0.0",
+  "description": "Logiciel de facturation Tarif 590 pour les thérapeutes en Suisse. http://app.aposto.ch",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public",
+    "init-deploy": "cd public && git add . && git commit -m \"New build\"",
+    "push-deploy": "cd public && git push origin master:gh-pages",
+    "deploy": "npm run init-deploy && npm run push-deploy",
+    "build-deploy": "npm run build && npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etceterra/aposto-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/etceterra/aposto-app/issues"
+  },
+  "homepage": "https://github.com/etceterra/aposto-app#readme",
+  "devDependencies": {
+    "@material/button": "^6.0.0",
+    "@material/card": "^6.0.0",
+    "@material/checkbox": "^6.0.0",
+    "@material/chips": "^6.0.0",
+    "@material/dialog": "^6.0.0",
+    "@material/drawer": "^6.0.0",
+    "@material/fab": "^6.0.0",
+    "@material/form-field": "^6.0.0",
+    "@material/icon-button": "^6.0.0",
+    "@material/linear-progress": "^6.0.0",
+    "@material/select": "^6.0.0",
+    "@material/snackbar": "^6.0.0",
+    "@material/textfield": "^6.0.0",
+    "@material/theme": "^6.0.0",
+    "@material/top-app-bar": "^6.0.0",
+    "@material/typography": "^6.0.0",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-replace": "^2.3.2",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "postcss": "^7.0.27",
+    "rollup": "^2.7.2",
+    "rollup-plugin-livereload": "^1.2.0",
+    "rollup-plugin-svelte": "^5.2.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "sass": "^1.26.5",
+    "svelte": "^3.21.0",
+    "svelte-preprocess": "^3.7.4"
+  },
+  "dependencies": {
+    "sirv-cli": "^0.4.5"
+  }
+}

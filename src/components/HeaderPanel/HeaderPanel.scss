@@ -1,0 +1,33 @@
+@use "aposto-theme";
+
+.header {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 4;
+
+  &:not(.loading) :global(.mdc-button) {
+    margin-top: 56px;
+  }
+
+  :global(.mdc-button) :global(.mdc-button__ripple) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+:global(.mdc-linear-progress) {
+  position: fixed;
+  margin-top: 56px;
+}
+
+@media (min-width: 599px) {
+  .header:not(.loading) :global(.mdc-button) {
+    margin-top: 64px;
+  }
+
+  :global(.mdc-linear-progress) {
+    margin-top: 64px;
+  }
+}

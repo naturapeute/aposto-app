@@ -1,0 +1,84 @@
+@use "aposto-theme" as *;
+
+@use "form";
+
+@use "@material/typography/mdc-typography";
+@use "@material/button/mdc-button";
+@use "@material/icon-button/mdc-icon-button";
+@use "@material/textfield/mdc-text-field";
+@use "@material/drawer/mdc-drawer";
+@use "@material/list/mdc-list";
+@use "@material/chips/mdc-chips";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/menu/mdc-menu";
+@use "@material/select/mdc-select";
+@use "@material/card/mdc-card";
+@use "@material/top-app-bar/mdc-top-app-bar";
+@use "@material/fab/mdc-fab";
+@use "@material/linear-progress/mdc-linear-progress";
+@use "@material/dialog/mdc-dialog";
+@use "@material/form-field/mdc-form-field";
+@use "@material/checkbox/mdc-checkbox";
+@use "@material/snackbar/mdc-snackbar";
+
+p {
+  @extend .mdc-typography--body1;
+}
+
+.typography--button-inline {
+  color: $text-color;
+  background: none;
+  border: none;
+  font-weight: 700;
+  text-align: left;
+  padding: 0;
+  line-height: inherit;
+  // Material .mdc-typography--button class
+  font-size: 0.875rem;
+  /* @alternate */
+  font-size: var(--mdc-typography-button-font-size, 0.875rem);
+  letter-spacing: 0.0892857143em;
+  /* @alternate */
+  letter-spacing: var(--mdc-typography-button-letter-spacing, 0.0892857143em);
+  /* @alternate */
+  -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
+  text-decoration: var(--mdc-typography-button-text-decoration, none);
+  text-transform: uppercase;
+  /* @alternate */
+  text-transform: var(--mdc-typography-button-text-transform, uppercase);
+}
+
+.card-set {
+  padding-left: 0;
+  margin: 0;
+
+  & > .mdc-card {
+    margin: 16px 0;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.mdc-card {
+  padding: 16px;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.mdc-chip-set {
+  margin: 0;
+  width: 100%;
+
+  > * {
+    list-style-type: none;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,22 @@
+@use "aposto-theme" as *;
+@use "main";
+
+main {
+  padding: 124px 8px 32px 8px;
+  margin: 0 auto;
+  min-height: calc(100vh - 156px);
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+
+  > * {
+    width: 100%;
+  }
+}
+
+@media (min-width: $top-app-bar-height-breakpoint) {
+  main {
+    padding-top: 132px;
+    min-height: calc(100vh - 164px);
+  }
+}
