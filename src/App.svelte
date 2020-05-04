@@ -1,6 +1,5 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
-  import { selectedServicesFixture } from './js/fixtures'
   import { author, therapist, servicePrice, preferedServices } from './js/store'
   import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizeView from './components/FinalizeView/FinalizeView.svelte'
@@ -35,7 +34,7 @@
   }
 
   function onNewInvoice() {
-    selectedServices = selectedServicesFixture.map(e => ({ ...e }))
+    selectedServices = []
   }
 </script>
 
