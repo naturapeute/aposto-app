@@ -1,6 +1,6 @@
 <script>
   import { slide } from 'svelte/transition'
-  import { author, therapist, servicePrice, loading } from '../../js/store'
+  import { author, therapist, servicePrice, selectedServices, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from '../FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
@@ -13,13 +13,12 @@
 
   export let patient = null
 
-  let services = []
   let errorSnackbar
   let confirmDialog
   let askConfirm = false
   let successSend = false
 
-  $: totalAmount = services.reduce(
+  $: totalAmount = $selectedServices.reduce(
     (total, service) => total + (service.duration * $servicePrice / 60),
     0
   )
@@ -44,7 +43,7 @@
     askConfirm = false
     $loading = true
 
-    sendInvoice($author, $therapist, patient, $servicePrice, services)
+    sendInvoice($author, $therapist, patient, $servicePrice, $selectedServices)
       .then(() => {
         successSend = true
       })
@@ -59,7 +58,7 @@
 
   function onNewInvoice() {
     patient = null
-    services = []
+    $selectedServices = []
     askConfirm = false
     successSend = false
   }
@@ -73,7 +72,7 @@
       <FinalizePatient bind:patient />
     </li>
     <li class="mdc-card">
-      <FinalizeTherapyDescription bind:services />
+      <FinalizeTherapyDescription />
     </li>
     <li class="mdc-card">
       <p class="finalize-p">

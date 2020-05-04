@@ -1,17 +1,15 @@
 <script>
   import { getDurationLabel } from '../../js/utils'
-  import { preferredServices } from '../../js/store'
+  import { preferredServices, selectedServices } from '../../js/store'
   import IconButton from '../IconButton/IconButton.svelte'
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
-
-  export let services
 
   let serviceIdCounter = 0
   let serviceEditModeId = -1
 
-  $: totalDuration = services.reduce((total, service) => total + service.duration, 0)
+  $: totalDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
 
-  $: serviceHeights = services.map(service => {
+  $: serviceHeights = $selectedServices.map(service => {
     let serviceHeight = (20 * 12) * (service.duration / totalDuration)
 
     if (serviceHeight < 36) serviceHeight = 36
@@ -19,7 +17,7 @@
     return serviceHeight
   })
 
-  $: services = services.map(service => {
+  $: $selectedServices.map(service => {
     if (service.id === undefined)
       service.id = serviceIdCounter++
 
@@ -36,23 +34,20 @@
   })
 
   function onAddService() {
-    services = [
-      ...services,
-      {
-        id: serviceIdCounter++,
-        code: $preferredServices[0].code,
-        duration: 5,
-        color: $preferredServices[0].color
-      }
-    ]
+    $selectedServices.push({
+      id: serviceIdCounter++,
+      code: $preferredServices[0].code,
+      duration: 5,
+      color: $preferredServices[0].color
+    })
     serviceEditModeId = serviceIdCounter - 1
   }
 
   function onDeleteService(e) {
-    services = services.reduce((newServices, service) => {
-      if (service.id === e.detail) return newServices
+    $selectedServices = $selectedServices.reduce((newSelectedServices, service) => {
+      if (service.id === e.detail) return newSelectedServices
 
-      return [...newServices, service]
+      return [...newSelectedServices, service]
     }, [])
 
     serviceEditModeId = -1
@@ -60,7 +55,7 @@
 </script>
 
 <ul class="therapy-description">
-  {#if services.length < 5}
+  {#if $selectedServices.length < 5}
     <li class="service service-add">
       <div class="service-timeline">
         <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
@@ -69,7 +64,7 @@
       </div>
     </li>
   {/if}
-  {#each [...services].reverse() as service, i (service.id)}
+  {#each [...$selectedServices].reverse() as service, i (service.id)}
     <ServiceDescription bind:service bind:serviceEditModeId {totalDuration}
       on:deleteService={onDeleteService} />
   {/each}

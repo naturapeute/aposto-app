@@ -3,6 +3,7 @@ export async function sendInvoice(author, therapist, patient, servicePrice, serv
 
   APIServices.forEach(service => {
     delete service.color
+    delete service.id
     service.date = Date.now()
   })
 
@@ -11,7 +12,7 @@ export async function sendInvoice(author, therapist, patient, servicePrice, serv
     therapist,
     patient: { ...patient },
     servicePrice,
-    APIServices,
+    services: APIServices,
     timestamp: Date.now()
   }
 
