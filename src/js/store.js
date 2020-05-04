@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import { serviceColors } from './utils'
 
 export const terrapeuteUserID = writable(null)
 export const author = writable({
@@ -23,6 +24,8 @@ export const therapist = writable({
 })
 export const patients = writable([])
 export const servicePrice = writable(0)
-export const preferedServices = writable([])
+export const preferedServices = writable(
+  [{ code: 1200, color: serviceColors[0] }]
+)
 
 export const loading = writable(false)
