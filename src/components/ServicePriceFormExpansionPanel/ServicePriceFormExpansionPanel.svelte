@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { servicePrice } from '../../js/store'
   import { isServicePriceValid } from '../../js/utils'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -17,13 +17,9 @@
     return !open
   }
 
-  let open
+  let open = !isServicePriceValid($servicePrice)
   let submitButtonElement
   const dispatch = createEventDispatcher()
-
-  onMount(() => {
-    open = !isServicePriceValid($servicePrice)
-  })
 
   function onAskToggle() {
     if (open)

@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { therapist } from '../../js/store'
   import { isTherapistValid } from '../../js/utils'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -18,7 +18,7 @@
     return !open
   }
 
-  let open
+  let open = !isTherapistValid($therapist)
   let submitButtonElement
   let GLNNotFound = false
   const dispatch = createEventDispatcher()
@@ -37,10 +37,6 @@
 
   $: if ($therapist.GLN)
     GLNNotFound = false
-
-  onMount(() => {
-    open = !isTherapistValid($therapist)
-  })
 
   function onAskToggle() {
     if (open)
@@ -75,18 +71,22 @@
       </TextField>
       <TextField bind:value={$therapist.phone} type="tel" fieldID="therapist-phone" required>
         Téléphone</TextField>
-      <TextField bind:value={$therapist.RCC} type="tel" fieldID="therapist-rcc" required>
+      <TextField bind:value={$therapist.RCC} type="tel" fieldID="therapist-rcc"
+        title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
+        pattern="[A-Z][0-9]&#123;6&#125;" helperText required>
         N°RCC
       </TextField>
       <TextField bind:value={$therapist.GLN} type="tel" fieldID="therapist-gln"
-        helperText={GLNNotFound} required>
+        title="Un numéro GLN est composé de 13 chiffres" pattern="[0-9]&#123;13&#125;"
+        helperText={GLNNotFound} required persistentHelperText>
         N°GLN
         <span slot="helper-text">
           {#if GLNNotFound}
             <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
               target="_blank">
-              Trouver son n°GLN ou faire la demande
+              Trouvez ou faites la demande de votre n°GLN sur RefData.
             </a>
+            Si toutefois vous ne le trouvez pas, renseignez le numéro 2099999999999.
           {/if}
         </span>
       </TextField>

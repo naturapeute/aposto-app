@@ -9,9 +9,11 @@
   export let outlined = false
   export let trailingIcon = null
   export let noAutoComplete = false
-  export let placeholder = ''
+  export let placeholder = null
   export let className = ''
   export let min = null
+  export let pattern = null
+  export let title = null
   export let helperText = false
 
   let element
@@ -59,8 +61,8 @@
   {/if}
   <input {value} {type} class="mdc-text-field__input" id={fieldID} {placeholder} name={fieldID}
     aria-labelledby={fieldID} aria-controls="{helperText ? helperTextID : ''}"
-    aria-describedby="{helperText ? helperTextID : ''}" on:input={onInput} {min} {required}
-    autocomplete="{noAutoComplete ? 'off' : ''}">
+    aria-describedby="{helperText ? helperTextID : ''}" {title} on:input={onInput} {min} {pattern}
+    {required} autocomplete="{noAutoComplete ? 'off' : ''}">
   {#if trailingIcon}
     <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>

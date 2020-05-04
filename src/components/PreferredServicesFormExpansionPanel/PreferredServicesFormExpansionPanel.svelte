@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { preferredServices } from '../../js/store'
   import { isPreferredServicesValid } from '../../js/utils'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -18,13 +18,9 @@
     return !open
   }
 
-  let open
+  let open = !isPreferredServicesValid($preferredServices)
   let missingPreferredServicesSnackbar
   const dispatch = createEventDispatcher()
-
-  onMount(() => {
-    open = !isPreferredServicesValid($preferredServices)
-  })
 
   function onAskToggle() {
     if (open)

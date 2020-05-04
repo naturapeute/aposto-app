@@ -29,12 +29,12 @@ export const genderOptions = [
 
 export function isAuthorValid(author) {
   return author.name && author.street && author.ZIP && author.city &&
-    isEmailValid(author.email) && author.phone && author.RCC && author.GLN
+    isEmailValid(author.email) && author.phone && isRCCValid(author.RCC) && isGLNValid(author.GLN)
 }
 
 export function isTherapistValid(therapist) {
   return therapist.firstName && therapist.lastName && therapist.street && therapist.ZIP &&
-    therapist.city && therapist.phone && therapist.RCC && therapist.GLN
+    therapist.city && therapist.phone && isRCCValid(therapist.RCC) && isGLNValid(therapist.GLN)
 }
 
 export function isServicePriceValid(servicePrice) {
@@ -47,6 +47,14 @@ export function isPreferredServicesValid(preferredServices) {
 
 function isEmailValid(email) {
   return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
+}
+
+function isRCCValid(RCC) {
+  return RCC.match(/[A-Z][0-9]{6}/)
+}
+
+function isGLNValid(GLN) {
+  return GLN.match(/[0-9]{13}/)
 }
 
 export function getDateInput(timestamp) {

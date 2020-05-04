@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { author } from '../../js/store'
   import { isAuthorValid } from '../../js/utils'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -18,7 +18,7 @@
     return !open
   }
 
-  let open
+  let open = !isAuthorValid($author)
   let submitButtonElement
   let GLNNotFound = false
   const dispatch = createEventDispatcher()
@@ -36,10 +36,6 @@
 
   $: if ($author.GLN)
     GLNNotFound = false
-
-  onMount(() => {
-    open = !isAuthorValid($author)
-  })
 
   function onAskToggle() {
     if (open)
@@ -73,18 +69,22 @@
       <TextField bind:value={$author.phone} type="tel" fieldID="author-phone" required>
         Téléphone
       </TextField>
-      <TextField bind:value={$author.RCC} type="tel" fieldID="author-rcc" required>
+      <TextField bind:value={$author.RCC} type="tel" fieldID="author-rcc"
+        title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
+        pattern="[A-Z][0-9]&#123;6&#125;" required>
         N°RCC
       </TextField>
       <TextField bind:value={$author.GLN} type="tel" fieldID="author-gln" helperText={GLNNotFound}
-        required>
+        title="Un numéro GLN est composé de 13 chiffres" pattern="[0-9]&#123;13&#125;" required
+        persistentHelperText>
         N°GLN
         <span slot="helper-text">
           {#if GLNNotFound}
             <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
               target="_blank">
-              Trouver son n°GLN ou faire la demande
+              Trouvez ou faites la demande de votre n°GLN sur RefData.
             </a>
+            Si toutefois vous ne le trouvez pas, renseignez le numéro 2099999999999.
           {/if}
         </span>
       </TextField>
