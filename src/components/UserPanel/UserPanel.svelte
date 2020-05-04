@@ -1,6 +1,6 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
-  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
   import { slide } from 'svelte/transition'
   import {
     terrapeuteUserID,
@@ -36,6 +36,10 @@
   let element
   let drawer = {}
   let authenticationMode = true
+  const storeSubscriptions = []
+  let userUpdated = false
+  let successUpdateSnackbar
+  let successPatchSnackbar
   let failedPatchSnackbar
 
   const formExpansionPanels = [
@@ -44,8 +48,6 @@
     { component: ServicePriceFormExpansionPanel, id: 'service-price-form-expansion-panel' },
     { component: PreferedServicesFormExpansionPanel, id: 'prefered-services-form-expansion-panel' }
   ]
-
-  const dispatch = createEventDispatcher()
 
   $: drawer.open = open
 
@@ -61,10 +63,18 @@
 
     open = !isAuthorValid($author) || !isTherapistValid($therapist) ||
       !isServicePriceValid($servicePrice) || !isPreferedServicesValid($preferedServices)
+
+    storeSubscriptions.push(author.subscribe(_ => { userUpdated = true }))
+    storeSubscriptions.push(therapist.subscribe(_ => { userUpdated = true }))
+    storeSubscriptions.push(servicePrice.subscribe(_ => { userUpdated = true }))
+    storeSubscriptions.push(preferedServices.subscribe(_ => { userUpdated = true }))
+    userUpdated = false
   })
 
   onDestroy(() => {
     if (drawer) drawer.detroy()
+
+    storeSubscriptions.forEach(storeUnsubscribe => { storeUnsubscribe() })
   })
 
   function onClose() {
@@ -74,12 +84,20 @@
     )
 
     if (validClose) {
+      if (!userUpdated) {
+        open = false
+        userUpdated = false
+        return
+      }
+
       if ($terrapeuteUserID) {
         $loading = true
 
         saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
           .then((_) => {
-            dispatch('closeUserPanel')
+            open = false
+            successPatchSnackbar.open()
+            userUpdated = false
           })
           .catch((err) => {
             console.error(err)
@@ -88,13 +106,23 @@
           .finally(() => {
             $loading = false
           })
-      } else
-        dispatch('closeUserPanel')
+      } else {
+        open = false
+        successUpdateSnackbar.open()
+        userUpdated = false
+      }
     }
   }
 
   function onAuthenticationDone() {
     authenticationMode = false
+  }
+
+  function onExpansionPanelSetMounted() {
+    if ($terrapeuteUserID) {
+      userUpdated = false
+      onClose()
+    }
   }
 
   function onExpansionPanelOpen(id) {
@@ -123,7 +151,7 @@
         <AuthenticationForm on:done={onAuthenticationDone} />
       </div>
     {:else}
-      <ExpansionPanelSet>
+      <ExpansionPanelSet on:mounted={onExpansionPanelSetMounted}>
         {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
           <svelte:component this={formExpansionPanel.component} bind:this={formExpansionPanel.instance}
             expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
@@ -135,6 +163,12 @@
 
 <div class="mdc-drawer-scrim" on:click={onClose}></div>
 
+<Snackbar bind:this={successUpdateSnackbar}>
+  <span slot="label">Vos informations ont été mises à jour.</span>
+</Snackbar>
+<Snackbar bind:this={successPatchSnackbar}>
+  <span slot="label">Vos informations ont été mises à jour sur le réseau Terrapeute.</span>
+</Snackbar>
 <Snackbar bind:this={failedPatchSnackbar}>
   <span slot="label">
     La sauvegarde de vos informations auprès du réseau Terrapeute a échoué. Veuillez réessayer...

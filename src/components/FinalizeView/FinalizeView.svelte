@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
   import { slide } from 'svelte/transition'
   import { author, therapist, servicePrice, loading } from '../../js/store'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
@@ -13,13 +12,12 @@
   import { sendInvoice } from '../../services/InvoiceService'
 
   export let patient = null
-  export let services
 
+  let services = []
   let errorSnackbar
   let confirmDialog
   let askConfirm = false
   let successSend = false
-  const dispatch = createEventDispatcher()
 
   $: totalAmount = services.reduce(
     (total, service) => total + (service.duration * $servicePrice / 60),
@@ -60,8 +58,8 @@
   }
 
   function onNewInvoice() {
-    dispatch('newInvoice')
     patient = null
+    services = []
     askConfirm = false
     successSend = false
   }
