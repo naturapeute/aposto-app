@@ -28,13 +28,13 @@ export const genderOptions = [
 ]
 
 export function isAuthorValid(author) {
-  return author.name && author.street && author.ZIP && author.city &&
-    isEmailValid(author.email) && author.phone && isRCCValid(author.RCC) && isGLNValid(author.GLN)
+  return Boolean(author.name && author.street && author.ZIP && author.city &&
+    isEmailValid(author.email) && author.phone && isRCCValid(author.RCC) && isGLNValid(author.GLN))
 }
 
 export function isTherapistValid(therapist) {
-  return therapist.firstName && therapist.lastName && therapist.street && therapist.ZIP &&
-    therapist.city && therapist.phone && isRCCValid(therapist.RCC) && isGLNValid(therapist.GLN)
+  return Boolean(therapist.firstName && therapist.lastName && therapist.street && therapist.ZIP &&
+    therapist.city && therapist.phone && isRCCValid(therapist.RCC) && isGLNValid(therapist.GLN))
 }
 
 export function isServicePriceValid(servicePrice) {
