@@ -20,7 +20,7 @@
   function getBestMatches(_filterService) {
     return _filterService.split(' ').reduce((scores, word) => {
       serviceCodes.forEach((service, i) => {
-        if (!$preferredServices.find(preferredService => preferredService.code === service.value))
+        if (!$preferredServices.find(preferredService => preferredService.code === service.code))
           scores[i].score += getServiceScore(service, word)
       })
 
@@ -39,13 +39,13 @@
     if (!word) return 0
 
     return +service.lightLabel.toLowerCase().includes(word.toLowerCase()) +
-      +String(service.value).includes(word)
+      +String(service.code).includes(word)
   }
 </script>
 
 <ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
-  {#each bestMatches as service (service.value)}
-    <li class="mdc-touch-target-wrapper" on:click={() => onSelectService(service.value)}>
+  {#each bestMatches as service (service.code)}
+    <li class="mdc-touch-target-wrapper" on:click={() => onSelectService(service.code)}>
       <Chip title="Sélectionner le service {service.lightLabel}" leadingIcon="spa" touchWrapper>
         {service.lightLabel}
       </Chip>

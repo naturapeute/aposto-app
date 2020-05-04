@@ -44,6 +44,6 @@
 
 <Snackbar bind:this={missingPreferredServicesSnackbar}>
   <span slot="label">
-    Vous devez renseigner au moins une thérapie préférée.
+    Vous devez renseigner au moins une thérapie préférée autre que Anamnèse.
   </span>
 </Snackbar>
