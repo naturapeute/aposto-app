@@ -1,11 +1,11 @@
 <script>
   import { createEventDispatcher, afterUpdate } from 'svelte'
   import { cubicOut } from 'svelte/easing'
-  import { preferedServices } from '../../js/store'
+  import { preferredServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
-  import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
+  import PreferredServiceList from '../PreferredServiceList/PreferredServiceList.svelte'
   import DurationList from '../DurationList/DurationList.svelte'
 
   export let service
@@ -48,8 +48,8 @@
 
   function onSelectedService(e) {
     service.code = e.detail
-    service.color = $preferedServices.find(
-      preferedService => preferedService.code === e.detail
+    service.color = $preferredServices.find(
+      preferredService => preferredService.code === e.detail
     ).color
   }
 
@@ -110,7 +110,7 @@
     {:else}
       <form bind:this={serviceFormElement} class="aposto-form" transition:fade
         on:submit|preventDefault={onCloseEditService}>
-        <PreferedServiceList selectedServiceCode="{service.code}"
+        <PreferredServiceList selectedServiceCode="{service.code}"
           on:selectedService={onSelectedService} />
         <DurationList bind:selectedServiceDuration={service.duration}
           selectedServiceColor="{service.color}" />

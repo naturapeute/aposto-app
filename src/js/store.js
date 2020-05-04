@@ -24,7 +24,7 @@ export const therapist = writable({
 })
 export const patients = writable([])
 export const servicePrice = writable(0)
-export const preferedServices = writable(
+export const preferredServices = writable(
   [{ code: 1200, color: serviceColors[0] }]
 )
 

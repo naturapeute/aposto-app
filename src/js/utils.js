@@ -41,8 +41,8 @@ export function isServicePriceValid(servicePrice) {
   return servicePrice > 0
 }
 
-export function isPreferedServicesValid(preferedServices) {
-  return preferedServices.length
+export function isPreferredServicesValid(preferredServices) {
+  return preferredServices.length
 }
 
 function isEmailValid(email) {

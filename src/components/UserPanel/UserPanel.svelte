@@ -7,7 +7,7 @@
     author,
     therapist,
     servicePrice,
-    preferedServices,
+    preferredServices,
     patients,
     loading
   } from '../../js/store'
@@ -15,7 +15,7 @@
     isAuthorValid,
     isTherapistValid,
     isServicePriceValid,
-    isPreferedServicesValid
+    isPreferredServicesValid
   } from '../../js/utils'
   import IconButton from '../IconButton/IconButton.svelte'
   import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
@@ -24,8 +24,8 @@
     from '../TherapistFormExpansionPanel/TherapistFormExpansionPanel.svelte'
   import ServicePriceFormExpansionPanel
     from '../ServicePriceFormExpansionPanel/ServicePriceFormExpansionPanel.svelte'
-  import PreferedServicesFormExpansionPanel
-    from '../PreferedServicesFormExpansionPanel/PreferedServicesFormExpansionPanel.svelte'
+  import PreferredServicesFormExpansionPanel
+    from '../PreferredServicesFormExpansionPanel/PreferredServicesFormExpansionPanel.svelte'
   import AuthenticationForm
     from '../AuthenticationForm/AuthenticationForm.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
@@ -46,7 +46,7 @@
     { component: AuthorFormExpansionPanel, id: 'author-form-expansion-panel' },
     { component: TherapistFormExpansionPanel, id: 'therapist-form-expansion-panel' },
     { component: ServicePriceFormExpansionPanel, id: 'service-price-form-expansion-panel' },
-    { component: PreferedServicesFormExpansionPanel, id: 'prefered-services-form-expansion-panel' }
+    { component: PreferredServicesFormExpansionPanel, id: 'preferred-services-form-expansion-panel' }
   ]
 
   $: drawer.open = open
@@ -62,12 +62,12 @@
     })
 
     open = !isAuthorValid($author) || !isTherapistValid($therapist) ||
-      !isServicePriceValid($servicePrice) || !isPreferedServicesValid($preferedServices)
+      !isServicePriceValid($servicePrice) || !isPreferredServicesValid($preferredServices)
 
     storeSubscriptions.push(author.subscribe(_ => { userUpdated = true }))
     storeSubscriptions.push(therapist.subscribe(_ => { userUpdated = true }))
     storeSubscriptions.push(servicePrice.subscribe(_ => { userUpdated = true }))
-    storeSubscriptions.push(preferedServices.subscribe(_ => { userUpdated = true }))
+    storeSubscriptions.push(preferredServices.subscribe(_ => { userUpdated = true }))
     userUpdated = false
   })
 
@@ -93,7 +93,7 @@
       if ($terrapeuteUserID) {
         $loading = true
 
-        saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
+        saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferredServices, $patients)
           .then((_) => {
             open = false
             successPatchSnackbar.open()

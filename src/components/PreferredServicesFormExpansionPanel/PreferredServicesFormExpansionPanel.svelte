@@ -1,29 +1,29 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte'
-  import { preferedServices } from '../../js/store'
-  import { isPreferedServicesValid } from '../../js/utils'
+  import { preferredServices } from '../../js/store'
+  import { isPreferredServicesValid } from '../../js/utils'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
-  import PreferedServiceList from '../PreferedServiceList/PreferedServiceList.svelte'
-  import AddPreferedServiceForm from '../AddPreferedServiceForm/AddPreferedServiceForm.svelte'
+  import PreferredServiceList from '../PreferredServiceList/PreferredServiceList.svelte'
+  import AddPreferredServiceForm from '../AddPreferredServiceForm/AddPreferredServiceForm.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
 
   export let expansionPanelId
 
   export function askClose() {
-    if (isPreferedServicesValid($preferedServices))
+    if (isPreferredServicesValid($preferredServices))
       open = false
     else
-      missingPreferedServicesSnackbar.open()
+      missingPreferredServicesSnackbar.open()
 
     return !open
   }
 
   let open
-  let missingPreferedServicesSnackbar
+  let missingPreferredServicesSnackbar
   const dispatch = createEventDispatcher()
 
   onMount(() => {
-    open = !isPreferedServicesValid($preferedServices)
+    open = !isPreferredServicesValid($preferredServices)
   })
 
   function onAskToggle() {
@@ -39,14 +39,14 @@
 <ExpansionPanel {expansionPanelId} bind:open on:askToggle={onAskToggle}>
   <div slot="summary">Thérapies préférées</div>
   <div slot="content">
-    <PreferedServiceList />
-    {#if $preferedServices.length < 10}
-      <AddPreferedServiceForm />
+    <PreferredServiceList />
+    {#if $preferredServices.length < 10}
+      <AddPreferredServiceForm />
     {/if}
   </div>
 </ExpansionPanel>
 
-<Snackbar bind:this={missingPreferedServicesSnackbar}>
+<Snackbar bind:this={missingPreferredServicesSnackbar}>
   <span slot="label">
     Vous devez renseigner au moins une thérapie préférée.
   </span>

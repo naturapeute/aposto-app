@@ -21,14 +21,14 @@ export async function saveUser(
   author,
   therapist,
   servicePrice,
-  preferedServices,
+  preferredServices,
   patients
 ) {
   const extraData = {
     author: { ...author },
     therapist: { ...therapist },
     servicePrice: servicePrice,
-    preferedServices: preferedServices.map(e => ({ ...e })),
+    preferredServices: preferredServices.map(e => ({ ...e })),
     patients: patients.map(e => ({ ...e }))
   }
 

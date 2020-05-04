@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { serviceCodes } from '../../js/utils'
-  import { preferedServices } from '../../js/store'
+  import { preferredServices } from '../../js/store'
   import Chip from '../Chip/Chip.svelte'
 
   export let filterService
@@ -20,7 +20,7 @@
   function getBestMatches(_filterService) {
     return _filterService.split(' ').reduce((scores, word) => {
       serviceCodes.forEach((service, i) => {
-        if (!$preferedServices.find(preferedService => preferedService.code === service.value))
+        if (!$preferredServices.find(preferredService => preferredService.code === service.value))
           scores[i].score += getServiceScore(service, word)
       })
 

@@ -1,6 +1,6 @@
 <script>
   import { getDurationLabel } from '../../js/utils'
-  import { preferedServices } from '../../js/store'
+  import { preferredServices } from '../../js/store'
   import IconButton from '../IconButton/IconButton.svelte'
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
 
@@ -23,13 +23,13 @@
     if (service.id === undefined)
       service.id = serviceIdCounter++
 
-    const matchingPreferedService = $preferedServices.find(
-      preferedService => service.code === preferedService.code
+    const matchingPreferredService = $preferredServices.find(
+      preferredService => service.code === preferredService.code
     )
 
-    if (!matchingPreferedService) {
-      service.code = $preferedServices[0].code
-      service.color = $preferedServices[0].color
+    if (!matchingPreferredService) {
+      service.code = $preferredServices[0].code
+      service.color = $preferredServices[0].color
     }
 
     return service
@@ -40,9 +40,9 @@
       ...services,
       {
         id: serviceIdCounter++,
-        code: $preferedServices[0].code,
+        code: $preferredServices[0].code,
         duration: 5,
-        color: $preferedServices[0].color
+        color: $preferredServices[0].color
       }
     ]
     serviceEditModeId = serviceIdCounter - 1

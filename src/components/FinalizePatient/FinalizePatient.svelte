@@ -5,7 +5,7 @@
     author,
     therapist,
     servicePrice,
-    preferedServices,
+    preferredServices,
     patients,
     loading
   } from '../../js/store'
@@ -77,7 +77,7 @@
     $loading = true
 
     if ($terrapeuteUserID) {
-      saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferedServices, $patients)
+      saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferredServices, $patients)
         .then((_) => {
           patient = { ...newPatient }
           onCloseSearch()

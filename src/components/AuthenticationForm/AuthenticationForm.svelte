@@ -5,7 +5,7 @@
     author,
     therapist,
     servicePrice,
-    preferedServices,
+    preferredServices,
     patients,
     loading
   } from '../../js/store'
@@ -67,8 +67,8 @@
 
           body.extraData.servicePrice && ($servicePrice = body.extraData.servicePrice)
 
-          body.extraData.preferedServices &&
-            ($preferedServices = body.extraData.preferedServices.map(e => ({ ...e })))
+          body.extraData.preferredServices &&
+            ($preferredServices = body.extraData.preferredServices.map(e => ({ ...e })))
 
           body.extraData.patients &&
             ($patients = body.extraData.patients.map(e => ({ ...e })))
