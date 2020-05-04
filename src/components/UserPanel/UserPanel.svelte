@@ -53,9 +53,13 @@
 
   onMount(() => {
     drawer = new MDCDrawer(element)
-    // FIXME : We are overriding the Material scrim click handler as we only want to close the drawer
-    // on scrim click if and only if the form is valid
-    Object.getPrototypeOf(drawer.foundation_).handleScrimClick = () => { }
+    // FIXME : We are overriding the Material scrim click handler and Esc key donw as we only want to
+    // close the drawer if and only if the form is valid
+    Object.getPrototypeOf(drawer.foundation_).handleScrimClick = () => { onClose() }
+    Object.getPrototypeOf(drawer.foundation_).handleKeydown = (e) => {
+      if (e.key === 'Escape' || e.keyCode === 27)
+        onClose()
+    }
 
     drawer.listen('MDCDrawer:opened', () => {
       document.querySelector('.mdc-icon-button').blur()
@@ -79,7 +83,10 @@
 
   function onClose() {
     const validClose = formExpansionPanels.reduce(
-      (_validClose, formExpansionPanel) => _validClose && formExpansionPanel.instance.askClose(),
+      (_validClose, formExpansionPanel) =>
+        _validClose &&
+        formExpansionPanel.instance &&
+        formExpansionPanel.instance.askClose(),
       true
     )
 
@@ -161,7 +168,7 @@
   </div>
 </aside>
 
-<div class="mdc-drawer-scrim" on:click={onClose}></div>
+<div class="mdc-drawer-scrim"></div>
 
 <Snackbar bind:this={successUpdateSnackbar}>
   <span slot="label">Vos informations ont été mises à jour.</span>
