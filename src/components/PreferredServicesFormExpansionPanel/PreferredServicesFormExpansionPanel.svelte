@@ -1,10 +1,11 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+
   import { preferredServices } from '../../js/store'
   import { isPreferredServicesValid } from '../../js/utils'
+  import AddPreferredServiceForm from '../AddPreferredServiceForm/AddPreferredServiceForm.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import PreferredServiceList from '../PreferredServiceList/PreferredServiceList.svelte'
-  import AddPreferredServiceForm from '../AddPreferredServiceForm/AddPreferredServiceForm.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
 
   export let expansionPanelId

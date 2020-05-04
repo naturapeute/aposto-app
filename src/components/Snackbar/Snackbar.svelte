@@ -1,6 +1,6 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
   import { MDCSnackbar } from '@material/snackbar'
+  import { onDestroy, onMount } from 'svelte'
 
   export function open() {
     snackbar.open()

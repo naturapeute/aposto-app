@@ -1,6 +1,6 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
   import { MDCDialog } from '@material/dialog'
+  import { onMount, onDestroy } from 'svelte'
 
   export let dialogId
 

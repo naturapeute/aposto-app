@@ -1,9 +1,10 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+
   import { author } from '../../js/store'
-  import Dialog from '../Dialog/Dialog.svelte'
-  import Checkbox from '../Checkbox/Checkbox.svelte'
   import Button from '../Button/Button.svelte'
+  import Checkbox from '../Checkbox/Checkbox.svelte'
+  import Dialog from '../Dialog/Dialog.svelte'
 
   export let patient
 

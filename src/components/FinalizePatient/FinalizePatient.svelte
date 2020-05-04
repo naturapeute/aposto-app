@@ -1,20 +1,21 @@
 <script>
   import { slide } from 'svelte/transition'
+
   import {
-    terrapeuteUserID,
     author,
-    therapist,
-    servicePrice,
-    preferredServices,
+    loading,
     patients,
-    loading
+    preferredServices,
+    servicePrice,
+    terrapeuteUserID,
+    therapist
   } from '../../js/store'
-  import TextField from '../TextField/TextField.svelte'
-  import PatientList from '../PatientList/PatientList.svelte'
-  import PatientForm from '../PatientForm/PatientForm.svelte'
-  import IconButton from '../IconButton/IconButton.svelte'
-  import Snackbar from '../Snackbar/Snackbar.svelte'
   import { saveUser } from '../../services/UserService'
+  import IconButton from '../IconButton/IconButton.svelte'
+  import PatientForm from '../PatientForm/PatientForm.svelte'
+  import PatientList from '../PatientList/PatientList.svelte'
+  import Snackbar from '../Snackbar/Snackbar.svelte'
+  import TextField from '../TextField/TextField.svelte'
 
   export let patient = null
 

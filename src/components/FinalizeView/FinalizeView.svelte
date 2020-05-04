@@ -1,15 +1,16 @@
 <script>
   import { slide } from 'svelte/transition'
-  import { author, therapist, servicePrice, selectedServices, loading } from '../../js/store'
+
+  import { author, loading, selectedServices, servicePrice, therapist } from '../../js/store'
+  import { sendInvoice } from '../../services/InvoiceService'
+  import Button from '../Button/Button.svelte'
+  import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from '../FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
-  import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
-  import Button from '../Button/Button.svelte'
   import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
-  import { sendInvoice } from '../../services/InvoiceService'
 
   export let patient = null
 

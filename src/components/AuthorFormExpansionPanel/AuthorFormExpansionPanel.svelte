@@ -1,11 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+
   import { author } from '../../js/store'
   import { isAuthorValid } from '../../js/utils'
+  import { getGLN } from '../../services/UserService'
+  import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import TextField from '../TextField/TextField.svelte'
-  import Button from '../Button/Button.svelte'
-  import { getGLN } from '../../services/UserService'
 
   export let expansionPanelId
 

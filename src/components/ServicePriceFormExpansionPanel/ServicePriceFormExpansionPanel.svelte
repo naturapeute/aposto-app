@@ -1,10 +1,11 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+
   import { servicePrice } from '../../js/store'
   import { isServicePriceValid } from '../../js/utils'
+  import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import TextField from '../TextField/TextField.svelte'
-  import Button from '../Button/Button.svelte'
 
   export let expansionPanelId
 

@@ -1,35 +1,36 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
-  import { onMount, onDestroy } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { slide } from 'svelte/transition'
+
   import {
-    terrapeuteUserID,
     author,
-    therapist,
-    servicePrice,
-    preferredServices,
+    loading,
     patients,
-    loading
+    preferredServices,
+    servicePrice,
+    terrapeuteUserID,
+    therapist
   } from '../../js/store'
   import {
     isAuthorValid,
-    isTherapistValid,
+    isPreferredServicesValid,
     isServicePriceValid,
-    isPreferredServicesValid
+    isTherapistValid
   } from '../../js/utils'
-  import IconButton from '../IconButton/IconButton.svelte'
-  import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
-  import AuthorFormExpansionPanel from '../AuthorFormExpansionPanel/AuthorFormExpansionPanel.svelte'
-  import TherapistFormExpansionPanel
-    from '../TherapistFormExpansionPanel/TherapistFormExpansionPanel.svelte'
-  import ServicePriceFormExpansionPanel
-    from '../ServicePriceFormExpansionPanel/ServicePriceFormExpansionPanel.svelte'
-  import PreferredServicesFormExpansionPanel
-    from '../PreferredServicesFormExpansionPanel/PreferredServicesFormExpansionPanel.svelte'
+  import { saveUser } from '../../services/UserService'
   import AuthenticationForm
     from '../AuthenticationForm/AuthenticationForm.svelte'
+  import AuthorFormExpansionPanel from '../AuthorFormExpansionPanel/AuthorFormExpansionPanel.svelte'
+  import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
+  import IconButton from '../IconButton/IconButton.svelte'
+  import PreferredServicesFormExpansionPanel
+    from '../PreferredServicesFormExpansionPanel/PreferredServicesFormExpansionPanel.svelte'
+  import ServicePriceFormExpansionPanel
+    from '../ServicePriceFormExpansionPanel/ServicePriceFormExpansionPanel.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
-  import { saveUser } from '../../services/UserService'
+  import TherapistFormExpansionPanel
+    from '../TherapistFormExpansionPanel/TherapistFormExpansionPanel.svelte'
 
   export let open = false
 

@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { slide } from 'svelte/transition'
+
   import { patients } from '../../js/store'
   import Chip from '../Chip/Chip.svelte'
 

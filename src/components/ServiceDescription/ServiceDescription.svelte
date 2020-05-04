@@ -1,12 +1,13 @@
 <script>
   import { createEventDispatcher, afterUpdate } from 'svelte'
   import { cubicOut } from 'svelte/easing'
+
   import { preferredServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
+  import DurationList from '../DurationList/DurationList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
   import PreferredServiceList from '../PreferredServiceList/PreferredServiceList.svelte'
-  import DurationList from '../DurationList/DurationList.svelte'
 
   export let service
   export let serviceEditModeId

@@ -1,10 +1,11 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { getCantonOptions, genderOptions, getDateInput } from '../../js/utils'
-  import TextField from '../TextField/TextField.svelte'
-  import Select from '../Select/Select.svelte'
+
+  import { genderOptions, getCantonOptions, getDateInput } from '../../js/utils'
   import Button from '../Button/Button.svelte'
+  import Select from '../Select/Select.svelte'
+  import TextField from '../TextField/TextField.svelte'
 
   export let filterPatient
   export let patient = null

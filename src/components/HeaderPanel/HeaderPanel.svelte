@@ -1,9 +1,9 @@
 <script>
   import { author, loading } from '../../js/store'
-  import UserPanel from '../UserPanel/UserPanel.svelte'
-  import TopAppBar from '../TopAppBar/TopAppBar.svelte'
   import Button from '../Button/Button.svelte'
   import LinearProgress from '../LinearProgress/LinearProgress.svelte'
+  import TopAppBar from '../TopAppBar/TopAppBar.svelte'
+  import UserPanel from '../UserPanel/UserPanel.svelte'
 
   let userPanelOpen = false
 

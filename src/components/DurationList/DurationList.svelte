@@ -1,5 +1,6 @@
 <script>
   import { afterUpdate } from 'svelte'
+
   import { getDurationLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
 

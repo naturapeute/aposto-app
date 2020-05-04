@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, afterUpdate } from 'svelte'
+
   import { preferredServices } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'

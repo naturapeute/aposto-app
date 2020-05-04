@@ -1,6 +1,6 @@
 <script>
-  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import { MDCTextField } from '@material/textfield'
+  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
   export let fieldID
   export let value = ''

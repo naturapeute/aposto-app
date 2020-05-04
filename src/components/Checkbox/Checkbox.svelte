@@ -1,8 +1,8 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
-  import { MDCFormField } from '@material/form-field'
   import { MDCCheckbox } from '@material/checkbox'
+  import { MDCFormField } from '@material/form-field'
   import { numbers } from '@material/ripple'
+  import { onDestroy, onMount } from 'svelte'
 
   export let checkboxId
   export let checked = false

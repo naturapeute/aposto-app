@@ -1,9 +1,10 @@
 <script>
   import { slide } from 'svelte/transition'
+
   import { preferredServices } from '../../js/store'
   import { serviceColors } from '../../js/utils'
-  import TextField from '../TextField/TextField.svelte'
   import ServiceList from '../ServiceList/ServiceList.svelte'
+  import TextField from '../TextField/TextField.svelte'
 
   let filterService = ''
 

@@ -1,6 +1,6 @@
 <script>
-  import { onMount } from 'svelte'
   import { MDCSelect } from '@material/select'
+  import { onMount } from 'svelte'
 
   export let fieldID
   export let options = [{ value: '', label: '' }]

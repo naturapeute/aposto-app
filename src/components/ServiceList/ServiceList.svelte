@@ -1,7 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { serviceCodes } from '../../js/utils'
+
   import { preferredServices } from '../../js/store'
+  import { serviceCodes } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
 
   export let filterService

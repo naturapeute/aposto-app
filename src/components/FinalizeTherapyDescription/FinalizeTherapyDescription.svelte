@@ -1,6 +1,6 @@
 <script>
-  import { getDurationLabel } from '../../js/utils'
   import { preferredServices, selectedServices } from '../../js/store'
+  import { getDurationLabel } from '../../js/utils'
   import IconButton from '../IconButton/IconButton.svelte'
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
 

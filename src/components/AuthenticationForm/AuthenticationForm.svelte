@@ -1,18 +1,19 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+
   import {
-    terrapeuteUserID,
     author,
-    therapist,
+    loading,
     servicePrice,
-    preferredServices,
     patients,
-    loading
+    preferredServices,
+    terrapeuteUserID,
+    therapist
   } from '../../js/store'
-  import Button from '../Button/Button.svelte'
-  import TextField from '../TextField/TextField.svelte'
-  import Snackbar from '../Snackbar/Snackbar.svelte'
   import { authenticate } from '../../services/UserService'
+  import Button from '../Button/Button.svelte'
+  import Snackbar from '../Snackbar/Snackbar.svelte'
+  import TextField from '../TextField/TextField.svelte'
 
   let email
   let failedAuthenticationSnackbar

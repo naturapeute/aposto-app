@@ -3,9 +3,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": [
-    "standard"
-  ],
+  "extends": ["standard"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -37,10 +35,7 @@
         "tabWidth": 2
       }
     ],
-    "curly": [
-      "warn",
-      "multi-or-nest"
-    ],
+    "curly": ["warn", "multi-or-nest"],
     "no-multiple-empty-lines": [
       "warn",
       {
@@ -49,16 +44,19 @@
         "maxEOF": 1
       }
     ],
-    "import/first": "off"
+    "import/first": "off",
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc" }
+      }
+    ]
   },
-  "plugins": [
-    "svelte3"
-  ],
+  "plugins": ["svelte3"],
   "overrides": [
     {
-      "files": [
-        "**/*.svelte"
-      ],
+      "files": ["**/*.svelte"],
       "processor": "svelte3/svelte3"
     }
   ]
