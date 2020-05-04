@@ -9,10 +9,10 @@
   export let filterPatient
   export let patient = null
 
-  const localPatient = {
+  const localPatient = patient ? {
     ...patient,
     birthdate: getDateInput(patient.birthdate)
-  } || {
+  } : {
     firstName: filterPatient.split(' ')[0],
     lastName: filterPatient.split(' ').slice(1).join(' '),
     street: '',
