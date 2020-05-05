@@ -10,8 +10,7 @@ export const author = writable({
   city: '',
   email: '',
   phone: '',
-  RCC: '',
-  GLN: ''
+  RCC: ''
 })
 export const therapist = writable({
   firstName: '',
@@ -20,8 +19,7 @@ export const therapist = writable({
   ZIP: '',
   city: '',
   phone: '',
-  RCC: '',
-  GLN: ''
+  RCC: ''
 })
 export const patients = writable([])
 export const servicePrice = writable(0)

@@ -3,7 +3,6 @@
 
   import { author } from '../../js/store'
   import { isAuthorValid } from '../../js/utils'
-  import { getGLN } from '../../services/UserService'
   import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import TextField from '../TextField/TextField.svelte'
@@ -21,22 +20,7 @@
 
   let open = !isAuthorValid($author)
   let submitButtonElement
-  let GLNNotFound = false
   const dispatch = createEventDispatcher()
-
-  $: if (!$author.GLN && $author.name && $author.ZIP && $author.city) {
-    getGLN($author.name, '', '', $author.ZIP, $author.city)
-      .then(GLN => {
-        $author.GLN = GLN
-        GLNNotFound = false
-      })
-      .catch((_) => {
-        GLNNotFound = true
-      })
-  }
-
-  $: if ($author.GLN)
-    GLNNotFound = false
 
   function onAskToggle() {
     if (open)
@@ -72,22 +56,8 @@
       </TextField>
       <TextField bind:value={$author.RCC} type="tel" fieldID="author-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
-        pattern="[A-Z][0-9]&#123;6&#125;" required>
+        pattern="[A-Z][0-9]&#123;6&#125;">
         N°RCC
-      </TextField>
-      <TextField bind:value={$author.GLN} type="tel" fieldID="author-gln" helperText={GLNNotFound}
-        title="Un numéro GLN est composé de 13 chiffres" pattern="[0-9]&#123;13&#125;" required
-        persistentHelperText>
-        N°GLN
-        <span slot="helper-text">
-          {#if GLNNotFound}
-            <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
-              target="_blank">
-              Trouvez ou faites la demande de votre n°GLN sur RefData.
-            </a>
-            Si toutefois vous ne le trouvez pas, renseignez le numéro 2099999999999.
-          {/if}
-        </span>
       </TextField>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">

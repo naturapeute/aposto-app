@@ -50,7 +50,6 @@
             body.extraData.author.email && ($author.email = body.extraData.author.email)
             body.extraData.author.phone && ($author.phone = body.extraData.author.phone)
             body.extraData.author.RCC && ($author.RCC = body.extraData.author.RCC)
-            body.extraData.author.GLN && ($author.GLN = body.extraData.author.GLN)
           }
 
           if (body.extraData.therapist) {
@@ -63,7 +62,6 @@
             body.extraData.therapist.ZIP && ($therapist.ZIP = body.extraData.therapist.ZIP)
             body.extraData.therapist.phone && ($therapist.phone = body.extraData.therapist.phone)
             body.extraData.therapist.RCC && ($therapist.RCC = body.extraData.therapist.RCC)
-            body.extraData.therapist.GLN && ($therapist.GLN = body.extraData.therapist.GLN)
           }
 
           body.extraData.servicePrice && ($servicePrice = body.extraData.servicePrice)

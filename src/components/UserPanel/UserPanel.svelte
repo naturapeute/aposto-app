@@ -79,7 +79,7 @@
   onDestroy(() => {
     if (drawer) drawer.detroy()
 
-    storeSubscriptions.forEach(storeUnsubscribe => { storeUnsubscribe() })
+    storeSubscriptions.forEach(storeSubscription => { storeSubscription() })
   })
 
   function onClose() {

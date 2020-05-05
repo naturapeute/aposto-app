@@ -3,7 +3,6 @@
 
   import { therapist } from '../../js/store'
   import { isTherapistValid } from '../../js/utils'
-  import { getGLN } from '../../services/UserService'
   import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import TextField from '../TextField/TextField.svelte'
@@ -21,23 +20,7 @@
 
   let open = !isTherapistValid($therapist)
   let submitButtonElement
-  let GLNNotFound = false
   const dispatch = createEventDispatcher()
-
-  $: if (!$therapist.GLN && $therapist.firstName && $therapist.lastName && $therapist.ZIP &&
-    $therapist.city) {
-    getGLN('', $therapist.firstName, $therapist.lastName, $therapist.ZIP, $therapist.city)
-      .then(GLN => {
-        $therapist.GLN = GLN
-        GLNNotFound = false
-      })
-      .catch((_) => {
-        GLNNotFound = true
-      })
-  }
-
-  $: if ($therapist.GLN)
-    GLNNotFound = false
 
   function onAskToggle() {
     if (open)
@@ -74,22 +57,8 @@
         Téléphone</TextField>
       <TextField bind:value={$therapist.RCC} type="tel" fieldID="therapist-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
-        pattern="[A-Z][0-9]&#123;6&#125;" helperText required>
+        pattern="[A-Z][0-9]&#123;6&#125;">
         N°RCC
-      </TextField>
-      <TextField bind:value={$therapist.GLN} type="tel" fieldID="therapist-gln"
-        title="Un numéro GLN est composé de 13 chiffres" pattern="[0-9]&#123;13&#125;"
-        helperText={GLNNotFound} required persistentHelperText>
-        N°GLN
-        <span slot="helper-text">
-          {#if GLNNotFound}
-            <a href="https://www.refdata.ch/fr/partenaires/requete/base-de-donnees-des-partenaires-gln"
-              target="_blank">
-              Trouvez ou faites la demande de votre n°GLN sur RefData.
-            </a>
-            Si toutefois vous ne le trouvez pas, renseignez le numéro 2099999999999.
-          {/if}
-        </span>
       </TextField>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">

@@ -38,8 +38,7 @@ describe('utils', () => {
       city: 'San Antonio',
       email: 'gaery0@over-blog.com',
       phone: '5164459701',
-      RCC: 'V123123',
-      GLN: '2000000000008'
+      RCC: 'V123123'
     }
 
     it('should validate a valid author object', () => {
@@ -72,19 +71,13 @@ describe('utils', () => {
     it('should invalidate an author object with an empty phone number', () => {
       assert.equal(isAuthorValid({ ...author, phone: '' }), false)
     })
-    it('should invalidate an author object with an empty RCC number', () => {
-      assert.equal(isAuthorValid({ ...author, RCC: '' }), false)
+    it('should validate an author object with an empty RCC number', () => {
+      assert.equal(isAuthorValid({ ...author, RCC: '' }), true)
     })
     it('should invalidate an author object with a wrongly formatted RCC number', () => {
       assert.equal(isAuthorValid({ ...author, RCC: 'V123' }), false)
       assert.equal(isAuthorValid({ ...author, RCC: '1231231' }), false)
       assert.equal(isAuthorValid({ ...author, RCC: 'VVVVVVV' }), false)
-    })
-    it('should invalidate an author object with an empty GLN number', () => {
-      assert.equal(isAuthorValid({ ...author, GLN: '' }), false)
-    })
-    it('should invalidate an author object with a wrongly formatted GLN number', () => {
-      assert.equal(isAuthorValid({ ...author, GLN: '2' }), false)
     })
   })
 
@@ -96,8 +89,7 @@ describe('utils', () => {
       ZIP: '735538',
       city: 'San Antonio',
       phone: '5164459701',
-      RCC: 'V123123',
-      GLN: '2000000000008'
+      RCC: 'V123123'
     }
 
     it('should validate a valid therapist object', () => {
@@ -124,19 +116,13 @@ describe('utils', () => {
     it('should invalidate an therapist object with an empty phone number', () => {
       assert.equal(isTherapistValid({ ...therapist, phone: '' }), false)
     })
-    it('should invalidate an therapist object with an empty RCC number', () => {
-      assert.equal(isTherapistValid({ ...therapist, RCC: '' }), false)
+    it('should validate an therapist object with an empty RCC number', () => {
+      assert.equal(isTherapistValid({ ...therapist, RCC: '' }), true)
     })
     it('should invalidate an therapist object with a wrongly formatted RCC number', () => {
       assert.equal(isTherapistValid({ ...therapist, RCC: 'V123' }), false)
       assert.equal(isTherapistValid({ ...therapist, RCC: '1231231' }), false)
       assert.equal(isTherapistValid({ ...therapist, RCC: 'VVVVVVV' }), false)
-    })
-    it('should invalidate an therapist object with an empty GLN number', () => {
-      assert.equal(isTherapistValid({ ...therapist, GLN: '' }), false)
-    })
-    it('should invalidate an therapist object with a wrongly formatted GLN number', () => {
-      assert.equal(isTherapistValid({ ...therapist, GLN: '2' }), false)
     })
   })
 
