@@ -20,11 +20,14 @@
     align-items: center;
     color: #fff;
     font-weight: 700;
+    background-color: var(--service-color);
   }
 
   :global(.service) {
     display: flex;
     align-items: center;
+    transition: height 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    height: var(--service-height);
 
     &:last-of-type :global(.service-timeline) {
       border-top-right-radius: 18px;
@@ -40,7 +43,7 @@
 
 
 .service-add {
-  height: 36px;
+  --service-height: 36px;
 
   .service-timeline {
     background-color: $primary;
@@ -48,5 +51,13 @@
 }
 
 .total-duration {
-  margin-top: 8px;
+  margin-bottom: 16px;
+
+  .aposto-form {
+    width: 150px;
+
+    :global(.total-duration-input.mdc-text-field--outlined) {
+      height: 40px;
+    }
+  }
 }

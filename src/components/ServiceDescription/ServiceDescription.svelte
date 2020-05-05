@@ -1,8 +1,9 @@
 <script>
-  import { createEventDispatcher, afterUpdate } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { cubicOut } from 'svelte/easing'
 
   import { user } from '../../js/store'
+  import { growShrink } from '../../js/transitions'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
   import DurationList from '../DurationList/DurationList.svelte'
@@ -15,11 +16,15 @@
 
   let serviceElement
   let serviceFormElement
+  let serviceHeight
   const dispatch = createEventDispatcher()
 
-  $: serviceHeight = (20 * 12) * (service.duration / totalDuration) > 36
-    ? (20 * 12) * (service.duration / totalDuration) : 36
   $: editMode = service.id === serviceEditModeId
+  $: if (!editMode) {
+    serviceHeight = (20 * 12) * (service.duration / totalDuration) > 36
+      ? (20 * 12) * (service.duration / totalDuration)
+      : 36
+  }
 
   function onMaybeClickOut(e) {
     if (editMode && !e.target.closest('.service-label-container') &&
@@ -27,13 +32,6 @@
       !serviceFormElement.contains(e.target))
       onCloseEditService()
   }
-
-  afterUpdate(() => {
-    if (!editMode)
-      serviceElement.style.setProperty('--service-height', `${serviceHeight}px`)
-
-    serviceElement.style.setProperty('--service-color', service.color)
-  })
 
   function onEditService() {
     serviceEditModeId = service.id
@@ -60,6 +58,7 @@
     const h = parseFloat(style.height)
     const o = +style.opacity
 
+    serviceHeight = h + 2 * 16
     serviceElement.style.setProperty('--service-height', `${h + 2 * 16}px`)
 
     return {
@@ -74,23 +73,13 @@
       }
     }
   }
-
-  function growShrink(node) {
-    const h = parseFloat(getComputedStyle(node).height)
-
-    return {
-      duration: 400,
-      easing: cubicOut,
-      css: t => {
-        return `height: ${t * h}px;`
-      }
-    }
-  }
 </script>
 
 <svelte:window on:click={onMaybeClickOut} on:touchstart={onMaybeClickOut} />
 
-<li bind:this={serviceElement} class="service" transition:growShrink>
+<li bind:this={serviceElement} class="service"
+  style="--service-color: {service.color}; --service-height: {serviceHeight}px;"
+  transition:growShrink>
   <div class="service-timeline">
     <span>{service.duration}'</span>
   </div>
@@ -99,7 +88,7 @@
       <div class="service-label-container">
         <Chip className="service-label"
           title="Éditer la thérapie {`"${getServiceLightLabel(service.code)}"`}" leadingIcon="spa"
-          trailingIcon="edit" color="{service.color}" on:click={onEditService}>
+          trailingIcon="edit" color={service.color} on:click={onEditService}>
           {getServiceLightLabel(service.code)}
         </Chip>
         <IconButton className="service-delete"
@@ -111,10 +100,10 @@
     {:else}
       <form bind:this={serviceFormElement} class="aposto-form" transition:fade
         on:submit|preventDefault={onCloseEditService}>
-        <PreferredServiceList selectedServiceCode="{service.code}"
+        <PreferredServiceList selectedServiceCode={service.code}
           on:selectedService={onSelectedService} />
         <DurationList bind:selectedServiceDuration={service.duration}
-          selectedServiceColor="{service.color}" />
+          selectedServiceColor={service.color} />
       </form>
     {/if}
   </div>

@@ -1,21 +1,20 @@
 <script>
-  import { selectedServices, user } from '../../js/store'
-  import { getDurationLabel } from '../../js/utils'
-  import IconButton from '../IconButton/IconButton.svelte'
-  import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
+  import { slide } from 'svelte/transition'
 
+  import { selectedServices, user } from '../../js/store'
+  import { growShrink } from '../../js/transitions'
+  import IconButton from '../IconButton/IconButton.svelte'
+  import RemainingDurationService from '../RemainingDurationService/RemainingDurationService.svelte'
+  import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
+  import TextField from '../TextField/TextField.svelte'
+
+  let totalDuration = 0
   let serviceIdCounter = 0
   let serviceEditModeId = -1
 
-  $: totalDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
-
-  $: serviceHeights = $selectedServices.map(service => {
-    let serviceHeight = (20 * 12) * (service.duration / totalDuration)
-
-    if (serviceHeight < 36) serviceHeight = 36
-
-    return serviceHeight
-  })
+  $: usedDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
+  $: if (usedDuration > totalDuration) totalDuration = usedDuration
+  $: remainingDuration = totalDuration > usedDuration ? totalDuration - usedDuration : 0
 
   $: $selectedServices.map(service => {
     if (service.id === undefined)
@@ -37,7 +36,7 @@
     $selectedServices.push({
       id: serviceIdCounter++,
       code: $user.preferredServices[0].code,
-      duration: 5,
+      duration: remainingDuration,
       color: $user.preferredServices[0].color
     })
     serviceEditModeId = serviceIdCounter - 1
@@ -54,9 +53,16 @@
   }
 </script>
 
+<div class="finalize-p" class:total-duration={remainingDuration || usedDuration}>
+  <i class="material-icons-outlined">schedule</i>
+  <form class="aposto-form" on:submit|preventDefault transition:slide>
+    <TextField type="number" bind:value={totalDuration} fieldID="total-duration"
+      className="total-duration-input" min={usedDuration} step="5" outlined noLabel />
+  </form>
+</div>
 <ul class="therapy-description">
-  {#if $selectedServices.length < 5}
-    <li class="service service-add">
+  {#if remainingDuration && $selectedServices.length < 5}
+    <li class="service service-add" transition:growShrink>
       <div class="service-timeline">
         <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
           add
@@ -64,16 +70,13 @@
       </div>
     </li>
   {/if}
+  {#if remainingDuration}
+    <RemainingDurationService {totalDuration} {remainingDuration} />
+  {/if}
   {#each [...$selectedServices].reverse() as service, i (service.id)}
     <ServiceDescription bind:service bind:serviceEditModeId {totalDuration}
       on:deleteService={onDeleteService} />
   {/each}
 </ul>
-<p class="finalize-p total-duration">
-  <i class="material-icons-outlined">schedule</i>
-  <strong class="typography--button-inline">
-    {getDurationLabel(totalDuration)}
-  </strong>
-</p>
 
 <style src="FinalizeTherapyDescription.scss"></style>

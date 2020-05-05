@@ -12,9 +12,11 @@
   export let placeholder = null
   export let className = ''
   export let min = null
+  export let step = null
   export let pattern = null
   export let title = null
   export let helperText = false
+  export let noLabel = false
 
   let element
   let textField
@@ -54,15 +56,15 @@
 </script>
 
 <label bind:this={element} class="mdc-text-field {className}"
-  class:mdc-text-field--filled={!outlined} class:mdc-text-field--outlined="{outlined}"
-  class:mdc-text-field--with-trailing-icon="{trailingIcon}">
+  class:mdc-text-field--filled={!outlined} class:mdc-text-field--outlined={outlined}
+  class:mdc-text-field--with-trailing-icon={trailingIcon} class:mdc-text-field--no-label={noLabel}>
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
   {/if}
   <input {value} {type} class="mdc-text-field__input" id={fieldID} {placeholder} name={fieldID}
-    aria-labelledby={fieldID} aria-controls="{helperText ? helperTextID : ''}"
-    aria-describedby="{helperText ? helperTextID : ''}" {title} on:input={onInput} {min} {pattern}
-    {required} autocomplete="{noAutoComplete ? 'off' : ''}">
+    aria-labelledby={fieldID} aria-controls={helperText ? helperTextID : ''}
+    aria-describedby={helperText ? helperTextID : ''} {title} on:input={onInput} {min} {step} {pattern}
+    {required} autocomplete={noAutoComplete ? 'off' : ''}>
   {#if trailingIcon}
     <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>
@@ -72,17 +74,21 @@
   {#if outlined}
     <div class="mdc-notched-outline">
       <div class="mdc-notched-outline__leading"></div>
-      <div class="mdc-notched-outline__notch">
-        <span class="mdc-floating-label" id={fieldID}>
-          <slot></slot>
-        </span>
-      </div>
+      {#if !noLabel}
+        <div class="mdc-notched-outline__notch">
+          <span class="mdc-floating-label" id={fieldID}>
+            <slot></slot>
+          </span>
+        </div>
+      {/if}
       <div class="mdc-notched-outline__trailing"></div>
     </div>
   {:else}
-    <span class="mdc-floating-label" id={fieldID}>
-      <slot></slot>
-    </span>
+    {#if !noLabel}
+      <span class="mdc-floating-label" id={fieldID}>
+        <slot></slot>
+      </span>
+    {/if}
     <div class="mdc-line-ripple"></div>
   {/if}
 </label>
