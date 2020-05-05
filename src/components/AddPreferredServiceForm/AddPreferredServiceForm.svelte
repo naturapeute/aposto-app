@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import { preferredServices } from '../../js/store'
+  import { user } from '../../js/store'
   import { serviceColors } from '../../js/utils'
   import ServiceList from '../ServiceList/ServiceList.svelte'
   import TextField from '../TextField/TextField.svelte'
@@ -9,15 +9,15 @@
   let filterService = ''
 
   function onServiceSelected(e) {
-    const availableColor = $preferredServices.reduce(
+    const availableColor = $user.preferredServices.reduce(
       (availableColors, preferredService) => {
         return availableColors.filter(color => preferredService.color !== color)
       },
       [...serviceColors]
     )[0]
 
-    $preferredServices = [
-      ...$preferredServices,
+    $user.preferredServices = [
+      ...$user.preferredServices,
       { code: e.detail, color: availableColor }
     ]
 

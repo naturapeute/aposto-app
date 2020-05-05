@@ -1,5 +1,5 @@
 <script>
-  import { author, loading } from '../../js/store'
+  import { loading, user } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import LinearProgress from '../LinearProgress/LinearProgress.svelte'
   import TopAppBar from '../TopAppBar/TopAppBar.svelte'
@@ -21,7 +21,7 @@
   <LinearProgress intermediate />
   <Button icon="account_circle" title="Accéder à mon profil de facturation"
     on:click={onToggleUserPanel}>
-    {$author.name}
+    {$user.author.name}
   </Button>
 </header>
 

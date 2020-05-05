@@ -1,5 +1,5 @@
 <script>
-  import { preferredServices, selectedServices } from '../../js/store'
+  import { selectedServices, user } from '../../js/store'
   import { getDurationLabel } from '../../js/utils'
   import IconButton from '../IconButton/IconButton.svelte'
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
@@ -21,13 +21,13 @@
     if (service.id === undefined)
       service.id = serviceIdCounter++
 
-    const matchingPreferredService = $preferredServices.find(
+    const matchingPreferredService = $user.preferredServices.find(
       preferredService => service.code === preferredService.code
     )
 
     if (!matchingPreferredService) {
-      service.code = $preferredServices[0].code
-      service.color = $preferredServices[0].color
+      service.code = $user.preferredServices[0].code
+      service.color = $user.preferredServices[0].color
     }
 
     return service
@@ -36,9 +36,9 @@
   function onAddService() {
     $selectedServices.push({
       id: serviceIdCounter++,
-      code: $preferredServices[0].code,
+      code: $user.preferredServices[0].code,
       duration: 5,
-      color: $preferredServices[0].color
+      color: $user.preferredServices[0].color
     })
     serviceEditModeId = serviceIdCounter - 1
   }

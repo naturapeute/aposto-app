@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import { author, loading, selectedServices, servicePrice, therapist } from '../../js/store'
+  import { loading, selectedServices, user } from '../../js/store'
   import { sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
@@ -20,7 +20,7 @@
   let successSend = false
 
   $: totalAmount = $selectedServices.reduce(
-    (total, service) => total + (service.duration * $servicePrice / 60),
+    (total, service) => total + (service.duration * $user.servicePrice / 60),
     0
   )
 
@@ -44,7 +44,7 @@
     askConfirm = false
     $loading = true
 
-    sendInvoice($author, $therapist, patient, $servicePrice, $selectedServices)
+    sendInvoice($user.author, $user.therapist, patient, $user.servicePrice, $selectedServices)
       .then(() => {
         successSend = true
       })

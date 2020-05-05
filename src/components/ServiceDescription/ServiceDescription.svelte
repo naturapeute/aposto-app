@@ -2,7 +2,7 @@
   import { createEventDispatcher, afterUpdate } from 'svelte'
   import { cubicOut } from 'svelte/easing'
 
-  import { preferredServices } from '../../js/store'
+  import { user } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
   import DurationList from '../DurationList/DurationList.svelte'
@@ -49,7 +49,7 @@
 
   function onSelectedService(e) {
     service.code = e.detail
-    service.color = $preferredServices.find(
+    service.color = $user.preferredServices.find(
       preferredService => preferredService.code === e.detail
     ).color
   }

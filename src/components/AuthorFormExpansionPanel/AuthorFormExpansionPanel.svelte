@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { author } from '../../js/store'
+  import { user } from '../../js/store'
   import { isAuthorValid } from '../../js/utils'
   import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -10,7 +10,7 @@
   export let expansionPanelId
 
   export function askClose() {
-    if (isAuthorValid($author))
+    if (isAuthorValid($user.author))
       open = false
     else
       submitButtonElement.click()
@@ -18,7 +18,7 @@
     return !open
   }
 
-  let open = !isAuthorValid($author)
+  let open = !isAuthorValid($user.author)
   let submitButtonElement
   const dispatch = createEventDispatcher()
 
@@ -40,21 +40,21 @@
   <div slot="summary">Auteur des factures</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$author.name} fieldID="author-name" required>
+      <TextField bind:value={$user.author.name} fieldID="author-name" required>
         Nom ou entreprise
       </TextField>
-      <TextField bind:value={$author.street} fieldID="author-street" required>
+      <TextField bind:value={$user.author.street} fieldID="author-street" required>
         Rue et n°
       </TextField>
-      <TextField bind:value={$author.ZIP} fieldID="author-zip" required>NPA</TextField>
-      <TextField bind:value={$author.city} fieldID="author-city" required>Localité</TextField>
-      <TextField bind:value={$author.email} type="email" fieldID="author-email" required>
+      <TextField bind:value={$user.author.ZIP} fieldID="author-zip" required>NPA</TextField>
+      <TextField bind:value={$user.author.city} fieldID="author-city" required>Localité</TextField>
+      <TextField bind:value={$user.author.email} type="email" fieldID="author-email" required>
         Email
       </TextField>
-      <TextField bind:value={$author.phone} type="tel" fieldID="author-phone" required>
+      <TextField bind:value={$user.author.phone} type="tel" fieldID="author-phone" required>
         Téléphone
       </TextField>
-      <TextField bind:value={$author.RCC} type="tel" fieldID="author-rcc"
+      <TextField bind:value={$user.author.RCC} type="tel" fieldID="author-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
         pattern="[A-Z][0-9]&#123;6&#125;">
         N°RCC

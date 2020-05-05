@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { servicePrice } from '../../js/store'
+  import { user } from '../../js/store'
   import { isServicePriceValid } from '../../js/utils'
   import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -10,7 +10,7 @@
   export let expansionPanelId
 
   export function askClose() {
-    if (isServicePriceValid($servicePrice))
+    if (isServicePriceValid($user.servicePrice))
       open = false
     else
       submitButtonElement.click()
@@ -18,7 +18,7 @@
     return !open
   }
 
-  let open = !isServicePriceValid($servicePrice)
+  let open = !isServicePriceValid($user.servicePrice)
   let submitButtonElement
   const dispatch = createEventDispatcher()
 
@@ -40,7 +40,7 @@
   <div slot="summary">Tarif horaire</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$servicePrice} type="number" fieldID="service-price" min="1" required>
+      <TextField bind:value={$user.servicePrice} type="number" fieldID="service-price" min="1" required>
         Tarif horaire
       </TextField>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"

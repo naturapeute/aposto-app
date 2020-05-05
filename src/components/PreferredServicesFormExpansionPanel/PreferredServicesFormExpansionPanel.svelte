@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { preferredServices } from '../../js/store'
+  import { user } from '../../js/store'
   import { isPreferredServicesValid } from '../../js/utils'
   import AddPreferredServiceForm from '../AddPreferredServiceForm/AddPreferredServiceForm.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
@@ -11,7 +11,7 @@
   export let expansionPanelId
 
   export function askClose() {
-    if (isPreferredServicesValid($preferredServices))
+    if (isPreferredServicesValid($user.preferredServices))
       open = false
     else
       missingPreferredServicesSnackbar.open()
@@ -19,7 +19,7 @@
     return !open
   }
 
-  let open = !isPreferredServicesValid($preferredServices)
+  let open = !isPreferredServicesValid($user.preferredServices)
   let missingPreferredServicesSnackbar
   const dispatch = createEventDispatcher()
 
@@ -37,7 +37,7 @@
   <div slot="summary">Thérapies préférées</div>
   <div slot="content">
     <PreferredServiceList />
-    {#if $preferredServices.length < 10}
+    {#if $user.preferredServices.length < 10}
       <AddPreferredServiceForm />
     {/if}
   </div>

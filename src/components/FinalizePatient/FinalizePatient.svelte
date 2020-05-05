@@ -1,15 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import {
-    author,
-    loading,
-    patients,
-    preferredServices,
-    servicePrice,
-    terrapeuteUserID,
-    therapist
-  } from '../../js/store'
+  import { loading, patients, user } from '../../js/store'
   import { saveUser } from '../../services/UserService'
   import IconButton from '../IconButton/IconButton.svelte'
   import PatientForm from '../PatientForm/PatientForm.svelte'
@@ -77,8 +69,15 @@
 
     $loading = true
 
-    if ($terrapeuteUserID) {
-      saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferredServices, $patients)
+    if ($user.terrapeuteUserID) {
+      saveUser(
+        $user.terrapeuteUserID,
+        $user.author,
+        $user.therapist,
+        $user.servicePrice,
+        $user.preferredServices,
+        $patients
+      )
         .then((_) => {
           patient = { ...newPatient }
           onCloseSearch()

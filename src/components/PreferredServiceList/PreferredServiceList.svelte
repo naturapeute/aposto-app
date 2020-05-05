@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher, afterUpdate } from 'svelte'
 
-  import { preferredServices } from '../../js/store'
+  import { user } from '../../js/store'
   import { getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
 
@@ -12,7 +12,7 @@
 
   afterUpdate(() => {
     if (selectedServiceCode) {
-      const selectedServiceColor = $preferredServices.find(
+      const selectedServiceColor = $user.preferredServices.find(
         preferredService => preferredService.code === selectedServiceCode
       ).color
 
@@ -25,7 +25,9 @@
   }
 
   function onDeletePreferredService(code) {
-    $preferredServices = $preferredServices.filter(preferredService => preferredService.code !== code)
+    $user.preferredServices = $user.preferredServices.filter(
+      preferredService => preferredService.code !== code
+    )
   }
 </script>
 
@@ -33,7 +35,7 @@
   {#if selectedServiceCode}
     <i bind:this={iconElement} class="material-icons-outlined">spa</i>
   {/if}
-  {#each $preferredServices as preferredService (preferredService.code)}
+  {#each $user.preferredServices as preferredService (preferredService.code)}
     <li class="mdc-touch-target-wrapper" on:click={() => onSelectService(preferredService.code)}>
       <Chip className="{selectedServiceCode ? 'preferred-service-chip' : ''}"
         title="Sélectionner la thérapie {`"${getServiceLightLabel(preferredService.code)}"`}"

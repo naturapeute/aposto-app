@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { author } from '../../js/store'
+  import { user } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import Checkbox from '../Checkbox/Checkbox.svelte'
   import Dialog from '../Dialog/Dialog.svelte'
@@ -40,7 +40,7 @@
     <p>
       Vous recevrez également une copie dans votre boîte mail
       <strong class="typography--button-inline">
-        {$author.email}
+        {$user.author.email}
       </strong>
       .
     </p>

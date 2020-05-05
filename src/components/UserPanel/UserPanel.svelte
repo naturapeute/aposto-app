@@ -3,15 +3,7 @@
   import { onDestroy, onMount } from 'svelte'
   import { slide } from 'svelte/transition'
 
-  import {
-    author,
-    loading,
-    patients,
-    preferredServices,
-    servicePrice,
-    terrapeuteUserID,
-    therapist
-  } from '../../js/store'
+  import { loading, patients, user } from '../../js/store'
   import {
     isAuthorValid,
     isPreferredServicesValid,
@@ -38,7 +30,6 @@
   let drawer = {}
   let authenticationMode = true
   const storeSubscriptions = []
-  let userUpdated = false
   let successUpdateSnackbar
   let successPatchSnackbar
   let failedPatchSnackbar
@@ -66,14 +57,9 @@
       document.querySelector('.mdc-icon-button').blur()
     })
 
-    open = !isAuthorValid($author) || !isTherapistValid($therapist) ||
-      !isServicePriceValid($servicePrice) || !isPreferredServicesValid($preferredServices)
-
-    storeSubscriptions.push(author.subscribe(_ => { userUpdated = true }))
-    storeSubscriptions.push(therapist.subscribe(_ => { userUpdated = true }))
-    storeSubscriptions.push(servicePrice.subscribe(_ => { userUpdated = true }))
-    storeSubscriptions.push(preferredServices.subscribe(_ => { userUpdated = true }))
-    userUpdated = false
+    user.initUpdated()
+    open = !isAuthorValid($user.author) || !isTherapistValid($user.therapist) ||
+      !isServicePriceValid($user.servicePrice) || !isPreferredServicesValid($user.preferredServices)
   })
 
   onDestroy(() => {
@@ -92,20 +78,26 @@
     )
 
     if (validClose) {
-      if (!userUpdated) {
+      if (!user.isUpdated()) {
         open = false
-        userUpdated = false
         return
       }
 
-      if ($terrapeuteUserID) {
+      if ($user.terrapeuteUserID) {
         $loading = true
 
-        saveUser($terrapeuteUserID, $author, $therapist, $servicePrice, $preferredServices, $patients)
+        saveUser(
+          $user.terrapeuteUserID,
+          $user.author,
+          $user.therapist,
+          $user.servicePrice,
+          $user.preferredServices,
+          $patients
+        )
           .then((_) => {
             open = false
             successPatchSnackbar.open()
-            userUpdated = false
+            user.initUpdated()
           })
           .catch((err) => {
             console.error(err)
@@ -117,7 +109,7 @@
       } else {
         open = false
         successUpdateSnackbar.open()
-        userUpdated = false
+        user.initUpdated()
       }
     }
   }
@@ -127,8 +119,8 @@
   }
 
   function onExpansionPanelSetMounted() {
-    if ($terrapeuteUserID) {
-      userUpdated = false
+    if ($user.terrapeuteUserID) {
+      user.initUpdated()
       onClose()
     }
   }
@@ -146,7 +138,7 @@
   <header class="mdc-drawer__header">
     <div>
       <h1 class="mdc-drawer__title">Vos informations</h1>
-      <h2 class="mdc-drawer__subtitle">{$author.name}</h2>
+      <h2 class="mdc-drawer__subtitle">{$user.author.name}</h2>
     </div>
     <IconButton title="Fermer et annuler les modifications" on:click={onClose}>
       close
