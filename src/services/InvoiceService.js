@@ -1,4 +1,11 @@
-export async function sendInvoice(author, therapist, patient, servicePrice, services) {
+export async function sendInvoice(
+  terrapeuteID,
+  author,
+  therapist,
+  patient,
+  servicePrice,
+  services
+) {
   const APIServices = services.map(e => ({ ...e }))
 
   APIServices.forEach(service => {
@@ -15,6 +22,9 @@ export async function sendInvoice(author, therapist, patient, servicePrice, serv
     services: APIServices,
     timestamp: Date.now()
   }
+
+  if (terrapeuteID)
+    invoiceContent.terrapeuteID = terrapeuteID
 
   delete invoiceContent.patient.id
 

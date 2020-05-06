@@ -1,10 +1,9 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { cubicOut } from 'svelte/easing'
 
-  import { user } from '../../js/store'
-  import { growShrink } from '../../js/transitions'
-  import { range, getServiceLightLabel } from '../../js/utils'
+  import { totalDuration, user } from '../../js/store'
+  import { customFade, growShrink } from '../../js/transitions'
+  import { range, getServiceHeight, getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
   import DurationList from '../DurationList/DurationList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -12,7 +11,6 @@
 
   export let service
   export let serviceEditModeId
-  export let totalDuration
   export let maxDuration
 
   let serviceElement
@@ -21,11 +19,8 @@
   const dispatch = createEventDispatcher()
 
   $: editMode = service.id === serviceEditModeId
-  $: if (!editMode) {
-    serviceHeight = (20 * 12) * (service.duration / totalDuration) > 36
-      ? (20 * 12) * (service.duration / totalDuration)
-      : 36
-  }
+  $: if (!editMode)
+    serviceHeight = getServiceHeight(service.duration, $totalDuration)
   $: durations = [...range(5, 60, 5), 75, 90]
     .filter(duration => duration <= (maxDuration + service.duration))
 
@@ -55,26 +50,8 @@
     ).color
   }
 
-  function fade(node) {
-    const style = getComputedStyle(node)
-    const mt = parseFloat(style.marginTop)
-    const h = parseFloat(style.height)
-    const o = +style.opacity
-
-    serviceHeight = h + 2 * 16
-    serviceElement.style.setProperty('--service-height', `${h + 2 * 16}px`)
-
-    return {
-      duration: 400,
-      easing: cubicOut,
-      css: t => {
-        return `
-        opacity: ${t * o};
-        margin-top: ${t * mt}px;
-        height: ${t * h}px;
-      `
-      }
-    }
+  function _customFade(node) {
+    customFade(node, serviceHeight, serviceElement)
   }
 </script>
 
@@ -101,12 +78,12 @@
         </IconButton>
       </div>
     {:else}
-      <form bind:this={serviceFormElement} class="aposto-form" transition:fade
+      <form bind:this={serviceFormElement} class="aposto-form" transition:_customFade
         on:submit|preventDefault={onCloseEditService}>
         <PreferredServiceList selectedServiceCode={service.code}
           on:selectedService={onSelectedService} />
-        <DurationList bind:selectedDuration={service.duration}
-          selectedServiceColor={service.color} {durations} />
+        <DurationList bind:selectedDuration={service.duration} selectedServiceColor={service.color}
+          {durations} />
       </form>
     {/if}
   </div>

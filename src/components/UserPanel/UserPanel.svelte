@@ -83,11 +83,11 @@
         return
       }
 
-      if ($user.terrapeuteUserID) {
+      if ($user.terrapeuteID) {
         $loading = true
 
         saveUser(
-          $user.terrapeuteUserID,
+          $user.terrapeuteID,
           $user.author,
           $user.therapist,
           $user.servicePrice,
@@ -119,7 +119,7 @@
   }
 
   function onExpansionPanelSetMounted() {
-    if ($user.terrapeuteUserID) {
+    if ($user.terrapeuteID) {
       user.initUpdated()
       onClose()
     }

@@ -4,7 +4,7 @@ import { serviceColors } from './utils'
 
 export function initUser() {
   const defaultUser = {
-    terrapeuteUserID: null,
+    terrapeuteID: null,
     author: {
       name: '',
       street: '',
@@ -54,6 +54,7 @@ export function initUser() {
 
 export const user = initUser()
 export const patients = writable([])
+export const totalDuration = writable(0)
 export const selectedServices = writable([])
 
 export const loading = writable(false)

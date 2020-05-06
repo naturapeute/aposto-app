@@ -35,7 +35,7 @@
           $user.therapist.ZIP = body.offices[0].zipCode
         }
 
-        $user.terrapeuteUserID = body.id
+        $user.terrapeuteID = body.id
 
         if (body.extraData) {
           if (body.extraData.author) {

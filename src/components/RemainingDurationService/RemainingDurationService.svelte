@@ -1,17 +1,17 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
+  import { totalDuration } from '../../js/store'
   import { growShrink } from '../../js/transitions'
+  import { getServiceHeight } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
 
-  export let totalDuration
   export let remainingDuration
 
   let serviceRemainingElement
   const dispatch = createEventDispatcher()
 
-  $: remainingHeight = (20 * 12) * (remainingDuration / totalDuration) > 36
-    ? (20 * 12) * (remainingDuration / totalDuration) : 36
+  $: remainingHeight = getServiceHeight(remainingDuration, $totalDuration)
 
   function onAddService() {
     dispatch('addService')

@@ -68,6 +68,10 @@ export function range(start, end, step) {
   return Array.from(Array(length), (x, index) => start + index * step)
 }
 
+export function getServiceHeight(serviceDuration, totalDuration) {
+  return Math.max((20 * 12) * (serviceDuration / totalDuration), 36)
+}
+
 export const serviceCodes = [
   { code: 1003, lightLabel: 'Acupressure' },
   { code: 1004, lightLabel: 'Acupuncture' },

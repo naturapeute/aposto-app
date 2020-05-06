@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import { loading, selectedServices, user } from '../../js/store'
+  import { loading, selectedServices, totalDuration, user } from '../../js/store'
   import { sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
@@ -44,7 +44,14 @@
     askConfirm = false
     $loading = true
 
-    sendInvoice($user.author, $user.therapist, patient, $user.servicePrice, $selectedServices)
+    sendInvoice(
+      $user.terrapeuteID || '',
+      $user.author,
+      $user.therapist,
+      patient,
+      $user.servicePrice,
+      $selectedServices
+    )
       .then(() => {
         successSend = true
       })
@@ -60,6 +67,7 @@
   function onNewInvoice() {
     patient = null
     $selectedServices = []
+    $totalDuration = 0
     askConfirm = false
     successSend = false
   }

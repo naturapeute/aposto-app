@@ -67,11 +67,11 @@
       patientUpdateMode = false
     }
 
-    $loading = true
+    if ($user.terrapeuteID) {
+      $loading = true
 
-    if ($user.terrapeuteUserID) {
       saveUser(
-        $user.terrapeuteUserID,
+        $user.terrapeuteID,
         $user.author,
         $user.therapist,
         $user.servicePrice,

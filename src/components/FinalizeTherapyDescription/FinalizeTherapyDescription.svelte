@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import { selectedServices, user } from '../../js/store'
+  import { selectedServices, totalDuration, user } from '../../js/store'
   import { getDurationLabel, range } from '../../js/utils'
   import DurationList from '../DurationList/DurationList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -9,13 +9,12 @@
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
 
   const durations = [...range(30, 60, 5), 75, 90, 105, 120]
-  let totalDuration = 0
   let totalDurationEditMode = true
   let serviceIdCounter = 0
   let serviceEditModeId = -1
 
   $: usedDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
-  $: remainingDuration = totalDuration - usedDuration
+  $: remainingDuration = $totalDuration - usedDuration
 
   $: $selectedServices.map(service => {
     if (service.id === undefined)
@@ -62,16 +61,16 @@
   }
 </script>
 
-<div class="finalize-p" class:total-duration={totalDuration}>
+<div class="finalize-p" class:total-duration={$totalDuration}>
   <i class="material-icons-outlined">schedule</i>
-  {#if totalDurationEditMode}
+  {#if !$totalDuration || totalDurationEditMode}
     <form class="aposto-form" on:submit|preventDefault in:slide>
-      <DurationList bind:selectedDuration={totalDuration} selectedServiceColor="#68b246" {durations}
+      <DurationList bind:selectedDuration={$totalDuration} selectedServiceColor="#68b246" {durations}
         on:durationSelected={onTotalDurationSelected} noIcon />
     </form>
   {:else}
     <strong class="typography--button-inline">
-      {getDurationLabel(totalDuration)}
+      {getDurationLabel($totalDuration)}
     </strong>
     <IconButton title="Modifier la durée totale de la séance" on:click={onEditTotalDuration}>
       edit
@@ -80,11 +79,11 @@
 </div>
 <ul class="therapy-description">
   {#if remainingDuration}
-    <RemainingDurationService {totalDuration} {remainingDuration} on:addService={onAddService} />
+    <RemainingDurationService {remainingDuration} on:addService={onAddService} />
   {/if}
   {#each [...$selectedServices].reverse() as service, i (service.id)}
-    <ServiceDescription bind:service bind:serviceEditModeId {totalDuration}
-      maxDuration={remainingDuration} on:deleteService={onDeleteService} />
+    <ServiceDescription bind:service bind:serviceEditModeId maxDuration={remainingDuration}
+      on:deleteService={onDeleteService} />
   {/each}
 </ul>
 
