@@ -3,12 +3,15 @@
 
   import { selectedServices, user } from '../../js/store'
   import { growShrink } from '../../js/transitions'
+  import { getDurationLabel, range } from '../../js/utils'
+  import DurationList from '../DurationList/DurationList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
   import RemainingDurationService from '../RemainingDurationService/RemainingDurationService.svelte'
   import ServiceDescription from '../ServiceDescription/ServiceDescription.svelte'
-  import TextField from '../TextField/TextField.svelte'
 
+  const durations = [...range(30, 60, 5), 75, 90, 105, 120]
   let totalDuration = 0
+  let totalDurationEditMode = true
   let serviceIdCounter = 0
   let serviceEditModeId = -1
 
@@ -31,6 +34,14 @@
 
     return service
   })
+
+  function onTotalDurationSelected() {
+    totalDurationEditMode = false
+  }
+
+  function onEditTotalDuration() {
+    totalDurationEditMode = true
+  }
 
   function onAddService() {
     $selectedServices.push({
@@ -55,10 +66,19 @@
 
 <div class="finalize-p total-duration">
   <i class="material-icons-outlined">schedule</i>
-  <form class="aposto-form" on:submit|preventDefault transition:slide>
-    <TextField type="number" bind:value={totalDuration} fieldID="total-duration"
-      className="total-duration-input" min={usedDuration} step="5" outlined noLabel />
-  </form>
+  {#if totalDurationEditMode}
+    <form class="aposto-form" on:submit|preventDefault in:slide>
+      <DurationList bind:selectedDuration={totalDuration} selectedServiceColor="#68b246" {durations}
+        on:durationSelected={onTotalDurationSelected} noIcon />
+    </form>
+  {:else}
+    <strong class="typography--button-inline">
+      {getDurationLabel(totalDuration)}
+    </strong>
+    <IconButton title="Modifier la durée totale de la séance" on:click={onEditTotalDuration}>
+      edit
+    </IconButton>
+  {/if}
 </div>
 <ul class="therapy-description">
   {#if $selectedServices.length < 5}

@@ -62,6 +62,12 @@ export function getDateInput(timestamp) {
   return `${date.getFullYear()}-${month}-${day}`
 }
 
+export function range(start, end, step) {
+  const length = Math.floor((end - start) / step) + 1
+
+  return Array.from(Array(length), (x, index) => start + index * step)
+}
+
 export const serviceCodes = [
   { code: 1003, lightLabel: 'Acupressure' },
   { code: 1004, lightLabel: 'Acupuncture' },

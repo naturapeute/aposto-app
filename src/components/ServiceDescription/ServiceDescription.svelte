@@ -4,7 +4,7 @@
 
   import { user } from '../../js/store'
   import { growShrink } from '../../js/transitions'
-  import { getServiceLightLabel } from '../../js/utils'
+  import { range, getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
   import DurationList from '../DurationList/DurationList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -14,6 +14,7 @@
   export let serviceEditModeId
   export let totalDuration
 
+  const durations = [...range(5, 60, 5), 75, 90]
   let serviceElement
   let serviceFormElement
   let serviceHeight
@@ -102,8 +103,8 @@
         on:submit|preventDefault={onCloseEditService}>
         <PreferredServiceList selectedServiceCode={service.code}
           on:selectedService={onSelectedService} />
-        <DurationList bind:selectedServiceDuration={service.duration}
-          selectedServiceColor={service.color} />
+        <DurationList bind:selectedDuration={service.duration}
+          selectedServiceColor={service.color} {durations} />
       </form>
     {/if}
   </div>
