@@ -2,7 +2,6 @@
   import { slide } from 'svelte/transition'
 
   import { selectedServices, user } from '../../js/store'
-  import { growShrink } from '../../js/transitions'
   import { getDurationLabel, range } from '../../js/utils'
   import DurationList from '../DurationList/DurationList.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -16,8 +15,7 @@
   let serviceEditModeId = -1
 
   $: usedDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
-  $: if (usedDuration > totalDuration) totalDuration = usedDuration
-  $: remainingDuration = totalDuration > usedDuration ? totalDuration - usedDuration : 0
+  $: remainingDuration = totalDuration - usedDuration
 
   $: $selectedServices.map(service => {
     if (service.id === undefined)
@@ -64,7 +62,7 @@
   }
 </script>
 
-<div class="finalize-p total-duration">
+<div class="finalize-p" class:total-duration={totalDuration}>
   <i class="material-icons-outlined">schedule</i>
   {#if totalDurationEditMode}
     <form class="aposto-form" on:submit|preventDefault in:slide>
@@ -81,17 +79,8 @@
   {/if}
 </div>
 <ul class="therapy-description">
-  {#if $selectedServices.length < 5}
-    <li class="service service-add" transition:growShrink>
-      <div class="service-timeline">
-        <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
-          add
-        </IconButton>
-      </div>
-    </li>
-  {/if}
   {#if remainingDuration}
-    <RemainingDurationService {totalDuration} {remainingDuration} />
+    <RemainingDurationService {totalDuration} {remainingDuration} on:addService={onAddService} />
   {/if}
   {#each [...$selectedServices].reverse() as service, i (service.id)}
     <ServiceDescription bind:service bind:serviceEditModeId {totalDuration}

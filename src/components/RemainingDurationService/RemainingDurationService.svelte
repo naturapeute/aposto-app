@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
+
   import { growShrink } from '../../js/transitions'
   import { getDurationLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
@@ -7,8 +9,14 @@
   export let remainingDuration
 
   let serviceRemainingElement
+  const dispatch = createEventDispatcher()
+
   $: remainingHeight = (20 * 12) * (remainingDuration / totalDuration) > 36
     ? (20 * 12) * (remainingDuration / totalDuration) : 36
+
+  function onAddService() {
+    dispatch('addService')
+  }
 </script>
 
 <li bind:this={serviceRemainingElement} class="service service-remaining"
@@ -19,7 +27,7 @@
   <div class="service-control-container">
     <div class="service-label-container">
       <Chip className="service-label" title="{getDurationLabel(remainingDuration)} à répartir..."
-        color="#6c757d">
+        leadingIcon="spa" trailingIcon="add" color="#9e9e9e" on:click={onAddService}>
         {getDurationLabel(remainingDuration)} à répartir...
       </Chip>
     </div>
