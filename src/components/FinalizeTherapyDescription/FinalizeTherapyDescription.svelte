@@ -36,7 +36,7 @@
     $selectedServices.push({
       id: serviceIdCounter++,
       code: $user.preferredServices[0].code,
-      duration: remainingDuration,
+      duration: remainingDuration || 5,
       color: $user.preferredServices[0].color
     })
     serviceEditModeId = serviceIdCounter - 1
@@ -53,7 +53,7 @@
   }
 </script>
 
-<div class="finalize-p" class:total-duration={remainingDuration || usedDuration}>
+<div class="finalize-p total-duration">
   <i class="material-icons-outlined">schedule</i>
   <form class="aposto-form" on:submit|preventDefault transition:slide>
     <TextField type="number" bind:value={totalDuration} fieldID="total-duration"
@@ -61,7 +61,7 @@
   </form>
 </div>
 <ul class="therapy-description">
-  {#if remainingDuration && $selectedServices.length < 5}
+  {#if $selectedServices.length < 5}
     <li class="service service-add" transition:growShrink>
       <div class="service-timeline">
         <IconButton title="Ajouter une nouvelle thérapie" on:click={onAddService}>
