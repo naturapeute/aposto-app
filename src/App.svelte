@@ -1,9 +1,9 @@
 <script>
-  import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
   import FinalizeView from './components/FinalizeView/FinalizeView.svelte'
+  import HeaderPanel from './components/HeaderPanel/HeaderPanel.svelte'
 </script>
 
-<HeaderPanel>Clôture de votre séance</HeaderPanel>
+<HeaderPanel>Aposto - Édition de votre facture</HeaderPanel>
 <main>
   <FinalizeView />
 </main>
