@@ -13,8 +13,8 @@
   export let service
   export let serviceEditModeId
   export let totalDuration
+  export let maxDuration
 
-  const durations = [...range(5, 60, 5), 75, 90]
   let serviceElement
   let serviceFormElement
   let serviceHeight
@@ -26,6 +26,8 @@
       ? (20 * 12) * (service.duration / totalDuration)
       : 36
   }
+  $: durations = [...range(5, 60, 5), 75, 90]
+    .filter(duration => duration <= (maxDuration + service.duration))
 
   function onMaybeClickOut(e) {
     if (editMode && !e.target.closest('.service-label-container') &&

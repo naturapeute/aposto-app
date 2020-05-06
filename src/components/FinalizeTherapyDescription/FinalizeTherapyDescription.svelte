@@ -95,7 +95,7 @@
   {/if}
   {#each [...$selectedServices].reverse() as service, i (service.id)}
     <ServiceDescription bind:service bind:serviceEditModeId {totalDuration}
-      on:deleteService={onDeleteService} />
+      maxDuration={remainingDuration} on:deleteService={onDeleteService} />
   {/each}
 </ul>
 
