@@ -33,6 +33,9 @@
   })
 
   function onTotalDurationSelected() {
+    if (totalDuration.hasReduced())
+      $selectedServices = []
+
     totalDurationEditMode = false
   }
 

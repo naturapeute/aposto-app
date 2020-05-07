@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 
 import { serviceColors } from './utils'
 
-export function initUser() {
+function userCustomStore() {
   const defaultUser = {
     terrapeuteID: null,
     author: {
@@ -28,8 +28,8 @@ export function initUser() {
       { code: 1200, color: serviceColors[0] }
     ]
   }
-  let updated = false
   let actualValue = JSON.parse(JSON.stringify(defaultUser))
+  let updated = false
 
   const { subscribe, set, update } = writable(defaultUser)
 
@@ -52,9 +52,32 @@ export function initUser() {
   return { subscribe, set: setOnChange, update, initUpdated, isUpdated }
 }
 
-export const user = initUser()
+function totalDurationCustomStore(initValue) {
+  let actualValue = initValue
+  let reduced = false
+
+  const { subscribe, set, update } = writable(actualValue)
+
+  function hasReduced() {
+    return reduced
+  }
+
+  function setOnChange(newValue) {
+    if (newValue < actualValue)
+      reduced = true
+    else
+      reduced = false
+
+    actualValue = newValue
+    set(newValue)
+  }
+
+  return { subscribe, set: setOnChange, update, hasReduced }
+}
+
+export const user = userCustomStore()
 export const patients = writable([])
-export const totalDuration = writable(0)
+export const totalDuration = totalDurationCustomStore(0)
 export const selectedServices = writable([])
 
 export const loading = writable(false)
