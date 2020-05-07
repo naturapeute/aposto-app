@@ -25,7 +25,7 @@
   }
 </script>
 
-<form class="aposto-form" on:submit|preventDefault transition:slide>
+<form class="aposto-form" on:submit|preventDefault transition:slide|local>
   <TextField bind:value={filterService} fieldID="service-search"
     placeholder="Rechercher une thérapie..." outlined noAutoComplete>
     Thérapie

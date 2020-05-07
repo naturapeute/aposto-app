@@ -31,7 +31,7 @@ function userCustomStore() {
   let actualValue = JSON.parse(JSON.stringify(defaultUser))
   let updated = false
 
-  const { subscribe, set, update } = writable(defaultUser)
+  const { subscribe, set, update } = writable(JSON.parse(JSON.stringify(defaultUser)))
 
   function initUpdated() {
     updated = false
@@ -39,6 +39,11 @@ function userCustomStore() {
 
   function isUpdated() {
     return updated
+  }
+
+  function logOut() {
+    actualValue = JSON.parse(JSON.stringify(defaultUser))
+    set(JSON.parse(JSON.stringify(defaultUser)))
   }
 
   function setOnChange(newValue) {
@@ -49,7 +54,7 @@ function userCustomStore() {
     }
   }
 
-  return { subscribe, set: setOnChange, update, initUpdated, isUpdated }
+  return { subscribe, set: setOnChange, update, initUpdated, isUpdated, logOut }
 }
 
 function totalDurationCustomStore(initValue) {

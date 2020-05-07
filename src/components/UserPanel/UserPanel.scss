@@ -26,6 +26,14 @@
   :global(.drawer-submit-button) {
     display: none;
   }
+
+  .log-out-button-wrapper {
+    padding: 16px;
+
+    :global(.mdc-button) {
+      width: 100%;
+    }
+  }
 }
 
 @media (min-width: $large-width-breakpoint) {

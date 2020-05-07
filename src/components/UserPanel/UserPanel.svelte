@@ -14,6 +14,7 @@
   import AuthenticationForm
     from '../AuthenticationForm/AuthenticationForm.svelte'
   import AuthorFormExpansionPanel from '../AuthorFormExpansionPanel/AuthorFormExpansionPanel.svelte'
+  import Button from '../Button/Button.svelte'
   import ExpansionPanelSet from '../ExpansionPanelSet/ExpansionPanelSet.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
   import PreferredServicesFormExpansionPanel
@@ -132,6 +133,11 @@
       formExpansionPanel.instance.askClose()
     })
   }
+
+  function onLogOut() {
+    authenticationMode = true
+    user.logOut()
+  }
 </script>
 
 <aside bind:this={element} class="mdc-drawer mdc-drawer--modal" dismissible={false}>
@@ -157,6 +163,17 @@
             expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
         {/each}
       </ExpansionPanelSet>
+      <div class="log-out-button-wrapper">
+        {#if $user.terrapeuteID}
+          <Button title="Se déconnecter du réseau Terrapeute" on:click={onLogOut}>
+            Se déconnecter
+          </Button>
+        {:else}
+          <Button title="Quitter le mode démo" on:click={onLogOut}>
+            Quitter le mode démo
+          </Button>
+        {/if}
+      </div>
     {/if}
   </div>
 </aside>

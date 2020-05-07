@@ -17,7 +17,7 @@
     <slot name="summary"></slot>
   </div>
   {#if open}
-    <div class="expansion-panel-content" transition:slide>
+    <div class="expansion-panel-content" transition:slide|local>
       <slot name="content"></slot>
     </div>
   {/if}
