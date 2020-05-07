@@ -1,15 +1,13 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import { loading, patients, user } from '../../js/store'
+  import { loading, patients, selectedPatient, user } from '../../js/store'
   import { saveUser } from '../../services/UserService'
   import IconButton from '../IconButton/IconButton.svelte'
   import PatientForm from '../PatientForm/PatientForm.svelte'
   import PatientList from '../PatientList/PatientList.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import TextField from '../TextField/TextField.svelte'
-
-  export let patient = null
 
   let filterPatient = ''
   let patientSearchMode = false
@@ -29,7 +27,7 @@
   }
 
   function onCloseSearch() {
-    if (patient)
+    if ($selectedPatient)
       patientSearchMode = false
 
     patientCreateMode = false
@@ -79,7 +77,7 @@
         $patients
       )
         .then((_) => {
-          patient = { ...newPatient }
+          $selectedPatient = { ...newPatient }
           onCloseSearch()
           succeedPatchSnackbar.open()
         })
@@ -91,19 +89,19 @@
           $loading = false
         })
     } else {
-      patient = { ...newPatient }
+      $selectedPatient = { ...newPatient }
       onCloseSearch()
     }
   }
 </script>
 
-{#if patient}
+{#if $selectedPatient}
   <p class="finalize-p">
     <i class="material-icons-outlined">face</i>
     <strong class="typography--button-inline">
-      {patient.firstName} {patient.lastName}
+      {$selectedPatient.firstName} {$selectedPatient.lastName}
     </strong>
-    <IconButton title="Mettre à jour les informations de {patient.firstName} {patient.lastName}"
+    <IconButton title="Mettre à jour les informations de {$selectedPatient.firstName} {$selectedPatient.lastName}"
       on:click={onUpdatePatient}>
       edit
     </IconButton>
@@ -112,7 +110,7 @@
     </IconButton>
   </p>
 {/if}
-{#if !patient || patientSearchMode}
+{#if !$selectedPatient || patientSearchMode}
   <form class="aposto-form patient-search-form" on:submit|preventDefault transition:slide>
     <TextField bind:value={filterPatient} fieldID="patient-search" trailingIcon="close"
       placeholder="Rechercher un patient..."
@@ -121,12 +119,12 @@
     </TextField>
   </form>
   {#if !patientCreateMode}
-    <PatientList {filterPatient} bind:patient on:patientSelected={onCloseSearch}
+    <PatientList {filterPatient} on:patientSelected={onCloseSearch}
       on:createPatient={onCreatePatient} />
   {/if}
 {/if}
 {#if patientUpdateMode || patientCreateMode}
-  <PatientForm {filterPatient} patient={patientUpdateMode ? patient : null}
+  <PatientForm {filterPatient} updateMode={patientUpdateMode}
     on:patientUpdatedOrCreated={onPatientUpdatedOrCreated} />
 {/if}
 

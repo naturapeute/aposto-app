@@ -83,6 +83,7 @@ function totalDurationCustomStore(initValue) {
 export const user = userCustomStore()
 export const patients = writable([])
 export const totalDuration = totalDurationCustomStore(0)
+export const selectedPatient = writable(null)
 export const selectedServices = writable([])
 
 export const loading = writable(false)

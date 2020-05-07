@@ -15,22 +15,22 @@
 
   $: usedDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
   $: remainingDuration = $totalDuration - usedDuration
+  $: $selectedServices = replaceDeletedPreferredServices($selectedServices, $user.preferredServices)
 
-  $: $selectedServices.map(service => {
-    if (service.id === undefined)
-      service.id = serviceIdCounter++
+  function replaceDeletedPreferredServices(selectedServices, preferredServices) {
+    return selectedServices.map(service => {
+      const matchingPreferredService = preferredServices.find(
+        preferredService => service.code === preferredService.code
+      )
 
-    const matchingPreferredService = $user.preferredServices.find(
-      preferredService => service.code === preferredService.code
-    )
+      if (!matchingPreferredService) {
+        service.code = preferredServices[0].code
+        service.color = preferredServices[0].color
+      }
 
-    if (!matchingPreferredService) {
-      service.code = $user.preferredServices[0].code
-      service.color = $user.preferredServices[0].color
-    }
-
-    return service
-  })
+      return service
+    })
+  }
 
   function onTotalDurationSelected() {
     if (totalDuration.hasReduced())

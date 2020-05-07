@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
 
-  import { loading, selectedServices, totalDuration, user } from '../../js/store'
+  import { loading, selectedPatient, selectedServices, totalDuration, user } from '../../js/store'
   import { sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
@@ -12,8 +12,6 @@
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
 
-  export let patient = null
-
   let errorSnackbar
   let confirmDialog
   let askConfirm = false
@@ -23,7 +21,7 @@
     (total, service) => total + (service.duration * $user.servicePrice / 60),
     0
   )
-  $: validationError = getValidationError(patient, $totalDuration, $selectedServices)
+  $: validationError = getValidationError($selectedPatient, $totalDuration, $selectedServices)
 
   function getValidationError(patient, totalDuration, selectedServices) {
     if (!patient)
@@ -67,7 +65,7 @@
       $user.terrapeuteID || '',
       $user.author,
       $user.therapist,
-      patient,
+      $selectedPatient,
       $user.servicePrice,
       $selectedServices
     )
@@ -84,7 +82,7 @@
   }
 
   function onNewInvoice() {
-    patient = null
+    $selectedPatient = null
     $selectedServices = []
     $totalDuration = 0
     askConfirm = false
@@ -97,7 +95,7 @@
 <form on:submit|preventDefault={onSendInvoice}>
   <ul class="card-set">
     <li class="mdc-card">
-      <FinalizePatient bind:patient />
+      <FinalizePatient />
     </li>
     <li class="mdc-card">
       <FinalizeTherapyDescription />
@@ -144,13 +142,11 @@
   </Snackbar>
 </form>
 
-{#if patient}
-  <FinalizeConfirmDialog bind:this={confirmDialog} {patient}
-    on:confirm={onConfirmSend} />
-{/if}
+<FinalizeConfirmDialog bind:this={confirmDialog}
+  on:confirm={onConfirmSend} />
 
-{#if patient && successSend}
-  <SuccessSendScrim {patient} on:newInvoice={onNewInvoice} />
+{#if successSend}
+  <SuccessSendScrim on:newInvoice={onNewInvoice} />
 {/if}
 
 <style src="FinalizeView.scss"></style>

@@ -1,9 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
+  import { selectedPatient } from '../../js/store'
   import Button from '../Button/Button.svelte'
-
-  export let patient
 
   const dispatch = createEventDispatcher()
 
@@ -18,7 +17,7 @@
   <p>
     Votre nouvelle facture a bien été envoyée à <strong
       class="typography--button-inline">
-      {patient.firstName} {patient.lastName}
+      {$selectedPatient.firstName} {$selectedPatient.lastName}
     </strong>.
   </p>
   <p>Vous devriez recevoir une copie dans votre boîte mail sous peu.</p>

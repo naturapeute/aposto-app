@@ -1,12 +1,10 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { user } from '../../js/store'
+  import { selectedPatient, user } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import Checkbox from '../Checkbox/Checkbox.svelte'
   import Dialog from '../Dialog/Dialog.svelte'
-
-  export let patient
 
   export function open() {
     dialog.open()
@@ -33,7 +31,9 @@
     <p>
       Cette action va générer la facture et l'envoyer à
       <strong class="typography--button-inline">
-        {patient.firstName} {patient.lastName} ({patient.email})
+        {#if $selectedPatient}
+          {$selectedPatient.firstName} {$selectedPatient.lastName} ({$selectedPatient.email})
+        {/if}
       </strong>
       par mail.
     </p>

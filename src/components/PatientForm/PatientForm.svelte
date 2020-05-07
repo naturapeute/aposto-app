@@ -2,17 +2,18 @@
   import { createEventDispatcher } from 'svelte'
   import { slide } from 'svelte/transition'
 
+  import { selectedPatient } from '../../js/store'
   import { genderOptions, getCantonOptions, getDateInput } from '../../js/utils'
   import Button from '../Button/Button.svelte'
   import Select from '../Select/Select.svelte'
   import TextField from '../TextField/TextField.svelte'
 
   export let filterPatient
-  export let patient = null
+  export let updateMode
 
-  const localPatient = patient ? {
-    ...patient,
-    birthdate: getDateInput(patient.birthdate)
+  const localPatient = updateMode ? {
+    ...$selectedPatient,
+    birthdate: getDateInput($selectedPatient.birthdate)
   } : {
     firstName: filterPatient.split(' ')[0],
     lastName: filterPatient.split(' ').slice(1).join(' '),
@@ -72,7 +73,7 @@
       Canton
     </Select>
   </div>
-  {#if patient}
+  {#if updateMode}
     <Button type="submit"
       title="Mettre à jour les informations de {localPatient.firstName} {localPatient.lastName}"
       unelevated>
