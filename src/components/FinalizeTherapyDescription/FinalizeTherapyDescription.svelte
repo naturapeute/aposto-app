@@ -47,6 +47,7 @@
       duration: remainingDuration || 5,
       color: $user.preferredServices[0].color
     })
+
     serviceEditModeId = serviceIdCounter - 1
   }
 

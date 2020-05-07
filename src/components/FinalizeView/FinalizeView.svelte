@@ -23,6 +23,25 @@
     (total, service) => total + (service.duration * $user.servicePrice / 60),
     0
   )
+  $: validationError = getValidationError(patient, $totalDuration, $selectedServices)
+
+  function getValidationError(patient, totalDuration, selectedServices) {
+    if (!patient)
+      return 'Veuillez sélectionner un patient pour finaliser votre facture.'
+
+    if (!totalDuration)
+      return 'Veuillez saisir la durée de la séance et la répartir entre les différentes thérapies réalisées.'
+
+    if (!selectedServices.length)
+      return 'Veuillez sélectionner au moins une thérapie.'
+
+    const usedDuration = selectedServices.reduce((total, service) => total + service.duration, 0)
+
+    if (usedDuration !== totalDuration)
+      return 'Veuillez répartir l\'intégralité de votre séance entre les différentes thérapies réalisées.'
+
+    return ''
+  }
 
   function onMaybeClickOut(e) {
     if (askConfirm && !e.target.closest('.confirm-button-container'))
@@ -97,11 +116,11 @@
       <div class="send-button-container" transition:slide="{{ duration: 400 }}">
         <IconButton className={$loading ? 'loading' : ''} type="submit"
           title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
-          fab disabled={!patient || $loading}>
+          fab disabled={validationError || $loading}>
           send
         </IconButton>
-        <p class="send-error-text" hidden={patient}>
-          Veuillez sélectionner un patient pour finaliser votre facture.
+        <p class="send-error-text" hidden={!validationError}>
+          {validationError}
         </p>
       </div>
     {:else}
