@@ -97,26 +97,30 @@
     <li class="mdc-card">
       <FinalizePatient />
     </li>
-    <li class="mdc-card">
-      <FinalizeTherapyDescription />
-    </li>
-    <li class="mdc-card">
-      <p class="finalize-p">
-        <i class="material-icons-outlined">monetization_on</i>
-        <strong class="typography--button-inline">
-          {totalAmount.toFixed(2)}CHF
-        </strong>
-      </p>
-    </li>
+    {#if $selectedPatient}
+      <li class="mdc-card">
+        <FinalizeTherapyDescription />
+      </li>
+      <li class="mdc-card">
+        <p class="finalize-p">
+          <i class="material-icons-outlined">monetization_on</i>
+          <strong class="typography--button-inline">
+            {totalAmount.toFixed(2)}CHF
+          </strong>
+        </p>
+      </li>
+    {/if}
   </ul>
   <div class="submit-buttons-container">
     {#if !askConfirm}
       <div class="send-button-container" transition:slide="{{ duration: 400 }}">
-        <IconButton className={$loading ? 'loading' : ''} type="submit"
-          title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
-          fab disabled={validationError || $loading}>
-          send
-        </IconButton>
+        {#if $selectedPatient}
+          <IconButton className={$loading ? 'loading' : ''} type="submit"
+            title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
+            fab disabled={validationError || $loading}>
+            send
+          </IconButton>
+        {/if}
         <p class="send-error-text" hidden={!validationError}>
           {validationError}
         </p>
