@@ -13,7 +13,7 @@ function loadMatomo() {
   _paq = window._paq || []
   _paq.push(['trackPageView'])
   _paq.push(['enableLinkTracking'])
-  ; (function() {
+  ; (function () {
     const u = '//stats.anonym.dev/'
     _paq.push(['setTrackerUrl', u + 'matomo.php'])
     _paq.push(['setSiteId', '5'])

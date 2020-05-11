@@ -4,9 +4,9 @@ import replace from '@rollup/plugin-replace'
 import livereload from 'rollup-plugin-livereload'
 import svelte from 'rollup-plugin-svelte'
 import { terser } from 'rollup-plugin-terser'
-import { globalStyle, scss } from 'svelte-preprocess'
 
 const production = !process.env.ROLLUP_WATCH
+const svelteConfig = require('./svelte.config')(production)
 
 export default {
   input: 'src/main.js',
@@ -17,24 +17,7 @@ export default {
     file: 'public/build/bundle.js'
   },
   plugins: [
-    svelte({
-      // enable run-time checks when not in production
-      dev: !production,
-      // we'll extract any component CSS out into
-      // a separate file - better for performance
-      css: css => {
-        css.write('public/build/bundle.css')
-      },
-      preprocess: [
-        scss({
-          includePaths: [
-            './src/styles',
-            './node_modules'
-          ]
-        }),
-        globalStyle()
-      ]
-    }),
+    svelte(svelteConfig),
     replace({
       // NOTE : Credits to Firthous
       // https://medium.com/@firthous.dev/how-to-setup-env-variables-to-your-svelte-js-app-c1579430f032
