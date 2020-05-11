@@ -26,7 +26,6 @@
   :global(.service) {
     display: flex;
     align-items: center;
-    transition: height 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
     height: var(--service-height);
 
     &:last-of-type :global(.service-timeline) {

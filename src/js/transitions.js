@@ -12,12 +12,10 @@ export function growShrink(node) {
   }
 }
 
-export function customFade(node, serviceElement) {
+export function customFade(node) {
   const style = getComputedStyle(node)
   const h = parseFloat(style.height)
   const o = +style.opacity
-
-  serviceElement.style.setProperty('--service-height', `${h + 2 * 16}px`)
 
   return {
     duration: 400,

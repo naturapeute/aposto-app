@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+import { tweened } from 'svelte/motion'
 
   import { totalDuration } from '../../js/store'
   import { growShrink } from '../../js/transitions'
@@ -9,9 +10,10 @@
   export let remainingDuration
 
   let serviceRemainingElement
+  const remainingHeight = tweened(0)
   const dispatch = createEventDispatcher()
 
-  $: remainingHeight = getServiceHeight(remainingDuration, $totalDuration)
+  $: remainingHeight.set(getServiceHeight(remainingDuration, $totalDuration))
 
   function onAddService() {
     dispatch('addService')
@@ -19,7 +21,7 @@
 </script>
 
 <li bind:this={serviceRemainingElement} class="service service-remaining"
-  style="--service-height: {remainingHeight}px;" transition:growShrink>
+  style="--service-height: {$remainingHeight}px;" out:growShrink>
   <div class="service-timeline">
   </div>
   <div class="service-control-container">

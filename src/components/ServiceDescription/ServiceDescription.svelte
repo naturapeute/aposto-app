@@ -1,5 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onDestroy } from 'svelte'
+  import { tweened } from 'svelte/motion'
 
   import { totalDuration, user } from '../../js/store'
   import { customFade, growShrink } from '../../js/transitions'
@@ -15,12 +16,12 @@
 
   let serviceElement
   let serviceFormElement
-  let serviceHeight
+  const serviceHeight = tweened(0)
   const dispatch = createEventDispatcher()
 
   $: editMode = service.id === serviceEditModeId
   $: if (!editMode)
-    serviceHeight = getServiceHeight(service.duration, $totalDuration)
+    serviceHeight.set(getServiceHeight(service.duration, $totalDuration))
   $: durations = [...range(5, 60, 5), 75, 90]
     .filter(duration => duration <= (maxDuration + service.duration))
 
@@ -51,15 +52,17 @@
   }
 
   function _customFade(node) {
-    return customFade(node, serviceElement)
+    serviceHeight.set(parseFloat(getComputedStyle(serviceFormElement).height) + 2 * 16)
+
+    return customFade(node)
   }
 </script>
 
 <svelte:window on:click={onMaybeClickOut} on:touchstart={onMaybeClickOut} />
 
 <li bind:this={serviceElement} class="service"
-  style="--service-color: {service.color}; --service-height: {serviceHeight}px;"
-  transition:growShrink>
+  style="--service-color: {service.color}; --service-height: {$serviceHeight}px;"
+  out:growShrink>
   <div class="service-timeline">
     <span>{service.duration}'</span>
   </div>
