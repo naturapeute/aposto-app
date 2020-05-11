@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { slide } from 'svelte/transition'
 
   import { selectedPatient } from '../../js/store'
   import { genderOptions, getCantonOptions, getDateInput } from '../../js/utils'
@@ -34,7 +33,7 @@
   }
 </script>
 
-<form class="aposto-form" on:submit|preventDefault={onPatientUpdatedOrCreated} transition:slide>
+<form class="aposto-form" on:submit|preventDefault={onPatientUpdatedOrCreated}>
   <div class="row row-xs">
     <TextField className="col-50" bind:value={localPatient.firstName} fieldID="patient-first-name"
       required>

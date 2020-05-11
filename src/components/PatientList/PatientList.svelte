@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { slide } from 'svelte/transition'
 
   import { patients, selectedPatient } from '../../js/store'
   import Chip from '../Chip/Chip.svelte'
@@ -45,7 +44,7 @@
   }
 </script>
 
-<ul class="mdc-chip-set mdc-chip-set--choice" role="grid" transition:slide>
+<ul class="mdc-chip-set mdc-chip-set--choice" role="grid">
   {#if filterPatient}
     <li class="mdc-touch-target-wrapper" on:click={onCreatePatient}>
       <Chip title="Créer le nouveau patient {filterPatient}" leadingIcon="add"

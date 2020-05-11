@@ -1,6 +1,4 @@
 <script>
-  import { slide } from 'svelte/transition'
-
   import { loading, patients, selectedPatient, user } from '../../js/store'
   import { saveUser } from '../../services/UserService'
   import IconButton from '../IconButton/IconButton.svelte'
@@ -111,7 +109,7 @@
   </p>
 {/if}
 {#if !$selectedPatient || patientSearchMode}
-  <form class="aposto-form patient-search-form" on:submit|preventDefault transition:slide>
+  <form class="aposto-form patient-search-form" on:submit|preventDefault>
     <TextField bind:value={filterPatient} fieldID="patient-search" trailingIcon="close"
       placeholder="Rechercher un patient..."
       on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount} outlined noAutoComplete>

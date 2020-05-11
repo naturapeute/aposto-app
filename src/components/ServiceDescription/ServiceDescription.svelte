@@ -51,7 +51,7 @@
   }
 
   function _customFade(node) {
-    customFade(node, serviceHeight, serviceElement)
+    return customFade(node, serviceElement)
   }
 </script>
 

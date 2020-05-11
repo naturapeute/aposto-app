@@ -1,6 +1,4 @@
 <script>
-  import { slide } from 'svelte/transition'
-
   import { selectedServices, totalDuration, user } from '../../js/store'
   import { getDurationLabel, range } from '../../js/utils'
   import DurationList from '../DurationList/DurationList.svelte'
@@ -68,7 +66,7 @@
 <div class="finalize-p" class:total-duration={$totalDuration}>
   <i class="material-icons-outlined">schedule</i>
   {#if !$totalDuration || totalDurationEditMode}
-    <form class="aposto-form" on:submit|preventDefault in:slide>
+    <form class="aposto-form" on:submit|preventDefault>
       <DurationList bind:selectedDuration={$totalDuration} selectedServiceColor="#68b246" {durations}
         on:durationSelected={onTotalDurationSelected} noIcon />
     </form>

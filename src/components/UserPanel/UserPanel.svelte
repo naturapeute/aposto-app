@@ -1,7 +1,6 @@
 <script>
   import { MDCDrawer } from '@material/drawer'
   import { onDestroy, onMount } from 'svelte'
-  import { slide } from 'svelte/transition'
 
   import { loading, patients, user } from '../../js/store'
   import {
@@ -153,9 +152,7 @@
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
     {#if authenticationMode}
-      <div transition:slide>
-        <AuthenticationForm on:done={onAuthenticationDone} />
-      </div>
+      <AuthenticationForm on:done={onAuthenticationDone} />
     {:else}
       <ExpansionPanelSet on:mounted={onExpansionPanelSetMounted}>
         {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}

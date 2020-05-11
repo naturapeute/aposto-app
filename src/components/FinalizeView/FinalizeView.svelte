@@ -1,6 +1,4 @@
 <script>
-  import { slide } from 'svelte/transition'
-
   import { loading, selectedPatient, selectedServices, totalDuration, user } from '../../js/store'
   import { sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
@@ -113,7 +111,7 @@
   </ul>
   <div class="submit-buttons-container">
     {#if !askConfirm}
-      <div class="send-button-container" transition:slide="{{ duration: 400 }}">
+      <div class="send-button-container">
         {#if $selectedPatient}
           <IconButton className={$loading ? 'loading' : ''} type="submit"
             title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
@@ -126,7 +124,7 @@
         </p>
       </div>
     {:else}
-      <div class="confirm-button-container" transition:slide="{{ duration: 400 }}">
+      <div class="confirm-button-container">
         <Button type="submit" title="Confimer l'envoi de la facture par mail au patient" icon="send"
           outlined disabled={$loading}>
           Confirmer l'envoi
