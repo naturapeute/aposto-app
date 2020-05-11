@@ -9,7 +9,7 @@
 
   const dispatch = createEventDispatcher()
 
-  $: bestMatches = getBestMatches(filterService)
+  $: bestMatches = getBestMatches(filterService, $user.preferredServices)
 
   function onSelectService(code) {
     dispatch(
@@ -18,10 +18,10 @@
     )
   }
 
-  function getBestMatches(_filterService) {
+  function getBestMatches(_filterService, preferredServices) {
     return _filterService.split(' ').reduce((scores, word) => {
       serviceCodes.forEach((service, i) => {
-        if (!$user.preferredServices.find(preferredService => preferredService.code === service.code))
+        if (!preferredServices.find(preferredService => preferredService.code === service.code))
           scores[i].score += getServiceScore(service, word)
       })
 

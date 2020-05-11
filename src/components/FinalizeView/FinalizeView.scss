@@ -1,5 +1,4 @@
 @use "aposto-theme" as *;
-@use "@material/theme";
 
 :global(.finalize-p) {
   display: flex;
@@ -59,13 +58,6 @@ $submit-button-icon-size: 32;
       width: #{$submit-button-icon-size}px;
       height: #{$submit-button-icon-size}px;
     }
-  }
-
-  .send-error-text {
-    color: theme.$error;
-    font-size: 12px;
-    text-align: center;
-    margin-bottom: 0;
   }
 }
 

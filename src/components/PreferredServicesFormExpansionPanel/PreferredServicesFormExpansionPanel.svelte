@@ -40,6 +40,9 @@
     {#if $user.preferredServices.length < 10}
       <AddPreferredServiceForm />
     {/if}
+    <p class="hint-text" hidden={$user.preferredServices.length < 10}>
+      Vous avez atteint le quota maximum de 10 thérapies préférées.
+    </p>
   </div>
 </ExpansionPanel>
 

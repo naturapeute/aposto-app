@@ -121,7 +121,7 @@
             send
           </IconButton>
         {/if}
-        <p class="send-error-text" hidden={!validationError}>
+        <p class="error-text" hidden={!validationError}>
           {validationError}
         </p>
       </div>
