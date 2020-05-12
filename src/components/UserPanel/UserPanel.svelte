@@ -2,7 +2,14 @@
   import { MDCDrawer } from '@material/drawer'
   import { onDestroy, onMount } from 'svelte'
 
-  import { loading, patients, user } from '../../js/store'
+  import {
+    loading,
+    patients,
+    user,
+    selectedPatient,
+    totalDuration,
+    selectedServices
+  } from '../../js/store'
   import {
     isAuthorValid,
     isPreferredServicesValid,
@@ -136,6 +143,9 @@
   function onLogOut() {
     authenticationMode = true
     user.logOut()
+    $selectedPatient = null
+    $totalDuration = 0
+    $selectedServices = []
   }
 </script>
 

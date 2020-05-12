@@ -66,7 +66,7 @@
 
 <li bind:this={serviceElement} class="service"
   style="--service-color: {service.color}; --service-height: {$serviceHeight}px;"
-  out:growShrink>
+  out:growShrink|local>
   <div class="service-timeline">
     <span>{service.duration}'</span>
   </div>

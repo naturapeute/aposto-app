@@ -25,7 +25,7 @@
 </script>
 
 <li bind:this={serviceRemainingElement} class="service service-remaining"
-  style="--service-height: {$remainingHeight}px;" out:growShrink>
+  style="--service-height: {$remainingHeight}px;" out:growShrink|local>
   <div class="service-timeline">
   </div>
   <div class="service-control-container">
