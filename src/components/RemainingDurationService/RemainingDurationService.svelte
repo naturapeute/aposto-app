@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-import { tweened } from 'svelte/motion'
+  import { cubicOut } from 'svelte/easing'
+  import { tweened } from 'svelte/motion'
 
   import { totalDuration } from '../../js/store'
   import { growShrink } from '../../js/transitions'
@@ -10,7 +11,10 @@ import { tweened } from 'svelte/motion'
   export let remainingDuration
 
   let serviceRemainingElement
-  const remainingHeight = tweened(0)
+  const remainingHeight = tweened(0, {
+    duration: 400,
+    easing: cubicOut
+  })
   const dispatch = createEventDispatcher()
 
   $: remainingHeight.set(getServiceHeight(remainingDuration, $totalDuration))

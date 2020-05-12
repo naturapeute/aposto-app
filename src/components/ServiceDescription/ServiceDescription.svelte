@@ -1,5 +1,6 @@
 <script>
-  import { createEventDispatcher, onDestroy } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
+  import { cubicOut } from 'svelte/easing'
   import { tweened } from 'svelte/motion'
 
   import { totalDuration, user } from '../../js/store'
@@ -16,7 +17,10 @@
 
   let serviceElement
   let serviceFormElement
-  const serviceHeight = tweened(0)
+  const serviceHeight = tweened(0, {
+    duration: 400,
+    easing: cubicOut
+  })
   const dispatch = createEventDispatcher()
 
   $: editMode = service.id === serviceEditModeId
