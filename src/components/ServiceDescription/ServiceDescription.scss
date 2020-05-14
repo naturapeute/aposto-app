@@ -1,31 +1,8 @@
 @use "aposto-theme" as *;
 
-.service-control-container {
-  flex-grow: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-
-  &.edit-mode {
-    display: unset;
-  }
-}
-
 .service-label-container {
   display: flex;
   overflow: hidden;
-
-  :global(.service-label) {
-    font-weight: 700;
-    min-width: 0;
-    flex-shrink: 100;
-
-    :global(.mdc-chip__icon) {
-      font-size: 12px;
-      width: 12px;
-      height: 12px;
-    }
-  }
 
   :global(.mdc-icon-button.service-delete) {
     margin-left: 8px;
