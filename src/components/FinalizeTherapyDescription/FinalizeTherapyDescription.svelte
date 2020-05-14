@@ -63,6 +63,11 @@
   }
 </script>
 
+{#if !$totalDuration}
+  <h2 class="mdc-typography--subtitle1">
+    Combien de temps a duré votre séance ?
+  </h2>
+{/if}
 <div class="finalize-p" class:total-duration={$totalDuration}>
   <i class="material-icons-outlined">schedule</i>
   {#if !$totalDuration || totalDurationEditMode}

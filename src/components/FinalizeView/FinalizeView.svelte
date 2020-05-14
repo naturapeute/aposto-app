@@ -22,12 +22,6 @@
   $: validationError = getValidationError($selectedPatient, $totalDuration, $selectedServices)
 
   function getValidationError(patient, totalDuration, selectedServices) {
-    if (!patient)
-      return 'Veuillez sélectionner un patient pour finaliser votre facture.'
-
-    if (!totalDuration)
-      return 'Veuillez saisir la durée de la séance et la répartir entre les différentes thérapies réalisées.'
-
     if (!selectedServices.length)
       return 'Veuillez sélectionner au moins une thérapie.'
 
@@ -99,29 +93,31 @@
       <li class="mdc-card">
         <FinalizeTherapyDescription />
       </li>
-      <li class="mdc-card">
-        <p class="finalize-p">
-          <i class="material-icons-outlined">monetization_on</i>
-          <strong class="typography--button-inline">
-            {totalAmount.toFixed(2)}CHF
-          </strong>
-        </p>
-      </li>
+      {#if totalAmount}
+        <li class="mdc-card">
+          <p class="finalize-p">
+            <i class="material-icons-outlined">monetization_on</i>
+            <strong class="typography--button-inline">
+              {totalAmount.toFixed(2)}CHF
+            </strong>
+          </p>
+        </li>
+      {/if}
     {/if}
   </ul>
   <div class="submit-buttons-container">
     {#if !askConfirm}
       <div class="send-button-container">
-        {#if $selectedPatient}
+        {#if $selectedPatient && $totalDuration}
           <IconButton className={$loading ? 'loading' : ''} type="submit"
             title="Envoyer la facture par mail au patient" fabLabel="Envoyer"
             fab disabled={validationError || $loading}>
             send
           </IconButton>
+          <p class="error-text" hidden={!validationError}>
+            {validationError}
+          </p>
         {/if}
-        <p class="error-text" hidden={!validationError}>
-          {validationError}
-        </p>
       </div>
     {:else}
       <div class="confirm-button-container">

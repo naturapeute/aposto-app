@@ -93,6 +93,11 @@
   }
 </script>
 
+{#if !$selectedPatient}
+  <h2 class="mdc-typography--subtitle1">
+    À quel patient éditez-vous cette facture ?
+  </h2>
+{/if}
 {#if $selectedPatient}
   <p class="finalize-p">
     <i class="material-icons-outlined">face</i>
@@ -113,7 +118,7 @@
     <TextField bind:value={filterPatient} fieldID="patient-search" trailingIcon="close"
       placeholder="Rechercher un patient..."
       on:trailingIconClick={onCloseSearch} on:mount={onTextFieldMount} outlined noAutoComplete>
-      Patient
+      Rechercher un patient...
     </TextField>
   </form>
   {#if !patientCreateMode}
