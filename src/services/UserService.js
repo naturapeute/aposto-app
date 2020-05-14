@@ -1,5 +1,5 @@
 export async function authenticate(email) {
-  const response = await fetch(`https://terrapeute.ch/api/therapist/${email}`, {
+  const response = await fetch(`https://naturapeute.ch/api/therapist/${email}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -32,7 +32,7 @@ export async function saveUser(
     patients: patients.map(e => ({ ...e }))
   }
 
-  const response = await fetch(`https://terrapeute.ch/api/therapist/${terrapeuteID}`, {
+  const response = await fetch(`https://naturapeute.ch/api/therapist/${terrapeuteID}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
