@@ -95,7 +95,7 @@
 
 {#if !$selectedPatient}
   <h2 class="mdc-typography--subtitle1">
-    À quel patient éditez-vous cette facture ?
+    Pour quel patient éditez-vous cette facture ?
   </h2>
 {/if}
 {#if $selectedPatient}

@@ -15,10 +15,7 @@
   let askConfirm = false
   let successSend = false
 
-  $: totalAmount = $selectedServices.reduce(
-    (total, service) => total + (service.duration * $user.servicePrice / 60),
-    0
-  )
+  $: totalAmount = ($totalDuration / 60) * $user.servicePrice
   $: validationError = getValidationError($selectedPatient, $totalDuration, $selectedServices)
 
   function getValidationError(patient, totalDuration, selectedServices) {
