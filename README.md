@@ -24,13 +24,30 @@ And that's it! The project will install all the node.js module dependencies itse
 
 In the terminal of your choice, go through the following steps:
 
-* Install the project: `npm install` _→ It installs all the needed node.js modules._<br>**Note:** You only have to run this command the first time.
+* Install the project: `npm install` _→ It installs all the needed node.js modules._
+**Note:** You only have to run this command the first time.
 * Start the project: `npm run dev` _→ It launches the Web application._
 
 You're done! The Web Application is now accessible on http://localhost:5000/. 🚀
 
 ## Building the application
 
-You can build the Web application by simply running `npm run build`.
+Then, you can build the Web application by simply running `npm run build`.
 
 You can run the newly built app with `npm run start`.
+
+## Deploying the application
+
+For the first time you are deploying the Web application, run the following commands :
+
+```bash
+> cd public
+> git init
+> git remote add origin git@github.com:etceterra/aposto-app.git
+> git fetch
+> git checkout gh-pages
+> git pull
+```
+
+Then, from the project root folder, whenever you want to deploy the Web application, simply run `npm run deploy` or `npm run build-deploy` if you want to build and deploy.
+
