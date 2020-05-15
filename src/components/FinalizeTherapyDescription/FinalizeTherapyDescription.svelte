@@ -16,18 +16,9 @@
   $: $selectedServices = replaceDeletedPreferredServices($selectedServices, $user.preferredServices)
 
   function replaceDeletedPreferredServices(selectedServices, preferredServices) {
-    return selectedServices.map(service => {
-      const matchingPreferredService = preferredServices.find(
-        preferredService => service.code === preferredService.code
-      )
-
-      if (!matchingPreferredService) {
-        service.code = preferredServices[0].code
-        service.color = preferredServices[0].color
-      }
-
-      return service
-    })
+    return selectedServices.filter(service => preferredServices.find(
+      preferredService => service.code === preferredService.code
+    ))
   }
 
   function onTotalDurationSelected() {
