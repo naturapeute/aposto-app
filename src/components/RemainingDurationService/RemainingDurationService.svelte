@@ -29,10 +29,12 @@
   <div class="service-timeline">
   </div>
   <div class="service-control-container">
-    <Chip className="service-label" title="Ajouter une thérapie" leadingIcon="spa"
-      trailingIcon="add" color="#9e9e9e" on:click={onAddService}>
-      Ajouter une thérapie
-    </Chip>
+    <div class="service-label-container">
+      <Chip className="service-label" title="Ajouter une thérapie" leadingIcon="spa"
+        trailingIcon="add" color="#9e9e9e" on:click={onAddService}>
+        Ajouter une thérapie
+      </Chip>
+    </div>
   </div>
 </li>
 
