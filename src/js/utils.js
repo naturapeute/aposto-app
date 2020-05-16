@@ -127,7 +127,6 @@ export const serviceCodes = [
   { code: 1070, lightLabel: 'Massage métamorphique' },
   { code: 1071, lightLabel: 'Moxibustion' },
   { code: 1072, lightLabel: 'Musicothérapie' },
-  { code: 1072, lightLabel: 'Musicothérapie' },
   { code: 1076, lightLabel: 'Neurofeedback' },
   { code: 1077, lightLabel: 'Acupuncture des oreilles' },
   { code: 1079, lightLabel: 'Otothérapie par les bougies' },
