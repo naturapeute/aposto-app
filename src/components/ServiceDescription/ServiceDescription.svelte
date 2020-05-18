@@ -27,11 +27,11 @@
   $: if (!editMode)
     serviceHeight.set(getServiceHeight(service.duration, $totalDuration))
   $: durations = [...range(5, maxDuration + service.duration, 5)]
+  $: serviceLightLabel = getServiceLightLabel(service.code)
 
   function onMaybeClickOut(e) {
     if (editMode && !e.target.closest('.service-label-container') &&
-      !e.target.closest('.service-add') && serviceFormElement &&
-      !serviceFormElement.contains(e.target))
+      serviceFormElement && !serviceFormElement.contains(e.target))
       onCloseEditService()
   }
 
@@ -73,12 +73,12 @@
     {#if !editMode}
       <div class="service-label-container">
         <Chip className="service-label"
-          title="Éditer la thérapie {`"${getServiceLightLabel(service.code)}"`}" leadingIcon="spa"
+          title="Éditer la thérapie {`"${serviceLightLabel}"`}" leadingIcon="spa"
           trailingIcon="edit" color={service.color} on:click={onEditService}>
-          {getServiceLightLabel(service.code)}
+          {serviceLightLabel}
         </Chip>
         <IconButton className="service-delete"
-          title="Supprimer la thérapie {`"${getServiceLightLabel(service.code)}"`}"
+          title="Supprimer la thérapie {`"${serviceLightLabel}"`}"
           on:click={onDeleteService}>
           delete
         </IconButton>
