@@ -26,8 +26,7 @@
   $: editMode = service.id === serviceEditModeId
   $: if (!editMode)
     serviceHeight.set(getServiceHeight(service.duration, $totalDuration))
-  $: durations = [...range(5, 60, 5), 75, 90]
-    .filter(duration => duration <= (maxDuration + service.duration))
+  $: durations = [...range(5, maxDuration + service.duration, 5)]
 
   function onMaybeClickOut(e) {
     if (editMode && !e.target.closest('.service-label-container') &&

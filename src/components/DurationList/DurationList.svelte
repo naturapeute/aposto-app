@@ -29,7 +29,7 @@
   {/if}
   {#each durations as duration (duration)}
     <li class="mdc-touch-target-wrapper" on:click={() => onChipClick(duration)}>
-      <Chip className="duration-chip" title="Sélectionner la durée  {`"${getDurationLabel(duration)}"`}"
+      <Chip className="duration-chip" title="Sélectionner la durée {`"${getDurationLabel(duration)}"`}"
         color={selectedServiceColor} selected={duration === selectedDuration} touchWrapper>
         {getDurationLabel(duration)}
       </Chip>
