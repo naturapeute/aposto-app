@@ -21,6 +21,13 @@
     ))
   }
 
+  function onMaybeClickOutTotalDuration(e) {
+    if(totalDurationEditMode && !e.target.closest('.total-duration') &&
+       !e.target.classList.contains('edit-total-duration')) {
+      totalDurationEditMode = false
+    }
+  }
+
   function onTotalDurationSelected() {
     if (totalDuration.hasReduced())
       $selectedServices = []
@@ -54,6 +61,8 @@
   }
 </script>
 
+<svelte:window on:click={onMaybeClickOutTotalDuration} on:touchstart={onMaybeClickOutTotalDuration} />
+
 {#if !$totalDuration}
   <h2 class="mdc-typography--subtitle1">
     Combien de temps a duré votre séance ?
@@ -70,7 +79,7 @@
     <strong class="typography--button-inline">
       {getDurationLabel($totalDuration)}
     </strong>
-    <IconButton title="Modifier la durée totale de la séance" on:click={onEditTotalDuration}>
+    <IconButton className="edit-total-duration" title="Modifier la durée totale de la séance" on:click={onEditTotalDuration}>
       edit
     </IconButton>
   {/if}
