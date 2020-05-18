@@ -44,6 +44,7 @@ function userCustomStore() {
   function logOut() {
     actualValue = JSON.parse(JSON.stringify(defaultUser))
     set(JSON.parse(JSON.stringify(defaultUser)))
+    window.localStorage.removeItem('terrapeuteEmail')
   }
 
   function setOnChange(newValue) {

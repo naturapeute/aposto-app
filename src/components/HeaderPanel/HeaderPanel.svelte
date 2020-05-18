@@ -5,14 +5,14 @@
   import TopAppBar from '../TopAppBar/TopAppBar.svelte'
   import UserPanel from '../UserPanel/UserPanel.svelte'
 
-  let userPanelOpen = false
+  let userPanel
 
-  function onToggleUserPanel() {
-    userPanelOpen = !userPanelOpen
+  function onOpenUserPanel() {
+    userPanel.openPanel()
   }
 </script>
 
-<UserPanel bind:open={userPanelOpen} />
+<UserPanel bind:this={userPanel} />
 
 <header class="header" class:loading={$loading}>
   <TopAppBar>
@@ -20,7 +20,7 @@
   </TopAppBar>
   <LinearProgress intermediate />
   <Button icon="account_circle" title="Accéder à mon profil de facturation"
-    on:click={onToggleUserPanel}>
+    on:click={onOpenUserPanel}>
     {$user.author.name}
   </Button>
 </header>

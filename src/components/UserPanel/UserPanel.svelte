@@ -31,12 +31,15 @@
   import TherapistFormExpansionPanel
     from '../TherapistFormExpansionPanel/TherapistFormExpansionPanel.svelte'
 
-  export let open = false
+  export function openPanel() {
+    open = true
+  }
 
+  let open
   let element
   let drawer = {}
   let authenticationMode = true
-  const storeSubscriptions = []
+  let authenticationForm
   let successUpdateSnackbar
   let successPatchSnackbar
   let failedPatchSnackbar
@@ -64,27 +67,29 @@
       document.querySelector('.mdc-icon-button').blur()
     })
 
-    user.initUpdated()
-    open = !isAuthorValid($user.author) || !isTherapistValid($user.therapist) ||
-      !isServicePriceValid($user.servicePrice) || !isPreferredServicesValid($user.preferredServices)
+    const localStorageEmail = window.localStorage.getItem('terrapeuteEmail')
+
+    if (localStorageEmail)
+      authenticationForm.authenticateTerrapeute(localStorageEmail)
+    else
+      // NOTE : We can not set open when authenticating from localStorage because it could leads to
+      // toggling the Material Drawer two times in a row. As the Material Drawer ignores toggle
+      // action while opening or closing, it would leave the panel open when logged in from local
+      // storage.
+      open = !isValidClose()
   })
 
   onDestroy(() => {
     if (drawer) drawer.detroy()
-
-    storeSubscriptions.forEach(storeSubscription => { storeSubscription() })
   })
 
-  function onClose() {
-    const validClose = formExpansionPanels.reduce(
-      (_validClose, formExpansionPanel) =>
-        _validClose &&
-        formExpansionPanel.instance &&
-        formExpansionPanel.instance.askClose(),
-      true
-    )
+  function isValidClose() {
+    return isAuthorValid($user.author) && isTherapistValid($user.therapist) &&
+      isServicePriceValid($user.servicePrice) && isPreferredServicesValid($user.preferredServices)
+  }
 
-    if (validClose) {
+  function onClose() {
+    if (isValidClose()) {
       if (!user.isUpdated()) {
         open = false
         return
@@ -123,13 +128,7 @@
 
   function onAuthenticationDone() {
     authenticationMode = false
-  }
-
-  function onExpansionPanelSetMounted() {
-    if ($user.terrapeuteID) {
-      user.initUpdated()
-      onClose()
-    }
+    onClose()
   }
 
   function onExpansionPanelOpen(id) {
@@ -162,9 +161,9 @@
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
     {#if authenticationMode}
-      <AuthenticationForm on:done={onAuthenticationDone} />
+      <AuthenticationForm bind:this={authenticationForm} on:done={onAuthenticationDone} />
     {:else}
-      <ExpansionPanelSet on:mounted={onExpansionPanelSetMounted}>
+      <ExpansionPanelSet>
         {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
           <svelte:component this={formExpansionPanel.component} bind:this={formExpansionPanel.instance}
             expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />

@@ -11,65 +11,14 @@
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import TextField from '../TextField/TextField.svelte'
 
-  let email
-  let failedAuthenticationSnackbar
-  const dispatch = createEventDispatcher()
-
-  function onAuthenticate() {
+  export function authenticateTerrapeute(terrapeuteEmail) {
+    email = terrapeuteEmail
     $loading = true
 
     authenticate(email)
       .then((body) => {
-        $user.author.email = body.email
-        $user.author.phone = body.phone
-        $user.therapist.firstName = body.firstname
-        $user.therapist.lastName = body.lastname
-        $user.therapist.phone = body.phone
-
-        if (body.offices.length) {
-          $user.author.street = body.offices[0].street
-          $user.author.city = body.offices[0].city
-          $user.author.ZIP = body.offices[0].zipCode
-          $user.therapist.street = body.offices[0].street
-          $user.therapist.city = body.offices[0].city
-          $user.therapist.ZIP = body.offices[0].zipCode
-        }
-
-        $user.terrapeuteID = body.id
-
-        if (body.extraData) {
-          if (body.extraData.author) {
-            body.extraData.author.name && ($user.author.name = body.extraData.author.name)
-            body.extraData.author.street && ($user.author.street = body.extraData.author.street)
-            body.extraData.author.ZIP && ($user.author.ZIP = body.extraData.author.ZIP)
-            body.extraData.author.city && ($user.author.city = body.extraData.author.city)
-            body.extraData.author.email && ($user.author.email = body.extraData.author.email)
-            body.extraData.author.phone && ($user.author.phone = body.extraData.author.phone)
-            body.extraData.author.RCC && ($user.author.RCC = body.extraData.author.RCC)
-          }
-
-          if (body.extraData.therapist) {
-            body.extraData.therapist.firstName &&
-              ($user.therapist.firstName = body.extraData.therapist.firstName)
-            body.extraData.therapist.lastName &&
-              ($user.therapist.lastName = body.extraData.therapist.lastName)
-            body.extraData.therapist.street &&
-              ($user.therapist.street = body.extraData.therapist.street)
-            body.extraData.therapist.city && ($user.therapist.city = body.extraData.therapist.city)
-            body.extraData.therapist.ZIP && ($user.therapist.ZIP = body.extraData.therapist.ZIP)
-            body.extraData.therapist.phone && ($user.therapist.phone = body.extraData.therapist.phone)
-            body.extraData.therapist.RCC && ($user.therapist.RCC = body.extraData.therapist.RCC)
-          }
-
-          body.extraData.servicePrice && ($user.servicePrice = body.extraData.servicePrice)
-
-          body.extraData.preferredServices &&
-            ($user.preferredServices = body.extraData.preferredServices.map(e => ({ ...e })))
-
-          body.extraData.patients &&
-            ($patients = body.extraData.patients.map(e => ({ ...e })))
-        }
-
+        saveAuthenticatedUser(body)
+        user.initUpdated()
         onAuthenticationDone()
       })
       .catch((_) => {
@@ -80,7 +29,70 @@
       })
   }
 
+  let email
+  let failedAuthenticationSnackbar
+  const dispatch = createEventDispatcher()
+
+  function saveAuthenticatedUser(body) {
+    $user.author.email = body.email
+    $user.author.phone = body.phone
+    $user.therapist.firstName = body.firstname
+    $user.therapist.lastName = body.lastname
+    $user.therapist.phone = body.phone
+
+    if (body.offices.length) {
+      $user.author.street = body.offices[0].street
+      $user.author.city = body.offices[0].city
+      $user.author.ZIP = body.offices[0].zipCode
+      $user.therapist.street = body.offices[0].street
+      $user.therapist.city = body.offices[0].city
+      $user.therapist.ZIP = body.offices[0].zipCode
+    }
+
+    $user.terrapeuteID = body.id
+
+    if (body.extraData) {
+      if (body.extraData.author) {
+        body.extraData.author.name && ($user.author.name = body.extraData.author.name)
+        body.extraData.author.street && ($user.author.street = body.extraData.author.street)
+        body.extraData.author.ZIP && ($user.author.ZIP = body.extraData.author.ZIP)
+        body.extraData.author.city && ($user.author.city = body.extraData.author.city)
+        body.extraData.author.email && ($user.author.email = body.extraData.author.email)
+        body.extraData.author.phone && ($user.author.phone = body.extraData.author.phone)
+        body.extraData.author.RCC && ($user.author.RCC = body.extraData.author.RCC)
+      }
+
+      if (body.extraData.therapist) {
+        body.extraData.therapist.firstName &&
+          ($user.therapist.firstName = body.extraData.therapist.firstName)
+        body.extraData.therapist.lastName &&
+          ($user.therapist.lastName = body.extraData.therapist.lastName)
+        body.extraData.therapist.street &&
+          ($user.therapist.street = body.extraData.therapist.street)
+        body.extraData.therapist.city && ($user.therapist.city = body.extraData.therapist.city)
+        body.extraData.therapist.ZIP && ($user.therapist.ZIP = body.extraData.therapist.ZIP)
+        body.extraData.therapist.phone && ($user.therapist.phone = body.extraData.therapist.phone)
+        body.extraData.therapist.RCC && ($user.therapist.RCC = body.extraData.therapist.RCC)
+      }
+
+      body.extraData.servicePrice && ($user.servicePrice = body.extraData.servicePrice)
+
+      body.extraData.preferredServices &&
+        ($user.preferredServices = body.extraData.preferredServices.map(e => ({ ...e })))
+
+      body.extraData.patients &&
+        ($patients = body.extraData.patients.map(e => ({ ...e })))
+    }
+  }
+
+  function onAuthenticate() {
+    authenticateTerrapeute(email)
+  }
+
   function onAuthenticationDone() {
+    if (!window.localStorage.getItem('terrapeuteEmail'))
+      window.localStorage.setItem('terrapeuteEmail', email)
+
     dispatch('done')
   }
 </script>
