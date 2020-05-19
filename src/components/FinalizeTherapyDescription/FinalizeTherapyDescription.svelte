@@ -13,7 +13,18 @@
 
   $: usedDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
   $: remainingDuration = $totalDuration - usedDuration
+  $: if ($totalDuration) onTotalDurationUpdated($totalDuration)
   $: $selectedServices = replaceDeletedPreferredServices($selectedServices, $user.preferredServices)
+
+  function onTotalDurationUpdated(_) {
+    if (totalDuration.hasReduced())
+      $selectedServices = []
+
+    totalDurationEditMode = false
+
+    if (!$selectedServices.length)
+      setDefaultTherapy()
+}
 
   function replaceDeletedPreferredServices(selectedServices, preferredServices) {
     return selectedServices.filter(service => preferredServices.find(
@@ -22,13 +33,11 @@
   }
 
   function setDefaultTherapy() {
-    // NOTE : Remaining duration has not been updated yet, so we use total duration.
-
     if ($user.preferredServices.length === 1) {
       addService(
         serviceIdCounter++,
         $user.preferredServices[0].code,
-        $totalDuration,
+        remainingDuration,
         $user.preferredServices[0].color
       )
     } else {
@@ -41,7 +50,7 @@
       addService(
         serviceIdCounter++,
         $user.preferredServices[1].code,
-        $totalDuration - 5,
+        remainingDuration,
         $user.preferredServices[1].color
       )
     }
@@ -50,22 +59,17 @@
   function addService(id, code, duration, color) {
     $selectedServices.push({ id, code, duration, color })
     serviceEditModeId = serviceIdCounter - 1
+
+    // NOTE : As the service is added, it is inserted in the DOM, using the remaining duration. The
+    // remaining duration is still not updated from the reactive statement, though. So we update it
+    // manually so the new service is inserted in the DOM with the correct remaining duration.
+    remainingDuration -= duration
   }
 
   function onMaybeClickOutTotalDuration(e) {
     if (totalDurationEditMode && !e.target.closest('.total-duration') &&
       !e.target.classList.contains('edit-total-duration'))
       totalDurationEditMode = false
-  }
-
-  function onTotalDurationSelected() {
-    if (totalDuration.hasReduced())
-      $selectedServices = []
-
-    totalDurationEditMode = false
-
-    if (!$selectedServices.length)
-      setDefaultTherapy()
   }
 
   function onEditTotalDuration() {
@@ -103,8 +107,7 @@
   <i class="material-icons-outlined">schedule</i>
   {#if !$totalDuration || totalDurationEditMode}
     <form class="aposto-form total-duration-form" on:submit|preventDefault>
-      <DurationList bind:selectedDuration={$totalDuration} selectedServiceColor="#68b246" {durations}
-        on:durationSelected={onTotalDurationSelected} noIcon />
+      <DurationList bind:selectedDuration={$totalDuration} selectedServiceColor="#68b246" {durations} noIcon />
     </form>
   {:else}
     <strong class="typography--button-inline">
