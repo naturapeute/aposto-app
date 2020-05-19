@@ -22,6 +22,7 @@
 
   function onUpdatePatient() {
     patientUpdateMode = true
+    patientSearchMode = false
   }
 
   function onCloseSearch() {
