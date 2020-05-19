@@ -93,11 +93,6 @@
   }
 </script>
 
-{#if !$selectedPatient}
-  <h2 class="mdc-typography--subtitle1">
-    Pour quel patient éditez-vous cette facture ?
-  </h2>
-{/if}
 {#if $selectedPatient}
   <p class="finalize-p">
     <i class="material-icons-outlined">face</i>
@@ -114,6 +109,9 @@
   </p>
 {/if}
 {#if !$selectedPatient || patientSearchMode}
+  <h2 class="mdc-typography--subtitle1">
+    Pour quel patient éditez-vous cette facture ?
+  </h2>
   <form class="aposto-form patient-search-form" on:submit|preventDefault>
     <TextField bind:value={filterPatient} fieldID="patient-search" trailingIcon="close"
       placeholder="Rechercher un patient..."

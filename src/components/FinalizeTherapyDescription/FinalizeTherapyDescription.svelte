@@ -22,10 +22,9 @@
   }
 
   function onMaybeClickOutTotalDuration(e) {
-    if(totalDurationEditMode && !e.target.closest('.total-duration') &&
-       !e.target.classList.contains('edit-total-duration')) {
+    if (totalDurationEditMode && !e.target.closest('.total-duration') &&
+      !e.target.classList.contains('edit-total-duration'))
       totalDurationEditMode = false
-    }
   }
 
   function onTotalDurationSelected() {
@@ -63,7 +62,7 @@
 
 <svelte:window on:click={onMaybeClickOutTotalDuration} on:touchstart={onMaybeClickOutTotalDuration} />
 
-{#if !$totalDuration}
+{#if !$totalDuration || totalDurationEditMode}
   <h2 class="mdc-typography--subtitle1">
     Combien de temps a duré votre séance ?
   </h2>
