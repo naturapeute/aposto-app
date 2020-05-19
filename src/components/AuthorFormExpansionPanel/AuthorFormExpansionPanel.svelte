@@ -56,8 +56,15 @@
       </TextField>
       <TextField bind:value={$user.author.RCC} type="tel" fieldID="author-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
-        pattern="[A-Z][0-9]&#123;6&#125;">
+        pattern="[A-Z][0-9]&#123;6&#125;" helperText>
         N°RCC
+
+        <span slot="helper-text">
+          Le numéro RCC est attribué à des personnes ayant une activité indépendante, à des personnes physiques ou morales (organisations) qui sont en mesure et qui souhaitent exercer à charge de l’assurance-maladie.
+          <strong>
+            Ce champ est optionnel.
+          </strong>
+        </span>
       </TextField>
       <Button bind:thisElement={submitButtonElement} className="drawer-submit-button" type="submit"
         title="Enregistrer les modifications">
