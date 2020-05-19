@@ -31,7 +31,8 @@
 
   function onMaybeClickOut(e) {
     if (editMode && !e.target.closest('.service-label-container') &&
-      serviceFormElement && !serviceFormElement.contains(e.target))
+      !e.target.closest('.total-duration-form') && serviceFormElement &&
+      !serviceFormElement.contains(e.target))
       onCloseEditService()
   }
 

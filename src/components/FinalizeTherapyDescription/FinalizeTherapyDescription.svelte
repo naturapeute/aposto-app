@@ -21,6 +21,37 @@
     ))
   }
 
+  function setDefaultTherapy() {
+    // NOTE : Remaining duration has not been updated yet, so we use total duration.
+
+    if ($user.preferredServices.length === 1) {
+      addService(
+        serviceIdCounter++,
+        $user.preferredServices[0].code,
+        $totalDuration,
+        $user.preferredServices[0].color
+      )
+    } else {
+      addService(
+        serviceIdCounter++,
+        $user.preferredServices[0].code,
+        5,
+        $user.preferredServices[0].color
+      )
+      addService(
+        serviceIdCounter++,
+        $user.preferredServices[1].code,
+        $totalDuration - 5,
+        $user.preferredServices[1].color
+      )
+    }
+  }
+
+  function addService(id, code, duration, color) {
+    $selectedServices.push({ id, code, duration, color })
+    serviceEditModeId = serviceIdCounter - 1
+  }
+
   function onMaybeClickOutTotalDuration(e) {
     if (totalDurationEditMode && !e.target.closest('.total-duration') &&
       !e.target.classList.contains('edit-total-duration'))
@@ -32,6 +63,9 @@
       $selectedServices = []
 
     totalDurationEditMode = false
+
+    if (!$selectedServices.length)
+      setDefaultTherapy()
   }
 
   function onEditTotalDuration() {
@@ -39,14 +73,12 @@
   }
 
   function onAddService() {
-    $selectedServices.push({
-      id: serviceIdCounter++,
-      code: $user.preferredServices[0].code,
-      duration: remainingDuration || 5,
-      color: $user.preferredServices[0].color
-    })
-
-    serviceEditModeId = serviceIdCounter - 1
+    addService(
+      serviceIdCounter++,
+      $user.preferredServices[0].code,
+      remainingDuration || 5,
+      $user.preferredServices[0].color
+    )
   }
 
   function onDeleteService(e) {
@@ -70,7 +102,7 @@
 <div class="finalize-p" class:total-duration={$totalDuration}>
   <i class="material-icons-outlined">schedule</i>
   {#if !$totalDuration || totalDurationEditMode}
-    <form class="aposto-form" on:submit|preventDefault>
+    <form class="aposto-form total-duration-form" on:submit|preventDefault>
       <DurationList bind:selectedDuration={$totalDuration} selectedServiceColor="#68b246" {durations}
         on:durationSelected={onTotalDurationSelected} noIcon />
     </form>
