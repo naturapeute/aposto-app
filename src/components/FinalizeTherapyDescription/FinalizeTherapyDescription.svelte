@@ -33,37 +33,16 @@
   }
 
   function setDefaultTherapy() {
-    if ($user.preferredServices.length === 1) {
-      addService(
-        serviceIdCounter++,
-        $user.preferredServices[0].code,
-        remainingDuration,
-        $user.preferredServices[0].color
-      )
-    } else {
-      addService(
-        serviceIdCounter++,
-        $user.preferredServices[0].code,
-        5,
-        $user.preferredServices[0].color
-      )
-      addService(
-        serviceIdCounter++,
-        $user.preferredServices[1].code,
-        remainingDuration,
-        $user.preferredServices[1].color
-      )
-    }
+    addService(
+      serviceIdCounter++,
+      $user.preferredServices[0].code,
+      10,
+      $user.preferredServices[0].color
+    )
   }
 
   function addService(id, code, duration, color) {
     $selectedServices.push({ id, code, duration, color })
-    serviceEditModeId = serviceIdCounter - 1
-
-    // NOTE : As the service is added, it is inserted in the DOM, using the remaining duration. The
-    // remaining duration is still not updated from the reactive statement, though. So we update it
-    // manually so the new service is inserted in the DOM with the correct remaining duration.
-    remainingDuration -= duration
   }
 
   function onMaybeClickOutTotalDuration(e) {
@@ -83,6 +62,8 @@
       remainingDuration || 5,
       $user.preferredServices[0].color
     )
+
+    serviceEditModeId = serviceIdCounter - 1
   }
 
   function onDeleteService(e) {
