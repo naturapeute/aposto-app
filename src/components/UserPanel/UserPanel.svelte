@@ -55,7 +55,7 @@
 
   onMount(() => {
     drawer = new MDCDrawer(element)
-    // FIXME : We are overriding the Material scrim click handler and Esc key donw as we only want to
+    // FIXME : We are overriding the Material scrim click handler and Esc key down as we only want to
     // close the drawer if and only if the form is valid
     Object.getPrototypeOf(drawer.foundation_).handleScrimClick = () => { onClose() }
     Object.getPrototypeOf(drawer.foundation_).handleKeydown = (e) => {
@@ -80,7 +80,7 @@
   })
 
   onDestroy(() => {
-    if (drawer) drawer.detroy()
+    if (drawer) drawer.destroy()
   })
 
   function isValidClose() {

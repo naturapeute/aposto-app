@@ -15,11 +15,11 @@
   }
 
   let dialog
-  let dontShowAgain = false
+  let donTShowAgain = false
   const dispatch = createEventDispatcher()
 
   function onConfirm() {
-    if (dontShowAgain) window.localStorage.setItem('dontShowAgainConfirmSend', true)
+    if (donTShowAgain) window.localStorage.setItem('donTShowAgainConfirmSend', true)
     dispatch('confirm')
   }
 </script>
@@ -44,7 +44,7 @@
       </strong>
       .
     </p>
-    <Checkbox bind:checked={dontShowAgain} checkboxId="dont-show-again">
+    <Checkbox bind:checked={donTShowAgain} checkboxId="don-t-show-again">
       Ne plus afficher cette alerte
     </Checkbox>
   </div>

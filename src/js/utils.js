@@ -171,7 +171,7 @@ export const serviceCodes = [
   { code: 1202, lightLabel: 'Art de parole thérapeutique' },
   { code: 1203, lightLabel: 'Ostéopathie' },
   { code: 1204, lightLabel: 'Etiopathie' },
-  { code: 1205, lightLabel: 'Méthodes de détoxication, par période de 5 minutess' },
+  { code: 1205, lightLabel: 'Méthodes de détoxication, par période de 5 minutes' },
   { code: 1206, lightLabel: 'Thérapie nutritionnelle' },
   { code: 1207, lightLabel: "Thérapie de l'ordre / Diététique" },
   { code: 1210, lightLabel: 'Spiraldynamik' }

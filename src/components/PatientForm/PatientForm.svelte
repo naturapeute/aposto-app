@@ -46,7 +46,7 @@
   </div>
   <div class="row row-xs">
     <TextField className="col-60" bind:value={localPatient.birthdate} type="date"
-      fieldID="patient-birthdate" required>
+      fieldID="patient-birthday" required>
       Date de naissance
     </TextField>
     <Select className="col-40" bind:value={localPatient.gender} fieldID="patient-gender"

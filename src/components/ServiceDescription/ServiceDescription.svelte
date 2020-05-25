@@ -55,6 +55,10 @@
     ).color
   }
 
+  function onDurationSelected() {
+    onCloseEditService()
+  }
+
   function _customFade(node) {
     serviceHeight.set(parseFloat(getComputedStyle(serviceFormElement).height) + 2 * 16)
 
@@ -90,7 +94,7 @@
         <PreferredServiceList selectedServiceCode={service.code}
           on:selectedService={onSelectedService} />
         <DurationList bind:selectedDuration={service.duration} selectedServiceColor={service.color}
-          {durations} />
+          {durations} on:durationSelected={onDurationSelected} />
       </form>
     {/if}
   </div>

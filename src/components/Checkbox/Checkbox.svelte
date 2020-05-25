@@ -18,8 +18,8 @@
     formField.input = checkbox
 
     // FIXME : At this point, `formFieldElement` and `checkboxElement` might not be rendered by the
-    // browser. If so happens, the instanciation above conducts to a wrong-size ripple. Indeed, the
-    // Material ripple CSS variable are computed during the instanciation and based on the checkbox
+    // browser. If so happens, the instantiation above conducts to a wrong-size ripple. Indeed, the
+    // Material ripple CSS variable are computed during the instantiation and based on the checkbox
     // element (`checkboxElement`) width and height. As it is not rendered, the width and height are
     // the window width and height and it results in a huge ripple placed away from the checkbox.
     // As a temporary solution, the following lines compute this CSS variables again when focus event

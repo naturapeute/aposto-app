@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from 'svelte'
+  import { afterUpdate, createEventDispatcher } from 'svelte'
 
   import { getDurationLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
@@ -10,6 +10,7 @@
   export let noIcon = false
 
   let iconElement
+  const dispatch = createEventDispatcher()
 
   afterUpdate(() => {
     if (!noIcon)
@@ -18,6 +19,7 @@
 
   function onChipClick(duration) {
     selectedDuration = duration
+    dispatch('durationSelected')
   }
 </script>
 

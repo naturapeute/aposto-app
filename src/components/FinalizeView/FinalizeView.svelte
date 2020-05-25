@@ -36,9 +36,9 @@
   }
 
   function onSendInvoice() {
-    const dontShowAgain = Boolean(window.localStorage.getItem('dontShowAgainConfirmSend'))
+    const donTShowAgain = Boolean(window.localStorage.getItem('donTShowAgainConfirmSend'))
 
-    if (!dontShowAgain)
+    if (!donTShowAgain)
       confirmDialog.open()
     else if (!askConfirm)
       askConfirm = true
@@ -118,7 +118,7 @@
       </div>
     {:else}
       <div class="confirm-button-container">
-        <Button type="submit" title="Confimer l'envoi de la facture par mail au patient" icon="send"
+        <Button type="submit" title="Confirmer l'envoi de la facture par mail au patient" icon="send"
           outlined disabled={$loading}>
           Confirmer l'envoi
         </Button>
