@@ -12,7 +12,7 @@
 
   const localPatient = updateMode ? {
     ...$selectedPatient,
-    birthdate: getDateInput($selectedPatient.birthdate)
+    birthday: getDateInput($selectedPatient.birthday)
   } : {
     firstName: filterPatient.split(' ')[0],
     lastName: filterPatient.split(' ').slice(1).join(' '),
@@ -21,7 +21,7 @@
     city: '',
     canton: '',
     gender: '',
-    birthdate: '',
+    birthday: '',
     email: '',
     id: Date.now()
   }
@@ -45,7 +45,7 @@
     </TextField>
   </div>
   <div class="row row-xs">
-    <TextField className="col-60" bind:value={localPatient.birthdate} type="date"
+    <TextField className="col-60" bind:value={localPatient.birthday} type="date"
       fieldID="patient-birthday" required>
       Date de naissance
     </TextField>

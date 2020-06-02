@@ -45,7 +45,7 @@
   function onPatientUpdatedOrCreated(e) {
     const newPatient = {
       ...e.detail,
-      birthdate: new Date(e.detail.birthdate).getTime()
+      birthday: new Date(e.detail.birthday).getTime()
     }
 
     if (patientCreateMode) {
