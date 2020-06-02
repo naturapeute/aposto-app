@@ -81,17 +81,7 @@
         ($user.preferredServices = body.extraData.preferredServices.map(e => ({ ...e })))
 
       body.extraData.patients &&
-        ($patients = body.extraData.patients.map(e => {
-          // TODO : Migrating from birthdate to birthday
-          const patient = { ...e }
-
-          if (patient.birthdate) {
-            patient.birthday = patient.birthdate
-            delete patient.birthdate
-          }
-
-          return patient
-        }))
+        ($patients = body.extraData.patients.map(e => ({ ...e })))
     }
   }
 

@@ -1,48 +1,48 @@
-<script>
-  import { loading, patients, selectedPatient, user } from '../../js/store'
-  import { saveUser } from '../../services/UserService'
-  import IconButton from '../IconButton/IconButton.svelte'
-  import PatientForm from '../PatientForm/PatientForm.svelte'
-  import PatientList from '../PatientList/PatientList.svelte'
-  import Snackbar from '../Snackbar/Snackbar.svelte'
-  import TextField from '../TextField/TextField.svelte'
+<script>  import { loading, patients, selectedPatient, user } from '../../js/store'
+import { isPatientValid } from '../../js/utils'
+import { saveUser } from '../../services/UserService'
+import IconButton from '../IconButton/IconButton.svelte'
+import PatientForm from '../PatientForm/PatientForm.svelte'
+import PatientList from '../PatientList/PatientList.svelte'
+import Snackbar from '../Snackbar/Snackbar.svelte'
+import TextField from '../TextField/TextField.svelte'
 
-  let filterPatient = ''
-  let patientSearchMode = false
-  let patientCreateMode = false
-  let patientUpdateMode = false
-  let succeedPatchSnackbar
-  let failedPatchSnackbar
+let filterPatient = ''
+let patientSearchMode = false
+let patientCreateMode = false
+let patientUpdateMode = false
+let succeedPatchSnackbar
+let failedPatchSnackbar
 
-  function onChangePatient() {
+function onChangePatient() {
     patientSearchMode = true
     patientCreateMode = false
     patientUpdateMode = false
-  }
+}
 
-  function onUpdatePatient() {
+function onUpdatePatient() {
     patientUpdateMode = true
     patientSearchMode = false
-  }
+}
 
-  function onCloseSearch() {
+function onCloseSearch() {
     if ($selectedPatient)
       patientSearchMode = false
 
     patientCreateMode = false
-    patientUpdateMode = false
+    patientUpdateMode = !isPatientValid($selectedPatient)
     filterPatient = ''
-  }
+}
 
-  function onTextFieldMount(e) {
+function onTextFieldMount(e) {
     e.detail.focus()
-  }
+}
 
-  function onCreatePatient() {
+function onCreatePatient() {
     patientCreateMode = true
-  }
+}
 
-  function onPatientUpdatedOrCreated(e) {
+function onPatientUpdatedOrCreated(e) {
     const newPatient = {
       ...e.detail,
       birthday: new Date(e.detail.birthday).getTime()
@@ -91,7 +91,7 @@
       $selectedPatient = { ...newPatient }
       onCloseSearch()
     }
-  }
+}
 </script>
 
 {#if $selectedPatient}

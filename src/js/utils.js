@@ -46,12 +46,26 @@ export function isPreferredServicesValid(preferredServices) {
     !(preferredServices.length === 1 && preferredServices[0].code === 1200)
 }
 
+export function isPatientValid(patient) {
+  return Boolean(patient.firstName && patient.lastName && patient.street && patient.ZIP &&
+    patient.city && isCantonValid(patient.canton) && isGenderValid(patient.gender) &&
+    !isNaN(patient.birthday) && isEmailValid(patient.email) && !isNaN(patient.id))
+}
+
 function isEmailValid(email) {
   return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
 }
 
 function isRCCValid(RCC) {
   return RCC.match(/(^(?!.)|[A-Z][0-9]{6})/)
+}
+
+function isCantonValid(canton) {
+  return cantons.includes(canton)
+}
+
+function isGenderValid(gender) {
+  return gender === 'male' || gender === 'female'
 }
 
 export function getDateInput(timestamp) {
