@@ -3,7 +3,7 @@
   import { cubicOut } from 'svelte/easing'
   import { tweened } from 'svelte/motion'
 
-  import { totalDuration } from '../../js/store'
+  import { selectedServices, totalDuration } from '../../js/store'
   import { growShrink } from '../../js/transitions'
   import { getServiceHeight } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
@@ -30,10 +30,14 @@
   </div>
   <div class="service-control-container">
     <div class="service-label-container">
-      <Chip className="service-label" title="Ajouter une thérapie" leadingIcon="spa"
-        trailingIcon="add" color="#9e9e9e" on:click={onAddService}>
-        Ajouter une thérapie
-      </Chip>
+      {#if $selectedServices.length < 5}
+        <Chip className="service-label" title="Ajouter une thérapie" leadingIcon="spa"
+          trailingIcon="add" color="#9e9e9e" on:click={onAddService}>
+          Ajouter une thérapie
+        </Chip>
+      {:else}
+        <p class="hint-text">Vous ne pouvez pas sélectionner plus que 5 thérapies.</p>
+      {/if}
     </div>
   </div>
 </li>
