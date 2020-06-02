@@ -43,6 +43,13 @@
 
   function addService(id, code, duration, color) {
     $selectedServices.push({ id, code, duration, color })
+
+    /**
+     * NOTE : We remove the added service duration from the remaining duration as right after this
+     * function return, the ServiceDescription component will be mounted, before remaining duration
+     * is updated from the reactive statement.
+     */
+    remainingDuration -= duration
   }
 
   function onMaybeClickOutTotalDuration(e) {

@@ -59,6 +59,10 @@ $submit-button-icon-size: 32;
       height: #{$submit-button-icon-size}px;
     }
   }
+
+  .error-text {
+    margin-top: 16px;
+  }
 }
 
 .confirm-button-container > :global(.mdc-button) {
