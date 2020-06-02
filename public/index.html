@@ -17,12 +17,16 @@
 </head>
 
 <body class="mdc-typography">
+  <input type="date" id="date-input-compatibility-check" hidden />
 </body>
 
 <script>
   // Check browser compatibility
   try {
     eval("async function _(){ const obj1 = {a: 1}; const obj2 = {...obj1} }")
+
+    if (document.getElementById('date-input-compatibility-check').type !== "date")
+      throw Error
   }
   catch (e) {
     window.location.href = 'https://polight.github.io/browser-compatibility'
