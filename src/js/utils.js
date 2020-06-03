@@ -28,13 +28,18 @@ export const genderOptions = [
 ]
 
 export function isAuthorValid(author) {
-  return Boolean(author.name && author.street && author.ZIP && author.city &&
-    isEmailValid(author.email) && author.phone && isRCCValid(author.RCC))
+  return Boolean(
+    author.name && author.name.length <= 70 && author.street && author.street.length <= 70 &&
+    author.ZIP && author.ZIP.length <= 16 && author.city && author.city.length <= 35 &&
+    isEmailValid(author.email) && author.phone && isRCCValid(author.RCC)
+  )
 }
 
 export function isTherapistValid(therapist) {
-  return Boolean(therapist.firstName && therapist.lastName && therapist.street && therapist.ZIP &&
-    therapist.city && therapist.phone && isRCCValid(therapist.RCC))
+  return Boolean(
+    therapist.firstName && therapist.lastName && therapist.street && therapist.ZIP &&
+    therapist.city && therapist.phone && isRCCValid(therapist.RCC)
+  )
 }
 
 export function isServicePriceValid(servicePrice) {
@@ -47,9 +52,13 @@ export function isPreferredServicesValid(preferredServices) {
 }
 
 export function isPatientValid(patient) {
-  return Boolean(patient.firstName && patient.lastName && patient.street && patient.ZIP &&
-    patient.city && isCantonValid(patient.canton) && isGenderValid(patient.gender) &&
-    !isNaN(patient.birthday) && isEmailValid(patient.email) && !isNaN(patient.id))
+  return Boolean(
+    patient.firstName && patient.firstName.length <= 35 && patient.lastName &&
+    patient.lastName.length <= 35 && patient.street && patient.street.length <= 70 &&
+    patient.ZIP && patient.ZIP.length <= 16 && patient.city && patient.city.length <= 35 &&
+    isCantonValid(patient.canton) && isGenderValid(patient.gender) && !isNaN(patient.birthday) &&
+    isEmailValid(patient.email) && !isNaN(patient.id)
+  )
 }
 
 function isEmailValid(email) {

@@ -39,12 +39,21 @@
     flex-direction: column;
   }
 
+  .mdc-text-field-helper-line {
+    margin: -8px 0 8px 0;
+  }
+
   @media (min-width: $xsmall-width-breakpoint) {
     .row-xs {
       flex-direction: row;
 
       .mdc-text-field,
-      .mdc-select {
+      .mdc-select,
+      .mdc-text-field-helper-line {
+        margin: 0;
+      }
+
+      .col {
         margin: 0 8px;
 
         &:first-child {

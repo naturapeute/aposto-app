@@ -40,14 +40,38 @@
   <div slot="summary">Auteur des factures</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$user.author.name} fieldID="author-name" required>
+      <TextField bind:value={$user.author.name} fieldID="author-name" maxlength="70" required
+        helperText>
         Nom ou entreprise
+
+        <span slot="helper-text">
+          Le nom de l'auteur est limité à 70 caractères.
+        </span>
       </TextField>
-      <TextField bind:value={$user.author.street} fieldID="author-street" required>
+      <TextField bind:value={$user.author.street} fieldID="author-street" maxlength="70" required
+        helperText>
         Rue et n°
+
+        <span slot="helper-text">
+          L'adresse postale de l'auteur est limitée à 70 caractères.
+        </span>
       </TextField>
-      <TextField bind:value={$user.author.ZIP} fieldID="author-zip" required>NPA</TextField>
-      <TextField bind:value={$user.author.city} fieldID="author-city" required>Localité</TextField>
+      <TextField bind:value={$user.author.ZIP} fieldID="author-zip" maxlength="16" required
+        helperText>
+        NPA
+
+        <span slot="helper-text">
+          Le code postal de l'auteur est limité à 16 caractères.
+        </span>
+      </TextField>
+      <TextField bind:value={$user.author.city} fieldID="author-city" maxlength="35" required
+        helperText>
+        Localité
+
+        <span slot="helper-text">
+          La ville de l'auteur est limitée à 16 caractères.
+        </span>
+      </TextField>
       <TextField bind:value={$user.author.email} type="email" fieldID="author-email" required>
         Email
       </TextField>

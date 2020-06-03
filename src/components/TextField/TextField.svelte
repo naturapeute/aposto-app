@@ -13,6 +13,7 @@
   export let className = ''
   export let min = null
   export let step = null
+  export let maxlength = null
   export let pattern = null
   export let title = null
   export let helperText = false
@@ -64,7 +65,7 @@
   <input {value} {type} class="mdc-text-field__input" id={fieldID} {placeholder} name={fieldID}
     aria-labelledby={fieldID} aria-controls={helperText ? helperTextID : ''}
     aria-describedby={helperText ? helperTextID : ''} {title} on:input={onInput} {min} {step} {pattern}
-    {required} autocomplete={noAutoComplete ? 'off' : ''}>
+    {maxlength} {required} autocomplete={noAutoComplete ? 'off' : ''}>
   {#if trailingIcon}
     <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>

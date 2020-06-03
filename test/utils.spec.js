@@ -53,14 +53,41 @@ describe('utils', () => {
     it('should invalidate an author object with an empty name', () => {
       assert.equal(isAuthorValid({ ...author, name: '' }), false)
     })
+    it('should invalidate an author object with a too long name', () => {
+      assert.equal(
+        isAuthorValid({
+          ...author,
+          name: 'Cabinet de Gordan Cabinet de Gordan Cabinet de Gordan Cabinet de Gordan'
+        }),
+        false
+      )
+    })
     it('should invalidate an author object with an empty street', () => {
       assert.equal(isAuthorValid({ ...author, street: '' }), false)
+    })
+    it('should invalidate an author object with a too long street', () => {
+      assert.equal(
+        isAuthorValid({
+          ...author,
+          street: '92320 Glacier Hill Terrace 92320 Glacier Hill Terrace 92320 Glacier Hill Terrace'
+        }),
+        false
+      )
     })
     it('should invalidate an author object with an empty post code', () => {
       assert.equal(isAuthorValid({ ...author, ZIP: '' }), false)
     })
+    it('should invalidate an author object with a too long post code', () => {
+      assert.equal(isAuthorValid({ ...author, ZIP: '735538 735538 735538' }), false)
+    })
     it('should invalidate an author object with an empty city', () => {
       assert.equal(isAuthorValid({ ...author, city: '' }), false)
+    })
+    it('should invalidate an author object with a too long city', () => {
+      assert.equal(
+        isAuthorValid({ ...author, city: 'San Antonio San Antonio San Antonio San Antonio' }),
+        false
+      )
     })
     it('should invalidate an author object with an empty email', () => {
       assert.equal(isAuthorValid({ ...author, email: '' }), false)
@@ -178,17 +205,47 @@ describe('utils', () => {
     it('should invalidate a patient object with an empty first name', () => {
       assert.equal(isPatientValid({ ...patient, firstName: '' }), false)
     })
+    it('should invalidate a patient object with a too long first name', () => {
+      assert.equal(
+        isPatientValid({ ...patient, firstName: 'Gordan Gordan Gordan Gordan Gordan Gordan' }),
+        false
+      )
+    })
     it('should invalidate a patient object with an empty last name', () => {
       assert.equal(isPatientValid({ ...patient, lastName: '' }), false)
+    })
+    it('should invalidate a patient object with a too long last name', () => {
+      assert.equal(
+        isPatientValid({ ...patient, lastName: 'Aery Aery Aery Aery Aery Aery Aery Aery' }),
+        false
+      )
     })
     it('should invalidate a patient object with an empty street', () => {
       assert.equal(isPatientValid({ ...patient, street: '' }), false)
     })
+    it('should invalidate a patient object with a too long street', () => {
+      assert.equal(
+        isPatientValid({
+          ...patient,
+          street: '92320 Glacier Hill Terrace 92320 Glacier Hill Terrace 92320 Glacier Hill Terrace'
+        }),
+        false
+      )
+    })
     it('should invalidate a patient object with an empty post code', () => {
       assert.equal(isPatientValid({ ...patient, ZIP: '' }), false)
     })
+    it('should invalidate a patient object with a too long post code', () => {
+      assert.equal(isPatientValid({ ...patient, ZIP: '735538 735538 735538' }), false)
+    })
     it('should invalidate a patient object with an empty city', () => {
       assert.equal(isPatientValid({ ...patient, city: '' }), false)
+    })
+    it('should invalidate a patient object with a too long city', () => {
+      assert.equal(
+        isPatientValid({ ...patient, city: 'San Antonio San Antonio San Antonio San Antonio' }),
+        false
+      )
     })
     it('should invalidate a patient object with an empty canton', () => {
       assert.equal(isPatientValid({ ...patient, canton: '' }), false)
