@@ -1,10 +1,27 @@
-export async function sendInvoice(
+export async function sendInvoice(invoiceContentBase64) {
+  const response = await fetch(`${process.env.API_URL}/email/${invoiceContentBase64}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Origin: process.env.APP_URL
+    }
+  })
+
+  if (!response.ok) {
+    const body = await response.text()
+
+    throw Error(body)
+  }
+}
+
+export function generateInvoiceContentBase64(
   terrapeuteID,
   author,
   therapist,
   patient,
   servicePrice,
-  services
+  services,
+  invoiceTimestamp
 ) {
   const APIServices = services.map(e => ({ ...e }))
 
@@ -20,7 +37,7 @@ export async function sendInvoice(
     patient: { ...patient },
     servicePrice,
     services: APIServices,
-    timestamp: Date.now()
+    timestamp: invoiceTimestamp
   }
 
   if (terrapeuteID)
@@ -28,19 +45,5 @@ export async function sendInvoice(
 
   delete invoiceContent.patient.id
 
-  const invoiceContentBase64 = btoa(JSON.stringify(invoiceContent))
-
-  const response = await fetch(`${process.env.API_URL}/email/${invoiceContentBase64}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Origin: process.env.APP_URL
-    }
-  })
-
-  if (!response.ok) {
-    const body = await response.text()
-
-    throw Error(body)
-  }
+  return btoa(JSON.stringify(invoiceContent))
 }

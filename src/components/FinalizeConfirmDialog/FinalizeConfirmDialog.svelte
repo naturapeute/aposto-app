@@ -1,10 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { selectedPatient, user } from '../../js/store'
+  import { invoiceTimestamp, selectedPatient, user } from '../../js/store'
   import Button from '../Button/Button.svelte'
   import Checkbox from '../Checkbox/Checkbox.svelte'
   import Dialog from '../Dialog/Dialog.svelte'
+
+  export let invoiceContentBase64
 
   export function open() {
     dialog.open()
@@ -54,6 +56,14 @@
       dialogAction="close" dialogInitialFocus>
       Revenir
     </Button>
+    <a class="mdc-button mdc-button--outlined mdc-dialog__button" title="Prévisualiser la facture"
+      target="_blank"
+      href="{process.env.API_URL}/pdf/{invoiceContentBase64}/facture-{$invoiceTimestamp}.pdf">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">
+        Prévisualiser
+      </span>
+    </a>
     <Button title="Confirmer l'envoi de la facture" unelevated dialog dialogAction="accept"
       on:click={onConfirm}>
       Envoyer

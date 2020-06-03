@@ -81,6 +81,7 @@ function totalDurationCustomStore(initValue) {
   return { subscribe, set: setOnChange, update, hasReduced }
 }
 
+export const invoiceTimestamp = writable(0)
 export const user = userCustomStore()
 export const patients = writable([])
 export const totalDuration = totalDurationCustomStore(0)

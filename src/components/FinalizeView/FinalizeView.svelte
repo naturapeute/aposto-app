@@ -1,6 +1,13 @@
 <script>
-  import { loading, selectedPatient, selectedServices, totalDuration, user } from '../../js/store'
-  import { sendInvoice } from '../../services/InvoiceService'
+  import {
+    invoiceTimestamp,
+    loading,
+    selectedPatient,
+    selectedServices,
+    totalDuration,
+    user
+  } from '../../js/store'
+  import { generateInvoiceContentBase64, sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
@@ -14,6 +21,7 @@
   let confirmDialog
   let askConfirm = false
   let successSend = false
+  let invoiceContentBase64
 
   $: totalAmount = ($totalDuration / 60) * $user.servicePrice
   $: validationError = getValidationError($selectedPatient, $totalDuration, $selectedServices)
@@ -38,6 +46,20 @@
   function onSendInvoice() {
     const donTShowAgain = Boolean(window.localStorage.getItem('donTShowAgainConfirmSend'))
 
+    if (!donTShowAgain || !askConfirm) {
+      $invoiceTimestamp = Date.now()
+
+      invoiceContentBase64 = generateInvoiceContentBase64(
+        $user.terrapeuteID || '',
+        $user.author,
+        $user.therapist,
+        $selectedPatient,
+        $user.servicePrice,
+        $selectedServices,
+        $invoiceTimestamp
+      )
+    }
+
     if (!donTShowAgain)
       confirmDialog.open()
     else if (!askConfirm)
@@ -50,14 +72,7 @@
     askConfirm = false
     $loading = true
 
-    sendInvoice(
-      $user.terrapeuteID || '',
-      $user.author,
-      $user.therapist,
-      $selectedPatient,
-      $user.servicePrice,
-      $selectedServices
-    )
+    sendInvoice(invoiceContentBase64)
       .then(() => {
         successSend = true
       })
@@ -137,7 +152,7 @@
   </Snackbar>
 </form>
 
-<FinalizeConfirmDialog bind:this={confirmDialog}
+<FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContentBase64}
   on:confirm={onConfirmSend} />
 
 {#if successSend}
