@@ -11,8 +11,8 @@
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import TextField from '../TextField/TextField.svelte'
 
-  export function authenticateTerrapeute(terrapeuteEmail) {
-    email = terrapeuteEmail
+  export function authenticateNaturapeute(naturapeuteEmail) {
+    email = naturapeuteEmail
     $loading = true
 
     authenticate(email)
@@ -49,7 +49,7 @@
       $user.therapist.ZIP = body.offices[0].zipCode
     }
 
-    $user.terrapeuteID = body.id
+    $user.naturapeuteID = body.id
 
     if (body.extraData) {
       if (body.extraData.author) {
@@ -86,12 +86,12 @@
   }
 
   function onAuthenticate() {
-    authenticateTerrapeute(email)
+    authenticateNaturapeute(email)
   }
 
   function onAuthenticationDone() {
-    if (!window.localStorage.getItem('terrapeuteEmail'))
-      window.localStorage.setItem('terrapeuteEmail', email)
+    if (!window.localStorage.getItem('naturapeuteEmail'))
+      window.localStorage.setItem('naturapeuteEmail', email)
 
     dispatch('done')
   }
@@ -101,14 +101,14 @@
   <TextField bind:value={email} type="email" fieldID="authentication-email" required>
     Email
   </TextField>
-  <Button type="submit" title="Se connecter via le réseau Terrapeute" unelevated
+  <Button className="connect-button" type="submit" title="Se connecter via le réseau Naturapeute" unelevated
     disabled={$loading}>
-    Se connecter via Terrapeute
+    Se connecter avec Naturapeute
   </Button>
-  <a class="mdc-button" href="https://pro.terrapeute.ch/join">
+  <a class="mdc-button" href="https://pro.naturapeute.ch/join">
     <div class="mdc-button__ripple"></div>
     <span class="mdc-button__label">
-      Rejoindre Terrapeute
+      Rejoindre Naturapeute
     </span>
   </a>
   <Button title="Essayer en démo" on:click={onAuthenticationDone} disabled={$loading}>
@@ -123,7 +123,7 @@
 
 <Snackbar bind:this={failedAuthenticationSnackbar}>
   <span slot="label">
-    Votre connexion auprès du réseau Terrapeute a échoué. Assurez-vous d'être bien inscrit auprès du
+    Votre connexion auprès du réseau Naturapeute a échoué. Assurez-vous d'être bien inscrit auprès du
     réseau et d'avoir renseigné l'adresse mail correspondant à votre inscription.
   </span>
 </Snackbar>

@@ -17,7 +17,7 @@ export async function authenticate(email) {
 }
 
 export async function saveUser(
-  terrapeuteID,
+  naturapeuteID,
   author,
   therapist,
   servicePrice,
@@ -32,7 +32,7 @@ export async function saveUser(
     patients: patients.map(e => ({ ...e }))
   }
 
-  const response = await fetch(`https://naturapeute.ch/api/therapist/${terrapeuteID}`, {
+  const response = await fetch(`https://naturapeute.ch/api/therapist/${naturapeuteID}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

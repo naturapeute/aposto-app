@@ -50,7 +50,7 @@
       $invoiceTimestamp = Date.now()
 
       invoiceContentBase64 = generateInvoiceContentBase64(
-        $user.terrapeuteID || '',
+        $user.naturapeuteID || '',
         $user.author,
         $user.therapist,
         $selectedPatient,

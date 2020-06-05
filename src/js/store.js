@@ -4,7 +4,7 @@ import { serviceColors } from './utils'
 
 function userCustomStore() {
   const defaultUser = {
-    terrapeuteID: null,
+    naturapeuteID: null,
     author: {
       name: '',
       street: '',
@@ -44,7 +44,7 @@ function userCustomStore() {
   function logOut() {
     actualValue = JSON.parse(JSON.stringify(defaultUser))
     set(JSON.parse(JSON.stringify(defaultUser)))
-    window.localStorage.removeItem('terrapeuteEmail')
+    window.localStorage.removeItem('naturapeuteEmail')
   }
 
   function setOnChange(newValue) {

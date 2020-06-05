@@ -64,11 +64,11 @@ function onPatientUpdatedOrCreated(e) {
       patientUpdateMode = false
     }
 
-    if ($user.terrapeuteID) {
+    if ($user.naturapeuteID) {
       $loading = true
 
       saveUser(
-        $user.terrapeuteID,
+        $user.naturapeuteID,
         $user.author,
         $user.therapist,
         $user.servicePrice,
@@ -132,13 +132,13 @@ function onPatientUpdatedOrCreated(e) {
 
 <Snackbar bind:this={succeedPatchSnackbar}>
   <span slot="label">
-    Votre patient a été sauvegardé sur le réseau Terrapeute.
+    Votre patient a été sauvegardé sur le réseau Naturapeute.
   </span>
 </Snackbar>
 
 <Snackbar bind:this={failedPatchSnackbar}>
   <span slot="label">
-    La sauvegarde de votre patient auprès du réseau Terrapeute a échoué. Veuillez réessayer...
+    La sauvegarde de votre patient auprès du réseau Naturapeute a échoué. Veuillez réessayer...
   </span>
 </Snackbar>
 

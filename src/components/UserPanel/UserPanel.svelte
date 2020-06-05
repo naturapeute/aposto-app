@@ -67,10 +67,10 @@
       document.querySelector('.mdc-icon-button').blur()
     })
 
-    const localStorageEmail = window.localStorage.getItem('terrapeuteEmail')
+    const localStorageEmail = window.localStorage.getItem('naturapeuteEmail')
 
     if (localStorageEmail)
-      authenticationForm.authenticateTerrapeute(localStorageEmail)
+      authenticationForm.authenticateNaturapeute(localStorageEmail)
     else
       // NOTE : We can not set open when authenticating from localStorage because it could leads to
       // toggling the Material Drawer two times in a row. As the Material Drawer ignores toggle
@@ -95,11 +95,11 @@
         return
       }
 
-      if ($user.terrapeuteID) {
+      if ($user.naturapeuteID) {
         $loading = true
 
         saveUser(
-          $user.terrapeuteID,
+          $user.naturapeuteID,
           $user.author,
           $user.therapist,
           $user.servicePrice,
@@ -170,8 +170,8 @@
         {/each}
       </ExpansionPanelSet>
       <div class="log-out-button-wrapper">
-        {#if $user.terrapeuteID}
-          <Button title="Se déconnecter du réseau Terrapeute" on:click={onLogOut}>
+        {#if $user.naturapeuteID}
+          <Button title="Se déconnecter du réseau Naturapeute" on:click={onLogOut}>
             Se déconnecter
           </Button>
         {:else}
@@ -190,11 +190,11 @@
   <span slot="label">Vos informations ont été mises à jour.</span>
 </Snackbar>
 <Snackbar bind:this={successPatchSnackbar}>
-  <span slot="label">Vos informations ont été mises à jour sur le réseau Terrapeute.</span>
+  <span slot="label">Vos informations ont été mises à jour sur le réseau Naturapeute.</span>
 </Snackbar>
 <Snackbar bind:this={failedPatchSnackbar}>
   <span slot="label">
-    La sauvegarde de vos informations auprès du réseau Terrapeute a échoué. Veuillez réessayer...
+    La sauvegarde de vos informations auprès du réseau Naturapeute a échoué. Veuillez réessayer...
   </span>
 </Snackbar>
 

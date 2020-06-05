@@ -15,7 +15,7 @@ export async function sendInvoice(invoiceContentBase64) {
 }
 
 export function generateInvoiceContentBase64(
-  terrapeuteID,
+  naturapeuteID,
   author,
   therapist,
   patient,
@@ -40,8 +40,8 @@ export function generateInvoiceContentBase64(
     timestamp: invoiceTimestamp
   }
 
-  if (terrapeuteID)
-    invoiceContent.terrapeuteID = terrapeuteID
+  if (naturapeuteID)
+    invoiceContent.naturapeuteID = naturapeuteID
 
   delete invoiceContent.patient.id
 

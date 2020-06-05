@@ -1,5 +1,9 @@
 .aposto-form {
   padding: 16px;
+
+  :global(.connect-button) {
+    height: 52.5px;
+  }
 }
 
 .demo-hint {
