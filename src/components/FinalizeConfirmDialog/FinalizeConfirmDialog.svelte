@@ -1,12 +1,14 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { invoiceTimestamp, selectedPatient, user } from '../../js/store'
+  import { loading, selectedPatient, user } from '../../js/store'
+  import { previewInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import Checkbox from '../Checkbox/Checkbox.svelte'
   import Dialog from '../Dialog/Dialog.svelte'
+  import Snackbar from '../Snackbar/Snackbar.svelte'
 
-  export let invoiceContentBase64
+  export let invoiceContent
 
   export function open() {
     dialog.open()
@@ -17,8 +19,27 @@
   }
 
   let dialog
+  let errorSnackbar
   let donTShowAgain = false
   const dispatch = createEventDispatcher()
+
+  function onPreview() {
+    $loading = true
+
+    previewInvoice(invoiceContent)
+      .then(previewBlob => {
+        const previewURL = URL.createObjectURL(previewBlob)
+
+        window.open(previewURL, '_blank')
+      })
+      .catch(err => {
+        console.error(err)
+        errorSnackbar.open()
+      })
+      .finally(() => {
+        $loading = false
+      })
+  }
 
   function onConfirm() {
     if (donTShowAgain) window.localStorage.setItem('donTShowAgainConfirmSend', true)
@@ -56,19 +77,26 @@
       dialogAction="close" dialogInitialFocus>
       Revenir
     </Button>
-    <a class="mdc-button mdc-button--outlined mdc-dialog__button" title="Prévisualiser la facture"
-      target="_blank"
-      href="{process.env.API_URL}/pdf/{invoiceContentBase64}/facture-{$invoiceTimestamp}.pdf">
-      <div class="mdc-button__ripple"></div>
-      <span class="mdc-button__label">
-        Prévisualiser
-      </span>
-    </a>
+    <Button title="Prévisualiser la facture" outlined dialog on:click={onPreview}>
+      Prévisualiser
+    </Button>
     <Button title="Confirmer l'envoi de la facture" unelevated dialog dialogAction="accept"
       on:click={onConfirm}>
       Envoyer
     </Button>
   </div>
 </Dialog>
+
+<Snackbar bind:this={errorSnackbar}>
+  <span slot="label">
+    La génération de la facture pour la prévisualisation a échoué. Veuillez réessayer plus tard...
+  </span>
+
+  <div slot="actions">
+    <Button on:click={onPreview} title="Réessayer de prévisualiser la facture" snackbar>
+      Réessayer
+    </Button>
+  </div>
+</Snackbar>
 
 <style src="FinalizeConfirmDialog.scss"></style>
