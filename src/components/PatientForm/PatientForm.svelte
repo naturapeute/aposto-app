@@ -36,23 +36,15 @@
 <form class="aposto-form" on:submit|preventDefault={onPatientUpdatedOrCreated}>
   <div class="row row-xs">
     <div class="col col-50">
-      <TextField bind:value={localPatient.firstName} fieldID="patient-first-name"
-        maxlength="35" required helperText>
+      <TextField bind:value={localPatient.firstName} fieldID="patient-first-name" maxlength="35"
+        required>
         Prénom
-
-        <span slot="helper-text">
-          Le prénom du patient est limité à 35 caractères.
-        </span>
       </TextField>
     </div>
     <div class="col col-50">
-      <TextField bind:value={localPatient.lastName} fieldID="patient-last-name"
-        maxlength="35" required helperText>
+      <TextField bind:value={localPatient.lastName} fieldID="patient-last-name" maxlength="35"
+        required>
         Nom
-
-        <span slot="helper-text">
-          Le nom du patient est limité à 35 caractères.
-        </span>
       </TextField>
     </div>
   </div>
@@ -69,31 +61,16 @@
   <TextField bind:value={localPatient.email} type="email" fieldID="patient-email" required>
     Email
   </TextField>
-  <TextField bind:value={localPatient.street} fieldID="patient-street" maxlength="70" required
-    helperText>
+  <TextField bind:value={localPatient.street} fieldID="patient-street" maxlength="35" required>
     Rue et n°
-
-    <span slot="helper-text">
-      L'adresse postale du patient est limitée à 70 caractères.
-    </span>
   </TextField>
-  <TextField bind:value={localPatient.city} fieldID="patient-city" maxlength="35" required
-    helperText>
+  <TextField bind:value={localPatient.city} fieldID="patient-city" maxlength="35" required>
     Localité
-
-    <span slot="helper-text">
-      La ville du patient est limitée à 35 caractères.
-    </span>
   </TextField>
   <div class="row row-xs">
     <div class="col col-50">
-      <TextField bind:value={localPatient.ZIP} fieldID="patient-zip"
-        maxlength="16" required helperText>
+      <TextField bind:value={localPatient.ZIP} fieldID="patient-zip" maxlength="9" required>
         NPA
-
-        <span slot="helper-text">
-          Le code postal du patient est limité à 16 caractères.
-        </span>
       </TextField>
     </div>
     <Select className="col col-50" bind:value={localPatient.canton} fieldID="patient-canton"
