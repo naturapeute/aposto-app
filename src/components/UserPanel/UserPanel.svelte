@@ -142,6 +142,7 @@
   function onLogOut() {
     authenticationMode = true
     user.logOut()
+    $patients = []
     $selectedPatient = null
     $totalDuration = 0
     $selectedServices = []
