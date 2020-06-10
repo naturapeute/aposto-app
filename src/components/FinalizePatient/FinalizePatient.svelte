@@ -21,7 +21,7 @@ function onChangePatient() {
 }
 
 function onUpdatePatient() {
-    patientUpdateMode = true
+    patientUpdateMode = !patientUpdateMode
     patientSearchMode = false
 }
 
