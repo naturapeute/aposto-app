@@ -1,13 +1,12 @@
 <script>
   import {
-    invoiceTimestamp,
     loading,
     selectedPatient,
     selectedServices,
     totalDuration,
     user
   } from '../../js/store'
-  import { generateInvoiceContentBase64, sendInvoice } from '../../services/InvoiceService'
+  import { generateInvoiceContent, sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
@@ -21,7 +20,7 @@
   let confirmDialog
   let askConfirm = false
   let successSend = false
-  let invoiceContentBase64
+  let invoiceContent
 
   $: totalAmount = ($totalDuration / 60) * $user.servicePrice
   $: validationError = getValidationError($selectedPatient, $totalDuration, $selectedServices)
@@ -47,16 +46,13 @@
     const donTShowAgain = Boolean(window.localStorage.getItem('donTShowAgainConfirmSend'))
 
     if (!donTShowAgain || !askConfirm) {
-      $invoiceTimestamp = Date.now()
-
-      invoiceContentBase64 = generateInvoiceContentBase64(
+      invoiceContent = generateInvoiceContent(
         $user.naturapeuteID || '',
         $user.author,
         $user.therapist,
         $selectedPatient,
         $user.servicePrice,
-        $selectedServices,
-        $invoiceTimestamp
+        $selectedServices
       )
     }
 
@@ -72,11 +68,11 @@
     askConfirm = false
     $loading = true
 
-    sendInvoice(invoiceContentBase64)
+    sendInvoice(invoiceContent)
       .then(() => {
         successSend = true
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err)
         errorSnackbar.open()
       })
@@ -152,8 +148,7 @@
   </Snackbar>
 </form>
 
-<FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContentBase64}
-  on:confirm={onConfirmSend} />
+<FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContent} on:confirm={onConfirmSend} />
 
 {#if successSend}
   <SuccessSendScrim on:newInvoice={onNewInvoice} />
