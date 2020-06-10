@@ -12,6 +12,7 @@ function userCustomStore() {
       city: '',
       email: '',
       phone: '',
+      IBAN: '',
       RCC: ''
     },
     therapist: {
