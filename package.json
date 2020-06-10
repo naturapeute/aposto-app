@@ -58,7 +58,7 @@
     "rollup-plugin-terser": "^6.1.0",
     "sass": "^1.26.8",
     "svelte": "^3.23.1",
-    "svelte-preprocess": "^3.9.5"
+    "svelte-preprocess": "^3.9.7"
   },
   "dependencies": {
     "sirv-cli": "^0.4.6"
