@@ -40,42 +40,23 @@
   <div slot="summary">Auteur des factures</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$user.author.name} fieldID="author-name" maxlength="70" required
-        helperText>
+      <TextField bind:value={$user.author.name} fieldID="author-name" maxlength="70" required>
         Nom ou entreprise
-
-        <span slot="helper-text">
-          Le nom de l'auteur est limité à 70 caractères.
-        </span>
       </TextField>
-      <TextField bind:value={$user.author.street} fieldID="author-street" maxlength="70" required
-        helperText>
+      <TextField bind:value={$user.author.street} fieldID="author-street" maxlength="35" required>
         Rue et n°
-
-        <span slot="helper-text">
-          L'adresse postale de l'auteur est limitée à 70 caractères.
-        </span>
       </TextField>
-      <TextField bind:value={$user.author.ZIP} fieldID="author-zip" maxlength="16" required
-        helperText>
+      <TextField bind:value={$user.author.ZIP} fieldID="author-zip" maxlength="9" required>
         NPA
-
-        <span slot="helper-text">
-          Le code postal de l'auteur est limité à 16 caractères.
-        </span>
       </TextField>
-      <TextField bind:value={$user.author.city} fieldID="author-city" maxlength="35" required
-        helperText>
+      <TextField bind:value={$user.author.city} fieldID="author-city" maxlength="35" required>
         Localité
-
-        <span slot="helper-text">
-          La ville de l'auteur est limitée à 16 caractères.
-        </span>
       </TextField>
       <TextField bind:value={$user.author.email} type="email" fieldID="author-email" required>
         Email
       </TextField>
-      <TextField bind:value={$user.author.phone} type="tel" fieldID="author-phone" required>
+      <TextField bind:value={$user.author.phone} type="tel" fieldID="author-phone" maxlength="35"
+        required>
         Téléphone
       </TextField>
       <TextField bind:value={$user.author.RCC} type="tel" fieldID="author-rcc"
