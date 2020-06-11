@@ -64,7 +64,12 @@
     }
 
     drawer.listen('MDCDrawer:opened', () => {
-      document.querySelector('.mdc-icon-button').blur()
+      drawer.root_.querySelector('.mdc-icon-button').blur()
+
+      const input = drawer.root_.querySelector('input')
+
+      if (input)
+        input.focus()
     })
 
     const localStorageEmail = window.localStorage.getItem('naturapeuteEmail')
@@ -85,6 +90,9 @@
   })
 
   function onClose() {
+    if (authenticationMode)
+      return
+
     const isValidClose = formExpansionPanels.reduce((_isValidClose, formExpansionPanel) => {
       return _isValidClose && formExpansionPanel.instance.askClose()
     }, true)
