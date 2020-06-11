@@ -76,20 +76,20 @@
       // toggling the Material Drawer two times in a row. As the Material Drawer ignores toggle
       // action while opening or closing, it would leave the panel open when logged in from local
       // storage.
-      open = !isValidClose()
+      // In other cases (means authentication form), the panel must be open.
+      open = true
   })
 
   onDestroy(() => {
     if (drawer) drawer.destroy()
   })
 
-  function isValidClose() {
-    return isAuthorValid($user.author) && isTherapistValid($user.therapist) &&
-      isServicePriceValid($user.servicePrice) && isPreferredServicesValid($user.preferredServices)
-  }
-
   function onClose() {
-    if (isValidClose()) {
+    const isValidClose = formExpansionPanels.reduce((_isValidClose, formExpansionPanel) => {
+      return _isValidClose && formExpansionPanel.instance.askClose()
+    }, true)
+
+    if (isValidClose) {
       if (!user.isUpdated()) {
         open = false
         return
@@ -126,9 +126,25 @@
     }
   }
 
+  function isValidExpansionPanel(id) {
+    switch (id) {
+      case 'author-form-expansion-panel':
+        return isAuthorValid($user.author)
+      case 'therapist-form-expansion-panel':
+        return isTherapistValid($user.therapist)
+      case 'service-price-form-expansion-panel':
+        return isServicePriceValid($user.servicePrice)
+      case 'preferred-services-form-expansion-panel':
+        return isPreferredServicesValid($user.preferredServices)
+    }
+  }
+
   function onAuthenticationDone() {
     authenticationMode = false
-    onClose()
+
+    open = !formExpansionPanels.reduce((_isValidClose, formExpansionPanel) => {
+      return _isValidClose && isValidExpansionPanel(formExpansionPanel.id)
+    }, true)
   }
 
   function onExpansionPanelOpen(id) {
