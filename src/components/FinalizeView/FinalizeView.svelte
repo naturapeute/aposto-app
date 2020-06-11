@@ -6,7 +6,7 @@
     totalDuration,
     user
   } from '../../js/store'
-  import { generateInvoiceContent, sendInvoice } from '../../services/InvoiceService'
+  import { generateInvoiceContent, previewInvoice, sendInvoice } from '../../services/InvoiceService'
   import Button from '../Button/Button.svelte'
   import FinalizeConfirmDialog from '../FinalizeConfirmDialog/FinalizeConfirmDialog.svelte'
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
@@ -16,23 +16,29 @@
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
 
-  let errorSnackbar
+  let sendErrorSnackbar
+  let previewErrorSnackbar
+  let IBANErrorSnackbar
   let confirmDialog
   let askConfirm = false
+  let IBANError = false
   let successSend = false
   let invoiceContent
+
+  const NO_THERAPY_ERROR = 'noTherapy'
+  const REMAINING_DURATION_ERROR = 'remainingDuration'
 
   $: totalAmount = ($totalDuration / 60) * $user.servicePrice
   $: validationError = getValidationError($selectedPatient, $totalDuration, $selectedServices)
 
   function getValidationError(patient, totalDuration, selectedServices) {
     if (!selectedServices.length)
-      return 'Veuillez sélectionner au moins une thérapie.'
+      return NO_THERAPY_ERROR
 
     const usedDuration = selectedServices.reduce((total, service) => total + service.duration, 0)
 
     if (usedDuration !== totalDuration)
-      return 'Veuillez répartir l\'intégralité de votre séance entre les différentes thérapies réalisées.'
+      return REMAINING_DURATION_ERROR
 
     return ''
   }
@@ -64,8 +70,32 @@
       onConfirmSend()
   }
 
+  function onPreview() {
+    IBANError = false
+    $loading = true
+
+    previewInvoice(invoiceContent)
+      .then(previewBlob => {
+        const previewURL = URL.createObjectURL(previewBlob)
+
+        window.open(previewURL, '_blank')
+      })
+      .catch(err => {
+        console.error(err)
+
+        checkIBANError(err.message)
+
+        if (!IBANError)
+          previewErrorSnackbar.open()
+      })
+      .finally(() => {
+        $loading = false
+      })
+  }
+
   function onConfirmSend() {
     askConfirm = false
+    IBANError = false
     $loading = true
 
     sendInvoice(invoiceContent)
@@ -74,11 +104,31 @@
       })
       .catch(err => {
         console.error(err)
-        errorSnackbar.open()
+
+        checkIBANError(err.message)
+
+        if (!IBANError)
+          sendErrorSnackbar.open()
       })
       .finally(() => {
         $loading = false
       })
+  }
+
+  function checkIBANError(errMessage) {
+    try {
+      const errors = JSON.parse(errMessage)
+
+      errors.forEach(error => {
+        if (error.msg === 'IBAN checksum is invalid.')
+          IBANError = true
+      })
+    } catch (e) { }
+
+    if (IBANError) {
+      confirmDialog.close()
+      IBANErrorSnackbar.open()
+    }
   }
 
   function onNewInvoice() {
@@ -123,7 +173,11 @@
             send
           </IconButton>
           <p class="error-text" hidden={!validationError}>
-            {validationError}
+            {#if validationError === NO_THERAPY_ERROR}
+              Veuillez sélectionner au moins une thérapie.
+            {:else if validationError === REMAINING_DURATION_ERROR}
+              Veuillez répartir l'intégralité de votre séance entre les différentes thérapies réalisées.
+            {/if}
           </p>
         {/if}
       </div>
@@ -136,19 +190,37 @@
       </div>
     {/if}
   </div>
-  <Snackbar bind:this={errorSnackbar}>
-    <span slot="label">L'envoi de la facture a échoué. Veuillez réessayer plus tard...</span>
-
-    <div slot="actions">
-      <Button on:click={onSendInvoice} title="Réessayer d'envoyer la facture par mail au patient"
-        snackbar>
-        Réessayer
-      </Button>
-    </div>
-  </Snackbar>
 </form>
 
-<FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContent} on:confirm={onConfirmSend} />
+<Snackbar bind:this={sendErrorSnackbar}>
+  <span slot="label">L'envoi de la facture a échoué. Veuillez réessayer plus tard...</span>
+
+  <div slot="actions">
+    <Button on:click={onSendInvoice} title="Réessayer d'envoyer la facture par mail au patient"
+      snackbar>
+      Réessayer
+    </Button>
+  </div>
+</Snackbar>
+
+<Snackbar bind:this={previewErrorSnackbar}>
+  <span slot="label">
+    La génération de la facture pour la prévisualisation a échoué. Veuillez réessayer plus tard...
+  </span>
+
+  <div slot="actions">
+    <Button on:click={onPreview} title="Réessayer de prévisualiser la facture" snackbar>
+      Réessayer
+    </Button>
+  </div>
+</Snackbar>
+
+<Snackbar bind:this={IBANErrorSnackbar}>
+  <span slot="label">Vous avez renseigné un IBAN incorrect. Merci de le vérifier.</span>
+</Snackbar>
+
+<FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContent} on:confirm={onConfirmSend}
+  on:preview={onPreview} />
 
 {#if successSend}
   <SuccessSendScrim on:newInvoice={onNewInvoice} />

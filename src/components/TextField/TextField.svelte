@@ -17,7 +17,7 @@
   export let pattern = null
   export let title = null
   export let helperText = false
-  export let prefix
+  export let prefix = false
 
   let element
   let textField
