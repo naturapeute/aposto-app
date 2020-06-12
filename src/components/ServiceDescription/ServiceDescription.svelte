@@ -3,7 +3,7 @@
   import { cubicOut } from 'svelte/easing'
   import { tweened } from 'svelte/motion'
 
-  import { totalDuration, user } from '../../js/store'
+  import { remainingDuration, totalDuration, user } from '../../js/store'
   import { customFade, growShrink } from '../../js/transitions'
   import { range, getServiceHeight, getServiceLightLabel } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
@@ -13,7 +13,6 @@
 
   export let service
   export let serviceEditModeId
-  export let maxDuration
 
   let serviceElement
   let serviceFormElement
@@ -26,7 +25,7 @@
   $: editMode = service.id === serviceEditModeId
   $: if (!editMode)
     serviceHeight.set(getServiceHeight(service.duration, $totalDuration))
-  $: durations = [...range(5, maxDuration + service.duration, 5)]
+  $: durations = [...range(5, $remainingDuration + service.duration, 5)]
   $: serviceLightLabel = getServiceLightLabel(service.code)
 
   function onMaybeClickOut(e) {

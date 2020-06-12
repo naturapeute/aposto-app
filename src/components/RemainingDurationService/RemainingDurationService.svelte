@@ -3,12 +3,10 @@
   import { cubicOut } from 'svelte/easing'
   import { tweened } from 'svelte/motion'
 
-  import { selectedServices, totalDuration } from '../../js/store'
+  import { remainingDuration, selectedServices, totalDuration } from '../../js/store'
   import { growShrink } from '../../js/transitions'
   import { getServiceHeight } from '../../js/utils'
   import Chip from '../Chip/Chip.svelte'
-
-  export let remainingDuration
 
   let serviceRemainingElement
   const remainingHeight = tweened(0, {
@@ -17,7 +15,7 @@
   })
   const dispatch = createEventDispatcher()
 
-  $: remainingHeight.set(getServiceHeight(remainingDuration, $totalDuration))
+  $: remainingHeight.set(getServiceHeight($remainingDuration, $totalDuration))
 
   function onAddService() {
     dispatch('addService')

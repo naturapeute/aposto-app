@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, derived } from 'svelte/store'
 
 import { serviceColors } from './utils'
 
@@ -81,10 +81,41 @@ function totalDurationCustomStore(initValue) {
   return { subscribe, set: setOnChange, update, hasReduced }
 }
 
+function selectedServicesCustomStore(initValue) {
+  const { subscribe, set, update } = writable(initValue)
+
+  function addService(id, code, duration, color) {
+    return update(actualValue => [
+      ...actualValue,
+      { id, code, duration, color }
+    ])
+  }
+
+  function deleteService(id) {
+    return update(actualValue =>
+      actualValue.reduce((newValue, service) => {
+        if (service.id === id) return newValue
+
+        return [...newValue, service]
+      }, [])
+    )
+  }
+
+  return { subscribe, set, update, addService, deleteService }
+}
+
 export const user = userCustomStore()
 export const patients = writable([])
 export const totalDuration = totalDurationCustomStore(0)
 export const selectedPatient = writable(null)
-export const selectedServices = writable([])
+export const selectedServices = selectedServicesCustomStore([])
+export const remainingDuration = derived(
+  [totalDuration, selectedServices],
+  ([$totalDuration, $selectedServices]) => {
+    const usedDuration = $selectedServices.reduce((total, service) => total + service.duration, 0)
+
+    return $totalDuration - usedDuration
+  }
+)
 
 export const loading = writable(false)

@@ -1,6 +1,7 @@
 <script>
   import {
     loading,
+    remainingDuration,
     selectedPatient,
     selectedServices,
     totalDuration,
@@ -12,6 +13,7 @@
   import FinalizePatient from '../FinalizePatient/FinalizePatient.svelte'
   import FinalizeTherapyDescription
     from '../FinalizeTherapyDescription/FinalizeTherapyDescription.svelte'
+  import FinalizeTotalDuration from '../FinalizeTotalDuration/FinalizeTotalDuration.svelte'
   import IconButton from '../IconButton/IconButton.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
@@ -29,9 +31,7 @@
     if (!selectedServices.length)
       return 'Veuillez sélectionner au moins une thérapie.'
 
-    const usedDuration = selectedServices.reduce((total, service) => total + service.duration, 0)
-
-    if (usedDuration !== totalDuration)
+    if (remainingDuration)
       return 'Veuillez répartir l\'intégralité de votre séance entre les différentes thérapies réalisées.'
 
     return ''
@@ -99,6 +99,7 @@
     </li>
     {#if $selectedPatient}
       <li class="mdc-card">
+        <FinalizeTotalDuration />
         <FinalizeTherapyDescription />
       </li>
       {#if totalAmount}

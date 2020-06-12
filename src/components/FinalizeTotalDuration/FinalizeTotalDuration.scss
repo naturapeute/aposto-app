@@ -1,0 +1,15 @@
+.total-duration {
+  margin-bottom: 16px;
+
+  .aposto-form {
+    width: 100%;
+
+    :global(.total-duration-input.mdc-text-field--outlined) {
+      height: 40px;
+    }
+  }
+
+  :global(.mdc-icon-button) {
+    margin-left: 16px;
+  }
+}
