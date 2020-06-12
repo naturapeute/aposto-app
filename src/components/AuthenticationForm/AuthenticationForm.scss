@@ -1,8 +1,12 @@
+@use "aposto-theme" as *;
+
 .aposto-form {
   padding: 16px;
 
-  :global(.connect-button) {
-    height: 52.5px;
+  @media (max-width: $xlarge-width-breakpoint - 1) {
+    :global(.connect-button) {
+      height: 52.5px;
+    }
   }
 }
 
@@ -10,4 +14,10 @@
   font-size: 12px;
   margin-top: 8px;
   line-height: normal;
+}
+
+@media (min-width: $xlarge-width-breakpoint) {
+  .aposto-form {
+    padding: 16px 150px;
+  }
 }

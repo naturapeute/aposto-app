@@ -41,3 +41,9 @@
     width: 320px;
   }
 }
+
+@media (min-width: $xlarge-width-breakpoint) {
+  .mdc-drawer {
+    width: 640px;
+  }
+}

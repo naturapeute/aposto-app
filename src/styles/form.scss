@@ -78,4 +78,40 @@
       }
     }
   }
+
+  @media (min-width: $xlarge-width-breakpoint) {
+    .row-xl {
+      flex-direction: row;
+
+      .mdc-text-field,
+      .mdc-select,
+      .mdc-text-field-helper-line {
+        margin: 0;
+      }
+
+      .col {
+        margin: 0 8px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .col-40 {
+        width: 40%;
+      }
+
+      .col-50 {
+        width: 50%;
+      }
+
+      .col-60 {
+        width: 60%;
+      }
+    }
+  }
 }

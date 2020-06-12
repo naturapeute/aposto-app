@@ -35,18 +35,14 @@
 
 <form class="aposto-form" on:submit|preventDefault={onPatientUpdatedOrCreated}>
   <div class="row row-xs">
-    <div class="col col-50">
-      <TextField bind:value={localPatient.firstName} fieldID="patient-first-name" maxlength="35"
-        required>
-        Prénom
-      </TextField>
-    </div>
-    <div class="col col-50">
-      <TextField bind:value={localPatient.lastName} fieldID="patient-last-name" maxlength="35"
-        required>
-        Nom
-      </TextField>
-    </div>
+    <TextField className="col col-50" bind:value={localPatient.firstName}
+      fieldID="patient-first-name" maxlength="35" required>
+      Prénom
+    </TextField>
+    <TextField className="col col-50" bind:value={localPatient.lastName}
+      fieldID="patient-last-name" maxlength="35" required>
+      Nom
+    </TextField>
   </div>
   <div class="row row-xs">
     <TextField className="col col-60" bind:value={localPatient.birthday} type="date"
@@ -68,11 +64,10 @@
     Localité
   </TextField>
   <div class="row row-xs">
-    <div class="col col-50">
-      <TextField bind:value={localPatient.ZIP} fieldID="patient-zip" maxlength="9" required>
-        NPA
-      </TextField>
-    </div>
+    <TextField className="col col-50" bind:value={localPatient.ZIP} fieldID="patient-zip"
+      maxlength="9" required>
+      NPA
+    </TextField>
     <Select className="col col-50" bind:value={localPatient.canton} fieldID="patient-canton"
       options={getCantonOptions()} required>
       Canton

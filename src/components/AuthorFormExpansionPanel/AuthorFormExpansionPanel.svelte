@@ -46,19 +46,26 @@
       <TextField bind:value={$user.author.street} fieldID="author-street" maxlength="35" required>
         Rue et n°
       </TextField>
-      <TextField bind:value={$user.author.ZIP} fieldID="author-zip" maxlength="9" required>
-        NPA
-      </TextField>
-      <TextField bind:value={$user.author.city} fieldID="author-city" maxlength="35" required>
-        Localité
-      </TextField>
-      <TextField bind:value={$user.author.email} type="email" fieldID="author-email" required>
-        Email
-      </TextField>
-      <TextField bind:value={$user.author.phone} type="tel" fieldID="author-phone" maxlength="35"
-        required>
-        Téléphone
-      </TextField>
+      <div class="row row-xl">
+        <TextField className="col col-40" bind:value={$user.author.ZIP} fieldID="author-zip"
+          maxlength="9" required>
+          NPA
+        </TextField>
+        <TextField className="col col-60" bind:value={$user.author.city} fieldID="author-city"
+          maxlength="35" required>
+          Localité
+        </TextField>
+      </div>
+      <div class="row row-xl">
+        <TextField className="col col-60" bind:value={$user.author.email} type="email"
+          fieldID="author-email" required>
+          Email
+        </TextField>
+        <TextField className="col col-40" bind:value={$user.author.phone} type="tel"
+          fieldID="author-phone" maxlength="35" required>
+          Téléphone
+        </TextField>
+      </div>
       <TextField bind:value={$user.author.RCC} type="tel" fieldID="author-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
         pattern="[A-Z][0-9]&#123;6&#125;" helperText>

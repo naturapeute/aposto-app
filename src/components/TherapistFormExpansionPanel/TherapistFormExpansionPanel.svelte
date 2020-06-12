@@ -40,24 +40,30 @@
   <div slot="summary">Thérapeute</div>
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
-      <TextField bind:value={$user.therapist.firstName} fieldID="therapist-first-name"
-        maxlength="35" required>
-        Prénom
-      </TextField>
-      <TextField bind:value={$user.therapist.lastName} fieldID="therapist-last-name" maxlength="35"
-        required>
-        Nom
-      </TextField>
+      <div class="row row-xl">
+        <TextField className="col col-50" bind:value={$user.therapist.firstName}
+          fieldID="therapist-first-name" maxlength="35" required>
+          Prénom
+        </TextField>
+        <TextField className="col col-50" bind:value={$user.therapist.lastName}
+          fieldID="therapist-last-name" maxlength="35" required>
+          Nom
+        </TextField>
+      </div>
       <TextField bind:value={$user.therapist.street} fieldID="therapist-street" maxlength="35"
         required>
         Rue et n°
       </TextField>
-      <TextField bind:value={$user.therapist.ZIP} fieldID="therapist-zip" maxlength="9" required>
-        NPA
-      </TextField>
-      <TextField bind:value={$user.therapist.city} fieldID="therapist-city" maxlength="35" required>
-        Localité
-      </TextField>
+      <div class="row row-xl">
+        <TextField className="col col-40" bind:value={$user.therapist.ZIP} fieldID="therapist-zip"
+          maxlength="9" required>
+          NPA
+        </TextField>
+        <TextField className="col col-60" bind:value={$user.therapist.city}
+          fieldID="therapist-city" maxlength="35" required>
+          Localité
+        </TextField>
+      </div>
       <TextField bind:value={$user.therapist.phone} type="tel" fieldID="therapist-phone"
         maxlength="25" required>
         Téléphone

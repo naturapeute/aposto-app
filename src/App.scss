@@ -20,3 +20,9 @@ main {
     min-height: calc(100vh - 164px);
   }
 }
+
+@media (min-width: $xlarge-width-breakpoint) {
+  main {
+    max-width: 600px;
+  }
+}
