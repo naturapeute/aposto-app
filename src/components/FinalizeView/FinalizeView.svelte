@@ -31,7 +31,7 @@
     if (!selectedServices.length)
       return 'Veuillez sélectionner au moins une thérapie.'
 
-    if (remainingDuration)
+    if ($remainingDuration)
       return 'Veuillez répartir l\'intégralité de votre séance entre les différentes thérapies réalisées.'
 
     return ''
