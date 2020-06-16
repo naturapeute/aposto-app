@@ -6,7 +6,7 @@
     loading,
     patients
   } from '../../js/store'
-  import { authenticate } from '../../services/UserService'
+  import { authenticate, saveUser } from '../../services/UserService'
   import Button from '../Button/Button.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import TextField from '../TextField/TextField.svelte'
@@ -80,8 +80,33 @@
       body.extraData.preferredServices &&
         ($user.preferredServices = body.extraData.preferredServices.map(e => ({ ...e })))
 
-      body.extraData.patients &&
-        ($patients = body.extraData.patients.map(e => ({ ...e })))
+      if (body.extraData.patients) {
+        $patients = body.extraData.patients.map(e => ({ ...e }))
+
+        // NOTE : "birthdate" key has been renamed in "birthday". This code is necessary for a
+        // while to update all patients stored in the Naturapeute database
+        let hasBirthdate = false
+
+        $patients.forEach(patient => {
+          if ('birthdate' in patient) {
+            patient.birthday = patient.birthdate
+            delete patient.birthdate
+
+            hasBirthdate = true
+          }
+        })
+
+        if (hasBirthdate) {
+          saveUser(
+            $user.naturapeuteID,
+            $user.author,
+            $user.therapist,
+            $user.servicePrice,
+            $user.preferredServices,
+            $patients
+          )
+        }
+      }
     }
   }
 
