@@ -59,6 +59,7 @@
         body.extraData.author.city && ($user.author.city = body.extraData.author.city)
         body.extraData.author.email && ($user.author.email = body.extraData.author.email)
         body.extraData.author.phone && ($user.author.phone = body.extraData.author.phone)
+        body.extraData.author.IBAN && ($user.author.IBAN = body.extraData.author.IBAN)
         body.extraData.author.RCC && ($user.author.RCC = body.extraData.author.RCC)
       }
 

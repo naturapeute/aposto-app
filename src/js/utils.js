@@ -32,7 +32,7 @@ export function isAuthorValid(author) {
     author.name && author.name.length <= 70 && author.street && author.street.length <= 35 &&
     author.ZIP && author.ZIP.length <= 9 && author.city && author.city.length <= 35 &&
     isEmailValid(author.email) && author.phone && author.phone.length <= 25 &&
-    isRCCValid(author.RCC)
+    isIBANValid(author.IBAN) && isRCCValid(author.RCC)
   )
 }
 
@@ -68,8 +68,12 @@ function isEmailValid(email) {
   return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
 }
 
+function isIBANValid(IBAN) {
+  return IBAN.match(/^((?!.)|[0-9]{19})$/)
+}
+
 function isRCCValid(RCC) {
-  return RCC.match(/(^(?!.)|[A-Z][0-9]{6})/)
+  return RCC.match(/^((?!.)|[A-Z][0-9]{6})$/)
 }
 
 function isCantonValid(canton) {

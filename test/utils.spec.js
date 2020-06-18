@@ -39,6 +39,7 @@ describe('utils', () => {
       city: 'San Antonio',
       email: 'gaery0@over-blog.com',
       phone: '5164459701',
+      IBAN: '1234567890123456789',
       RCC: 'V123123'
     }
 
@@ -99,6 +100,14 @@ describe('utils', () => {
     it('should invalidate an author object with an empty phone number', () => {
       assert.equal(isAuthorValid({ ...author, phone: '' }), false)
     })
+    it('should validate an author object with an empty IBAN number', () => {
+      assert.equal(isAuthorValid({ ...author, IBAN: '' }), true)
+    })
+    it('should invalidate an author object with a wrongly formatted IBAN number', () => {
+      assert.equal(isAuthorValid({ ...author, IBAN: '123456789012345678' }), false)
+      assert.equal(isAuthorValid({ ...author, IBAN: '12345678901234567890' }), false)
+      assert.equal(isAuthorValid({ ...author, IBAN: 'AAAAAAAAAAAAAAAAAAA' }), false)
+    })
     it('should validate an author object with an empty RCC number', () => {
       assert.equal(isAuthorValid({ ...author, RCC: '' }), true)
     })
@@ -106,6 +115,7 @@ describe('utils', () => {
       assert.equal(isAuthorValid({ ...author, RCC: 'V123' }), false)
       assert.equal(isAuthorValid({ ...author, RCC: '1231231' }), false)
       assert.equal(isAuthorValid({ ...author, RCC: 'VVVVVVV' }), false)
+      assert.equal(isAuthorValid({ ...author, RCC: 'V1231231' }), false)
     })
   })
 
@@ -151,6 +161,7 @@ describe('utils', () => {
       assert.equal(isTherapistValid({ ...therapist, RCC: 'V123' }), false)
       assert.equal(isTherapistValid({ ...therapist, RCC: '1231231' }), false)
       assert.equal(isTherapistValid({ ...therapist, RCC: 'VVVVVVV' }), false)
+      assert.equal(isTherapistValid({ ...therapist, RCC: 'V1231231' }), false)
     })
   })
 

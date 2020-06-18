@@ -68,7 +68,7 @@
         maxlength="25" required>
         Téléphone
       </TextField>
-      <TextField bind:value={$user.therapist.RCC} type="tel" fieldID="therapist-rcc"
+      <TextField bind:value={$user.therapist.RCC} fieldID="therapist-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
         pattern="[A-Z][0-9]&#123;6&#125;" helperText>
         N°RCC

@@ -17,7 +17,7 @@
   export let pattern = null
   export let title = null
   export let helperText = false
-  export let noLabel = false
+  export let prefix = false
 
   let element
   let textField
@@ -58,9 +58,14 @@
 
 <label bind:this={element} class="mdc-text-field {className}"
   class:mdc-text-field--filled={!outlined} class:mdc-text-field--outlined={outlined}
-  class:mdc-text-field--with-trailing-icon={trailingIcon} class:mdc-text-field--no-label={noLabel}>
+  class:mdc-text-field--with-trailing-icon={trailingIcon}>
   {#if !outlined}
     <div class="mdc-text-field__ripple"></div>
+  {/if}
+  {#if prefix}
+    <span class="mdc-text-field__affix mdc-text-field__affix--prefix">
+      <slot name="prefix"></slot>
+    </span>
   {/if}
   <input {value} {type} class="mdc-text-field__input" id={fieldID} {placeholder} name={fieldID}
     aria-labelledby={fieldID} aria-controls={helperText ? helperTextID : ''}
@@ -75,21 +80,17 @@
   {#if outlined}
     <div class="mdc-notched-outline">
       <div class="mdc-notched-outline__leading"></div>
-      {#if !noLabel}
-        <div class="mdc-notched-outline__notch">
-          <span class="mdc-floating-label" id={fieldID}>
-            <slot></slot>
-          </span>
-        </div>
-      {/if}
+      <div class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id={fieldID}>
+          <slot></slot>
+        </span>
+      </div>
       <div class="mdc-notched-outline__trailing"></div>
     </div>
   {:else}
-    {#if !noLabel}
-      <span class="mdc-floating-label" id={fieldID}>
-        <slot></slot>
-      </span>
-    {/if}
+    <span class="mdc-floating-label" id={fieldID}>
+      <slot></slot>
+    </span>
     <div class="mdc-line-ripple"></div>
   {/if}
 </label>

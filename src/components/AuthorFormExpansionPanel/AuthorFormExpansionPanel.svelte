@@ -66,6 +66,13 @@
           Téléphone
         </TextField>
       </div>
+      <TextField bind:value={$user.author.IBAN} fieldID="author-iban"
+        title="Un IBAN ou un QR-IBAN est composé des lettres CH et d'une suite de 19 chiffres"
+        pattern="[0-9]&#123;19&#125;" prefix>
+        IBAN ou QR-IBAN
+
+        <span slot="prefix">CH</span>
+      </TextField>
       <TextField bind:value={$user.author.RCC} type="tel" fieldID="author-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
         pattern="[A-Z][0-9]&#123;6&#125;" helperText>

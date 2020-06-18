@@ -54,7 +54,7 @@ export function generateInvoiceContent(
   })
 
   const invoiceContent = {
-    author: { ...author },
+    author: { ...author, IBAN: `CH${author.IBAN}` },
     therapist: { ...therapist },
     patient: { ...patient },
     servicePrice,
@@ -73,11 +73,9 @@ export function generateInvoiceContent(
 
   delete invoiceContent.patient.id
 
-  /**
-   * FIXME : The API does not support negative JavaScript timestamps for now.
-   *          Remove this code once it is supported.
-   *          See https://github.com/samuelcolvin/pydantic/issues/1600
-   */
+  // FIXME : The API does not support negative JavaScript timestamps for now.
+  //          Remove this code once it is supported.
+  //          See https://github.com/samuelcolvin/pydantic/issues/1600
   if (invoiceContent.patient.birthday < 0)
     invoiceContent.patient.birthday /= 1000
 
