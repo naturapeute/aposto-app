@@ -22,6 +22,7 @@
 @use "@material/checkbox/mdc-checkbox";
 @use "@material/snackbar/mdc-snackbar";
 @use "@material/textfield/helper-text/mdc-text-field-helper-text";
+@use "@material/switch/mdc-switch";
 
 p {
   @extend .mdc-typography--body1;
