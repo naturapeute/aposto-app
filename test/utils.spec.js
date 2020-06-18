@@ -100,8 +100,8 @@ describe('utils', () => {
     it('should invalidate an author object with an empty phone number', () => {
       assert.equal(isAuthorValid({ ...author, phone: '' }), false)
     })
-    it('should validate an author object with an empty IBAN number', () => {
-      assert.equal(isAuthorValid({ ...author, IBAN: '' }), true)
+    it('should invalidate an author object with an empty IBAN number', () => {
+      assert.equal(isAuthorValid({ ...author, IBAN: '' }), false)
     })
     it('should invalidate an author object with a wrongly formatted IBAN number', () => {
       assert.equal(isAuthorValid({ ...author, IBAN: '123456789012345678' }), false)

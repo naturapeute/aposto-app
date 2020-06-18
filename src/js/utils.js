@@ -69,7 +69,7 @@ function isEmailValid(email) {
 }
 
 function isIBANValid(IBAN) {
-  return IBAN.match(/^((?!.)|[0-9]{19})$/)
+  return IBAN.match(/^[0-9]{19}$/)
 }
 
 function isRCCValid(RCC) {
