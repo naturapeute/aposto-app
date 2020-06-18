@@ -17,7 +17,9 @@
   import IconButton from '../IconButton/IconButton.svelte'
   import Snackbar from '../Snackbar/Snackbar.svelte'
   import SuccessSendScrim from '../SuccessSendScrim/SuccessSendScrim.svelte'
+  import Switch from '../Switch/Switch.svelte'
 
+  let paid = false
   let sendErrorSnackbar
   let previewErrorSnackbar
   let IBANErrorSnackbar
@@ -58,7 +60,8 @@
         $user.therapist,
         $selectedPatient,
         $user.servicePrice,
-        $selectedServices
+        $selectedServices,
+        paid
       )
     }
 
@@ -153,13 +156,18 @@
         <FinalizeTherapyDescription />
       </li>
       {#if totalAmount}
-        <li class="mdc-card">
+        <li class="mdc-card finalize-total-amount">
           <p class="finalize-p">
             <i class="material-icons-outlined">monetization_on</i>
             <strong class="typography--button-inline">
               {totalAmount.toFixed(2)}CHF
             </strong>
           </p>
+          <div class="switch-wrapper">
+            <Switch bind:checked={paid} switchId="paid-switch">
+              Payé
+            </Switch>
+          </div>
         </li>
       {/if}
     {/if}

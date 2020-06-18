@@ -13,6 +13,14 @@
   }
 }
 
+.finalize-total-amount {
+  flex-direction: column;
+}
+
+.switch-wrapper {
+  margin-top: 16px;
+}
+
 .submit-buttons-container {
   margin-top: 24px;
   width: 100%;
@@ -80,5 +88,17 @@ $submit-button-icon-size: 32;
     font-size: #{$submit-button-icon-size}px;
     width: #{$submit-button-icon-size}px;
     height: #{$submit-button-icon-size}px;
+  }
+}
+
+@media (min-width: $xsmall-width-breakpoint) {
+  .finalize-total-amount {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .switch-wrapper {
+    width: 40%;
+    margin-top: 0;
   }
 }

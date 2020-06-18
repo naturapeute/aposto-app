@@ -43,7 +43,8 @@ export function generateInvoiceContent(
   therapist,
   patient,
   servicePrice,
-  services
+  services,
+  paid
 ) {
   const APIServices = services.map(e => ({ ...e }))
 
@@ -59,7 +60,8 @@ export function generateInvoiceContent(
     patient: { ...patient },
     servicePrice,
     services: APIServices,
-    timestamp: Date.now()
+    timestamp: Date.now(),
+    paid
   }
 
   if (naturapeuteID)
