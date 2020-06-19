@@ -16,8 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/etceterra/aposto-app.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "mlbiche",
+  "license": "CC-BY-NC-SA-4.0",
   "bugs": {
     "url": "https://github.com/etceterra/aposto-app/issues"
   },

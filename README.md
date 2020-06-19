@@ -53,3 +53,7 @@ For the first time you are deploying the Web application, run the following comm
 
 Then, from the project root folder, whenever you want to deploy the Web application, simply run `npm run deploy` or `npm run build-deploy` if you want to build and deploy.
 
+## License
+
+[![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)<br />
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
