@@ -22,10 +22,8 @@
   let paid = false
   let sendErrorSnackbar
   let previewErrorSnackbar
-  let IBANErrorSnackbar
   let confirmDialog
   let askConfirm = false
-  let IBANError = false
   let successSend = false
   let invoiceContent
 
@@ -74,7 +72,6 @@
   }
 
   function onPreview() {
-    IBANError = false
     $loading = true
 
     previewInvoice(invoiceContent)
@@ -86,10 +83,7 @@
       .catch(err => {
         console.error(err)
 
-        checkIBANError(err.message)
-
-        if (!IBANError)
-          previewErrorSnackbar.open()
+        previewErrorSnackbar.open()
       })
       .finally(() => {
         $loading = false
@@ -98,7 +92,6 @@
 
   function onConfirmSend() {
     askConfirm = false
-    IBANError = false
     $loading = true
 
     sendInvoice(invoiceContent)
@@ -108,30 +101,11 @@
       .catch(err => {
         console.error(err)
 
-        checkIBANError(err.message)
-
-        if (!IBANError)
-          sendErrorSnackbar.open()
+        sendErrorSnackbar.open()
       })
       .finally(() => {
         $loading = false
       })
-  }
-
-  function checkIBANError(errMessage) {
-    try {
-      const errors = JSON.parse(errMessage)
-
-      errors.forEach(error => {
-        if (error.msg === 'IBAN checksum is invalid.')
-          IBANError = true
-      })
-    } catch (e) { }
-
-    if (IBANError) {
-      confirmDialog.close()
-      IBANErrorSnackbar.open()
-    }
   }
 
   function onNewInvoice() {
@@ -222,10 +196,6 @@
       Réessayer
     </Button>
   </div>
-</Snackbar>
-
-<Snackbar bind:this={IBANErrorSnackbar}>
-  <span slot="label">Vous avez renseigné un IBAN incorrect. Merci de le vérifier.</span>
 </Snackbar>
 
 <FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContent} on:confirm={onConfirmSend}

@@ -1,3 +1,5 @@
+import bigInt from 'big-integer'
+
 export function getServiceLightLabel(code) {
   const match = serviceCodes.find(serviceCode => serviceCode.code === code)
 
@@ -68,8 +70,9 @@ function isEmailValid(email) {
   return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
 }
 
-function isIBANValid(IBAN) {
-  return IBAN.match(/^[0-9]{19}$/)
+export function isIBANValid(IBAN) {
+  return IBAN.match(/^[0-9]{19}$/) &&
+    (98 - bigInt(`${IBAN.slice(2)}121700`).mod(97).toJSNumber()) === parseInt(IBAN.slice(0, 2))
 }
 
 function isRCCValid(RCC) {

@@ -69,8 +69,8 @@
   {/if}
   <input {value} {type} class="mdc-text-field__input" id={fieldID} {placeholder} name={fieldID}
     aria-labelledby={fieldID} aria-controls={helperText ? helperTextID : ''}
-    aria-describedby={helperText ? helperTextID : ''} {title} on:input={onInput} {min} {step} {pattern}
-    {maxlength} {required} autocomplete={noAutoComplete ? 'off' : ''}>
+    aria-describedby={helperText ? helperTextID : ''} {title} on:input={onInput} {min} {step}
+    {pattern} {maxlength} {required} autocomplete={noAutoComplete ? 'off' : ''}>
   {#if trailingIcon}
     <i class="material-icons-outlined mdc-text-field__icon mdc-text-field__icon--trailing"
       tabindex="0" role="button" on:click={onTrailingIconClick}>

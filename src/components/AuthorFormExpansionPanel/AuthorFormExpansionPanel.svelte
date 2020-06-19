@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte'
 
   import { user } from '../../js/store'
-  import { isAuthorValid } from '../../js/utils'
+  import { isAuthorValid, isIBANValid } from '../../js/utils'
   import Button from '../Button/Button.svelte'
   import ExpansionPanel from '../ExpansionPanel/ExpansionPanel.svelte'
   import TextField from '../TextField/TextField.svelte'
@@ -12,8 +12,16 @@
   export function askClose() {
     if (isAuthorValid($user.author))
       open = false
-    else
+    else {
+      const IBANInput = document.querySelector('#author-iban')
+
+      if (!isIBANValid(IBANInput.value))
+        IBANInput.setCustomValidity('Votre IBAN ou QR-IBAN est incorrect. Merci de le vérifier.')
+      else
+        IBANInput.setCustomValidity('')
+
       submitButtonElement.click()
+    }
 
     return !open
   }

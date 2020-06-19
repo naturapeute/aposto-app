@@ -39,7 +39,7 @@ describe('utils', () => {
       city: 'San Antonio',
       email: 'gaery0@over-blog.com',
       phone: '5164459701',
-      IBAN: '1234567890123456789',
+      IBAN: '5131234567890123456',
       RCC: 'V123123'
     }
 
@@ -107,6 +107,9 @@ describe('utils', () => {
       assert.equal(isAuthorValid({ ...author, IBAN: '123456789012345678' }), false)
       assert.equal(isAuthorValid({ ...author, IBAN: '12345678901234567890' }), false)
       assert.equal(isAuthorValid({ ...author, IBAN: 'AAAAAAAAAAAAAAAAAAA' }), false)
+    })
+    it('should invalidate an author object with a wrong IBAN checksum', () => {
+      assert.equal(isAuthorValid({ ...author, IBAN: '1234567890123456789' }), false)
     })
     it('should validate an author object with an empty RCC number', () => {
       assert.equal(isAuthorValid({ ...author, RCC: '' }), true)
