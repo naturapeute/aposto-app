@@ -1,10 +1,12 @@
 # aposto-app
 
-Aposto is a 💸 free, 🌱 light, ✨ easy-to-use and 📖 open-source billing software dedicated to Swiss therapist. It allows generating invoices in compliance with new standard Tarif 590 in a few seconds.
+Aposto is a 💸 free, 🌱 light, ✨ easy-to-use and 📖 open-source billing software dedicated to Swiss therapist. It allows generating invoices in compliance with new standard Tarif 590 and QR-invoice in a few seconds.
 
 🔥 Aposto is already online on [app.aposto.ch](https://app.aposto.ch/). Find a full introduction to its features on [aposto.ch](https://aposto.ch/).
 
 🇫🇷 Note that Aposto is currently only available in French.
+
+📽 Visit [Naturapeute PeerTube channel](https://peertube.club/video-channels/naturapeute_videos/videos) and watch introduction videos on Aposto _(only in 🇫🇷)_.
 
 This repository contains the Aposto Web application. You can use it to 🧾 generate and 💌 send the PDF invoice by email to the patient and the therapist using [SendInBlue](https://fr.sendinblue.com/) mailing service.
 

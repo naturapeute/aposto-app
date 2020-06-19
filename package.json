@@ -1,7 +1,7 @@
 {
   "name": "aposto-app",
   "version": "1.0.0",
-  "description": "Logiciel de facturation Tarif 590 pour les thérapeutes en Suisse. http://app.aposto.ch",
+  "description": "Aposto is a free, light, easy-to-use and open-source billing software dedicated to Swiss therapist. It allows generating invoices in compliance with new standard Tarif 590 and QR-invoice in a few seconds. app.aposto.ch",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
