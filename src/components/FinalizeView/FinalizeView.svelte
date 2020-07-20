@@ -198,7 +198,7 @@
   </div>
 </Snackbar>
 
-<FinalizeConfirmDialog bind:this={confirmDialog} {invoiceContent} on:confirm={onConfirmSend}
+<FinalizeConfirmDialog bind:this={confirmDialog} on:confirm={onConfirmSend}
   on:preview={onPreview} />
 
 {#if successSend}

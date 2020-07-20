@@ -13,7 +13,8 @@ module.exports = (production) => ({
       includePaths: [
         './src/styles',
         './node_modules'
-      ]
+      ],
+      implementation: require('sass')
     }),
     globalStyle()
   ]
