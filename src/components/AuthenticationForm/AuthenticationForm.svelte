@@ -116,7 +116,8 @@
   }
 
   function onAuthenticationDone() {
-    if (!window.localStorage.getItem('naturapeuteEmail'))
+    console.log('Coucou')
+    if (email && !window.localStorage.getItem('naturapeuteEmail'))
       window.localStorage.setItem('naturapeuteEmail', email)
 
     dispatch('done')
