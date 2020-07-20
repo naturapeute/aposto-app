@@ -155,6 +155,15 @@
     }, true)
   }
 
+  function onAuthenticationFailed() {
+    // NOTE : When the component try to authenticate and it fails (i.e. the account has been
+    // deleted), the user panel has to be open. When it occurs in the onMount component method, the
+    // panel is by default closed to avoid Material Web Components issue (see NOTE line 80). So when
+    // the authentication from the email written in the local storage in onMount method, fails, the
+    // panel has to be opened so the user can retry authenticating.
+    open = true
+  }
+
   function onExpansionPanelOpen(id) {
     formExpansionPanels.forEach(formExpansionPanel => {
       if (formExpansionPanel.id === id) return
@@ -186,12 +195,14 @@
   <hr class="mdc-list-divider">
   <div class="mdc-drawer__content">
     {#if authenticationMode}
-      <AuthenticationForm bind:this={authenticationForm} on:done={onAuthenticationDone} />
+      <AuthenticationForm bind:this={authenticationForm} on:done={onAuthenticationDone}
+        on:failed={onAuthenticationFailed} />
     {:else}
       <ExpansionPanelSet>
         {#each formExpansionPanels as formExpansionPanel (formExpansionPanel.id)}
-          <svelte:component this={formExpansionPanel.component} bind:this={formExpansionPanel.instance}
-            expansionPanelId={formExpansionPanel.id} on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
+          <svelte:component this={formExpansionPanel.component}
+            bind:this={formExpansionPanel.instance} expansionPanelId={formExpansionPanel.id}
+            on:open={() => onExpansionPanelOpen(formExpansionPanel.id)} />
         {/each}
       </ExpansionPanelSet>
       <div class="log-out-button-wrapper">

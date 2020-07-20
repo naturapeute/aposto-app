@@ -22,7 +22,7 @@
         onAuthenticationDone()
       })
       .catch((_) => {
-        failedAuthenticationSnackbar.open()
+        onAuthenticationFailed()
       })
       .finally(() => {
         $loading = false
@@ -120,6 +120,15 @@
       window.localStorage.setItem('naturapeuteEmail', email)
 
     dispatch('done')
+  }
+
+  function onAuthenticationFailed() {
+    failedAuthenticationSnackbar.open()
+
+    if (window.localStorage.getItem('naturapeuteEmail'))
+      window.localStorage.removeItem('naturapeuteEmail')
+
+    dispatch('failed')
   }
 </script>
 
