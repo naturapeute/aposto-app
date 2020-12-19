@@ -31,19 +31,28 @@ export const genderOptions = [
 
 export function isAuthorValid(author) {
   return Boolean(
-    author.name && author.name.length <= 70 && author.street && author.street.length <= 35 &&
-    author.ZIP && author.ZIP.length <= 9 && author.city && author.city.length <= 35 &&
-    isEmailValid(author.email) && author.phone && author.phone.length <= 25 &&
-    isIBANValid(author.IBAN) && isRCCValid(author.RCC)
+    author.name &&
+    author.name.length <= 70 &&
+    author.street &&
+    author.street.length <= 35 &&
+    author.zipcode &&
+    author.zipcode.length <= 9 &&
+    author.city &&
+    author.city.length <= 35 &&
+    isEmailValid(author.email) &&
+    author.phone &&
+    author.phone.length <= 25 &&
+    isIBANValid(author.iban) &&
+    isRCCValid(author.rcc)
   )
 }
 
 export function isTherapistValid(therapist) {
   return Boolean(
-    therapist.firstName && therapist.firstName.length <= 35 && therapist.lastName &&
-    therapist.lastName.length <= 35 && therapist.street && therapist.street.length <= 35 &&
-    therapist.ZIP && therapist.ZIP.length <= 9 && therapist.city && therapist.city.length <= 35 &&
-    therapist.phone && therapist.phone.length <= 25 && isRCCValid(therapist.RCC)
+    therapist.firstname && therapist.firstname.length <= 35 && therapist.lastname &&
+    therapist.lastname.length <= 35 && therapist.street && therapist.street.length <= 35 &&
+    therapist.zipcode && therapist.zipcode.length <= 9 && therapist.city && therapist.city.length <= 35 &&
+    therapist.phone && therapist.phone.length <= 25 && isRCCValid(therapist.rcc)
   )
 }
 
@@ -58,10 +67,10 @@ export function isPreferredServicesValid(preferredServices) {
 
 export function isPatientValid(patient) {
   return Boolean(
-    patient.firstName && patient.firstName.length <= 35 && patient.lastName &&
-    patient.lastName.length <= 35 && patient.street && patient.street.length <= 35 &&
-    patient.ZIP && patient.ZIP.length <= 9 && patient.city && patient.city.length <= 35 &&
-    isCantonValid(patient.canton) && isGenderValid(patient.gender) && !isNaN(patient.birthday) &&
+    patient.firstname && patient.firstname.length <= 35 && patient.lastname &&
+    patient.lastname.length <= 35 && patient.street && patient.street.length <= 35 &&
+    patient.zipcode && patient.zipcode.length <= 9 && patient.city && patient.city.length <= 35 &&
+    isCantonValid(patient.canton) && isGenderValid(patient.gender) && !isNaN(patient.birthdate) &&
     isEmailValid(patient.email) && !isNaN(patient.id)
   )
 }

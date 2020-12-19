@@ -55,7 +55,7 @@
         Rue et n°
       </TextField>
       <div class="row row-xl">
-        <TextField className="col col-40" bind:value={$user.author.ZIP} fieldID="author-zip"
+        <TextField className="col col-40" bind:value={$user.author.zipcode} fieldID="author-zipcode"
           maxlength="9" required>
           NPA
         </TextField>
@@ -74,14 +74,14 @@
           Téléphone
         </TextField>
       </div>
-      <TextField bind:value={$user.author.IBAN} fieldID="author-iban"
+      <TextField bind:value={$user.author.iban} fieldID="author-iban"
         title="Un IBAN ou un QR-IBAN est composé des lettres CH et d'une suite de 19 chiffres"
         pattern="[0-9]&#123;19&#125;" prefix required>
         IBAN ou QR-IBAN
 
         <span slot="prefix">CH</span>
       </TextField>
-      <TextField bind:value={$user.author.RCC} type="tel" fieldID="author-rcc"
+      <TextField bind:value={$user.author.rcc} type="tel" fieldID="author-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
         pattern="[A-Z][0-9]&#123;6&#125;" helperText>
         N°RCC

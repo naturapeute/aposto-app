@@ -39,8 +39,8 @@
   function getPatientScore(patient, word) {
     if (!word) return 0
 
-    return +patient.firstName.toLowerCase().includes(word.toLowerCase()) +
-      +patient.lastName.toLowerCase().includes(word.toLowerCase())
+    return +patient.firstname.toLowerCase().includes(word.toLowerCase()) +
+      +patient.lastname.toLowerCase().includes(word.toLowerCase())
   }
 </script>
 
@@ -55,9 +55,9 @@
   {/if}
   {#each bestMatches as patient (patient.id)}
     <li class="mdc-touch-target-wrapper" on:click={() => onSelectPatient(patient.id)}>
-      <Chip title="Sélectionner le patient {patient.firstName} {patient.lastName}" leadingIcon="face"
+      <Chip title="Sélectionner le patient {patient.firstname} {patient.lastname}" leadingIcon="face"
         touchWrapper>
-        {patient.firstName} {patient.lastName}
+        {patient.firstname} {patient.lastname}
       </Chip>
     </li>
   {/each}

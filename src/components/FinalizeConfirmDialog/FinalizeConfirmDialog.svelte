@@ -36,7 +36,7 @@
       Cette action va générer la facture et l'envoyer à
       <strong class="typography--button-inline">
         {#if $selectedPatient}
-          {$selectedPatient.firstName} {$selectedPatient.lastName} ({$selectedPatient.email})
+          {$selectedPatient.firstname} {$selectedPatient.lastname} ({$selectedPatient.email})
         {/if}
       </strong>
       par mail.

@@ -17,7 +17,7 @@
   <p>
     Votre nouvelle facture a bien été envoyée à <strong
       class="typography--button-inline">
-      {$selectedPatient.firstName} {$selectedPatient.lastName}
+      {$selectedPatient.firstname} {$selectedPatient.lastname}
     </strong>.
   </p>
   <p>Vous devriez recevoir une copie dans votre boîte mail sous peu.</p>

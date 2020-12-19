@@ -8,21 +8,21 @@ function userCustomStore() {
     author: {
       name: '',
       street: '',
-      ZIP: '',
+      zipcode: '',
       city: '',
       email: '',
       phone: '',
-      IBAN: '',
-      RCC: ''
+      iban: '',
+      rcc: ''
     },
     therapist: {
-      firstName: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       street: '',
-      ZIP: '',
+      zipcode: '',
       city: '',
       phone: '',
-      RCC: ''
+      rcc: ''
     },
     servicePrice: 0,
     preferredServices: [

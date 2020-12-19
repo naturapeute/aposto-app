@@ -25,7 +25,8 @@ export default {
         env: {
           PROD: production,
           API_URL: production ? 'https://api.aposto.ch' : 'http://localhost:8080',
-          APP_URL: production ? 'https://app.aposto.ch/' : 'http://localhost:5000'
+          APP_URL: production ? 'https://app.aposto.ch' : 'http://localhost:5000',
+          AUTH_URL: production ? 'https://naturapeute.ch/api' : 'http://localhost:8000/api'
         }
       })
     }),

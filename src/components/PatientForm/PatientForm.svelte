@@ -12,16 +12,16 @@
 
   const localPatient = updateMode ? {
     ...$selectedPatient,
-    birthday: getDateInput($selectedPatient.birthday)
+    birthdate: getDateInput($selectedPatient.birthdate)
   } : {
-    firstName: filterPatient.split(' ')[0],
-    lastName: filterPatient.split(' ').slice(1).join(' '),
+    firstname: filterPatient.split(' ')[0],
+    lastname: filterPatient.split(' ').slice(1).join(' '),
     street: '',
-    ZIP: '',
+    zipcode: '',
     city: '',
     canton: '',
     gender: '',
-    birthday: '',
+    birthdate: '',
     email: '',
     id: Date.now()
   }
@@ -35,18 +35,18 @@
 
 <form class="aposto-form" on:submit|preventDefault={onPatientUpdatedOrCreated}>
   <div class="row row-xs">
-    <TextField className="col col-50" bind:value={localPatient.firstName}
-      fieldID="patient-first-name" maxlength="35" required>
+    <TextField className="col col-50" bind:value={localPatient.firstname}
+      fieldID="patient-firstname" maxlength="35" required>
       Prénom
     </TextField>
-    <TextField className="col col-50" bind:value={localPatient.lastName}
-      fieldID="patient-last-name" maxlength="35" required>
+    <TextField className="col col-50" bind:value={localPatient.lastname}
+      fieldID="patient-lastname" maxlength="35" required>
       Nom
     </TextField>
   </div>
   <div class="row row-xs">
-    <TextField className="col col-60" bind:value={localPatient.birthday} type="date"
-      fieldID="patient-birthday" required>
+    <TextField className="col col-60" bind:value={localPatient.birthdate} type="date"
+      fieldID="patient-birthdate" required>
       Date de naissance
     </TextField>
     <Select className="col col-40" bind:value={localPatient.gender} fieldID="patient-gender"
@@ -64,7 +64,7 @@
     Localité
   </TextField>
   <div class="row row-xs">
-    <TextField className="col col-50" bind:value={localPatient.ZIP} fieldID="patient-zip"
+    <TextField className="col col-50" bind:value={localPatient.zipcode} fieldID="patient-zipcode"
       maxlength="9" required>
       NPA
     </TextField>
@@ -75,12 +75,12 @@
   </div>
   {#if updateMode}
     <Button type="submit"
-      title="Mettre à jour les informations de {localPatient.firstName} {localPatient.lastName}"
+      title="Mettre à jour les informations de {localPatient.firstname} {localPatient.lastname}"
       unelevated>
       Mettre à jour
     </Button>
   {:else}
-    <Button type="submit" title="Créer le patient {localPatient.firstName} {localPatient.lastName}"
+    <Button type="submit" title="Créer le patient {localPatient.firstname} {localPatient.lastname}"
       unelevated>
       Créer
     </Button>

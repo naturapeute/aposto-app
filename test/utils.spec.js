@@ -35,12 +35,12 @@ describe('utils', () => {
     const author = {
       name: 'Cabinet de Gordan',
       street: '92320 Glacier Hill Terrace',
-      ZIP: '735538',
+      zipcode: '735538',
       city: 'San Antonio',
       email: 'gaery0@over-blog.com',
       phone: '5164459701',
-      IBAN: '5131234567890123456',
-      RCC: 'V123123'
+      iban: '5131234567890123456',
+      rcc: 'V123123'
     }
 
     it('should validate a valid author object', () => {
@@ -76,10 +76,10 @@ describe('utils', () => {
       )
     })
     it('should invalidate an author object with an empty post code', () => {
-      assert.equal(isAuthorValid({ ...author, ZIP: '' }), false)
+      assert.equal(isAuthorValid({ ...author, zipcode: '' }), false)
     })
     it('should invalidate an author object with a too long post code', () => {
-      assert.equal(isAuthorValid({ ...author, ZIP: '735538 735538 735538' }), false)
+      assert.equal(isAuthorValid({ ...author, zipcode: '735538 735538 735538' }), false)
     })
     it('should invalidate an author object with an empty city', () => {
       assert.equal(isAuthorValid({ ...author, city: '' }), false)
@@ -101,36 +101,36 @@ describe('utils', () => {
       assert.equal(isAuthorValid({ ...author, phone: '' }), false)
     })
     it('should invalidate an author object with an empty IBAN number', () => {
-      assert.equal(isAuthorValid({ ...author, IBAN: '' }), false)
+      assert.equal(isAuthorValid({ ...author, iban: '' }), false)
     })
     it('should invalidate an author object with a wrongly formatted IBAN number', () => {
-      assert.equal(isAuthorValid({ ...author, IBAN: '123456789012345678' }), false)
-      assert.equal(isAuthorValid({ ...author, IBAN: '12345678901234567890' }), false)
-      assert.equal(isAuthorValid({ ...author, IBAN: 'AAAAAAAAAAAAAAAAAAA' }), false)
+      assert.equal(isAuthorValid({ ...author, iban: '123456789012345678' }), false)
+      assert.equal(isAuthorValid({ ...author, iban: '12345678901234567890' }), false)
+      assert.equal(isAuthorValid({ ...author, iban: 'AAAAAAAAAAAAAAAAAAA' }), false)
     })
     it('should invalidate an author object with a wrong IBAN checksum', () => {
-      assert.equal(isAuthorValid({ ...author, IBAN: '1234567890123456789' }), false)
+      assert.equal(isAuthorValid({ ...author, iban: '1234567890123456789' }), false)
     })
     it('should validate an author object with an empty RCC number', () => {
-      assert.equal(isAuthorValid({ ...author, RCC: '' }), true)
+      assert.equal(isAuthorValid({ ...author, rcc: '' }), true)
     })
-    it('should invalidate an author object with a wrongly formatted RCC number', () => {
-      assert.equal(isAuthorValid({ ...author, RCC: 'V123' }), false)
-      assert.equal(isAuthorValid({ ...author, RCC: '1231231' }), false)
-      assert.equal(isAuthorValid({ ...author, RCC: 'VVVVVVV' }), false)
-      assert.equal(isAuthorValid({ ...author, RCC: 'V1231231' }), false)
+    it('should invalidate an author object with a wrongly formatted rcc number', () => {
+      assert.equal(isAuthorValid({ ...author, rcc: 'V123' }), false)
+      assert.equal(isAuthorValid({ ...author, rcc: '1231231' }), false)
+      assert.equal(isAuthorValid({ ...author, rcc: 'VVVVVVV' }), false)
+      assert.equal(isAuthorValid({ ...author, rcc: 'V1231231' }), false)
     })
   })
 
   describe('#isTherapistValid()', () => {
     const therapist = {
-      firstName: 'Gordan',
-      lastName: 'Aery',
+      firstname: 'Gordan',
+      lastname: 'Aery',
       street: '92320 Glacier Hill Terrace',
-      ZIP: '735538',
+      zipcode: '735538',
       city: 'San Antonio',
       phone: '5164459701',
-      RCC: 'V123123'
+      rcc: 'V123123'
     }
 
     it('should validate a valid therapist object', () => {
@@ -140,16 +140,16 @@ describe('utils', () => {
       assert.equal(isTherapistValid({}), false)
     })
     it('should invalidate a therapist object with an empty first name', () => {
-      assert.equal(isTherapistValid({ ...therapist, firstName: '' }), false)
+      assert.equal(isTherapistValid({ ...therapist, firstname: '' }), false)
     })
     it('should invalidate a therapist object with an empty last name', () => {
-      assert.equal(isTherapistValid({ ...therapist, lastName: '' }), false)
+      assert.equal(isTherapistValid({ ...therapist, lastname: '' }), false)
     })
     it('should invalidate a therapist object with an empty street', () => {
       assert.equal(isTherapistValid({ ...therapist, street: '' }), false)
     })
     it('should invalidate a therapist object with an empty post code', () => {
-      assert.equal(isTherapistValid({ ...therapist, ZIP: '' }), false)
+      assert.equal(isTherapistValid({ ...therapist, zipcode: '' }), false)
     })
     it('should invalidate an therapist object with an empty city', () => {
       assert.equal(isTherapistValid({ ...therapist, city: '' }), false)
@@ -158,13 +158,13 @@ describe('utils', () => {
       assert.equal(isTherapistValid({ ...therapist, phone: '' }), false)
     })
     it('should validate a therapist object with an empty RCC number', () => {
-      assert.equal(isTherapistValid({ ...therapist, RCC: '' }), true)
+      assert.equal(isTherapistValid({ ...therapist, rcc: '' }), true)
     })
     it('should invalidate a therapist object with a wrongly formatted RCC number', () => {
-      assert.equal(isTherapistValid({ ...therapist, RCC: 'V123' }), false)
-      assert.equal(isTherapistValid({ ...therapist, RCC: '1231231' }), false)
-      assert.equal(isTherapistValid({ ...therapist, RCC: 'VVVVVVV' }), false)
-      assert.equal(isTherapistValid({ ...therapist, RCC: 'V1231231' }), false)
+      assert.equal(isTherapistValid({ ...therapist, rcc: 'V123' }), false)
+      assert.equal(isTherapistValid({ ...therapist, rcc: '1231231' }), false)
+      assert.equal(isTherapistValid({ ...therapist, rcc: 'VVVVVVV' }), false)
+      assert.equal(isTherapistValid({ ...therapist, rcc: 'V1231231' }), false)
     })
   })
 
@@ -195,15 +195,15 @@ describe('utils', () => {
 
   describe('#isPatientValid()', () => {
     const patient = {
-      firstName: 'Gordan',
-      lastName: 'Aery',
+      firstname: 'Gordan',
+      lastname: 'Aery',
       street: '92320 Glacier Hill Terrace',
-      ZIP: '735538',
+      zipcode: '735538',
       city: 'San Antonio',
       canton: 'GE',
       gender: 'male',
       email: 'gaery0@over-blog.com',
-      birthday: Date.now(),
+      birthdate: Date.now(),
       id: Date.now()
     }
 
@@ -217,20 +217,20 @@ describe('utils', () => {
       assert.equal(isPatientValid({}), false)
     })
     it('should invalidate a patient object with an empty first name', () => {
-      assert.equal(isPatientValid({ ...patient, firstName: '' }), false)
+      assert.equal(isPatientValid({ ...patient, firstname: '' }), false)
     })
     it('should invalidate a patient object with a too long first name', () => {
       assert.equal(
-        isPatientValid({ ...patient, firstName: 'Gordan Gordan Gordan Gordan Gordan Gordan' }),
+        isPatientValid({ ...patient, firstname: 'Gordan Gordan Gordan Gordan Gordan Gordan' }),
         false
       )
     })
     it('should invalidate a patient object with an empty last name', () => {
-      assert.equal(isPatientValid({ ...patient, lastName: '' }), false)
+      assert.equal(isPatientValid({ ...patient, lastname: '' }), false)
     })
     it('should invalidate a patient object with a too long last name', () => {
       assert.equal(
-        isPatientValid({ ...patient, lastName: 'Aery Aery Aery Aery Aery Aery Aery Aery' }),
+        isPatientValid({ ...patient, lastname: 'Aery Aery Aery Aery Aery Aery Aery Aery' }),
         false
       )
     })
@@ -247,10 +247,10 @@ describe('utils', () => {
       )
     })
     it('should invalidate a patient object with an empty post code', () => {
-      assert.equal(isPatientValid({ ...patient, ZIP: '' }), false)
+      assert.equal(isPatientValid({ ...patient, zipcode: '' }), false)
     })
     it('should invalidate a patient object with a too long post code', () => {
-      assert.equal(isPatientValid({ ...patient, ZIP: '735538 735538 735538' }), false)
+      assert.equal(isPatientValid({ ...patient, zipcode: '735538 735538 735538' }), false)
     })
     it('should invalidate a patient object with an empty city', () => {
       assert.equal(isPatientValid({ ...patient, city: '' }), false)
@@ -277,12 +277,12 @@ describe('utils', () => {
       assert.equal(isPatientValid({ ...patient, email: 'gaery0' }), false)
       assert.equal(isPatientValid({ ...patient, email: 'gaery0@' }), false)
     })
-    it('should invalidate a patient object with a missing birthday', () => {
-      delete patient.birthday
+    it('should invalidate a patient object with a missing birthdate', () => {
+      delete patient.birthdate
 
       assert.equal(isPatientValid(patient), false)
 
-      patient.birthday = Date.now()
+      patient.birthdate = Date.now()
     })
     it('should invalidate a patient object with a missing id', () => {
       delete patient.id

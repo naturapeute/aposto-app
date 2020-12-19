@@ -14,7 +14,6 @@
   export function authenticateNaturapeute(naturapeuteEmail) {
     email = naturapeuteEmail
     $loading = true
-
     authenticate(email)
       .then((body) => {
         saveAuthenticatedUser(body)
@@ -34,81 +33,54 @@
   const dispatch = createEventDispatcher()
 
   function saveAuthenticatedUser(body) {
-    $user.author.email = body.email
-    $user.author.phone = body.phone
-    $user.therapist.firstName = body.firstname
-    $user.therapist.lastName = body.lastname
-    $user.therapist.phone = body.phone
-
-    if (body.offices.length) {
-      $user.author.street = body.offices[0].street
-      $user.author.city = body.offices[0].city
-      $user.author.ZIP = body.offices[0].zipCode
-      $user.therapist.street = body.offices[0].street
-      $user.therapist.city = body.offices[0].city
-      $user.therapist.ZIP = body.offices[0].zipCode
-    }
 
     $user.naturapeuteID = body.id
 
-    if (body.extraData) {
-      if (body.extraData.author) {
-        body.extraData.author.name && ($user.author.name = body.extraData.author.name)
-        body.extraData.author.street && ($user.author.street = body.extraData.author.street)
-        body.extraData.author.ZIP && ($user.author.ZIP = body.extraData.author.ZIP)
-        body.extraData.author.city && ($user.author.city = body.extraData.author.city)
-        body.extraData.author.email && ($user.author.email = body.extraData.author.email)
-        body.extraData.author.phone && ($user.author.phone = body.extraData.author.phone)
-        body.extraData.author.IBAN && ($user.author.IBAN = body.extraData.author.IBAN)
-        body.extraData.author.RCC && ($user.author.RCC = body.extraData.author.RCC)
-      }
+    $user.author.email = body.email
+    $user.author.phone = body.phone
+    $user.therapist.firstname = body.firstname
+    $user.therapist.lastname = body.lastname
+    $user.therapist.phone = body.phone
 
-      if (body.extraData.therapist) {
-        body.extraData.therapist.firstName &&
-          ($user.therapist.firstName = body.extraData.therapist.firstName)
-        body.extraData.therapist.lastName &&
-          ($user.therapist.lastName = body.extraData.therapist.lastName)
-        body.extraData.therapist.street &&
-          ($user.therapist.street = body.extraData.therapist.street)
-        body.extraData.therapist.city && ($user.therapist.city = body.extraData.therapist.city)
-        body.extraData.therapist.ZIP && ($user.therapist.ZIP = body.extraData.therapist.ZIP)
-        body.extraData.therapist.phone && ($user.therapist.phone = body.extraData.therapist.phone)
-        body.extraData.therapist.RCC && ($user.therapist.RCC = body.extraData.therapist.RCC)
-      }
-
-      body.extraData.servicePrice && ($user.servicePrice = body.extraData.servicePrice)
-
-      body.extraData.preferredServices &&
-        ($user.preferredServices = body.extraData.preferredServices.map(e => ({ ...e })))
-
-      if (body.extraData.patients) {
-        $patients = body.extraData.patients.map(e => ({ ...e }))
-
-        // NOTE : "birthdate" key has been renamed in "birthday". This code is necessary for a
-        // while to update all patients stored in the Naturapeute database
-        let hasBirthdate = false
-
-        $patients.forEach(patient => {
-          if ('birthdate' in patient) {
-            patient.birthday = patient.birthdate
-            delete patient.birthdate
-
-            hasBirthdate = true
-          }
-        })
-
-        if (hasBirthdate) {
-          saveUser(
-            $user.naturapeuteID,
-            $user.author,
-            $user.therapist,
-            $user.servicePrice,
-            $user.preferredServices,
-            $patients
-          )
-        }
-      }
+    const office = body.offices[0]
+    if (office) {
+      $user.author.street = office.street
+      $user.author.city = office.city
+      $user.author.zipcode = office.zipcode
+      $user.therapist.street = office.street
+      $user.therapist.city = office.city
+      $user.therapist.zipcode = office.zipcode
     }
+
+    if(body.invoice_data.author.name) $user.author.name = body.invoice_data.author.name
+    if(body.invoice_data.author.street) $user.author.street = body.invoice_data.author.street
+    if(body.invoice_data.author.zipcode) $user.author.zipcode = body.invoice_data.author.zipcode
+    if(body.invoice_data.author.city) $user.author.city = body.invoice_data.author.city
+    if(body.invoice_data.author.email) $user.author.email = body.invoice_data.author.email
+    if(body.invoice_data.author.phone) $user.author.phone = body.invoice_data.author.phone
+    if(body.invoice_data.author.iban) $user.author.iban = body.invoice_data.author.iban
+    if(body.invoice_data.author.rcc) $user.author.rcc = body.invoice_data.author.rcc
+
+    if(body.invoice_data.therapist.firstname) $user.therapist.firstname = body.invoice_data.therapist.firstname
+    if(body.invoice_data.therapist.lastname) $user.therapist.lastname = body.invoice_data.therapist.lastname
+    if(body.invoice_data.therapist.street) $user.therapist.street = body.invoice_data.therapist.street
+    if(body.invoice_data.therapist.city) $user.therapist.city = body.invoice_data.therapist.city
+    if(body.invoice_data.therapist.zipcode) $user.therapist.zipcode = body.invoice_data.therapist.zipcode
+    if(body.invoice_data.therapist.phone) $user.therapist.phone = body.invoice_data.therapist.phone
+    if(body.invoice_data.therapist.rcc) $user.therapist.rcc = body.invoice_data.therapist.rcc
+
+    if(body.invoice_data.hourly_price) $user.servicePrice = body.invoice_data.hourly_price
+    if(body.invoice_data.services) $user.preferredServices = body.invoice_data.services.map(e => ({ ...e }))
+    $patients = body.patients.map(e => ({ ...e }))
+
+    saveUser(
+      $user.naturapeuteID,
+      $user.author,
+      $user.therapist,
+      $user.servicePrice,
+      $user.preferredServices,
+      $patients
+    )
   }
 
   function onAuthenticate() {
@@ -116,7 +88,6 @@
   }
 
   function onAuthenticationDone() {
-    console.log('Coucou')
     if (email && !window.localStorage.getItem('naturapeuteEmail'))
       window.localStorage.setItem('naturapeuteEmail', email)
 

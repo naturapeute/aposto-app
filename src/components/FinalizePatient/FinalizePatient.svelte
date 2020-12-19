@@ -45,7 +45,7 @@ function onCreatePatient() {
 function onPatientUpdatedOrCreated(e) {
     const newPatient = {
       ...e.detail,
-      birthday: new Date(e.detail.birthday).getTime()
+      birthdate: new Date(e.detail.birthdate).getTime()
     }
 
     if (patientCreateMode) {
@@ -98,9 +98,9 @@ function onPatientUpdatedOrCreated(e) {
   <p class="finalize-p">
     <i class="material-icons-outlined">face</i>
     <strong class="typography--button-inline">
-      {$selectedPatient.firstName} {$selectedPatient.lastName}
+      {$selectedPatient.firstname} {$selectedPatient.lastname}
     </strong>
-    <IconButton title="Mettre à jour les informations de {$selectedPatient.firstName} {$selectedPatient.lastName}"
+    <IconButton title="Mettre à jour les informations de {$selectedPatient.firstname} {$selectedPatient.lastname}"
       on:click={onUpdatePatient}>
       edit
     </IconButton>

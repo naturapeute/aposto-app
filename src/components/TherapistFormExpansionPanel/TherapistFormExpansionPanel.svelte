@@ -41,12 +41,12 @@
   <div slot="content">
     <form class="aposto-form" on:submit|preventDefault={onSubmit}>
       <div class="row row-xl">
-        <TextField className="col col-50" bind:value={$user.therapist.firstName}
-          fieldID="therapist-first-name" maxlength="35" required>
+        <TextField className="col col-50" bind:value={$user.therapist.firstname}
+          fieldID="therapist-firstname" maxlength="35" required>
           Prénom
         </TextField>
-        <TextField className="col col-50" bind:value={$user.therapist.lastName}
-          fieldID="therapist-last-name" maxlength="35" required>
+        <TextField className="col col-50" bind:value={$user.therapist.lastname}
+          fieldID="therapist-lastname" maxlength="35" required>
           Nom
         </TextField>
       </div>
@@ -55,7 +55,7 @@
         Rue et n°
       </TextField>
       <div class="row row-xl">
-        <TextField className="col col-40" bind:value={$user.therapist.ZIP} fieldID="therapist-zip"
+        <TextField className="col col-40" bind:value={$user.therapist.zipcode} fieldID="therapist-zipcode"
           maxlength="9" required>
           NPA
         </TextField>
@@ -68,7 +68,7 @@
         maxlength="25" required>
         Téléphone
       </TextField>
-      <TextField bind:value={$user.therapist.RCC} fieldID="therapist-rcc"
+      <TextField bind:value={$user.therapist.rcc} fieldID="therapist-rcc"
         title="Un numéro RCC est composé d'une lettre majuscule et de 6 chiffres"
         pattern="[A-Z][0-9]&#123;6&#125;" helperText>
         N°RCC

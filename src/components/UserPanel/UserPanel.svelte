@@ -211,8 +211,8 @@
             Se déconnecter
           </Button>
         {:else}
-          <Button title="Quitter le mode démo" on:click={onLogOut}>
-            Quitter le mode démo
+          <Button title="Quitter" on:click={onLogOut}>
+            Quitter
           </Button>
         {/if}
       </div>

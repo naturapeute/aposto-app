@@ -55,7 +55,7 @@ export function generateInvoiceContent(
   })
 
   const invoiceContent = {
-    author: { ...author, IBAN: `CH${author.IBAN}` },
+    author: { ...author, IBAN: `CH${author.iban}` },
     therapist: { ...therapist },
     patient: { ...patient },
     servicePrice,
@@ -67,11 +67,11 @@ export function generateInvoiceContent(
   if (naturapeuteID)
     invoiceContent.naturapeuteID = naturapeuteID
 
-  if (!invoiceContent.author.RCC.length)
-    delete invoiceContent.author.RCC
+  if (!invoiceContent.author.rcc.length)
+    delete invoiceContent.author.rcc
 
-  if (!invoiceContent.therapist.RCC.length)
-    delete invoiceContent.therapist.RCC
+  if (!invoiceContent.therapist.rcc.length)
+    delete invoiceContent.therapist.rcc
 
   delete invoiceContent.patient.id
 
