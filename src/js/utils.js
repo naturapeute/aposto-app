@@ -25,8 +25,8 @@ export function getCantonOptions() {
 
 export const genderOptions = [
   { value: '', label: '' },
-  { value: 'male', label: 'Homme' },
-  { value: 'female', label: 'Femme' }
+  { value: 'man', label: 'Homme' },
+  { value: 'woman', label: 'Femme' }
 ]
 
 export function isAuthorValid(author) {
@@ -93,7 +93,7 @@ function isCantonValid(canton) {
 }
 
 function isGenderValid(gender) {
-  return gender === 'male' || gender === 'female'
+  return gender === 'man' || gender === 'woman'
 }
 
 export function getDateInput(timestamp) {

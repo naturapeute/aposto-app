@@ -23,7 +23,6 @@
     gender: '',
     birthdate: '',
     email: '',
-    id: Date.now()
   }
 
   const dispatch = createEventDispatcher()

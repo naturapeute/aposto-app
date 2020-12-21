@@ -201,17 +201,16 @@ describe('utils', () => {
       zipcode: '735538',
       city: 'San Antonio',
       canton: 'GE',
-      gender: 'male',
+      gender: 'man',
       email: 'gaery0@over-blog.com',
       birthdate: Date.now(),
-      id: Date.now()
     }
 
     it('should validate a valid patient object', () => {
       assert.equal(isPatientValid(patient), true)
-      assert.equal(isPatientValid({ ...patient, gender: 'female' }), true)
+      assert.equal(isPatientValid({ ...patient, gender: 'woman' }), true)
       assert.equal(isPatientValid({ ...patient, canton: 'BE' }), true)
-      assert.equal(isPatientValid({ ...patient, id: 0 }), true)
+      assert.equal(isPatientValid({ ...patient }), true)
     })
     it('should invalidate an empty object', () => {
       assert.equal(isPatientValid({}), false)

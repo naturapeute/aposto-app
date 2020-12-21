@@ -55,7 +55,7 @@ export function generateInvoiceContent(
   })
 
   const invoiceContent = {
-    author: { ...author, IBAN: `CH${author.iban}` },
+    author: { ...author, iban: `CH${author.iban}` },
     therapist: { ...therapist },
     patient: { ...patient },
     servicePrice,
