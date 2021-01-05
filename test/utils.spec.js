@@ -7,6 +7,7 @@ import {
   getDurationLabel,
   getServiceLightLabel,
   isAuthorValid,
+  isIBANValid,
   isPatientValid,
   isPreferredServicesValid,
   isServicePriceValid,
@@ -39,7 +40,7 @@ describe('utils', () => {
       city: 'San Antonio',
       email: 'gaery0@over-blog.com',
       phone: '5164459701',
-      iban: '5131234567890123456',
+      iban: 'CH5131234567890123456',
       rcc: 'V123123'
     }
 
@@ -193,8 +194,22 @@ describe('utils', () => {
     })
   })
 
+  describe('#isIBANValid()', () => {
+    it('should match a valid Swiss IBAN', () => {
+      assert.strictEqual(isIBANValid('CH100023000A109822346'), true)
+      assert.strictEqual(isIBANValid('AB100023000A109822346'), false, "must start with CH")
+      assert.strictEqual(isIBANValid('CH100023000A10982234'), false, "must be 21 chars")
+      assert.strictEqual(isIBANValid('CH1X0023000A109822346'), false, "control digit must be 2 digits")
+      assert.strictEqual(isIBANValid('CH1000X3000A109822346'), false, "Bank Clearing must be 5 digits")
+      assert.strictEqual(isIBANValid('CH100023000A109-82234'), false, "Account Number must be numbers and letters")
+      // TODO
+      // assert.strictEqual(isIBANValid('CH100023000A109822344'), false, "Account number must with validation code")
+    })
+  })
+
   describe('#isPatientValid()', () => {
     const patient = {
+      id: 3,
       firstname: 'Gordan',
       lastname: 'Aery',
       street: '92320 Glacier Hill Terrace',
@@ -210,7 +225,6 @@ describe('utils', () => {
       assert.equal(isPatientValid(patient), true)
       assert.equal(isPatientValid({ ...patient, gender: 'woman' }), true)
       assert.equal(isPatientValid({ ...patient, canton: 'BE' }), true)
-      assert.equal(isPatientValid({ ...patient }), true)
     })
     it('should invalidate an empty object', () => {
       assert.equal(isPatientValid({}), false)

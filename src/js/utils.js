@@ -79,9 +79,10 @@ function isEmailValid(email) {
   return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
 }
 
-export function isIBANValid(IBAN) {
-  return IBAN.match(/^[0-9]{19}$/) &&
-    (98 - bigInt(`${IBAN.slice(2)}121700`).mod(97).toJSNumber()) === parseInt(IBAN.slice(0, 2))
+export function isIBANValid(iban) {
+    const matches = iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/)
+    return Boolean(matches)
+
 }
 
 function isRCCValid(RCC) {
