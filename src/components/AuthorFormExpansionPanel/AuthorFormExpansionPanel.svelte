@@ -15,7 +15,7 @@
     else {
       const IBANInput = document.querySelector('#author-iban')
 
-      if (!isIBANValid(IBANInput.value))
+      if (!isIBANValid('CH' + IBANInput.value))
         IBANInput.setCustomValidity('Votre IBAN ou QR-IBAN est incorrect. Merci de le vérifier.')
       else
         IBANInput.setCustomValidity('')

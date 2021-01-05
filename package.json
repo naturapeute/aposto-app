@@ -6,8 +6,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "init-deploy": "cd public && git add . && git commit -m \"New build\"",
-    "push-deploy": "cd public && git push -f",
+    "init-deploy": "cd public && git add .; git commit -m \"New build\"; cd -",
+    "push-deploy": "cd public && git push -f; cd -",
     "deploy": "npm run init-deploy && npm run push-deploy",
     "build-deploy": "npm run build && npm run deploy",
     "test": "npx mocha -r esm"
