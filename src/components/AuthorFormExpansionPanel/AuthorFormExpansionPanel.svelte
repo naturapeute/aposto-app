@@ -76,7 +76,7 @@
       </div>
       <TextField bind:value={$user.author.iban} fieldID="author-iban"
         title="Un IBAN ou un QR-IBAN est composé des lettres CH et d'une suite de 19 chiffres et lettres"
-        pattern="[A-Z][0-9]&#123;19&#125;" prefix required>
+        pattern="\w&#123;19&#125;" prefix required>
         IBAN ou QR-IBAN
 
         <span slot="prefix">CH</span>
