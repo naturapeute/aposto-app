@@ -1,7 +1,7 @@
 deploy:
 	npm run build && \
 	cd public && \
-	git add . && \
-	git commit -am "New build" && \
-	git push -f && \
+	git add build && \
+	git commit build -m "New build" && \
+	git push && \
 	cd -
