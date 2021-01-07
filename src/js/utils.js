@@ -62,13 +62,21 @@ export function isPreferredServicesValid(preferredServices) {
 }
 
 export function isPatientValid(patient) {
-  return Boolean(
-    patient.firstname && patient.firstname.length <= 35 && patient.lastname &&
-    patient.lastname.length <= 35 && patient.street && patient.street.length <= 35 &&
-    patient.zipcode && patient.zipcode.length <= 9 && patient.city && patient.city.length <= 35 &&
-    isCantonValid(patient.canton) && isGenderValid(patient.gender) && !isNaN(patient.birthdate) &&
-    isEmailValid(patient.email) && !isNaN(patient.id)
-  )
+  const errors = []
+
+  if(!(patient.firstname && patient.firstname.length <= 35)) errors.push('firstname invalid: ' + patient.firstname)
+  if(!(patient.lastname && patient.lastname.length <= 35)) errors.push('lastname invalid: ' + patient.lastname)
+  if(!(patient.street && patient.street.length <= 35)) errors.push('street invalid: ' + patient.street)
+  if(!(patient.zipcode && String(patient.zipcode).length <= 9)) errors.push('zipcode invalid: ' + patient.zipcode)
+  if(!(patient.city && patient.city.length <= 35)) errors.push('city invalid: ' + patient.city)
+  if(!(isCantonValid(patient.canton))) errors.push('canton invalid: ' + patient.canton)
+  if(!(isGenderValid(patient.gender))) errors.push('gender invalid: ' + patient.gender)
+  if(!(isEmailValid(patient.email))) errors.push('email invalid: ' + patient.email)
+  if(!(!isNaN(patient.birthdate))) errors.push('birthdate invalid: ' + patient.birthdate)
+  if(!(!isNaN(patient.id))) errors.push('id invalid: ' + patient.id)
+
+  if(errors.length) console.error("patient invalid", errors)
+  return errors.length === 0
 }
 
 function isEmailValid(email) {
