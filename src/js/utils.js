@@ -30,21 +30,17 @@ export const genderOptions = [
 ]
 
 export function isAuthorValid(author) {
-  return Boolean(
-    author.name &&
-    author.name.length <= 70 &&
-    author.street &&
-    author.street.length <= 35 &&
-    author.zipcode &&
-    author.zipcode.length <= 9 &&
-    author.city &&
-    author.city.length <= 35 &&
-    isEmailValid(author.email) &&
-    author.phone &&
-    author.phone.length <= 25 &&
-    isIBANValid(author.iban) &&
-    isRCCValid(author.rcc)
-  )
+  const errors = []
+  if(!(author.name && author.name.length <= 70)) errors.push("name invalid: " + author.name)
+  if(!(author.street && author.street.length <= 35)) errors.push("street invalid: " + author.street)
+  if(!(author.zipcode && author.zipcode.length <= 9)) errors.push("zipcode invalid: " + author.zipcode)
+  if(!(author.city && author.city.length <= 25)) errors.push("city invalid: " + author.city)
+  if(!isPhoneValid(author.phone)) errors.push("phone invalid: " + author.phone)
+  if(!isEmailValid(author.email)) errors.push("email invalid: " + author.email)
+  if(!isIBANValid('CH' + author.iban)) errors.push("iban invalid: CH" + author.iban)
+  if(!isRCCValid(author.rcc)) errors.push("rcc invalid: " + author.rcc)
+  if(errors.length) console.error('author is not valid:', errors)
+  return errors.length === 0
 }
 
 export function isTherapistValid(therapist) {
@@ -91,6 +87,10 @@ function isRCCValid(RCC) {
 
 function isCantonValid(canton) {
   return cantons.includes(canton)
+}
+
+function isPhoneValid(phone) {
+  return phone.replaceAll(' ', '').length <= 12
 }
 
 function isGenderValid(gender) {
