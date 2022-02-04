@@ -51,7 +51,7 @@ For the first time you are deploying the Web application, run the following comm
 > git pull
 ```
 
-Then, from the project root folder, whenever you want to deploy the Web application, simply run `npm run deploy` or `npm run build-deploy` if you want to build and deploy.
+Then, from the project root folder, whenever you want to deploy the Web application, simply run `make deploy`.
 
 ## License
 
