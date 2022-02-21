@@ -80,13 +80,12 @@ export function isPatientValid(patient) {
 }
 
 function isEmailValid(email) {
-  return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
+  return email && email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
 }
 
 export function isIBANValid(iban) {
-    const matches = iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/)
-    return Boolean(matches)
-
+  const matches = iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/)
+  return Boolean(matches)
 }
 
 function isRCCValid(RCC) {

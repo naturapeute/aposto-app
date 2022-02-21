@@ -33,7 +33,6 @@
   const dispatch = createEventDispatcher()
 
   function saveAuthenticatedUser(body) {
-
     $user.naturapeuteID = body.id
 
     $user.author.email = body.email
@@ -43,6 +42,7 @@
     $user.therapist.phone = body.phone
 
     const office = body.offices[0]
+
     if (office) {
       $user.author.street = office.street
       $user.author.city = office.city
@@ -73,14 +73,16 @@
     if(body.invoice_data.services) $user.preferredServices = body.invoice_data.services.map(e => ({ ...e }))
     $patients = body.patients.map(e => ({ ...e }))
 
-    saveUser(
-      $user.naturapeuteID,
-      $user.author,
-      $user.therapist,
-      $user.servicePrice,
-      $user.preferredServices,
-      $patients
-    )
+    if ($user.naturapeuteID) {
+      saveUser(
+        $user.naturapeuteID,
+        $user.author,
+        $user.therapist,
+        $user.servicePrice,
+        $user.preferredServices,
+        $patients
+      )
+    }
   }
 
   function onAuthenticate() {
@@ -102,6 +104,55 @@
 
     dispatch('failed')
   }
+
+  function onDemoMode() {
+    saveAuthenticatedUser({
+      email: 'john.doe@email.com',
+      phone: '0313172521',
+      firstname: 'John',
+      lastname: 'Doe',
+      offices: [],
+      invoice_data: {
+        author: {
+          name: 'Cabinet de John',
+          street: 'Rue de Bourgogne 19',
+          zipcode: '1203',
+          city: 'Genf',
+          iban: '6689144926855958782',
+          rcc: 'A123456'
+        },
+        therapist: {
+          street: 'Rue de Bourgogne 19',
+          zipcode: '1203',
+          city: 'Genf',
+          rcc: 'A123456'
+        },
+        hourly_price: 100,
+        services: [
+          { code: 1200, color: '#f46d6d' },
+          { code: 1140, color: '#75b79e' },
+          { code: 1089, color: '#f8a978' },
+          { code: 1005, color: '#424874' }
+        ]
+      },
+      patients: [
+        {
+          id: 1234567890,
+          firstname: 'Joe',
+          lastname: 'Doakes',
+          birthdate: 45270000000,
+          gender: 'man',
+          email: 'joe.doakes@email.com',
+          street: 'Avenue de Rheinau 8',
+          zipcode: '1304',
+          city: 'Werdenberg',
+          canton: 'AG'
+        }
+      ]
+    })
+    user.initUpdated()
+    onAuthenticationDone()
+  }
 </script>
 
 <form class="aposto-form" on:submit|preventDefault={onAuthenticate}>
@@ -118,7 +169,7 @@
       Rejoindre Naturapeute
     </span>
   </a>
-  <Button title="Essayer en démo" on:click={onAuthenticationDone} disabled={$loading}>
+  <Button title="Essayer en démo" on:click={onDemoMode} disabled={$loading}>
     Essayer en démo
   </Button>
   <p class="demo-hint">
