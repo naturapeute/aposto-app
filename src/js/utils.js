@@ -80,17 +80,15 @@ export function isPatientValid(patient) {
 }
 
 function isEmailValid(email) {
-  return email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/)
+  return email && Boolean(email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*/))
 }
 
 export function isIBANValid(iban) {
-    const matches = iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/)
-    return Boolean(matches)
-
+  return iban && Boolean(iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/))
 }
 
-function isRCCValid(RCC) {
-  return RCC.match(/^((?!.)|[A-Z][0-9]{6})$/)
+function isRCCValid(rcc) {
+  return rcc != null && Boolean(rcc.match(/^((?!.)|[A-Z][0-9]{6})$/))
 }
 
 function isCantonValid(canton) {
@@ -98,7 +96,7 @@ function isCantonValid(canton) {
 }
 
 function isPhoneValid(phone) {
-  return phone.replaceAll(' ', '').length <= 12
+  return phone && phone.replaceAll(' ', '').length <= 12
 }
 
 function isGenderValid(gender) {
