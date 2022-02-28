@@ -84,12 +84,11 @@ function isEmailValid(email) {
 }
 
 export function isIBANValid(iban) {
-  const matches = iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/)
-  return Boolean(matches)
+  return iban && iban.match(/^CH(\d{2})(\d{5})([A-Z0-9]{12})$/)
 }
 
-function isRCCValid(RCC) {
-  return RCC.match(/^((?!.)|[A-Z][0-9]{6})$/)
+function isRCCValid(rcc) {
+  return rcc && rcc.match(/^((?!.)|[A-Z][0-9]{6})$/)
 }
 
 function isCantonValid(canton) {
